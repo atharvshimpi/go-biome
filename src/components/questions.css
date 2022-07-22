@@ -1,0 +1,41 @@
+.questions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    background: #FFDFB8;
+    height: 100vh;
+    transition: all 0.4s ease-in-out;
+}
+
+.questions-heading, .questions-about, .questions-btn-container {
+    margin: 1rem 1rem 0rem;
+    min-height: 15%;
+    width: 90%;
+}
+
+.questions-heading {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.questions-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.questions-btn {
+    outline: none;
+    cursor: pointer;
+    width: 50%;
+    height: 3rem;
+}
+
+.username {
+    background: #f3b04d;
+    border-radius: 0.5rem;
+}

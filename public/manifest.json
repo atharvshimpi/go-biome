@@ -1,6 +1,6 @@
 {
     "short_name": "Go Biome",
-    "name": "Go Biome PWA",
+    "name": "Go Biome",
     "icons": [
         {
             "src": "/images/logo.png",
@@ -11,6 +11,6 @@
     ],
     "start_url": ".",
     "display": "standalone",
-    "theme_color": "#000000",
+    "theme_color": "#FFDFB8",
     "background_color": "#ffffff"
 }

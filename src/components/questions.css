@@ -55,8 +55,18 @@
     font-size: 1.5rem;
 }
 
-.answer-time-input {
+.answer-time-input-container {
     width: 100%;
+}
+
+.answer-time-label {
+    font-weight: 700;
+}
+
+.answer-time-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .username {

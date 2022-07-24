@@ -25,8 +25,8 @@ const App = () => {
     return (
         <Router>
             <Routes>
+                <Route path="settings" element={ <Settings /> } />
                 <Route path="/" element={ authenticated ? (preferences ? <Dashboard /> : <Questions />) : <Login /> } />
-                <Route path="/settings" element={ <Settings /> } />
             </Routes>
         </Router>
     )

@@ -5,6 +5,7 @@ import "./styles.css"
 import Dashboard from "./components/dashboard"
 import Questions from "./components/questions"
 import Login from "./components/login"
+import Settings from "./components/settings"
 
 const App = () => {
     const [authenticated, setAuthenticated] = useState(null)
@@ -25,6 +26,7 @@ const App = () => {
         <Router>
             <Routes>
                 <Route path="/" element={ authenticated ? (preferences ? <Dashboard /> : <Questions />) : <Login /> } />
+                <Route path="/settings" element={ <Settings /> } />
             </Routes>
         </Router>
     )

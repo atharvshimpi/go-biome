@@ -1,0 +1,64 @@
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #ffdfb8;
+}
+
+.top-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0rem 0rem;
+}
+
+.icon {
+    margin: 0rem 0.5rem;
+    font-size: 1.4rem;
+}
+
+.general-settings {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.general-settings-container {
+    width: 100%;
+    margin: 1rem;
+}
+
+.general-settings-container h2 {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.general-settings-content {
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    padding: 1rem;
+}
+
+.general-settings-content .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.3rem;
+}
+
+.title-icon {
+    display: flex;
+    align-items: center;
+}
+
+.title-icon p {
+    margin-left: 0.3rem;
+}

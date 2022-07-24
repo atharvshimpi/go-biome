@@ -1,0 +1,57 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #FFDFB8;
+}
+
+.top-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0rem 0rem;
+}
+
+.icon {
+    margin: 0rem 0.5rem;
+    font-size: 1.4rem;
+}
+
+.game-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFCF85;
+    box-shadow: 1px 0px 15px 5px #ffbc58;
+    border-radius: 3rem;
+    width: 80%;
+    height: 75vh;
+}
+
+.activity-cards {
+    display: flex;
+    width: 50%;
+}
+
+.cards {
+    width: 25%;
+    height: 2rem;
+    border-radius: 0.5rem;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.cards:active {
+    opacity: 0.5;
+}
+
+.bottom-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 0rem 0.5rem;
+}

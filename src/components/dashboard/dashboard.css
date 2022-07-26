@@ -48,6 +48,14 @@
     opacity: 0.5;
 }
 
+.custom-card {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+}
+
 .bottom-view {
     display: flex;
     width: 100%;

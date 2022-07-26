@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { AnimatePresence } from "framer-motion"
 import "./styles.css"
 
-import Dashboard from "./components/dashboard"
-import Questions from "./components/questions"
-import Login from "./components/login"
-import Settings from "./components/settings"
+import Dashboard from "./components/dashboard/dashboard"
+import Questions from "./components/questions/questions"
+import Login from "./components/login/login"
+import Settings from "./components/settings/settings"
 
 const App = () => {
     const [authenticated, setAuthenticated] = useState(null)
     const [preferences, setPreferences] = useState(null)
+
     useEffect(() => {
         const userPresent = JSON.parse(localStorage.getItem("user"))
         const prefPresent = JSON.parse(localStorage.getItem("preferences"))
@@ -17,17 +19,32 @@ const App = () => {
             setAuthenticated(userPresent)
         }
 
-        if(prefPresent) {
+        if (prefPresent) {
             setPreferences(prefPresent)
         }
     }, [])
 
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={ authenticated ? (preferences ? <Dashboard /> : <Questions />) : <Login /> } />
-                <Route path="/settings" element={ <Settings /> } />
-            </Routes>
+            <AnimatePresence exitBeforeEnter>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            authenticated ? (
+                                preferences ? (
+                                    <Dashboard />
+                                ) : (
+                                    <Questions />
+                                )
+                            ) : (
+                                <Login />
+                            )
+                        }
+                    />
+                    <Route path="/settings" element={<Settings />} />
+                </Routes>
+            </AnimatePresence>
         </Router>
     )
 }

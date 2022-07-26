@@ -3,8 +3,13 @@ import React from "react"
 import { IoIosArrowForward } from "react-icons/io"
 import { BsFillShareFill } from "react-icons/bs"
 import { MdBackup } from "react-icons/md"
+// eslint-disable-next-line
+const BackupSharingSettings = ({ setOpen, setSettingId }) => {
+    const handleClick = (id) => {
+        setSettingId(id)
+        setOpen(true)
+    }
 
-const BackupSharingSettings = () => {
     return (
         <div className="general-settings">
             <div className="general-settings-container">
@@ -15,14 +20,14 @@ const BackupSharingSettings = () => {
                             <MdBackup />
                             <p>Save Progress &amp; feedback</p>
                         </div>
-                        <IoIosArrowForward className="icon" />
+                        <IoIosArrowForward className="icon" onClick={() => handleClick(16)} />
                     </div>
                     <div className="options">
                         <div className="title-icon">
                             <BsFillShareFill />
                             <p>Share with friends</p>
                         </div>
-                        <IoIosArrowForward className="icon" />
+                        <IoIosArrowForward className="icon" onClick={() => handleClick(17)} />
                     </div>
                 </div>
             </div>

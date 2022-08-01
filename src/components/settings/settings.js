@@ -1,6 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AnimatePresence, motion } from "framer-motion"
+
+import { settingDetails } from "./settingsData"
+import { changeUsername } from "./changeSettings"
 
 import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
@@ -14,9 +17,19 @@ import { GrFormClose } from "react-icons/gr"
 import "./settings.css"
 
 const Settings = () => {
+    // eslint-disable-next-line
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
     const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [settingId, setSettingId] = useState(null)
+    const [selectedSetting, setSelectedSetting] = useState({})
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(settingId) {
+            setSelectedSetting(settingDetails.find(obj => obj.id === settingId))
+        }
+    }, [settingId])
 
     return (
         <>
@@ -56,7 +69,7 @@ const Settings = () => {
                         <SettingsDetails onClose={() => setOpen(false)}>
                             <div className="flex flex-col h-full pt-3">
                                 <div className="relative px-3 pb-4 shadow-sm text-center">
-                                    <span className="font-medium">{settingId}</span>
+                                    <span className="slider-title">{selectedSetting?.icon} {selectedSetting?.title}</span>
                                     <div className="absolute inset-y-0 right-2 text-3xl">
                                         <button>
                                             <GrFormClose 
@@ -65,6 +78,7 @@ const Settings = () => {
                                         </button>
                                     </div>
                                 </div>
+                                { settingId === 1 ? changeUsername({user, setUser, loading, setLoading, setOpen}) : null }
                             </div>
                         </SettingsDetails>
                     )}

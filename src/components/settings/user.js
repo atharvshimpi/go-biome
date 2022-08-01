@@ -1,10 +1,8 @@
 import React from "react"
 
+import { settingDetails } from "./settingsData"
+
 import { IoIosArrowForward } from "react-icons/io"
-import { BsStack } from "react-icons/bs"
-import { FaUserAlt } from "react-icons/fa"
-import { GiPlantsAndAnimals } from "react-icons/gi"
-import { MdHistory } from "react-icons/md"
 // eslint-disable-next-line
 const UserSettings = ({ setOpen, setSettingId }) => {
     const handleClick = (id) => {
@@ -17,34 +15,17 @@ const UserSettings = ({ setOpen, setSettingId }) => {
             <div className="general-settings-container">
                 <h2>User Settings</h2>
                 <div className="general-settings-content">
-                    <div className="options">
-                        <div className="title-icon">
-                            <FaUserAlt />
-                            <p>Change Username</p>
-                        </div>
-                        <IoIosArrowForward className="icon" onClick={() => handleClick(1)}/>
-                    </div>
-                    <div className="options">
-                        <div className="title-icon">
-                            <BsStack />
-                            <p>Activity Card Stack</p>
-                        </div>
-                        <IoIosArrowForward className="icon" onClick={() => handleClick(2)}/>
-                    </div>
-                    <div className="options">
-                        <div className="title-icon">
-                            <MdHistory />
-                            <p>Activity History</p>
-                        </div>
-                        <IoIosArrowForward className="icon" onClick={() => handleClick(3)}/>
-                    </div>
-                    <div className="options">
-                        <div className="title-icon">
-                            <GiPlantsAndAnimals />
-                            <p>Biome Garden</p>
-                        </div>
-                        <IoIosArrowForward className="icon" onClick={() => handleClick(4)} />
-                    </div>
+                    {settingDetails.filter(obj => obj.id > 0 && obj.id < 5).map((obj) => {
+                        return (
+                            <div key={obj.id} className="options">
+                                <div className="title-icon">
+                                    {obj.icon}
+                                    <p>{obj.title}</p>
+                                </div>
+                                <IoIosArrowForward className="icon" onClick={() => handleClick(obj.id)}/>
+                            </div>  
+                        )
+                    })}
                 </div>
             </div>
         </div>

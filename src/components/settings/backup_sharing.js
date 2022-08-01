@@ -1,8 +1,8 @@
 import React from "react"
 
+import { settingDetails } from "./settingsData"
 import { IoIosArrowForward } from "react-icons/io"
-import { BsFillShareFill } from "react-icons/bs"
-import { MdBackup } from "react-icons/md"
+
 // eslint-disable-next-line
 const BackupSharingSettings = ({ setOpen, setSettingId }) => {
     const handleClick = (id) => {
@@ -15,20 +15,17 @@ const BackupSharingSettings = ({ setOpen, setSettingId }) => {
             <div className="general-settings-container">
                 <h2>Data Backup</h2>
                 <div className="general-settings-content">
-                    <div className="options">
-                        <div className="title-icon">
-                            <MdBackup />
-                            <p>Save Progress &amp; feedback</p>
-                        </div>
-                        <IoIosArrowForward className="icon" onClick={() => handleClick(16)} />
-                    </div>
-                    <div className="options">
-                        <div className="title-icon">
-                            <BsFillShareFill />
-                            <p>Share with friends</p>
-                        </div>
-                        <IoIosArrowForward className="icon" onClick={() => handleClick(17)} />
-                    </div>
+                    {settingDetails.filter(obj => obj.id >= 16 && obj.id < 18).map((obj) => {
+                        return (
+                            <div key={obj.id} className="options">
+                                <div className="title-icon">
+                                    {obj.icon}
+                                    <p>{obj.title}</p>
+                                </div>
+                                <IoIosArrowForward className="icon" onClick={() => handleClick(obj.id)}/>
+                            </div>  
+                        )
+                    })}
                 </div>
             </div>
         </div>

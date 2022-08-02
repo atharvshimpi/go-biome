@@ -1,6 +1,6 @@
 import React from "react"
 
-import { BsStack, BsFillShareFill, BsFillVolumeUpFill, BsPhoneVibrateFill, BsFillMoonFill, BsListCheck } from "react-icons/bs"
+import { BsStack, BsFillShareFill, BsFillVolumeUpFill, BsPhoneVibrateFill, BsFillMoonFill } from "react-icons/bs"
 import { FaUserAlt, FaBookOpen, FaInfo, FaSun, FaBacterium, FaVirus } from "react-icons/fa"
 import { GiPlantsAndAnimals, GiForkKnifeSpoon, GiSunPriest } from "react-icons/gi"
 import { MdHistory, MdBackup } from "react-icons/md"
@@ -78,16 +78,11 @@ export const settingDetails = [
     },
     {
         id: 15,
-        title: "Set Activity Count",
-        icon: <BsListCheck />,
-    },
-    {
-        id: 16,
         title: `Save Progress & feedback`,
         icon: <MdBackup />,
     },
     {
-        id: 17,
+        id: 16,
         title: "Share with friends",
         icon: <BsFillShareFill />,
     },

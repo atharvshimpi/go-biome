@@ -15,7 +15,7 @@ const BackupSharingSettings = ({ setOpen, setSettingId }) => {
             <div className="general-settings-container">
                 <h2>Data Backup</h2>
                 <div className="general-settings-content">
-                    {settingDetails.filter(obj => obj.id >= 16 && obj.id < 18).map((obj) => {
+                    {settingDetails.filter(obj => obj.id >= 15 && obj.id < 17).map((obj) => {
                         return (
                             <div key={obj.id} className="options">
                                 <div className="title-icon">

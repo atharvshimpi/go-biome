@@ -21,7 +21,7 @@ const GeneralSettings = ({ setOpen, setSettingId }) => {
         localStorage.setItem("preferences", JSON.stringify({ ...pref, vibrate: !enabled }))
 
         if(!enabled) {
-            window.navigator.vibrate(500)
+            window.navigator.vibrate(250)
         }
     }
 

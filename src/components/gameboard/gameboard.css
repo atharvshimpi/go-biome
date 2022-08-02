@@ -20,10 +20,8 @@
     z-index: 1;
 }
 
-.biome-character {
-    width: 10px;
-    height: 10px;
-    z-index: 999;
-    background-color: #fff;
-    transform: translate3d(-360px, 20px, 0px); /* X: -360px to -60px*/
+#game-board {
+    position: relative;
+    width: 100%;
+    height: 80vh;
 }

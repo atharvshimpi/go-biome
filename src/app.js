@@ -7,6 +7,7 @@ import Dashboard from "./components/dashboard/dashboard"
 import Questions from "./components/questions/questions"
 import Login from "./components/login/login"
 import Settings from "./components/settings/settings"
+import Gameboard from "./components/gameboard/gameboard"
 
 const App = () => {
     const [authenticated, setAuthenticated] = useState(null)
@@ -43,6 +44,7 @@ const App = () => {
                         }
                     />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="/game" element={<Gameboard />} />
                 </Routes>
             </AnimatePresence>
         </Router>

@@ -37,7 +37,9 @@
             "never"
         ],
         "no-console": "warn",
-        "no-constant-condition": "off"
+        "no-constant-condition": "off",
+        "react/prop-types": 0,
+        "no-unused-vars": "off"
     },
     "ignorePatterns": [
         "**/*.html"

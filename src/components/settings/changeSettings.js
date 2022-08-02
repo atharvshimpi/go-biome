@@ -18,7 +18,7 @@ export const changeUsername = ({ user, setUser, loading, setLoading, setOpen }) 
                 value={user.username}
                 onChange={(e) => setUser({...user, username : e.target.value})}
             />
-            <button onClick={handleSubmit} className="change-button">{loading ? "Loading..." : "Submit"}</button>
+            <button onClick={handleSubmit} className="change-button">{loading ? "Loading..." : "Update"}</button>
         </div>
     )
 }

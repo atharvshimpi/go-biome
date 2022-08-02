@@ -5,9 +5,7 @@ import { motion } from "framer-motion"
 import Gameboard from "../gameboard/gameboard"
 
 import { AiFillSetting } from "react-icons/ai"
-import { MdOutlineReplay } from "react-icons/md"
-import { BiShuffle } from "react-icons/bi"
-import { HiPlus } from "react-icons/hi"
+import { MdOutlineReplay, MdLocationPin } from "react-icons/md"
 // eslint-disable-next-line
 import { BsShieldFillCheck } from "react-icons/bs" // all activities completed
 // eslint-disable-next-line
@@ -43,8 +41,8 @@ const Dashboard = () => {
                     <BsShieldFillExclamation className="icon" />
                 </div>
             </div>
-            <div className="game-board">
-                <Gameboard />
+            <div>
+                <Gameboard></Gameboard>
             </div>
             <div className="bottom-view">
                 <div className="icon-container">
@@ -54,28 +52,22 @@ const Dashboard = () => {
                     <div
                         style={{ backgroundColor: "green" }}
                         className="cards"
-                    ></div>
+                    >E</div>
                     <div
                         style={{ backgroundColor: "yellow" }}
                         className="cards"
-                    ></div>
+                    >PA</div>
                     <div
                         style={{ backgroundColor: "violet" }}
                         className="cards"
-                    ></div>
+                    >S</div>
                     <div
                         style={{ backgroundColor: "pink" }}
                         className="cards"
-                    ></div>
-                    <div
-                        style={{ backgroundColor: "#e5e5e5" }}
-                        className="cards custom-card"
-                    >
-                        <HiPlus />
-                    </div>
+                    >Z</div>
                 </div>
                 <div className="icon-container">
-                    <BiShuffle className="icon" />
+                    <MdLocationPin className="icon" />
                 </div>
             </div>
         </motion.div>

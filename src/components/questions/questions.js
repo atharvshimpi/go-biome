@@ -20,7 +20,7 @@ const Questions = () => {
     const navigate = useNavigate()
     
     const handleClick = () => {
-        localStorage.setItem("preferences", JSON.stringify({...answers, wakeupTime: wakeTimeValue, sleepTime: sleepTimeValue}))
+        localStorage.setItem("preferences", JSON.stringify({...answers, wakeupTime: wakeTimeValue, sleepTime: sleepTimeValue, vibrate: false}))
         setLoading(true)
         setTimeout(() => {
             setLoading(false)

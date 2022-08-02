@@ -6,15 +6,40 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background: #BE877E;
+    background: #B17572;
 }
 
-.top-view {
+.top-view, .points-view {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0rem 0rem;
+}
+
+.points-view {
+    margin-top: 1rem;
+    padding: 0 2rem;
+}
+
+.biomechar-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.biomechar {
+    width: 3rem;
+}
+
+.biome-points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 1.5rem;
+    background-color: #D3807E;
+    border-radius: 0.3rem;
+    border: 1px solid black
 }
 
 .icon {
@@ -57,4 +82,8 @@
     justify-content: space-between;
     align-items: center;
     margin: 0rem 0rem 0.5rem;
+}
+
+.game-board-container {
+    width: 100%;
 }

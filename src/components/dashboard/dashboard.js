@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
+import friendlyBiome from "../../assets/images/friendly.png"
+import unFriendlyBiome from "../../assets/images/unfriendly.png"
 
 import { AiFillSetting } from "react-icons/ai"
 import { MdOutlineReplay, MdLocationPin } from "react-icons/md"
@@ -41,7 +43,22 @@ const Dashboard = () => {
                     <BsShieldFillExclamation className="icon" />
                 </div>
             </div>
-            <div>
+            <div className="points-view">
+                <div className="biomechar-container">
+                    <img src={unFriendlyBiome} className="biomechar" />
+                    <div className="biome-points">
+                        85
+                    </div>
+                </div>
+                
+                <div className="biomechar-container">
+                    <img src={friendlyBiome} className="biomechar" />
+                    <div className="biome-points">
+                        15
+                    </div>
+                </div>
+            </div>
+            <div className="game-board-container">
                 <Gameboard></Gameboard>
             </div>
             <div className="bottom-view">

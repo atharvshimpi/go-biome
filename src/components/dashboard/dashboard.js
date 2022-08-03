@@ -84,7 +84,7 @@ const Dashboard = () => {
                     >Z</div>
                 </div>
                 <div className="icon-container">
-                    <MdLocationPin className="icon" />
+                    <MdLocationPin className="icon" onClick={() => navigate("/map")} />
                 </div>
             </div>
         </motion.div>

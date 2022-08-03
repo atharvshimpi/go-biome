@@ -1,0 +1,24 @@
+.gamemap-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #B17572;
+}
+
+.top-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0rem 0rem;
+}
+
+#gamemap {
+    width: 90%;
+    height: 80vh;
+    background-color: pink;
+    border-radius: 1rem;
+}

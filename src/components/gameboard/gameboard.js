@@ -7,9 +7,11 @@ import gameBG4 from "../../assets/images/bg/Layer_5.png"
 import gameBG5 from "../../assets/images/bg/Layer_6.png"
 import gameBG6 from "../../assets/images/bg/Layer_7.png"
 
+import biomeImg1 from "../../assets/images/friendly.png"
+
 import "./gameboard.css"
 
-const Gameboard = (props) => {    
+const Gameboard = () => {    
     useEffect(() => { 
         const canvas = document.getElementById("game-board")
         const ctx = canvas.getContext("2d")
@@ -30,6 +32,32 @@ const Gameboard = (props) => {
         backgroundLayer5.src = gameBG5
         const backgroundLayer6 = new Image()
         backgroundLayer6.src = gameBG6
+
+        const biomeImg = new Image()
+        biomeImg.src = biomeImg1
+
+        class Player {
+            constructor(gameWidth, gameHeight) {
+                this.gameWidth = gameWidth
+                this.gameHeight = gameHeight
+                this.width = 200
+                this.height = 150
+                this.x = -40
+                this.y = this.gameHeight - this.height - 250
+                this.image = biomeImg
+            }
+    
+            draw(context) {
+                context.fillStyle = "transparent"
+                context.globalAlpha = 1
+                context.fillRect(this.x, this.y, this.width, this.height)
+                context.drawImage(this.image, this.x, this.y, this.width, this.height)
+            }
+    
+            updateX() {
+                this.x = -20
+            }
+        }
 
         class Layer {
             constructor(image, speedModifier) {
@@ -64,14 +92,17 @@ const Gameboard = (props) => {
         const layer5 = new Layer(backgroundLayer5, 0.6)
         const layer6 = new Layer(backgroundLayer6, 0.2)
 
+        const biome1 = new Player(CANVAS_WIDTH, CANVAS_HEIGHT)
+
         const gameObjects = [layer6, layer4, layer3, layer5, layer2, layer1]
 
         function animate () {
             ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
             gameObjects.forEach(object => {
                 object.draw()
-                object.update()
+                // object.update()
             })
+            biome1.draw(ctx)
             requestAnimationFrame(animate)
         }
 
@@ -79,9 +110,7 @@ const Gameboard = (props) => {
     }, [])
 
     return (
-        <canvas id="game-board">
-            {props.children}
-        </canvas>
+        <canvas id="game-board"></canvas>
     )
 }
 

@@ -68,9 +68,14 @@ const Settings = () => {
                     {open && (
                         <SettingsDetails onClose={() => setOpen(false)}>
                             <div className="flex flex-col h-full pt-3">
-                                <div className="relative px-3 pb-4 shadow-sm text-center">
-                                    <span className="slider-title">{selectedSetting?.icon} {selectedSetting?.title}</span>
-                                    <div className="absolute inset-y-0 right-2 text-3xl">
+                                <div className="flex justify-between items-start px-3 shadow-sm text-center">
+                                    <div className="slider-title">
+                                        {selectedSetting?.icon}
+                                    </div>
+                                    <div className="slider-title">
+                                        {selectedSetting?.title}
+                                    </div>
+                                    <div className="inset-y-0 right-2 text-3xl">
                                         <button>
                                             <GrFormClose 
                                                 onClick={() => setOpen(false)} 

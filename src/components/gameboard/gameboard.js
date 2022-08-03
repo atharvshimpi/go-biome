@@ -70,7 +70,7 @@ const Gameboard = (props) => {
             ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
             gameObjects.forEach(object => {
                 object.draw()
-                // object.update()
+                object.update()
             })
             requestAnimationFrame(animate)
         }

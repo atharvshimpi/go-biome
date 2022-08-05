@@ -29,7 +29,7 @@ const Gamemap = () => {
                 </div>
             </div>
             <canvas id="gamemap"></canvas>
-            <div className="top-view">
+            <div className="top-view" style={{ opacity: 0 }}>
                 <div className="icon-container">
                     <IoIosArrowBack
                         onClick={() => navigate("/")}

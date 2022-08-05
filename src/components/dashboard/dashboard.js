@@ -46,16 +46,12 @@ const Dashboard = () => {
             <div className="points-view">
                 <div className="biomechar-container">
                     <img src={unFriendlyBiome} className="biomechar" />
-                    <div className="biome-points">
-                        85
-                    </div>
+                    <div className="biome-points">85</div>
                 </div>
-                
+
                 <div className="biomechar-container">
                     <img src={friendlyBiome} className="biomechar" />
-                    <div className="biome-points">
-                        15
-                    </div>
+                    <div className="biome-points">15</div>
                 </div>
             </div>
             <div className="game-board-container">
@@ -66,25 +62,30 @@ const Dashboard = () => {
                     <MdOutlineReplay className="icon" />
                 </div>
                 <div className="activity-cards">
-                    <div
-                        style={{ backgroundColor: "green" }}
-                        className="cards"
-                    >E</div>
+                    <div style={{ backgroundColor: "green" }} className="cards">
+                        E
+                    </div>
                     <div
                         style={{ backgroundColor: "yellow" }}
                         className="cards"
-                    >PA</div>
+                    >
+                        PA
+                    </div>
                     <div
                         style={{ backgroundColor: "violet" }}
                         className="cards"
-                    >S</div>
-                    <div
-                        style={{ backgroundColor: "pink" }}
-                        className="cards"
-                    >Z</div>
+                    >
+                        S
+                    </div>
+                    <div style={{ backgroundColor: "pink" }} className="cards">
+                        Z
+                    </div>
                 </div>
                 <div className="icon-container">
-                    <MdLocationPin className="icon" onClick={() => navigate("/map")} />
+                    <MdLocationPin
+                        className="icon"
+                        onClick={() => navigate("/map")}
+                    />
                 </div>
             </div>
         </motion.div>

@@ -1,4 +1,4 @@
-import React, {useEffect } from "react"
+import React, { useEffect } from "react"
 
 import gameBG1 from "../../assets/images/bg/Layer_1.png"
 import gameBG2 from "../../assets/images/bg/Layer_2.png"
@@ -11,12 +11,12 @@ import biomeImg1 from "../../assets/images/friendly.png"
 
 import "./gameboard.css"
 
-const Gameboard = () => {    
-    useEffect(() => { 
+const Gameboard = () => {
+    useEffect(() => {
         const canvas = document.getElementById("game-board")
         const ctx = canvas.getContext("2d")
-        const CANVAS_WIDTH = canvas.width = 1000
-        const CANVAS_HEIGHT = canvas.height = window.outerHeight
+        const CANVAS_WIDTH = (canvas.width = 1000)
+        const CANVAS_HEIGHT = (canvas.height = window.outerHeight)
 
         let gameSpeed = 5
 
@@ -43,17 +43,23 @@ const Gameboard = () => {
                 this.width = 200
                 this.height = 150
                 this.x = -40
-                this.y = this.gameHeight - this.height - 250
+                this.y = this.gameHeight - this.height - 240
                 this.image = biomeImg
             }
-    
+
             draw(context) {
                 context.fillStyle = "transparent"
                 context.globalAlpha = 1
                 context.fillRect(this.x, this.y, this.width, this.height)
-                context.drawImage(this.image, this.x, this.y, this.width, this.height)
+                context.drawImage(
+                    this.image,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                )
             }
-    
+
             updateX() {
                 this.x = -20
             }
@@ -72,7 +78,7 @@ const Gameboard = () => {
 
             update() {
                 this.speed = gameSpeed * this.speedModifier
-                if(this.x <= -this.width) {
+                if (this.x <= -this.width) {
                     this.x = 0
                 }
                 this.x = Math.floor(this.x - this.speed)
@@ -80,8 +86,20 @@ const Gameboard = () => {
 
             draw() {
                 ctx.globalAlpha = 0.8
-                ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
-                ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height)
+                ctx.drawImage(
+                    this.image,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                )
+                ctx.drawImage(
+                    this.image,
+                    this.x + this.width,
+                    this.y,
+                    this.width,
+                    this.height
+                )
             }
         }
 
@@ -96,9 +114,9 @@ const Gameboard = () => {
 
         const gameObjects = [layer6, layer4, layer3, layer5, layer2, layer1]
 
-        function animate () {
+        function animate() {
             ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-            gameObjects.forEach(object => {
+            gameObjects.forEach((object) => {
                 object.draw()
                 // object.update()
             })
@@ -109,9 +127,7 @@ const Gameboard = () => {
         animate()
     }, [])
 
-    return (
-        <canvas id="game-board"></canvas>
-    )
+    return <canvas id="game-board"></canvas>
 }
 
 export default Gameboard

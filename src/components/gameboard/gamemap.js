@@ -11,9 +11,9 @@ const Gamemap = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const tileSize = 32
+        const tileSize = 128
         const canvas = document.getElementById("gamemap")
-        const ctx = canvas.getContext("2d") 
+        const ctx = canvas.getContext("2d")
         const bluePrint = new BluePrint(tileSize)
         const pacman = bluePrint.getPacman()
 
@@ -24,7 +24,7 @@ const Gamemap = () => {
         }
 
         bluePrint.setCanvasSize(canvas)
-        setInterval(gameLoop, 1000/75)
+        setInterval(gameLoop, 1000 / 75)
     }, [])
 
     return (

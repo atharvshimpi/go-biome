@@ -43,7 +43,7 @@ const Gameboard = () => {
                 this.width = 200
                 this.height = 150
                 this.x = -40
-                this.y = this.gameHeight - this.height - 240
+                this.y = this.gameHeight - this.height - 280
                 this.image = biomeImg
             }
 
@@ -85,7 +85,7 @@ const Gameboard = () => {
             }
 
             draw() {
-                ctx.globalAlpha = 0.8
+                ctx.globalAlpha = 1
                 ctx.drawImage(
                     this.image,
                     this.x,

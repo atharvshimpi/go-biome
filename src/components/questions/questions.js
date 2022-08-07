@@ -21,6 +21,7 @@ const Questions = () => {
     
     const handleClick = () => {
         localStorage.setItem("preferences", JSON.stringify({...answers, wakeupTime: wakeTimeValue, sleepTime: sleepTimeValue, vibrate: false}))
+        localStorage.setItem("gamestats", JSON.stringify({ friendlyBiomePoints: 15, unFriendlyBiomePoints: 85  }))
         setLoading(true)
         setTimeout(() => {
             setLoading(false)

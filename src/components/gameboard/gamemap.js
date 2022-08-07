@@ -1,13 +1,31 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
+import BluePrint from "./blueprint"
 import { IoIosArrowBack } from "react-icons/io"
 
 import "./gamemap.css"
 
 const Gamemap = () => {
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const tileSize = 32
+        const canvas = document.getElementById("gamemap")
+        const ctx = canvas.getContext("2d") 
+        const bluePrint = new BluePrint(tileSize)
+        const pacman = bluePrint.getPacman()
+
+        function gameLoop() {
+            bluePrint.draw(ctx)
+            pacman.draw(ctx)
+            // pacman.update()
+        }
+
+        bluePrint.setCanvasSize(canvas)
+        setInterval(gameLoop, 1000/75)
+    }, [])
 
     return (
         <motion.div

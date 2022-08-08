@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom"
 import TimePicker from "react-time-picker"
 // eslint-disable-next-line
 import { data, dataElements } from "./questionsData"
+import { setDefault } from "./setDefault"
 
 import "./questions.css"
 
-const answerFormat = { friendlyBiome: "", unFriendlyBiome: "", wakeupTime: "08:00", sleepTime: "22:00", activityCount: 0 }
+const answerFormat = { friendlyBiome: "", unFriendlyBiome: "", wakeupTime: "08:00", sleepTime: "22:00" }
 
 const Questions = () => {
     // eslint-disable-next-line
@@ -20,8 +21,8 @@ const Questions = () => {
     const navigate = useNavigate()
     
     const handleClick = () => {
+        setDefault()
         localStorage.setItem("preferences", JSON.stringify({...answers, wakeupTime: wakeTimeValue, sleepTime: sleepTimeValue, vibrate: false}))
-        localStorage.setItem("gamestats", JSON.stringify({ friendlyBiomePoints: 15, unFriendlyBiomePoints: 85  }))
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
@@ -74,18 +75,7 @@ const Questions = () => {
                                             />
                                         </div>
                                     </div>
-                                ) : (
-                                    <div className="answer-actCount-input">
-                                        <input 
-                                            className="biome-name" 
-                                            type="number" 
-                                            id="activityCount"
-                                            placeholder="Enter Activity Count"
-                                            onChange={(e) => setAnswers({ ...answers, [e.target.id]: e.target.value })}
-                                            value={answers.activityCount}
-                                        />
-                                    </div>
-                                )}
+                                ) : null}
                             </div>
                             <div className="questions-btn-container">
                                 {key !== 0 && 

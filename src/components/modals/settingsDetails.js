@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Dialog } from "@headlessui/react"
 
 // eslint-disable-next-line
-const SettingsDetails = ({ children, onClose }) => {
+const SettingsDetails = ({ settingId, children, onClose }) => {
     return (
         <Dialog className="fixed inset-0 z-10" onClose={onClose} open={true}>
             <div className="flex flex-col justify-center h-full pt-4 text-center sm:block sm:p-0">
@@ -31,7 +31,7 @@ const SettingsDetails = ({ children, onClose }) => {
                     initial={{ y: "100%" }}
                     animate={{
                         // ask whether to lock in portrait mode or not
-                        y: `${window.orientation === 90 ? "40vh" : "50vh"}`,
+                        y: `${window.orientation === 90 ? `${settingId === 4 ? "20vh" : "40vh"}` : `${settingId === 4 ? "30vh" : "50vh"}`}`,
                         transition: {
                             duration: 0.4,
                             ease: "easeOut",

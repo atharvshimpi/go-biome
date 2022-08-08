@@ -42,17 +42,38 @@ export default class BluePrint {
                 if (tile === 1)
                     this.#drawImg(this.wall, ctx, col, row, this.tileSize, tile)
                 else if (tile === 0)
-                    this.#drawImg(this.yellowDot, ctx, col, row, this.tileSize, tile)
+                    this.#drawImg(
+                        this.yellowDot,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize,
+                        tile
+                    )
                 else if (tile === 4)
-                    this.#drawImg(this.ghost, ctx, col, row, this.tileSize, tile)
+                    this.#drawImg(
+                        this.ghost,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize,
+                        tile
+                    )
                 else if (tile === 5)
-                    this.#drawImg(this.enemy, ctx, col, row, this.tileSize, tile)
+                    this.#drawImg(
+                        this.enemy,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize,
+                        tile
+                    )
             }
         }
     }
 
     #drawImg(img, ctx, col, row, size, tile) {
-        if(tile !== 4) {
+        if (tile !== 4) {
             ctx.fillStyle = "orange"
             ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
         }

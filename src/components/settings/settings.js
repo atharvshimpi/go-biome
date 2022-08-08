@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AnimatePresence, motion } from "framer-motion"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import { settingDetails } from "./settingsData"
-import { changeUsername } from "./changeSettings"
+import { changeUsername, activityCardStack, activityHistory, biomeGarden } from "./changeSettings"
 
 import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
@@ -19,10 +21,14 @@ import "./settings.css"
 const Settings = () => {
     // eslint-disable-next-line
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
+    const activityUserCards = JSON.parse(localStorage.getItem("activity-user-cards"))
+    const activityHistoryData = JSON.parse(localStorage.getItem("activity-history"))
+    const biomeChars = JSON.parse(localStorage.getItem("biome-garden"))
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [settingId, setSettingId] = useState(null)
     const [selectedSetting, setSelectedSetting] = useState({})
+    const notify = () => toast.success("Updated Successfully!")
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -66,7 +72,7 @@ const Settings = () => {
 
                 <AnimatePresence>
                     {open && (
-                        <SettingsDetails onClose={() => setOpen(false)}>
+                        <SettingsDetails settingId={settingId} onClose={() => setOpen(false)}>
                             <div className="flex flex-col h-full pt-3">
                                 <div className="flex justify-between items-start px-3 shadow-sm text-center">
                                     <div className="slider-title">
@@ -83,11 +89,27 @@ const Settings = () => {
                                         </button>
                                     </div>
                                 </div>
-                                { settingId === 1 ? changeUsername({user, setUser, loading, setLoading, setOpen}) : null }
+                                { settingId === 1 ? changeUsername({notify, user, setUser, loading, setLoading, setOpen}) : null }
+                                { settingId === 2 ? activityCardStack(activityUserCards) : null }
+                                { settingId === 3 ? activityHistory(activityHistoryData) : null }
+                                { settingId === 4 ? biomeGarden(biomeChars) : null }
                             </div>
                         </SettingsDetails>
                     )}
                 </AnimatePresence>
+                
+                {/* Update Pop Up */}
+                <ToastContainer 
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </motion.div>
         </>
     )

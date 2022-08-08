@@ -118,3 +118,51 @@
 .change-button:active {
     opacity: 0.5;
 }
+
+.empty-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.empty-heading {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.empty-redirect {
+    color: #b17572;
+}
+
+.empty-img {
+    width: 50%;
+    height: 30vh;
+}
+
+.biome-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 63vh;
+    padding: 0 0.5rem 2rem;
+    overflow: scroll;
+}
+
+.biome-image {
+    width: 25%;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-width: 0.5rem;
+    border-style: ridge;
+}
+
+@media (max-width: 768px) {
+    .biome-image {
+        width: 48%;
+        height: auto;
+    }
+}

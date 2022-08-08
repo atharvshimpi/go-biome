@@ -160,6 +160,10 @@
     border-style: ridge;
 }
 
+.biome-active-image {
+    border-color: green;
+}
+
 @media (max-width: 768px) {
     .biome-image {
         width: 48%;

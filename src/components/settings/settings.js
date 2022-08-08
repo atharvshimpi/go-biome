@@ -26,7 +26,7 @@ const Settings = () => {
     const biomeChars = JSON.parse(localStorage.getItem("biome-garden"))
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [settingId, setSettingId] = useState(null)
+    const [settingId, setSettingId] = useState(-1)
     const [selectedSetting, setSelectedSetting] = useState({})
     const notify = () => toast.success("Updated Successfully!")
     const navigate = useNavigate()

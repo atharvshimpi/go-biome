@@ -60,11 +60,12 @@ export const activityHistory = (activityHistory) => {
 }
 
 export const biomeGarden = (biomeGarden) => {
+    const biomeActiveChar = biomeGarden.active
 
     return (
         <div className="biome-container">
-            {biomeGarden?.map((biome, key) => (
-                <div key={key} className="biome-image">
+            {biomeGarden.chars?.map((biome, key) => (
+                <div key={key} className={`biome-image ${biomeActiveChar === biome ? "biome-active-image" : ""}`}>
                     <img src={require(`../../assets/images/biome/${biome}`)} alt={biome.split(".")[0]} />
                 </div>
             ))}

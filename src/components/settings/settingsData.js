@@ -1,8 +1,25 @@
 import React from "react"
 
-import { BsStack, BsFillShareFill, BsFillVolumeUpFill, BsPhoneVibrateFill, BsFillMoonFill } from "react-icons/bs"
-import { FaUserAlt, FaBookOpen, FaInfo, FaSun, FaBacterium, FaVirus } from "react-icons/fa"
-import { GiPlantsAndAnimals, GiForkKnifeSpoon, GiSunPriest } from "react-icons/gi"
+import {
+    BsStack,
+    BsFillShareFill,
+    BsFillVolumeUpFill,
+    BsPhoneVibrateFill,
+    BsFillMoonFill,
+} from "react-icons/bs"
+import {
+    FaUserAlt,
+    FaBookOpen,
+    FaInfo,
+    FaSun,
+    FaBacterium,
+    FaVirus,
+} from "react-icons/fa"
+import {
+    GiPlantsAndAnimals,
+    GiForkKnifeSpoon,
+    GiSunPriest,
+} from "react-icons/gi"
 import { MdHistory, MdBackup } from "react-icons/md"
 
 export const settingDetails = [
@@ -78,7 +95,7 @@ export const settingDetails = [
     },
     {
         id: 15,
-        title: `Save Progress & feedback`,
+        title: "Save Progress & feedback",
         icon: <MdBackup />,
     },
     {

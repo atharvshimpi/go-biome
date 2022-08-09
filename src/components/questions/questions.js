@@ -7,7 +7,12 @@ import { setDefault } from "./setDefault"
 
 import "./questions.css"
 
-const answerFormat = { friendlyBiome: "", unFriendlyBiome: "", wakeupTime: "08:00", sleepTime: "22:00" }
+const answerFormat = {
+    friendlyBiome: "",
+    unFriendlyBiome: "",
+    wakeupTime: "08:00",
+    sleepTime: "22:00",
+}
 
 const Questions = () => {
     // eslint-disable-next-line
@@ -19,10 +24,20 @@ const Questions = () => {
     const [loading, setLoading] = useState(false)
     // eslint-disable-next-line
     const navigate = useNavigate()
-    
+
     const handleClick = () => {
         setDefault()
-        localStorage.setItem("preferences", JSON.stringify({...answers, wakeupTime: wakeTimeValue, sleepTime: sleepTimeValue, vibrate: false}))
+        localStorage.setItem(
+            "preferences",
+            JSON.stringify({
+                ...answers,
+                wakeupTime: wakeTimeValue,
+                sleepTime: sleepTimeValue,
+                vibrate: false,
+                mealTime: null,
+                morningCheckInTime: null
+            })
+        )
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
@@ -51,26 +66,49 @@ const Questions = () => {
                                         <input
                                             className="biome-name"
                                             type="text"
-                                            onChange={(e) => setAnswers({ ...answers, [e.target.id]: e.target.value })}
-                                            placeholder={`Enter ${item.question.split(" ")[2]} biome name`}
-                                            value={key === 0 ? answers.friendlyBiome : answers.unFriendlyBiome}
-                                            id={key === 0 ? "friendlyBiome" : "unFriendlyBiome"}
+                                            onChange={(e) =>
+                                                setAnswers({
+                                                    ...answers,
+                                                    [e.target.id]:
+                                                        e.target.value,
+                                                })
+                                            }
+                                            placeholder={`Enter ${
+                                                item.question.split(" ")[2]
+                                            } biome name`}
+                                            value={
+                                                key === 0
+                                                    ? answers.friendlyBiome
+                                                    : answers.unFriendlyBiome
+                                            }
+                                            id={
+                                                key === 0
+                                                    ? "friendlyBiome"
+                                                    : "unFriendlyBiome"
+                                            }
                                         />
                                     </div>
                                 ) : key === 2 ? (
                                     <div className="answer-time-input-container">
                                         <div className="answer-time-input">
-                                            <span className="answer-time-label">Wakeup Time : </span>
+                                            <span className="answer-time-label">
+                                                Wakeup Time :{" "}
+                                            </span>
                                             <TimePicker
-                                                onChange={onWakeTimeValueChange} 
+                                                onChange={onWakeTimeValueChange}
                                                 value={wakeTimeValue}
                                             />
                                         </div>
-                                        <br /><br />
+                                        <br />
+                                        <br />
                                         <div className="answer-time-input">
-                                            <span className="answer-time-label">Sleeping Time : </span>
+                                            <span className="answer-time-label">
+                                                Sleeping Time :{" "}
+                                            </span>
                                             <TimePicker
-                                                onChange={onSleepTimeValueChange} 
+                                                onChange={
+                                                    onSleepTimeValueChange
+                                                }
                                                 value={sleepTimeValue}
                                             />
                                         </div>
@@ -78,7 +116,7 @@ const Questions = () => {
                                 ) : null}
                             </div>
                             <div className="questions-btn-container">
-                                {key !== 0 && 
+                                {key !== 0 && (
                                     <a
                                         className="questions-btn-a"
                                         href={`#${key - 1}`}
@@ -87,12 +125,13 @@ const Questions = () => {
                                             Back
                                         </button>
                                     </a>
-                                }
+                                )}
                                 {key === 3 ? (
-                                    <a
-                                        className="questions-btn-a"
-                                    >
-                                        <button onClick={handleClick} className="questions-btn">
+                                    <a className="questions-btn-a">
+                                        <button
+                                            onClick={handleClick}
+                                            className="questions-btn"
+                                        >
                                             {loading ? "Loading..." : "Submit"}
                                         </button>
                                     </a>

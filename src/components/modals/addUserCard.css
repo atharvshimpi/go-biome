@@ -1,4 +1,4 @@
-.usercard-bg-container {
+.add-usercard-bg-container {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -16,44 +16,33 @@
     margin: 0.5rem 0rem 1.5rem;
 }
 
-.usercard-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.add-usercard-container {
     width: 80%;
     background-color: #e6e6e6;
     padding: 1rem;
     overflow: scroll;
 }
 
-.usercard-location,
-.usercard-tags,
-.usercard-description,
-.usercard-btn-container {
+.add-usercard-location,
+.add-usercard-image,
+.add-usercard-tags,
+.add-usercard-description,
+.add-usercard-btn-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.usercard-preview-image-container {
-    width: 100%;
-    margin-bottom: 0.3rem;
-}
-
-.usercard-btn {
+.add-usercard-btn {
     padding: 16.5px 14px;
 }
 
-.usercard-icons {
-    margin-right: 0.3rem;
-}
-
-.usercard-input {
+.add-usercard-input {
     width: 70%;
 }
 
-.usercard-image-text {
+.add-usercard-image-text {
     display: flex;
     justify-content: space-between;
     align-items: center;

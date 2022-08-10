@@ -62,22 +62,32 @@ const Dashboard = () => {
                     <MdOutlineReplay className="icon" />
                 </div>
                 <div className="activity-cards">
-                    <div style={{ backgroundColor: "green" }} className="cards">
+                    <div
+                        onClick={() => navigate("/card")}
+                        style={{ backgroundColor: "green" }}
+                        className="cards"
+                    >
                         E
                     </div>
                     <div
+                        onClick={() => navigate("/card")}
                         style={{ backgroundColor: "yellow" }}
                         className="cards"
                     >
                         PA
                     </div>
                     <div
+                        onClick={() => navigate("/card")}
                         style={{ backgroundColor: "violet" }}
                         className="cards"
                     >
                         S
                     </div>
-                    <div style={{ backgroundColor: "pink" }} className="cards">
+                    <div
+                        onClick={() => navigate("/card")}
+                        style={{ backgroundColor: "pink" }}
+                        className="cards"
+                    >
                         Z
                     </div>
                 </div>

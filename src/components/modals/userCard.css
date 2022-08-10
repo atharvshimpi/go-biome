@@ -1,0 +1,43 @@
+.usercard-bg-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: hsl(3, 29%, 57%);
+}
+
+.top-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0rem 1.5rem;
+}
+
+.usercard-container {
+    width: 80%;
+    height: 80vh;
+    background-color: #e6e6e6;
+    padding: 1rem;
+    overflow: scroll;
+}
+
+.usercard-location, .usercard-image, .usercard-tags, .usercard-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.usercard-input {
+    width: 70%;
+} 
+
+.usercard-image-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}

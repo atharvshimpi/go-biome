@@ -24,6 +24,9 @@
     background-color: #e6e6e6;
     padding: 1rem;
     overflow-wrap: anywhere;
+    border-radius: 1rem;
+    border: 2px solid #333;
+    box-shadow: 0px 0px 1px 15px #fff;
 }
 
 @media (max-width: 768px) {
@@ -35,11 +38,17 @@
 .usercard-location,
 .usercard-tags,
 .usercard-description,
+.usercard-createdAt,
 .usercard-btn-container {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     margin-bottom: 1rem;
     width: 100%;
+}
+
+.usercard-createdAt h5 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .usercard-preview-image-container {

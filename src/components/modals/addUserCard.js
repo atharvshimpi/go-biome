@@ -12,39 +12,50 @@ import { FaTag } from "react-icons/fa"
 import { MdLocationPin } from "react-icons/md"
 import { RiDoubleQuotesL } from "react-icons/ri"
 import { BsCardImage } from "react-icons/bs"
+import { AiFillLock } from "react-icons/ai"
 
 import "./addUserCard.css"
 
 const categoryTags = [
     {
         category: "Environment",
-        color: "green",
+        color: "#94B394",
+        avatarColor: "#619461"
     },
     {
         category: "Physical Activity",
-        color: "yellow",
+        color: "#FED966",
+        avatarColor: "#ffc100"
     },
     {
         category: "Social",
-        color: "violet",
+        color: "#B886C1",
+        avatarColor: "#a560b1"
     },
     {
         category: "Zen",
-        color: "pink",
+        color: "#F2A1A0",
+        avatarColor: "#e97170"
     },
 ]
 
-const initialState = { location: "", tag: "Environment", description: "", createdAt: Date() }
+const initialState = {
+    location: "",
+    tag: categoryTags[1],
+    description: "",
+    createdAt: Date(),
+}
 
 const AddUserCard = () => {
-    const [isPreviewOn, setIsPreviewOn] = useState(true)
+    const [isPreviewOn, setIsPreviewOn] = useState(false)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)
+    const isDisabled = userCardData.location === "" || userCardData.description === "" || !userImageData
     const navigate = useNavigate()
 
     const handleChange = (e) => {
-        setUserCardData({...userCardData, [e.target.id]: e.target.value})
+        setUserCardData({ ...userCardData, [e.target.id]: e.target.value })
     }
 
     const handleImageChange = (e) => {
@@ -58,14 +69,14 @@ const AddUserCard = () => {
         fileReader.readAsDataURL(e.target.files[0])
     }
 
-    const handleTags = (e) => {
-        console.log(e)
-    }
-
     return (
         <>
             {isPreviewOn ? (
-                <UserCard setIsPreviewOn={setIsPreviewOn} userCardData={userCardData} userImageData={userImageData} />
+                <UserCard
+                    setIsPreviewOn={setIsPreviewOn}
+                    userCardData={userCardData}
+                    userImageData={userImageData}
+                />
             ) : (
                 <div className="add-usercard-bg-container">
                     <div className="top-view">
@@ -76,7 +87,10 @@ const AddUserCard = () => {
                             />
                         </div>
                         <h2>User Card</h2>
-                        <div style={{ opacity: 0 }} className="avatar-container">
+                        <div
+                            style={{ opacity: 0 }}
+                            className="avatar-container"
+                        >
                             <img
                                 className="avatar"
                                 src="https://image.shutterstock.com/image-photo/word-demo-appearing-behind-torn-600w-1782295403.jpg"
@@ -89,6 +103,7 @@ const AddUserCard = () => {
                                 fullWidth
                                 id="location"
                                 label="Location"
+                                inputProps={{ maxLength: 20 }}
                                 variant="outlined"
                                 className="add-usercard-input"
                                 value={userCardData.location}
@@ -110,7 +125,9 @@ const AddUserCard = () => {
                                 component="label"
                             >
                                 <div className="add-usercard-image-text">
-                                    <BsCardImage style={{ color: "rgba(0, 0, 0, 0.54)" }} />
+                                    <BsCardImage
+                                        style={{ color: "rgba(0, 0, 0, 0.54)" }}
+                                    />
                                     {userImageFile
                                         ? userImageFile.name
                                         : "Upload Photo"}
@@ -124,7 +141,7 @@ const AddUserCard = () => {
                             </Button>
                         </div>
                         <div className="add-usercard-tags">
-                            <TextField 
+                            <TextField
                                 fullWidth
                                 disabled
                                 className="add-usercard-input"
@@ -136,8 +153,16 @@ const AddUserCard = () => {
                                         <InputAdornment position="start">
                                             <FaTag />
                                             <Chip
-                                                avatar={<Avatar alt="Environment" src="/static/images/avatar/1.jpg" />}
-                                                label="Environment"
+                                                style={{ backgroundColor: userCardData.tag.color }}
+                                                avatar={
+                                                    <Avatar
+                                                        style={{ backgroundColor: userCardData.tag.avatarColor }}
+                                                        alt={userCardData.tag.category}
+                                                        // maybe we can add the activity logo here 
+                                                        src="/static/images/avatar/1.jpg"
+                                                    />
+                                                }
+                                                label={userCardData.tag.category}
                                                 variant="outlined"
                                                 className="category-chip"
                                             />
@@ -153,6 +178,7 @@ const AddUserCard = () => {
                                 variant="outlined"
                                 id="description"
                                 label="Description"
+                                inputProps={{ maxLength: 70 }}
                                 value={userCardData.description}
                                 onChange={(e) => handleChange(e)}
                                 multiline
@@ -167,12 +193,23 @@ const AddUserCard = () => {
                             />
                         </div>
                         <div className="add-usercard-btn-container">
-                            <Button onClick={() => setIsPreviewOn(true)} className="add-usercard-btn" fullWidth variant="contained">
+                            <Button
+                                startIcon={isDisabled ? <AiFillLock /> : null}
+                                disabled={isDisabled}
+                                onClick={() => setIsPreviewOn(true)}
+                                className="add-usercard-btn"
+                                fullWidth
+                                variant="contained"
+                            >
                                 Preview
                             </Button>
                         </div>
                         <div className="add-usercard-btn-container">
-                            <Button className="add-usercard-btn" fullWidth variant="contained">
+                            <Button
+                                className="add-usercard-btn"
+                                fullWidth
+                                variant="contained"
+                            >
                                 Create
                             </Button>
                         </div>

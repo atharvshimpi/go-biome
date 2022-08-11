@@ -64,28 +64,28 @@ const Dashboard = () => {
                 <div className="activity-cards">
                     <div
                         onClick={() => navigate("/card")}
-                        style={{ backgroundColor: "green" }}
+                        style={{ backgroundColor: "#94B394" }}
                         className="cards"
                     >
                         E
                     </div>
                     <div
                         onClick={() => navigate("/card")}
-                        style={{ backgroundColor: "yellow" }}
+                        style={{ backgroundColor: "#FED966" }}
                         className="cards"
                     >
                         PA
                     </div>
                     <div
                         onClick={() => navigate("/card")}
-                        style={{ backgroundColor: "violet" }}
+                        style={{ backgroundColor: "#B886C1" }}
                         className="cards"
                     >
                         S
                     </div>
                     <div
                         onClick={() => navigate("/card")}
-                        style={{ backgroundColor: "pink" }}
+                        style={{ backgroundColor: "#F2A1A0" }}
                         className="cards"
                     >
                         Z

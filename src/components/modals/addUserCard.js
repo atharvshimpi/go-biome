@@ -37,7 +37,7 @@ const categoryTags = [
 const initialState = { location: "", tag: "Environment", description: "", createdAt: Date() }
 
 const AddUserCard = () => {
-    const [isPreviewOn, setIsPreviewOn] = useState(false)
+    const [isPreviewOn, setIsPreviewOn] = useState(true)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)

@@ -32,7 +32,10 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
                     />
                 </div>
             </div>
-            <div style={{ backgroundColor: userCardData.tag.color }} className="usercard-container">
+            <div
+                style={{ backgroundColor: userCardData.tag.color }}
+                className="usercard-container"
+            >
                 <div className="usercard-location">
                     <MdLocationPin className="usercard-icons" />
                     <h5>{userCardData.location}</h5>

@@ -41,7 +41,7 @@ const categoryTags = [
 
 const initialState = {
     location: "",
-    tag: categoryTags[1],
+    tag: categoryTags[0],
     description: "",
     createdAt: Date(),
 }
@@ -147,7 +147,7 @@ const AddUserCard = () => {
                                 className="add-usercard-input"
                                 id="tag"
                                 variant="outlined"
-                                label="Tags"
+                                label="Activity Category"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -206,6 +206,8 @@ const AddUserCard = () => {
                         </div>
                         <div className="add-usercard-btn-container">
                             <Button
+                                startIcon={isDisabled ? <AiFillLock /> : null}
+                                disabled={isDisabled}
                                 className="add-usercard-btn"
                                 fullWidth
                                 variant="contained"

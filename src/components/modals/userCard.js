@@ -11,7 +11,7 @@ import { FaTags } from "react-icons/fa"
 
 import "./userCard.css"
 
-const UserCard = ({ setIsPreviewOn }) => {
+const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
     const navigate = useNavigate()
 
     return (
@@ -34,21 +34,21 @@ const UserCard = ({ setIsPreviewOn }) => {
             <div className="usercard-container">
                 <div className="usercard-location">
                     <MdLocationPin className="usercard-icons" />
-                    <h5>Location</h5>
+                    <h5>{userCardData.location}</h5>
                 </div>
                 <div className="usercard-preview-image-container">
                     <img
                         className="usercard-preview-image"
-                        src="https://image.shutterstock.com/image-photo/word-demo-appearing-behind-torn-600w-1782295403.jpg"
+                        src={userImageData}
                     />
                 </div>
                 <div className="usercard-tags">
                     <FaTags className="usercard-icons" />
-                    tags, tags, tags, tags
+                    <h5>{userCardData.tag}</h5>
                 </div>
                 <div className="usercard-description">
                     <RiDoubleQuotesL className="usercard-icons" />
-                    Description
+                    <h5>{userCardData.description}</h5>
                 </div>
                 <div className="usercard-btn-container">
                     <Button

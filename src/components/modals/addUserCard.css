@@ -48,3 +48,7 @@
     align-items: center;
     width: 100%;
 }
+
+.category-chip {
+    margin-left: 0.5rem;
+}

@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
-import { InputAdornment } from "@mui/material"
+import { Avatar, Chip, InputAdornment } from "@mui/material"
 import { Button } from "@material-ui/core"
 
 import UserCard from "./userCard"
 
 import { IoIosArrowBack } from "react-icons/io"
+import { FaTag } from "react-icons/fa"
 import { MdLocationPin } from "react-icons/md"
 import { RiDoubleQuotesL } from "react-icons/ri"
 import { BsCardImage } from "react-icons/bs"
@@ -34,7 +34,7 @@ const categoryTags = [
     },
 ]
 
-const initialState = { location: "", tags: [], description: "", createdAt: Date() }
+const initialState = { location: "", tag: "Environment", description: "", createdAt: Date() }
 
 const AddUserCard = () => {
     const [isPreviewOn, setIsPreviewOn] = useState(false)
@@ -65,7 +65,7 @@ const AddUserCard = () => {
     return (
         <>
             {isPreviewOn ? (
-                <UserCard setIsPreviewOn={setIsPreviewOn} />
+                <UserCard setIsPreviewOn={setIsPreviewOn} userCardData={userCardData} userImageData={userImageData} />
             ) : (
                 <div className="add-usercard-bg-container">
                     <div className="top-view">
@@ -124,22 +124,26 @@ const AddUserCard = () => {
                             </Button>
                         </div>
                         <div className="add-usercard-tags">
-                            <Autocomplete
+                            <TextField 
                                 fullWidth
+                                disabled
                                 className="add-usercard-input"
-                                multiple
-                                id="tags"
-                                options={categoryTags}
-                                getOptionLabel={(option) => option.category}
-                                filterSelectedOptions
-                                onChange={(e) => console.log(e)}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label="Add category tags"
-                                        placeholder="Category"
-                                    />
-                                )}
+                                id="tag"
+                                variant="outlined"
+                                label="Tags"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <FaTag />
+                                            <Chip
+                                                avatar={<Avatar alt="Environment" src="/static/images/avatar/1.jpg" />}
+                                                label="Environment"
+                                                variant="outlined"
+                                                className="category-chip"
+                                            />
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </div>
                         <div className="add-usercard-description">

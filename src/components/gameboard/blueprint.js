@@ -1,38 +1,62 @@
-import ghost from "../../assets/images/gamemap/ghost.png"
-import pacman from "../../assets/images/gamemap/pacman.png"
-import wall from "../../assets/images/gamemap/wall.png"
-import yellowDot from "../../assets/images/gamemap/yellowDot.png"
-import enemy from "../../assets/images/gamemap/character.png"
+import biome from "../../assets/images/gamemap/biome.png"
+import minion from "../../assets/images/gamemap/minion.png"
+import plus from "../../assets/images/gamemap/plus.png"
+import dashed from "../../assets/images/gamemap/dashed.png"
+import dashedLeftDown from "../../assets/images/gamemap/dashedLeftDown.png"
+import dashedLeftUp from "../../assets/images/gamemap/dashedLeftUp.png"
+import dashedRightDown from "../../assets/images/gamemap/dashedRightDown.png"
+import dashedRightUp from "../../assets/images/gamemap/dashedRightUp.png"
 
 export default class BluePrint {
     constructor(tileSize) {
         this.tileSize = tileSize
         this.gameStats = JSON.parse(localStorage.getItem("gamestats"))
+        
+        this.minion = new Image()
+        this.minion.src = minion
+        
+        this.dashed = new Image()
+        this.dashed.src = dashed
 
-        this.yellowDot = new Image()
-        this.yellowDot.src = yellowDot
+        this.dashedLeftDown = new Image()
+        this.dashedLeftDown.src = dashedLeftDown
 
-        this.wall = new Image()
-        this.wall.src = wall
+        this.dashedLeftUp = new Image()
+        this.dashedLeftUp.src = dashedLeftUp
 
-        this.pacman = new Image()
-        this.pacman.src = pacman
+        this.dashedRightDown = new Image()
+        this.dashedRightDown.src = dashedRightDown
 
-        this.ghost = new Image()
-        this.ghost.src = ghost
-
-        this.enemy = new Image()
-        this.enemy.src = enemy
+        this.dashedRightUp = new Image()
+        this.dashedRightUp.src = dashedRightUp
+        
+        this.plus = new Image()
+        this.plus.src = plus
     }
 
+    /*
+        Convention :-
+        0 - dashed
+        1 - dashedLeftDown
+        2 - dashedRightUp
+        3 - dashedRightDown
+        4 - dashedLeftUp
+        5 - biome
+        6 - minion
+        7 - plus
+        8 - backgroundColor
+    */
+
     map = [
-        [1, 1, 5, 1, 4, 1],
-        [1, 0, 0, 0, 0, 1],
-        [1, 0, 1, 1, 1, 1],
-        [5, 0, 0, 0, 0, 1],
-        [1, 1, 1, 1, 0, 1],
-        [1, 0, 0, 0, 0, 5],
-        [1, 3, 1, 1, 1, 1],
+        [8, 8, 8, 8, 8, 6],
+        [1, 0, 7, 0, 7, 2],
+        [4, 7, 0, 7, 0, 3],
+        [1, 0, 7, 0, 7, 2],
+        [4, 7, 0, 7, 0, 3],
+        [1, 0, 7, 0, 7, 2],
+        [4, 7, 0, 7, 0, 3],
+        [1, 0, 7, 0, 7, 2],
+        [5, 8, 8, 8, 8, 8],
     ]
 
     draw(ctx) {
@@ -40,43 +64,85 @@ export default class BluePrint {
             for (let col = 0; col < this.map[row].length; col++) {
                 let tile = this.map[row][col]
                 if (tile === 1)
-                    this.#drawImg(this.wall, ctx, col, row, this.tileSize, tile)
-                else if (tile === 0)
                     this.#drawImg(
-                        this.yellowDot,
+                        this.dashedLeftDown,
                         ctx,
                         col,
                         row,
-                        this.tileSize,
-                        tile
+                        this.tileSize
+                    )
+                else if (tile === 0)
+                    this.#drawImg(
+                        this.dashed,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
+                    )
+                else if (tile === 2)
+                    this.#drawImg(
+                        this.dashedRightUp,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
+                    )
+                else if (tile === 3)
+                    this.#drawImg(
+                        this.dashedRightDown,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
                     )
                 else if (tile === 4)
                     this.#drawImg(
-                        this.ghost,
+                        this.dashedLeftUp,
                         ctx,
                         col,
                         row,
-                        this.tileSize,
-                        tile
+                        this.tileSize
                     )
-                else if (tile === 5)
+                else if (tile === 6)
                     this.#drawImg(
-                        this.enemy,
+                        this.minion,
                         ctx,
                         col,
                         row,
-                        this.tileSize,
-                        tile
+                        this.tileSize
                     )
+                else if (tile === 7) {
+                    this.#drawImg(
+                        this.dashed,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
+                    )
+                    this.#drawPlus(
+                        this.plus,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize / 2
+                    )
+                }
+
+                // ctx.strokeStyle = "black"
+                // ctx.strokeRect(col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize)
             }
         }
     }
 
-    #drawImg(img, ctx, col, row, size, tile) {
-        if (tile !== 4) {
-            ctx.fillStyle = "orange"
-            ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
-        }
+    #drawPlus(img, ctx, col, row, size) {
+        ctx.fillStyle = "#b17572"
+        ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
+        ctx.drawImage(img, (col + 0.25) * this.tileSize, (row + 0.25) * this.tileSize, size, size)
+    }
+
+    #drawImg(img, ctx, col, row, size) {
+        ctx.fillStyle = "#b17572"
+        ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
         ctx.drawImage(img, col * this.tileSize, row * this.tileSize, size, size)
     }
 
@@ -84,7 +150,7 @@ export default class BluePrint {
         for (let row = 0; row < this.map.length; row++) {
             for (let col = 0; col < this.map[row].length; col++) {
                 let tile = this.map[row][col]
-                if (tile === 3) {
+                if (tile === 5) {
                     return new Pacman(
                         col * this.tileSize,
                         row * this.tileSize,
@@ -111,7 +177,7 @@ class Pacman {
         this.tileMap = tileMap
         this.gameStats = gameStats
         this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
-        this.#loadPacmanImages()
+        this.#loadBiomeImages()
     }
 
     /*
@@ -127,7 +193,7 @@ class Pacman {
     draw(ctx) {
         if (this.biomeMoveCount < 1)
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x,
                 this.y,
                 this.tileSize,
@@ -135,7 +201,7 @@ class Pacman {
             )
         else if (this.biomeMoveCount >= 1 && this.biomeMoveCount <= 4)
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x + (this.biomeMoveCount - 1) * this.tileSize,
                 this.y - this.tileSize,
                 this.tileSize,
@@ -143,7 +209,7 @@ class Pacman {
             )
         else if (this.biomeMoveCount > 4 && this.biomeMoveCount <= 6)
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x + 3 * this.tileSize,
                 this.y - (this.biomeMoveCount - 3) * this.tileSize,
                 this.tileSize,
@@ -151,7 +217,7 @@ class Pacman {
             )
         else if (this.biomeMoveCount > 6 && this.biomeMoveCount <= 9)
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x + (9 - this.biomeMoveCount) * this.tileSize,
                 this.y - 3 * this.tileSize,
                 this.tileSize,
@@ -159,7 +225,7 @@ class Pacman {
             )
         else if (this.biomeMoveCount > 9 && this.biomeMoveCount <= 11)
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x,
                 this.y - (this.biomeMoveCount - 6) * this.tileSize,
                 this.tileSize,
@@ -167,7 +233,7 @@ class Pacman {
             )
         else if (this.biomeMoveCount > 11 && this.biomeMoveCount <= 14)
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x + (this.biomeMoveCount - 11) * this.tileSize,
                 this.y - 5 * this.tileSize,
                 this.tileSize,
@@ -175,7 +241,7 @@ class Pacman {
             )
         else {
             ctx.drawImage(
-                this.pacmanImages[0],
+                this.biomeImages[0],
                 this.x + 3 * this.tileSize,
                 this.y - 6 * this.tileSize,
                 this.tileSize,
@@ -188,10 +254,10 @@ class Pacman {
         this.biomeMoveCount += 0.06
     }
 
-    #loadPacmanImages() {
-        const pacmanImage1 = new Image()
-        pacmanImage1.src = pacman
+    #loadBiomeImages() {
+        const biomeImage = new Image()
+        biomeImage.src = biome
 
-        this.pacmanImages = [pacmanImage1]
+        this.biomeImages = [biomeImage]
     }
 }

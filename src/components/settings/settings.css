@@ -21,26 +21,15 @@
     font-size: 1.4rem;
 }
 
-.avatar-container {
-    margin: 0rem 0.5rem;
-    border: 1px solid #ffbc58;
-    border-radius: 4rem;
-    background-color: #ffbc58;
-    font-weight: 700;
-    transition: all 0.09s ease-in-out;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.avatar-container:active {
-    border-color: #333;
-}
-
 .avatar {
     width: 2rem;
     height: 2rem;
+    margin: 0rem 0.5rem;
+    transition: all 0.09s ease-in-out;
+}
+
+.avatar:active {
+    border: 1px solid #333;
 }
 
 .general-settings {
@@ -241,4 +230,9 @@
 
 .MuiPickersClockPointer-thumb {
     border-color: #a66d27 !important;
+}
+
+.user-profile-picture {
+    width: 18rem;
+    height: 35vh;
 }

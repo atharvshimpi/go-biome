@@ -6,6 +6,7 @@ import {
     BsFillVolumeUpFill,
     BsPhoneVibrateFill,
     BsFillMoonFill,
+    BsFillImageFill
 } from "react-icons/bs"
 import {
     FaUserAlt,
@@ -23,6 +24,11 @@ import {
 import { MdHistory, MdBackup } from "react-icons/md"
 
 export const settingDetails = [
+    {
+        id: 0,
+        title: "Profile Picture",
+        icon: <BsFillImageFill />,
+    },
     {
         id: 1,
         title: "Change Username",

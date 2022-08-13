@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 import { settingDetails } from "./settingsData"
-import { changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName, saveProgress } from "./changeSettings"
+import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName, saveProgress } from "./changeSettings"
 
 import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
@@ -17,6 +17,7 @@ import { IoIosArrowBack } from "react-icons/io"
 import { GrFormClose } from "react-icons/gr"
 
 import "./settings.css"
+import { Avatar } from "@mui/material"
 
 const Settings = () => {
     // eslint-disable-next-line
@@ -37,9 +38,7 @@ const Settings = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(settingId) {
-            setSelectedSetting(settingDetails.find(obj => obj.id === settingId))
-        }
+        setSelectedSetting(settingDetails.find(obj => obj.id === settingId))
     }, [settingId])
 
     return (
@@ -58,16 +57,15 @@ const Settings = () => {
                         />
                     </div>
                     <h2>Settings</h2>
-                    <div className="avatar-container">
-                        <img
-                            onClick={() => {
-                                setOpen(true),
-                                setSettingId(0)
-                            }}
-                            className="avatar"
-                            src="https://image.shutterstock.com/image-photo/word-demo-appearing-behind-torn-600w-1782295403.jpg"
-                        />
-                    </div>
+                    <Avatar
+                        alt={user.username}
+                        src={JSON.parse(localStorage.getItem("user")).profilePicture}
+                        className="avatar"
+                        onClick={() => {
+                            setOpen(true),
+                            setSettingId(0)
+                        }}
+                    />
                 </div>
 
                 <UserSettings setOpen={setOpen} setSettingId={setSettingId} />
@@ -94,6 +92,7 @@ const Settings = () => {
                                         </button>
                                     </div>
                                 </div>
+                                { settingId === 0 ? changeProfilePicture({notify, user, setUser, loading, setLoading, setOpen}) : null }
                                 { settingId === 1 ? changeUsername({notify, pref, user, setUser, loading, setLoading, setOpen}) : null }
                                 { settingId === 2 ? activityCardStack(activityUserCards) : null }
                                 { settingId === 3 ? activityHistory(activityHistoryData) : null }

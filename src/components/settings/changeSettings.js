@@ -1,9 +1,63 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { TimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
 
 import emptyTemplate from "../../assets/images/emptyTemplate.svg"
+import { Avatar, IconButton } from "@mui/material"
+
+export const changeProfilePicture = ({
+    notify,
+    user,
+    setUser,
+    loading,
+    setLoading,
+    setOpen,
+}) => {
+    const handleImage = (e) => {
+        const fileReader = new FileReader()
+
+        fileReader.addEventListener("load", () => {
+            setUser({...user, profilePicture: fileReader.result})
+        })
+
+        fileReader.readAsDataURL(e.target.files[0])
+    }
+
+    const handleSubmit = () => {
+        localStorage.setItem("user", JSON.stringify(user))
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            setOpen(false)
+            notify()
+        }, 1000)
+    }
+
+    return (
+        <div className="change-input-container">
+            <input
+                accept="image/*"
+                type="file"
+                id="profile-photo-file"
+                onChange={handleImage}
+                hidden
+            />
+            <label htmlFor="profile-photo-file">
+                <IconButton component="span">
+                    <Avatar
+                        alt={user.username}
+                        src={user.profilePicture}
+                        sx={{ width: 156, height: 156 }}
+                    />
+                </IconButton>
+            </label>
+            <button style={{ marginTop: "1rem" }} onClick={handleSubmit} className="change-button">
+                {loading ? "Loading..." : "Update"}
+            </button>
+        </div>
+    )
+}
 
 export const changeUsername = ({
     notify,

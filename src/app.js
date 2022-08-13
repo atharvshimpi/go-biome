@@ -5,7 +5,7 @@ import "./styles.css"
 
 import Dashboard from "./components/dashboard/dashboard"
 import Questions from "./components/questions/questions"
-import Login from "./components/login/login"
+import Login from "./components/onboarding/login"
 import Settings from "./components/settings/settings"
 import Gamemap from "./components/gameboard/gamemap"
 import AddUserCard from "./components/modals/addUserCard"

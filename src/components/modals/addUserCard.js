@@ -129,7 +129,7 @@ const AddUserCard = () => {
                                         style={{ color: "rgba(0, 0, 0, 0.54)" }}
                                     />
                                     {userImageFile
-                                        ? userImageFile.name
+                                        ? userImageFile.name.length > 18 ? `${userImageFile.name.split("").splice(0, 17).join("")}...` : userImageFile.name
                                         : "Upload Photo"}
                                 </div>
                                 <input
@@ -178,7 +178,7 @@ const AddUserCard = () => {
                                 variant="outlined"
                                 id="description"
                                 label="Description"
-                                inputProps={{ maxLength: 70 }}
+                                inputProps={{ maxLength: 30 }}
                                 value={userCardData.description}
                                 onChange={(e) => handleChange(e)}
                                 multiline

@@ -4,8 +4,20 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    background: #ffdfb8;
     height: 100vh;
+    background: #ffdfb8;
+}
+
+.questions-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffcf85;
+    height: 85vh;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 1px 15px #fff;
+    padding: 1rem 1rem;
     transition: all 0.4s ease-in-out;
 }
 
@@ -14,7 +26,7 @@
 .questions-btn-container {
     margin: 1rem 1rem 0rem;
     min-height: 15%;
-    width: 90%;
+    width: 100%;
 }
 
 .questions-heading {
@@ -22,6 +34,18 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.9rem;
+}
+
+.space-between {
+    display: flex;
+    flex: 1;
+}
+
+.questions-about p {
+    font-size: 1.2rem;
 }
 
 .questions-btn-container {
@@ -38,10 +62,19 @@
 }
 
 .questions-btn {
-    outline: none;
-    cursor: pointer;
-    width: 95%;
+    width: 100%;
     height: 3rem;
+    background: #ffdfb8;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+    transition: opacity 0.1s ease-in-out;
+    position: relative;
+    box-shadow:0 5px 5px 0 #a66d27;
+}
+
+.questions-btn:active {
+    top: 0.1rem;
+    box-shadow: none;
 }
 
 .answer-text-input {
@@ -71,5 +104,13 @@
 
 .username {
     background: #f3b04d;
-    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+@media (max-width: 968px) {
+    .questions-content {
+        width: 85%;
+        overflow-x: hidden;
+    }
 }

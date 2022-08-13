@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion"
 import "./styles.css"
 
 import Dashboard from "./components/dashboard/dashboard"
+import QuestionsHome from "./components/questions/questionsHome"
 import Questions from "./components/questions/questions"
 import Login from "./components/onboarding/login"
 import Settings from "./components/settings/settings"
@@ -37,13 +38,14 @@ const App = () => {
                                 preferences ? (
                                     <Dashboard />
                                 ) : (
-                                    <Questions />
+                                    <QuestionsHome />
                                 )
                             ) : (
                                 <Login />
                             )
                         }
                     />
+                    <Route path="/questions" element={<Questions />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/map" element={<Gamemap />} />
                     <Route path="/card" element={<AddUserCard />} />

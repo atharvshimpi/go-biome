@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: #ffdfb8;
     height: 100vh;
+    background: #ffdfb8;
 }
 
 .auth-content {
@@ -32,7 +32,8 @@
     height: auto;
 }
 
-.auth-input, .auth-profile-photo {
+.auth-input,
+.auth-profile-photo {
     margin-bottom: 2rem !important;
 }
 

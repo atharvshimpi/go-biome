@@ -9,22 +9,20 @@ import {
     setUnFriendlyBiomeName,
     setWakeupTime,
     setSleepTime,
-    setActivityCount,
 } from "../questions/setQuestions"
 
 const initialState = {
-    friendlyBiome: "",
-    unFriendlyBiome: "",
+    friendlyBiome: "Bugsy",
+    unFriendlyBiome: "Minion",
     wakeupTime: null,
     sleepTime: null,
     morningCheckInTime: null,
     mealTime: null,
     vibrate: false,
-    activityCount: "",
+    activityCount: 3,
 }
 
 const QuestionModal = ({ qNum }) => {
-    const user = JSON.parse(localStorage.getItem("user"))
     const [answers, setAnswers] = useState(initialState)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -56,20 +54,13 @@ const QuestionModal = ({ qNum }) => {
                 </div>
                 <div className="questions-about">
                     {qNum === 1
-                        ? setFriendlyBiomeName({ user, answers, handleChange })
+                        ? setFriendlyBiomeName({ answers, handleChange })
                         : null}
                     {qNum === 2
-                        ? setUnFriendlyBiomeName({
-                            user,
-                            answers,
-                            handleChange,
-                        })
+                        ? setUnFriendlyBiomeName({ answers, handleChange })
                         : null}
                     {qNum === 3 ? setWakeupTime({ answers, setAnswers }) : null}
                     {qNum === 4 ? setSleepTime({ answers, setAnswers }) : null}
-                    {qNum === 5
-                        ? setActivityCount({ answers, setAnswers })
-                        : null}
                 </div>
                 <div className="space-between"></div>
                 <div className="questions-btn-container">
@@ -89,11 +80,11 @@ const QuestionModal = ({ qNum }) => {
                     <button
                         className="questions-btn"
                         onClick={() => {
-                            if (qNum < 5) navigate(`/questions?q=${qNum + 1}`)
+                            if (qNum < 4) navigate(`/questions?q=${qNum + 1}`)
                             else handleSubmit()
                         }}
                     >
-                        {qNum >= 5
+                        {qNum >= 4
                             ? loading
                                 ? "Loading..."
                                 : "Submit"

@@ -19,9 +19,4 @@ export const data = [
         question: "Set sleeping hours",
         description: ""
     },
-    {
-        id: 5,
-        question: "Set activity count",
-        description: ""
-    },
 ]

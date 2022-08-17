@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { TimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
@@ -18,7 +18,7 @@ export const changeProfilePicture = ({
         const fileReader = new FileReader()
 
         fileReader.addEventListener("load", () => {
-            setUser({...user, profilePicture: fileReader.result})
+            setUser({ ...user, profilePicture: fileReader.result })
         })
 
         fileReader.readAsDataURL(e.target.files[0])
@@ -52,7 +52,11 @@ export const changeProfilePicture = ({
                     />
                 </IconButton>
             </label>
-            <button style={{ marginTop: "1rem" }} onClick={handleSubmit} className="change-button">
+            <button
+                style={{ marginTop: "1rem" }}
+                onClick={handleSubmit}
+                className="change-button"
+            >
                 {loading ? "Loading..." : "Update"}
             </button>
         </div>
@@ -141,7 +145,7 @@ export const activityHistory = (activityHistory) => {
     )
 }
 
-export const biomeGarden = (biomeGarden) => {
+export const biomeGarden = (biomeGarden, loading, setLoading) => {
     const biomeActiveChar = biomeGarden.active
 
     return (
@@ -153,10 +157,14 @@ export const biomeGarden = (biomeGarden) => {
                         biomeActiveChar === biome ? "biome-active-image" : ""
                     }`}
                 >
-                    <img
-                        src={require(`../../assets/images/biome/${biome}`)}
-                        alt={biome.split(".")[0]}
-                    />
+                    {loading ? (
+                        "Loading..."
+                    ) : (
+                        <img
+                            src={require(`../../assets/images/biome/${biome}`)}
+                            alt={biome.split(".")[0]}
+                        />
+                    )}
                 </div>
             ))}
         </div>

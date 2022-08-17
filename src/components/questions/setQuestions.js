@@ -1,13 +1,13 @@
 import React from "react"
 import { motion } from "framer-motion"
 
-import { FaVirus, FaBacterium, FaTasks } from "react-icons/fa"
-import { InputAdornment, TextField } from "@mui/material"
+import { FaVirus, FaBacterium } from "react-icons/fa"
+import { InputAdornment, TextField, Typography } from "@mui/material"
 
 import { TimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
 
-export const setFriendlyBiomeName = ({ user, answers, handleChange }) => {
+export const setFriendlyBiomeName = ({ answers, handleChange }) => {
 
     return (
         <motion.div
@@ -18,9 +18,10 @@ export const setFriendlyBiomeName = ({ user, answers, handleChange }) => {
         >
             <TextField
                 fullWidth
+                autoComplete="off"
                 variant="outlined"
                 id="friendlyBiome"
-                label={`Name for ${user.username}'s friendly biome`}
+                label="My friendly biome's name"
                 className="auth-input"
                 value={answers.friendlyBiome}
                 onChange={handleChange}
@@ -32,11 +33,12 @@ export const setFriendlyBiomeName = ({ user, answers, handleChange }) => {
                     ),
                 }}
             />
+            <Typography className="text-xs font-bold text-left w-full" variant="span">NOTE: You can change your Biome name any time under the settings tab.</Typography>
         </motion.div>
     )
 }
 
-export const setUnFriendlyBiomeName = ({ user, answers, handleChange }) => {
+export const setUnFriendlyBiomeName = ({ answers, handleChange }) => {
 
     return (
         <motion.div
@@ -47,9 +49,10 @@ export const setUnFriendlyBiomeName = ({ user, answers, handleChange }) => {
         >
             <TextField
                 fullWidth
+                autoComplete="off"
                 variant="outlined"
                 id="unFriendlyBiome"
-                label={`Name for ${user.username}'s unfriendly biome`}
+                label="My unfriendly biome's name"
                 className="auth-input"
                 value={answers.unFriendlyBiome}
                 onChange={handleChange}
@@ -61,6 +64,7 @@ export const setUnFriendlyBiomeName = ({ user, answers, handleChange }) => {
                     ),
                 }}
             />
+            <Typography className="text-xs font-bold text-left w-full" variant="span">NOTE: You can change your Biome name any time under the settings tab.</Typography>
         </motion.div>
     )
 }
@@ -103,35 +107,6 @@ export const setSleepTime = ({ answers, setAnswers }) => {
                     onChange={(e) => setAnswers({...answers, sleepTime: e})}
                 />
             </MuiPickersUtilsProvider>
-        </motion.div>
-    )
-}
-
-export const setActivityCount = ({ answers, setAnswers }) => {
-
-    return (
-        <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
-            className="change-input-container"
-        >
-            <TextField
-                fullWidth
-                variant="outlined"
-                id="activityCount"
-                label="Activity Count"
-                className="auth-input"
-                value={answers.activityCount}
-                onChange={(e) => setAnswers({...answers, activityCount: Number(e.target.value)})}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <FaTasks />
-                        </InputAdornment>
-                    ),
-                }}
-            />
         </motion.div>
     )
 }

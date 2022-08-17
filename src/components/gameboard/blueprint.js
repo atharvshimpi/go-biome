@@ -11,10 +11,10 @@ export default class BluePrint {
     constructor(tileSize) {
         this.tileSize = tileSize
         this.gameStats = JSON.parse(localStorage.getItem("gamestats"))
-        
+
         this.minion = new Image()
         this.minion.src = minion
-        
+
         this.dashed = new Image()
         this.dashed.src = dashed
 
@@ -29,7 +29,7 @@ export default class BluePrint {
 
         this.dashedRightUp = new Image()
         this.dashedRightUp.src = dashedRightUp
-        
+
         this.plus = new Image()
         this.plus.src = plus
     }
@@ -59,6 +59,23 @@ export default class BluePrint {
         [5, 8, 8, 8, 8, 8],
     ]
 
+    rects = [
+        { x: 2, y: 1, clicked: false },
+        { x: 4, y: 1 },
+        { x: 1, y: 2 },
+        { x: 3, y: 2 },
+        { x: 2, y: 3 },
+        { x: 4, y: 3 },
+        { x: 1, y: 4 },
+        { x: 3, y: 4 },
+        { x: 2, y: 5 },
+        { x: 4, y: 5 },
+        { x: 1, y: 6 },
+        { x: 3, y: 6 },
+        { x: 2, y: 7 },
+        { x: 4, y: 7 },
+    ]
+
     draw(ctx) {
         for (let row = 0; row < this.map.length; row++) {
             for (let col = 0; col < this.map[row].length; col++) {
@@ -72,13 +89,7 @@ export default class BluePrint {
                         this.tileSize
                     )
                 else if (tile === 0)
-                    this.#drawImg(
-                        this.dashed,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize
-                    )
+                    this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
                 else if (tile === 2)
                     this.#drawImg(
                         this.dashedRightUp,
@@ -104,28 +115,17 @@ export default class BluePrint {
                         this.tileSize
                     )
                 else if (tile === 6)
-                    this.#drawImg(
-                        this.minion,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize
-                    )
+                    this.#drawImg(this.minion, ctx, col, row, this.tileSize)
                 else if (tile === 7) {
-                    this.#drawImg(
-                        this.dashed,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize
-                    )
-                    this.#drawPlus(
-                        this.plus,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize / 2
-                    )
+                    this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    if (1)
+                        this.#drawPlus(
+                            this.plus,
+                            ctx,
+                            col,
+                            row,
+                            this.tileSize / 2
+                        )
                 }
 
                 // ctx.strokeStyle = "black"
@@ -137,7 +137,13 @@ export default class BluePrint {
     #drawPlus(img, ctx, col, row, size) {
         ctx.fillStyle = "#b17572"
         ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
-        ctx.drawImage(img, (col + 0.25) * this.tileSize, (row + 0.25) * this.tileSize, size, size)
+        ctx.drawImage(
+            img,
+            (col + 0.25) * this.tileSize,
+            (row + 0.25) * this.tileSize,
+            size,
+            size
+        )
     }
 
     #drawImg(img, ctx, col, row, size) {
@@ -166,6 +172,28 @@ export default class BluePrint {
     setCanvasSize(canvas) {
         canvas.width = this.map[0].length * this.tileSize
         canvas.height = this.map.length * this.tileSize
+    }
+
+    updatePlus(ctx, mouseX, mouseY) {
+        var isCollision = false
+        for (var i = 0, len = this.rects.length; i < len; i++) {
+            var left = this.rects[i].x * this.tileSize,
+                right = left + this.tileSize
+            var top = this.rects[i].y * this.tileSize,
+                bottom = top + this.tileSize
+            if (
+                right >= mouseX &&
+                left <= mouseX &&
+                bottom >= mouseY &&
+                top <= mouseY
+            ) {
+                isCollision = true
+                break
+            }
+        }
+        isCollision
+            ? console.log("Collision!")
+            : console.log("No Collision Detected!")
     }
 }
 

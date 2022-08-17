@@ -15,7 +15,6 @@ import PersonIcon from "@mui/icons-material/Person"
 import PasswordIcon from "@mui/icons-material/Password"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto"
 
 import "./login.css"
 
@@ -24,7 +23,6 @@ const initialState = { username: "", /*password: "",*/ agreedTerms: false, profi
 const Login = () => {
     const [userData, setUserData] = useState(initialState)
     const [showPassword, setShowPassword] = useState(true)
-    const [userImageFile, setUserImageFile] = useState("")
     const [loading, setLoading] = useState(false)
 
     const handleChange = (e) => {
@@ -43,17 +41,6 @@ const Login = () => {
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
-    }
-
-    const handleImage = (e) => {
-        setUserImageFile(e.target.files[0])
-        const fileReader = new FileReader()
-
-        fileReader.addEventListener("load", () => {
-            setUserData({...userData, profilePicture: fileReader.result})
-        })
-
-        fileReader.readAsDataURL(e.target.files[0])
     }
 
     const YellowCheckbox = withStyles({
@@ -75,6 +62,7 @@ const Login = () => {
                 <div className="auth-input-fields">
                     <TextField
                         required
+                        autoComplete="off"
                         fullWidth
                         variant="outlined"
                         id="username"
@@ -118,26 +106,6 @@ const Login = () => {
                             ),
                         }}
                     /> */}
-                    <Button
-                        fullWidth
-                        className="auth-profile-photo"
-                        variant="outlined"
-                        component="label"
-                        startIcon={<InsertPhotoIcon />}
-                    >
-                        <div className="add-usercard-image-text">
-                            {userImageFile
-                                ? userImageFile.name.length > 18 ? `${userImageFile.name.split("").splice(0, 17).join("")}...` : userImageFile.name
-                                : "Upload Profile Photo"
-                            }
-                        </div>
-                        <input
-                            accept="image/*"
-                            type="file"
-                            onChange={handleImage}
-                            hidden
-                        />
-                    </Button>
                     <FormControlLabel
                         className="auth-checkbox"
                         control={
@@ -164,7 +132,6 @@ const Login = () => {
                         onClick={handleSubmit}
                         disabled={
                             userData.username === "" ||
-                            userData.password === "" ||
                             !userData.agreedTerms
                         }
                     >
@@ -177,22 +144,3 @@ const Login = () => {
 }
 
 export default Login
-
-/*
-<div className="privacy-container">
-    <input
-        required
-        type="checkbox"
-        className="privacy-checkbox"
-        checked={agreedTerms}
-        onChange={() => setAgreedTerms(!agreedTerms)}
-    />
-    <label>
-        When you use our services, you&apos;re trusting us
-        with your information. We understand this is a big
-        responsibility and work hard to protect your
-        information and put you in control. Click here to
-        allow us collect your data.
-    </label>
-</div>
-*/

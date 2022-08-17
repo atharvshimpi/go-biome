@@ -11,9 +11,11 @@ const Gamemap = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const tileSize = 128
         const canvas = document.getElementById("gamemap")
         const ctx = canvas.getContext("2d")
+
+        // calculating bounds
+        const tileSize = 128
         const bluePrint = new BluePrint(tileSize)
         const pacman = bluePrint.getPacman()
 
@@ -21,6 +23,13 @@ const Gamemap = () => {
             bluePrint.draw(ctx)
             pacman.draw(ctx)
             // pacman.update()
+
+            canvas.onclick = function (e) {
+                var x = e.offsetX
+                var y = e.offsetY
+    
+                bluePrint.updatePlus(ctx, x, y)
+            }
         }
 
         bluePrint.setCanvasSize(canvas)

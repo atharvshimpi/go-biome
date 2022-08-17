@@ -24,8 +24,7 @@
 .questions-heading,
 .questions-about,
 .questions-btn-container {
-    margin: 1rem 1rem 0rem;
-    min-height: 15%;
+    margin: 2rem 1rem 0rem;
     width: 100%;
 }
 
@@ -37,6 +36,7 @@
     font-weight: 700;
     font-size: 1.2rem;
     line-height: 1.9rem;
+    margin-bottom: 1rem;
 }
 
 .space-between {
@@ -112,5 +112,9 @@
     .questions-content {
         width: 85%;
         overflow-x: hidden;
+    }
+
+    .questions-heading {
+        margin-bottom: 2.5rem;
     }
 }

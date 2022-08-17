@@ -96,7 +96,7 @@ const Settings = () => {
                                 { settingId === 1 ? changeUsername({notify, pref, user, setUser, loading, setLoading, setOpen}) : null }
                                 { settingId === 2 ? activityCardStack(activityUserCards) : null }
                                 { settingId === 3 ? activityHistory(activityHistoryData) : null }
-                                { settingId === 4 ? biomeGarden(biomeChars) : null }
+                                { settingId === 4 ? biomeGarden(biomeChars, loading, setLoading) : null }
                                 { settingId === 9 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 10 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 11 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }

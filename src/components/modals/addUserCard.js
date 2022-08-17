@@ -47,7 +47,7 @@ const initialState = {
 }
 
 const AddUserCard = () => {
-    const [isPreviewOn, setIsPreviewOn] = useState(false)
+    const [isPreviewOn, setIsPreviewOn] = useState(true)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)
@@ -93,11 +93,11 @@ const AddUserCard = () => {
                         >
                             <img
                                 className="avatar"
-                                src="https://image.shutterstock.com/image-photo/word-demo-appearing-behind-torn-600w-1782295403.jpg"
+                                src=""
                             />
                         </div>
                     </div>
-                    <div className="add-usercard-container">
+                    <div style={{ backgroundColor: categoryTags[0].color }} className="add-usercard-container">
                         <div className="add-usercard-location">
                             <TextField
                                 fullWidth
@@ -153,10 +153,10 @@ const AddUserCard = () => {
                                         <InputAdornment position="start">
                                             <FaTag />
                                             <Chip
-                                                style={{ backgroundColor: userCardData.tag.color }}
+                                                style={{ backgroundColor: userCardData.tag.avatarColor }}
                                                 avatar={
                                                     <Avatar
-                                                        style={{ backgroundColor: userCardData.tag.avatarColor }}
+                                                        style={{ backgroundColor: userCardData.tag.color }}
                                                         alt={userCardData.tag.category}
                                                         // maybe we can add the activity logo here 
                                                         src="/static/images/avatar/1.jpg"

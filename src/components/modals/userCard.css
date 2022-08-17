@@ -65,6 +65,11 @@
     margin-bottom: 1rem;
 }
 
+.usercard-preview-image-container img {
+    width: 300px;
+    height: 200px;
+}
+
 .usercard-btn {
     padding: 16.5px 14px;
 }

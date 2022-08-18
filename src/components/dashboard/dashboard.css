@@ -41,16 +41,22 @@
     background-color: #d3807e;
     border-radius: 0.3rem;
     border: 1px solid black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .icon {
     margin: 0rem 0.5rem;
-    font-size: 1.4rem;
+    font-size: 1rem;
+    width: 1.5rem;
 }
 
 .activity-cards {
     display: flex;
     width: 50%;
+    border: 2px solid #333;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    background-color: #B76161;
 }
 
 .cards {
@@ -69,6 +75,14 @@
     opacity: 0.5;
 }
 
+.cards:last-child {
+    margin-right: 0;
+}
+
+.cards img {
+    width: 1.8rem;
+}
+
 .custom-card {
     width: 25%;
     display: flex;
@@ -77,11 +91,18 @@
     height: 2rem;
 }
 
-.bottom-view {
+.bottom-view, .card-view {
     display: flex;
     width: 100%;
-    justify-content: space-between;
     align-items: center;
+}
+
+.card-view {
+    justify-content: center;
+}
+
+.bottom-view {
+    justify-content: space-between;
     margin: 0rem 0rem 0.5rem;
 }
 

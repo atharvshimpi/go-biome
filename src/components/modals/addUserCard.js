@@ -47,7 +47,7 @@ const initialState = {
 }
 
 const AddUserCard = () => {
-    const [isPreviewOn, setIsPreviewOn] = useState(true)
+    const [isPreviewOn, setIsPreviewOn] = useState(false)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)

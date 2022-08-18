@@ -27,7 +27,7 @@ const Gamemap = () => {
             canvas.onclick = function (e) {
                 var x = e.offsetX
                 var y = e.offsetY
-    
+
                 bluePrint.updatePlus(ctx, x, y)
             }
         }

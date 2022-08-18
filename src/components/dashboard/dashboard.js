@@ -3,24 +3,34 @@ import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
+
+import Environment from "../../assets/images/category/environment.svg" 
+
+// categories
+import Social from "../../assets/images/category/social.svg" 
+import Physicalactivity from "../../assets/images/category/physicalactivity.svg" 
+import Zen from "../../assets/images/category/zen.svg"
 import friendlyBiome from "../../assets/images/friendly.png"
 import unFriendlyBiome from "../../assets/images/unfriendly.png"
 
+// biome shield strength
+import Nostrength from "../../assets/images/shield/nostrength.svg"
+import { BsShieldExclamation } from "react-icons/bs"
+import Charging from "../../assets/images/shield/charging.svg"
+import Partialstrength from "../../assets/images/shield/partialstrength.svg"
+import Fullstrength from "../../assets/images/shield/fullstrength.svg"
+import Diversitycheck from "../../assets/images/shield/diversitycheck.svg"
+import Superdiversity from "../../assets/images/shield/superdiversity.svg"
+
+
 import { AiFillSetting } from "react-icons/ai"
 import { MdOutlineReplay, MdLocationPin } from "react-icons/md"
-// eslint-disable-next-line
-import { BsShieldFillCheck } from "react-icons/bs" // all activities completed
-// eslint-disable-next-line
-import { BsShieldShaded } from "react-icons/bs" // partial activities completed
-import { BsShieldFillExclamation } from "react-icons/bs" // no activity completed
-// eslint-disable-next-line
-import { RiShieldFlashFill } from "react-icons/ri" // activity ongoing
+import { BiShuffle } from "react-icons/bi"
 
 import "./dashboard.css"
 
 const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem("user"))
-    // eslint-disable-next-line
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const navigate = useNavigate()
 
@@ -40,7 +50,7 @@ const Dashboard = () => {
                 </div>
                 <h3>{user.username}&apos;s Biome Land</h3>
                 <div className="icon-container">
-                    <BsShieldFillExclamation className="icon" />
+                    <img src={Nostrength} alt="shield" className="icon" />
                 </div>
             </div>
             <div className="points-view">
@@ -57,39 +67,44 @@ const Dashboard = () => {
             <div className="game-board-container">
                 <Gameboard></Gameboard>
             </div>
-            <div className="bottom-view">
-                <div className="icon-container">
-                    <MdOutlineReplay className="icon" />
-                </div>
+            <div className="card-view">
                 <div className="activity-cards">
                     <div
                         onClick={() => navigate("/card")}
                         style={{ backgroundColor: "#94B394" }}
                         className="cards"
                     >
-                        E
+                        <img src={Environment} alt="environment" />
                     </div>
                     <div
                         onClick={() => navigate("/card")}
                         style={{ backgroundColor: "#FED966" }}
                         className="cards"
                     >
-                        PA
+                        <img src={Physicalactivity} alt="physicalActivity" />
                     </div>
                     <div
                         onClick={() => navigate("/card")}
                         style={{ backgroundColor: "#B886C1" }}
                         className="cards"
                     >
-                        S
+                        <img src={Social} alt="social" />
                     </div>
                     <div
                         onClick={() => navigate("/card")}
                         style={{ backgroundColor: "#F2A1A0" }}
                         className="cards"
                     >
-                        Z
+                        <img src={Zen} alt="zen" />
                     </div>
+                </div>
+            </div>
+            <div className="bottom-view">
+                <div className="icon-container">
+                    <MdOutlineReplay className="icon" />
+                </div>
+                <div className="icon-container">
+                    <BiShuffle className="icon" />
                 </div>
                 <div className="icon-container">
                     <MdLocationPin

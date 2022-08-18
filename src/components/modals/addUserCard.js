@@ -97,123 +97,125 @@ const AddUserCard = () => {
                             />
                         </div>
                     </div>
-                    <div style={{ backgroundColor: categoryTags[0].color }} className="add-usercard-container">
-                        <div className="add-usercard-location">
-                            <TextField
-                                fullWidth
-                                id="location"
-                                label="Location"
-                                inputProps={{ maxLength: 20 }}
-                                variant="outlined"
-                                className="add-usercard-input"
-                                value={userCardData.location}
-                                onChange={(e) => handleChange(e)}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <MdLocationPin />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
-                        <div className="add-usercard-image">
-                            <Button
-                                fullWidth
-                                className="add-usercard-input"
-                                variant="contained"
-                                component="label"
-                            >
-                                <div className="add-usercard-image-text">
-                                    <BsCardImage
-                                        style={{ color: "rgba(0, 0, 0, 0.54)" }}
-                                    />
-                                    {userImageFile
-                                        ? userImageFile.name.length > 18 ? `${userImageFile.name.split("").splice(0, 17).join("")}...` : userImageFile.name
-                                        : "Upload Photo"}
-                                </div>
-                                <input
-                                    accept="image/*"
-                                    type="file"
-                                    onChange={(e) => handleImageChange(e)}
-                                    hidden
+                    <div className="add-usercard-container">
+                        <div style={{ backgroundColor: categoryTags[0].color }} className="add-usercard-content">
+                            <div className="add-usercard-location">
+                                <TextField
+                                    fullWidth
+                                    id="location"
+                                    label="Location"
+                                    inputProps={{ maxLength: 20 }}
+                                    variant="outlined"
+                                    className="add-usercard-input"
+                                    value={userCardData.location}
+                                    onChange={(e) => handleChange(e)}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <MdLocationPin />
+                                            </InputAdornment>
+                                        ),
+                                    }}
                                 />
-                            </Button>
-                        </div>
-                        <div className="add-usercard-tags">
-                            <TextField
-                                fullWidth
-                                disabled
-                                className="add-usercard-input"
-                                id="tag"
-                                variant="outlined"
-                                label="Activity Category"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <FaTag />
-                                            <Chip
-                                                style={{ backgroundColor: userCardData.tag.avatarColor }}
-                                                avatar={
-                                                    <Avatar
-                                                        style={{ backgroundColor: userCardData.tag.color }}
-                                                        alt={userCardData.tag.category}
-                                                        // maybe we can add the activity logo here 
-                                                        src="/static/images/avatar/1.jpg"
-                                                    />
-                                                }
-                                                label={userCardData.tag.category}
-                                                variant="outlined"
-                                                className="category-chip"
-                                            />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
-                        <div className="add-usercard-description">
-                            <TextField
-                                fullWidth
-                                className="add-usercard-input"
-                                variant="outlined"
-                                id="description"
-                                label="Description"
-                                inputProps={{ maxLength: 30 }}
-                                value={userCardData.description}
-                                onChange={(e) => handleChange(e)}
-                                multiline
-                                rows={4}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <RiDoubleQuotesL />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
-                        <div className="add-usercard-btn-container">
-                            <Button
-                                startIcon={isDisabled ? <AiFillLock /> : null}
-                                disabled={isDisabled}
-                                onClick={() => setIsPreviewOn(true)}
-                                className="add-usercard-btn"
-                                fullWidth
-                                variant="contained"
-                            >
-                                Preview
-                            </Button>
-                        </div>
-                        <div className="add-usercard-btn-container">
-                            <Button
-                                startIcon={isDisabled ? <AiFillLock /> : null}
-                                disabled={isDisabled}
-                                className="add-usercard-btn"
-                                fullWidth
-                                variant="contained"
-                            >
-                                Create
-                            </Button>
+                            </div>
+                            <div className="add-usercard-image">
+                                <Button
+                                    fullWidth
+                                    className="add-usercard-input"
+                                    variant="contained"
+                                    component="label"
+                                >
+                                    <div className="add-usercard-image-text">
+                                        <BsCardImage
+                                            style={{ color: "rgba(0, 0, 0, 0.54)" }}
+                                        />
+                                        {userImageFile
+                                            ? userImageFile.name.length > 18 ? `${userImageFile.name.split("").splice(0, 17).join("")}...` : userImageFile.name
+                                            : "Upload Photo"}
+                                    </div>
+                                    <input
+                                        accept="image/*"
+                                        type="file"
+                                        onChange={(e) => handleImageChange(e)}
+                                        hidden
+                                    />
+                                </Button>
+                            </div>
+                            <div className="add-usercard-tags">
+                                <TextField
+                                    fullWidth
+                                    disabled
+                                    className="add-usercard-input"
+                                    id="tag"
+                                    variant="outlined"
+                                    label="Activity Category"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <FaTag />
+                                                <Chip
+                                                    style={{ backgroundColor: userCardData.tag.avatarColor }}
+                                                    avatar={
+                                                        <Avatar
+                                                            style={{ backgroundColor: userCardData.tag.color }}
+                                                            alt={userCardData.tag.category}
+                                                            // maybe we can add the activity logo here 
+                                                            src="/static/images/avatar/1.jpg"
+                                                        />
+                                                    }
+                                                    label={userCardData.tag.category}
+                                                    variant="outlined"
+                                                    className="category-chip"
+                                                />
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            </div>
+                            <div className="add-usercard-description">
+                                <TextField
+                                    fullWidth
+                                    className="add-usercard-input"
+                                    variant="outlined"
+                                    id="description"
+                                    label="Description"
+                                    inputProps={{ maxLength: 30 }}
+                                    value={userCardData.description}
+                                    onChange={(e) => handleChange(e)}
+                                    multiline
+                                    rows={4}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <RiDoubleQuotesL />
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            </div>
+                            <div className="add-usercard-btn-container">
+                                <Button
+                                    startIcon={isDisabled ? <AiFillLock /> : null}
+                                    disabled={isDisabled}
+                                    onClick={() => setIsPreviewOn(true)}
+                                    className="add-usercard-btn"
+                                    fullWidth
+                                    variant="contained"
+                                >
+                                    Preview
+                                </Button>
+                            </div>
+                            <div className="add-usercard-btn-container">
+                                <Button
+                                    startIcon={isDisabled ? <AiFillLock /> : null}
+                                    disabled={isDisabled}
+                                    className="add-usercard-btn"
+                                    fullWidth
+                                    variant="contained"
+                                >
+                                    Create
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

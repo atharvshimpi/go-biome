@@ -32,41 +32,40 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
                     />
                 </div>
             </div>
-            <div
-                style={{ backgroundColor: userCardData.tag.color }}
-                className="usercard-container"
-            >
-                <div className="usercard-location">
-                    <MdLocationPin className="usercard-icons" />
-                    <h5>{userCardData.location}</h5>
-                </div>
-                <div className="usercard-preview-image-container">
-                    <img
-                        className="usercard-preview-image"
-                        src={userImageData}
-                    />
-                </div>
-                <div className="usercard-tags">
-                    <FaTags className="usercard-icons" />
-                    <h5>{userCardData.tag.category}</h5>
-                </div>
-                <div className="usercard-description">
-                    <RiDoubleQuotesL className="usercard-icons" />
-                    <h5>{userCardData.description}</h5>
-                </div>
-                <div className="usercard-createdAt">
-                    <AiFillClockCircle className="usercard-icons" />
-                    <h5>{userCardData.createdAt.substring(4, 15)}</h5>
-                </div>
-                <div className="usercard-btn-container">
-                    <Button
-                        className="usercard-btn"
-                        fullWidth
-                        variant="contained"
-                        onClick={() => setIsPreviewOn(false)}
-                    >
-                        Go Back
-                    </Button>
+            <div className="usercard-container" >
+                <div style={{ backgroundColor: userCardData.tag.color }} className="usercard-content">
+                    <div className="usercard-location">
+                        <MdLocationPin className="usercard-icons" />
+                        <h5>{userCardData.location}</h5>
+                    </div>
+                    <div className="usercard-preview-image-container">
+                        <img
+                            className="usercard-preview-image"
+                            src={userImageData}
+                        />
+                    </div>
+                    <div className="usercard-tags">
+                        <FaTags className="usercard-icons" />
+                        <h5>{userCardData.tag.category}</h5>
+                    </div>
+                    <div className="usercard-description">
+                        <RiDoubleQuotesL className="usercard-icons" />
+                        <h5>{userCardData.description}</h5>
+                    </div>
+                    <div className="usercard-createdAt">
+                        <AiFillClockCircle className="usercard-icons" />
+                        <h5>{userCardData.createdAt.substring(4, 15)}</h5>
+                    </div>
+                    <div className="usercard-btn-container">
+                        <Button
+                            className="usercard-btn"
+                            fullWidth
+                            variant="contained"
+                            onClick={() => setIsPreviewOn(false)}
+                        >
+                            Go Back
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

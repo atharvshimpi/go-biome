@@ -82,6 +82,7 @@ export const setWakeupTime = ({ answers, setAnswers }) => {
                 <TimePicker
                     placeholder="Set Wake Up Time"
                     className="time-picker"
+                    minutesStep={5}
                     value={answers.wakeupTime}
                     onChange={(e) => setAnswers({...answers, wakeupTime: e})}
                 />
@@ -103,6 +104,7 @@ export const setSleepTime = ({ answers, setAnswers }) => {
                 <TimePicker
                     placeholder="Set Sleep Time"
                     className="time-picker"
+                    minutesStep={5}
                     value={answers.sleepTime}
                     onChange={(e) => setAnswers({...answers, sleepTime: e})}
                 />

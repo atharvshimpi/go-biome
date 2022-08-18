@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
@@ -24,15 +24,36 @@ import Superdiversity from "../../assets/images/shield/superdiversity.svg"
 
 
 import { AiFillSetting } from "react-icons/ai"
-import { MdOutlineReplay, MdLocationPin } from "react-icons/md"
+import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
+import { FcLike } from "react-icons/fc"
 
 import "./dashboard.css"
 
 const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
+    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+    const [shieldImage, setSheildImage] = useState(Nostrength)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(gameStats.activityOngoing) {
+            setSheildImage(Charging)
+        } else {
+            if(gameStats.activityPerformed === 0)
+                setSheildImage(Nostrength)
+            else if(gameStats.activityPerformed === 1)
+                setSheildImage(Partialstrength)
+            else if(gameStats.activityPerformed === 2)
+                setSheildImage(Fullstrength)
+            else if(gameStats.activityPerformed === 3)
+                setSheildImage(Diversitycheck)
+            else if(gameStats.activityPerformed === 4)
+                setSheildImage(Superdiversity)
+        }
+        
+    }, [gameStats.activityPerformed])
 
     return (
         <motion.div
@@ -50,7 +71,7 @@ const Dashboard = () => {
                 </div>
                 <h3>{user.username}&apos;s Biome Land</h3>
                 <div className="icon-container">
-                    <img src={Nostrength} alt="shield" className="icon" />
+                    <img src={shieldImage} alt="shield" className="icon" />
                 </div>
             </div>
             <div className="points-view">
@@ -101,7 +122,7 @@ const Dashboard = () => {
             </div>
             <div className="bottom-view">
                 <div className="icon-container">
-                    <MdOutlineReplay className="icon" />
+                    <FcLike style={{ color: "black" }} className="icon" />
                 </div>
                 <div className="icon-container">
                     <BiShuffle className="icon" />

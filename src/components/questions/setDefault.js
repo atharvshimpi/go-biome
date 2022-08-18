@@ -1,7 +1,7 @@
 export const setDefault = () => {
     localStorage.setItem(
         "gamestats",
-        JSON.stringify({ friendlyBiomePoints: 15, unFriendlyBiomePoints: 85 })
+        JSON.stringify({ friendlyBiomePoints: 15, unFriendlyBiomePoints: 85, activityPerformed: 0, activityOngoing: false })
     )
     localStorage.setItem("activity-user-cards", JSON.stringify([]))
     localStorage.setItem("activity-history", JSON.stringify([]))

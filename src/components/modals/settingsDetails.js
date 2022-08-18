@@ -31,7 +31,7 @@ const SettingsDetails = ({ settingId, children, onClose }) => {
                     initial={{ y: "100%" }}
                     animate={{
                         // ask whether to lock in portrait mode or not
-                        y: `${window.orientation === 90 ? `${settingId === 4 ? "20vh" : "40vh"}` : `${settingId === 4 ? "30vh" : "50vh"}`}`,
+                        y: `${settingId === 4 ? "30vh" : "50vh"}`,
                         transition: {
                             duration: 0.4,
                             ease: "easeOut",

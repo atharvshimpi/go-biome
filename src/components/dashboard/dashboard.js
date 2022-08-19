@@ -76,11 +76,11 @@ const Dashboard = () => {
             </div>
             <div className="points-view">
                 <div className="biomechar-container">
-                    <img onClick={() => window.navigator.vibrate(250)} src={friendlyBiome} className="biomechar" />
+                    <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={friendlyBiome} className="biomechar" />
                     <div className="minion-group">
-                        <img onClick={() => window.navigator.vibrate(250)} src={unFriendlyBiome2} className="minionchar" />
-                        <img onClick={() => window.navigator.vibrate(250)} src={unFriendlyBiome1} className="minionchar shift-right" />
-                        <img onClick={() => window.navigator.vibrate(250)} src={unFriendlyBiome3} className="minionchar" />
+                        <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={unFriendlyBiome2} className="minionchar" />
+                        <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={unFriendlyBiome1} className="minionchar shift-right" />
+                        <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={unFriendlyBiome3} className="minionchar" />
                     </div>
                 </div>
 

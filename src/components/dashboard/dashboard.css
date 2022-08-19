@@ -18,18 +18,34 @@
     margin: 0.5rem 0rem 0rem;
 }
 
+.top-view {
+    padding: 0 1rem;
+}
+
+.top-view h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffdfb8;
+    border-radius: 0.3rem;
+    border: 1px solid black;
+    padding: 0 0.5rem;
+}
+
 .points-view {
     margin-top: -1rem;
     padding: 0 2rem;
+    flex-direction: column;
 }
 
 .biomechar-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .biomechar {
     width: 3rem;
+    max-height: 4rem;
 }
 
 .biome-points {
@@ -37,17 +53,34 @@
     justify-content: center;
     align-items: center;
     width: 3rem;
-    height: 1.5rem;
-    background-color: #d3807e;
+    background-color: #ffdfb8;
     border-radius: 0.3rem;
     border: 1px solid black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.icon {
+.icon, .shield-icon {
     margin: 0rem 0.5rem;
     font-size: 1rem;
     width: 1.5rem;
+}
+
+.icon-container {
+    border: 1px solid #333;
+    border-radius: 0.3rem;
+    padding: 0.2rem 0;
+    background-color: #ffdfb8;
+}
+.shield-icon-container {
+    padding: 0.3rem 0rem;
+    background-color: #70BECA;
+    border: 1px solid #333;
+    border-radius: 0.3rem;
+    margin-right: 10px;
+}
+
+.shield-icon {
+    width: 1rem;
 }
 
 .activity-cards {
@@ -56,7 +89,7 @@
     border: 2px solid #333;
     border-radius: 0.5rem;
     padding: 0.3rem;
-    background-color: #B76161;
+    background-color: #ffdfb8;
 }
 
 .cards {
@@ -95,14 +128,13 @@
     display: flex;
     width: 100%;
     align-items: center;
-}
-
-.card-view {
     justify-content: center;
 }
 
 .bottom-view {
+    display: flex;
     justify-content: space-between;
+    width: 50%;
     margin: 0rem 0rem 0.5rem;
 }
 
@@ -114,4 +146,25 @@
     .game-board-container {
         width: 100%;
     }
+}
+
+.biome-stats {
+    display: flex;
+    position: relative;
+    right: 15px;
+}
+
+.minion-group {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.minionchar {
+    height: 3rem;
+    margin-right: -1rem;
+}
+
+.shift-right {
+    position: relative;
 }

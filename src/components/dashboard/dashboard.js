@@ -4,14 +4,18 @@ import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
 
-import Environment from "../../assets/images/category/environment.svg" 
+// liked cards
+import Likedcards from "../../assets/images/likedCards.svg"
 
 // categories
+import Environment from "../../assets/images/category/environment.svg" 
 import Social from "../../assets/images/category/social.svg" 
 import Physicalactivity from "../../assets/images/category/physicalactivity.svg" 
 import Zen from "../../assets/images/category/zen.svg"
 import friendlyBiome from "../../assets/images/friendly.png"
-import unFriendlyBiome from "../../assets/images/unfriendly.png"
+import unFriendlyBiome1 from "../../assets/images/minion/minion1.png"
+import unFriendlyBiome2 from "../../assets/images/minion/minion2.png"
+import unFriendlyBiome3 from "../../assets/images/minion/minion3.png"
 
 // biome shield strength
 import Nostrength from "../../assets/images/shield/nostrength.svg"
@@ -26,7 +30,6 @@ import Superdiversity from "../../assets/images/shield/superdiversity.svg"
 import { AiFillSetting } from "react-icons/ai"
 import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
-import { FcLike } from "react-icons/fc"
 
 import "./dashboard.css"
 
@@ -70,19 +73,25 @@ const Dashboard = () => {
                     />
                 </div>
                 <h3>{user.username}&apos;s Biome Land</h3>
-                <div className="icon-container">
-                    <img src={shieldImage} alt="shield" className="icon" />
-                </div>
             </div>
             <div className="points-view">
                 <div className="biomechar-container">
-                    <img src={unFriendlyBiome} className="biomechar" />
-                    <div className="biome-points">85</div>
+                    <img src={friendlyBiome} className="biomechar" />
+                    <div className="minion-group">
+                        <img src={unFriendlyBiome2} className="minionchar" />
+                        <img src={unFriendlyBiome1} className="minionchar shift-right" />
+                        <img src={unFriendlyBiome3} className="minionchar" />
+                    </div>
                 </div>
 
                 <div className="biomechar-container">
-                    <img src={friendlyBiome} className="biomechar" />
-                    <div className="biome-points">15</div>
+                    <div className="biome-stats">
+                        <div className="shield-icon-container">
+                            <img src={shieldImage} alt="shield" className="shield-icon" />
+                        </div>
+                        <div className="biome-points">15</div>
+                    </div>
+                    <div className="biome-points">85</div>
                 </div>
             </div>
             <div className="game-board-container">
@@ -122,7 +131,7 @@ const Dashboard = () => {
             </div>
             <div className="bottom-view">
                 <div className="icon-container">
-                    <FcLike style={{ color: "black" }} className="icon" />
+                    <img src={Likedcards} style={{ color: "black" }} className="icon" />
                 </div>
                 <div className="icon-container">
                     <BiShuffle className="icon" />

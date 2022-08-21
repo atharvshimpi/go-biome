@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
@@ -9,20 +9,20 @@ import "./gamemap.css"
 
 const Gamemap = () => {
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         const canvas = document.getElementById("gamemap")
         const ctx = canvas.getContext("2d")
-
+        
         // calculating bounds
         const tileSize = 128
         const bluePrint = new BluePrint(tileSize)
-        const pacman = bluePrint.getPacman()
+        const biome = bluePrint.getBiome()
+        // console.log(canvas.getBoundingClientRect())
 
         function gameLoop() {
             bluePrint.draw(ctx)
-            pacman.draw(ctx)
-            // pacman.update()
+            biome.draw(ctx)
 
             canvas.onclick = function (e) {
                 var x = e.offsetX
@@ -31,9 +31,9 @@ const Gamemap = () => {
                 bluePrint.updatePlus(ctx, x, y)
             }
         }
-
+        
         bluePrint.setCanvasSize(canvas)
-        setInterval(gameLoop, 1000 / 75)
+        gameLoop()
     }, [])
 
     return (

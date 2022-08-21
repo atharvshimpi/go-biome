@@ -1,11 +1,18 @@
+import { useState } from "react"
+
 import biome from "../../assets/images/gamemap/biome.png"
 import minion from "../../assets/images/gamemap/minion.png"
 import plus from "../../assets/images/gamemap/plus.png"
-import dashed from "../../assets/images/gamemap/dashed.png"
-import dashedLeftDown from "../../assets/images/gamemap/dashedLeftDown.png"
-import dashedLeftUp from "../../assets/images/gamemap/dashedLeftUp.png"
-import dashedRightDown from "../../assets/images/gamemap/dashedRightDown.png"
-import dashedRightUp from "../../assets/images/gamemap/dashedRightUp.png"
+
+// dashed
+import dashed from "../../assets/images/gamemap/dashed/dashed.png"
+import dashedLeftDown from "../../assets/images/gamemap/dashed/dashedLeftDown.png"
+import dashedLeftUp from "../../assets/images/gamemap/dashed/dashedLeftUp.png"
+import dashedRightDown from "../../assets/images/gamemap/dashed/dashedRightDown.png"
+import dashedRightUp from "../../assets/images/gamemap/dashed/dashedRightUp.png"
+
+// zen
+import zenLeftDown from "../../assets/images/gamemap/zen/zenLeftDown.png"
 
 export default class BluePrint {
     constructor(tileSize) {
@@ -36,11 +43,11 @@ export default class BluePrint {
 
     /*
         Convention :-
-        0 - dashed
-        1 - dashedLeftDown
-        2 - dashedRightUp
-        3 - dashedRightDown
-        4 - dashedLeftUp
+        0 - dashed/category
+        1 - dashed/category LeftDown
+        2 - dashed/category RightUp
+        3 - dashed/category RightDown
+        4 - dashed/category LeftUp
         5 - biome
         6 - minion
         7 - plus
@@ -60,7 +67,7 @@ export default class BluePrint {
     ]
 
     rects = [
-        { x: 2, y: 1, clicked: false },
+        { x: 2, y: 1 },
         { x: 4, y: 1 },
         { x: 1, y: 2 },
         { x: 3, y: 2 },
@@ -117,19 +124,17 @@ export default class BluePrint {
                 else if (tile === 6)
                     this.#drawImg(this.minion, ctx, col, row, this.tileSize)
                 else if (tile === 7) {
-                    this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
-                    if (1)
-                        this.#drawPlus(
-                            this.plus,
-                            ctx,
-                            col,
-                            row,
-                            this.tileSize / 2
-                        )
+                    // this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    this.#drawPlus(this.plus, ctx, col, row, this.tileSize)
                 }
 
-                // ctx.strokeStyle = "black"
-                // ctx.strokeRect(col * this.tileSize, row * this.tileSize, this.tileSize, this.tileSize)
+                ctx.strokeStyle = "black"
+                ctx.strokeRect(
+                    col * this.tileSize,
+                    row * this.tileSize,
+                    this.tileSize,
+                    this.tileSize
+                )
             }
         }
     }
@@ -137,13 +142,7 @@ export default class BluePrint {
     #drawPlus(img, ctx, col, row, size) {
         ctx.fillStyle = "#b17572"
         ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
-        ctx.drawImage(
-            img,
-            (col + 0.25) * this.tileSize,
-            (row + 0.25) * this.tileSize,
-            size,
-            size
-        )
+        ctx.drawImage(img, col * this.tileSize, row * this.tileSize, size, size)
     }
 
     #drawImg(img, ctx, col, row, size) {
@@ -152,12 +151,12 @@ export default class BluePrint {
         ctx.drawImage(img, col * this.tileSize, row * this.tileSize, size, size)
     }
 
-    getPacman() {
+    getBiome() {
         for (let row = 0; row < this.map.length; row++) {
             for (let col = 0; col < this.map[row].length; col++) {
                 let tile = this.map[row][col]
                 if (tile === 5) {
-                    return new Pacman(
+                    return new Biome(
                         col * this.tileSize,
                         row * this.tileSize,
                         this.tileSize,
@@ -177,10 +176,10 @@ export default class BluePrint {
     updatePlus(ctx, mouseX, mouseY) {
         var isCollision = false
         for (var i = 0, len = this.rects.length; i < len; i++) {
-            var left = this.rects[i].x * this.tileSize,
-                right = left + this.tileSize
-            var top = this.rects[i].y * this.tileSize,
-                bottom = top + this.tileSize
+            var left = this.rects[i].x * 50,
+                right = this.rects[i].x * 50 + 50
+            var top = this.rects[i].y * 50,
+                bottom = this.rects[i].y * 50 + 50
             if (
                 right >= mouseX &&
                 left <= mouseX &&
@@ -191,13 +190,21 @@ export default class BluePrint {
                 break
             }
         }
-        isCollision
-            ? console.log("Collision!")
-            : console.log("No Collision Detected!")
+        console.log(
+            "Left : ",
+            left,
+            "\nRight : ",
+            right,
+            "\nTop : ",
+            top,
+            "\nBottom : ",
+            bottom
+        )
+        isCollision ? console.log("Collision!") : console.log("No Collision.")
     }
 }
 
-class Pacman {
+class Biome {
     constructor(x, y, tileSize, tileMap, gameStats) {
         this.x = x
         this.y = y
@@ -205,18 +212,9 @@ class Pacman {
         this.tileMap = tileMap
         this.gameStats = gameStats
         this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
+        // this.biomeMoveCount = (15 - 15) / 5
         this.#loadBiomeImages()
     }
-
-    /*
-        biome - 15
-        minion - 85
-
-        done an activity - +5
-
-        biome - 20
-        minion - 80
-    */
 
     draw(ctx) {
         if (this.biomeMoveCount < 1)
@@ -227,7 +225,7 @@ class Pacman {
                 this.tileSize,
                 this.tileSize
             )
-        else if (this.biomeMoveCount >= 1 && this.biomeMoveCount <= 4)
+        else if (this.biomeMoveCount >= 1 && this.biomeMoveCount <= 6)
             ctx.drawImage(
                 this.biomeImages[0],
                 this.x + (this.biomeMoveCount - 1) * this.tileSize,
@@ -235,43 +233,60 @@ class Pacman {
                 this.tileSize,
                 this.tileSize
             )
-        else if (this.biomeMoveCount > 4 && this.biomeMoveCount <= 6)
+        else if (this.biomeMoveCount > 6 && this.biomeMoveCount <= 12) {
             ctx.drawImage(
                 this.biomeImages[0],
-                this.x + 3 * this.tileSize,
-                this.y - (this.biomeMoveCount - 3) * this.tileSize,
+                this.x + (12 - this.biomeMoveCount) * this.tileSize,
+                this.y - 2 * this.tileSize,
                 this.tileSize,
                 this.tileSize
             )
-        else if (this.biomeMoveCount > 6 && this.biomeMoveCount <= 9)
+            // console.log(this.tileMap.map[this.y / this.tileSize - 2][this.x / this.tileSize + (12 - this.biomeMoveCount)])
+        } else if (this.biomeMoveCount > 12 && this.biomeMoveCount <= 18)
             ctx.drawImage(
                 this.biomeImages[0],
-                this.x + (9 - this.biomeMoveCount) * this.tileSize,
+                this.x + (this.biomeMoveCount - 13) * this.tileSize,
                 this.y - 3 * this.tileSize,
                 this.tileSize,
                 this.tileSize
             )
-        else if (this.biomeMoveCount > 9 && this.biomeMoveCount <= 11)
+        else if (this.biomeMoveCount > 18 && this.biomeMoveCount <= 24)
             ctx.drawImage(
                 this.biomeImages[0],
-                this.x,
-                this.y - (this.biomeMoveCount - 6) * this.tileSize,
+                this.x + (24 - this.biomeMoveCount) * this.tileSize,
+                this.y - 4 * this.tileSize,
                 this.tileSize,
                 this.tileSize
             )
-        else if (this.biomeMoveCount > 11 && this.biomeMoveCount <= 14)
+        else if (this.biomeMoveCount > 24 && this.biomeMoveCount <= 30)
             ctx.drawImage(
                 this.biomeImages[0],
-                this.x + (this.biomeMoveCount - 11) * this.tileSize,
+                this.x + (this.biomeMoveCount - 25) * this.tileSize,
                 this.y - 5 * this.tileSize,
+                this.tileSize,
+                this.tileSize
+            )
+        else if (this.biomeMoveCount > 30 && this.biomeMoveCount <= 36)
+            ctx.drawImage(
+                this.biomeImages[0],
+                this.x + (36 - this.biomeMoveCount) * this.tileSize,
+                this.y - 6 * this.tileSize,
+                this.tileSize,
+                this.tileSize
+            )
+        else if (this.biomeMoveCount > 36 && this.biomeMoveCount <= 42)
+            ctx.drawImage(
+                this.biomeImages[0],
+                this.x + (this.biomeMoveCount - 37) * this.tileSize,
+                this.y - 7 * this.tileSize,
                 this.tileSize,
                 this.tileSize
             )
         else {
             ctx.drawImage(
                 this.biomeImages[0],
-                this.x + 3 * this.tileSize,
-                this.y - 6 * this.tileSize,
+                this.x + 5 * this.tileSize,
+                this.y - 8 * this.tileSize,
                 this.tileSize,
                 this.tileSize
             )
@@ -279,7 +294,7 @@ class Pacman {
     }
 
     update() {
-        this.biomeMoveCount += 0.06
+        this.biomeMoveCount += 5
     }
 
     #loadBiomeImages() {

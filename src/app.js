@@ -10,6 +10,7 @@ import Login from "./components/onboarding/login"
 import Settings from "./components/settings/settings"
 import Gamemap from "./components/gameboard/gamemap"
 import AddUserCard from "./components/modals/addUserCard"
+import ActivityCarousal from "./components/activities/activityCarousal"
 
 const App = () => {
     const [authenticated, setAuthenticated] = useState(null)
@@ -49,6 +50,7 @@ const App = () => {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/map" element={<Gamemap />} />
                     <Route path="/card" element={<AddUserCard />} />
+                    <Route path="/carousal" element={<ActivityCarousal />} />
                 </Routes>
             </AnimatePresence>
         </Router>

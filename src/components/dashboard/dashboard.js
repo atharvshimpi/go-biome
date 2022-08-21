@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
+import ActivityCarousal from "../activities/activityCarousal"
 
 // liked cards
 import Likedcards from "../../assets/images/likedCards.svg"
@@ -26,18 +27,19 @@ import Fullstrength from "../../assets/images/shield/fullstrength.svg"
 import Diversitycheck from "../../assets/images/shield/diversitycheck.svg"
 import Superdiversity from "../../assets/images/shield/superdiversity.svg"
 
-
 import { AiFillSetting } from "react-icons/ai"
 import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
 
 import "./dashboard.css"
+import { Box, Modal, Typography } from "@mui/material"
 
 const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
     const [shieldImage, setSheildImage] = useState(Nostrength)
+    const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -58,6 +60,14 @@ const Dashboard = () => {
         
     }, [gameStats.activityPerformed])
 
+    const handleVibrate = () => {
+        pref?.vibrate ? window.navigator.vibrate(250) : null
+    }
+
+    const handleCardModalOpen = () => {
+        setIsCardModalOpen(true)
+    }
+
     return (
         <motion.div
             initial={{ width: 0 }}
@@ -76,11 +86,11 @@ const Dashboard = () => {
             </div>
             <div className="points-view">
                 <div className="biomechar-container">
-                    <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={friendlyBiome} className="biomechar" />
+                    <img onClick={handleVibrate} src={friendlyBiome} className="biomechar" />
                     <div className="minion-group">
-                        <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={unFriendlyBiome2} className="minionchar" />
-                        <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={unFriendlyBiome1} className="minionchar shift-right" />
-                        <img onClick={() => pref?.vibrate ? window.navigator.vibrate(250) : null} src={unFriendlyBiome3} className="minionchar" />
+                        <img onClick={handleVibrate} src={unFriendlyBiome2} className="minionchar" />
+                        <img onClick={handleVibrate} src={unFriendlyBiome1} className="minionchar shift-right" />
+                        <img onClick={handleVibrate} src={unFriendlyBiome3} className="minionchar" />
                     </div>
                 </div>
 
@@ -96,32 +106,43 @@ const Dashboard = () => {
             </div>
             <div className="game-board-container">
                 <Gameboard></Gameboard>
+                <Modal
+                    open={isCardModalOpen}
+                    onClose={() => setIsCardModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityCarousal />
+                    </Box>
+                </Modal>
             </div>
             <div className="card-view">
                 <div className="activity-cards">
                     <div
-                        onClick={() => navigate("/card")}
+                        onClick={handleCardModalOpen}
                         style={{ backgroundColor: "#94B394" }}
                         className="cards"
                     >
                         <img src={Environment} alt="environment" />
                     </div>
                     <div
-                        onClick={() => navigate("/card")}
+                        onClick={handleCardModalOpen}
                         style={{ backgroundColor: "#FED966" }}
                         className="cards"
                     >
                         <img src={Physicalactivity} alt="physicalActivity" />
                     </div>
                     <div
-                        onClick={() => navigate("/card")}
+                        onClick={handleCardModalOpen}
                         style={{ backgroundColor: "#B886C1" }}
                         className="cards"
                     >
                         <img src={Social} alt="social" />
                     </div>
                     <div
-                        onClick={() => navigate("/card")}
+                        onClick={handleCardModalOpen}
                         style={{ backgroundColor: "#F2A1A0" }}
                         className="cards"
                     >

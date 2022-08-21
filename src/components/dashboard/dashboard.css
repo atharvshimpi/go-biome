@@ -168,3 +168,15 @@
 .shift-right {
     position: relative;
 }
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.modal-content {
+    background-color: transparent;
+    outline: none;
+}

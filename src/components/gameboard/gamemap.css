@@ -22,3 +22,9 @@
     background-color: #b17572;
     border-radius: 1rem;
 }
+
+@media (max-width: 300px) {
+    #gamemap {
+        width: 100%;
+    }
+}

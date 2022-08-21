@@ -124,17 +124,17 @@ export default class BluePrint {
                 else if (tile === 6)
                     this.#drawImg(this.minion, ctx, col, row, this.tileSize)
                 else if (tile === 7) {
-                    // this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
-                    this.#drawPlus(this.plus, ctx, col, row, this.tileSize)
+                    this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    this.#drawPlus(this.plus, ctx, col, row, this.tileSize / 2)
                 }
 
-                ctx.strokeStyle = "black"
-                ctx.strokeRect(
-                    col * this.tileSize,
-                    row * this.tileSize,
-                    this.tileSize,
-                    this.tileSize
-                )
+                // ctx.strokeStyle = "black"
+                // ctx.strokeRect(
+                //     col * this.tileSize,
+                //     row * this.tileSize,
+                //     this.tileSize,
+                //     this.tileSize
+                // )
             }
         }
     }
@@ -142,7 +142,7 @@ export default class BluePrint {
     #drawPlus(img, ctx, col, row, size) {
         ctx.fillStyle = "#b17572"
         ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
-        ctx.drawImage(img, col * this.tileSize, row * this.tileSize, size, size)
+        ctx.drawImage(img, (col + 0.25) * this.tileSize, (row + 0.25) * this.tileSize, size, size)
     }
 
     #drawImg(img, ctx, col, row, size) {
@@ -211,8 +211,8 @@ class Biome {
         this.tileSize = tileSize
         this.tileMap = tileMap
         this.gameStats = gameStats
-        this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
-        // this.biomeMoveCount = (15 - 15) / 5
+        // this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
+        this.biomeMoveCount = (45 - 15) / 5
         this.#loadBiomeImages()
     }
 
@@ -294,7 +294,7 @@ class Biome {
     }
 
     update() {
-        this.biomeMoveCount += 5
+        this.biomeMoveCount += 0.06
     }
 
     #loadBiomeImages() {

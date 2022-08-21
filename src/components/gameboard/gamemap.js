@@ -23,6 +23,7 @@ const Gamemap = () => {
         function gameLoop() {
             bluePrint.draw(ctx)
             biome.draw(ctx)
+            // biome.update()
 
             canvas.onclick = function (e) {
                 var x = e.offsetX
@@ -33,7 +34,7 @@ const Gamemap = () => {
         }
         
         bluePrint.setCanvasSize(canvas)
-        gameLoop()
+        setInterval(gameLoop, 1000 / 75)
     }, [])
 
     return (

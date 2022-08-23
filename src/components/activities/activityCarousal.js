@@ -1,6 +1,8 @@
 import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { EffectCards, EffectFade } from "swiper"
+import { EffectCards } from "swiper"
+
+import Friendly from "../../assets/images/friendly.png"
 
 import "./activityCarousal.css"
 import "swiper/css"
@@ -13,22 +15,43 @@ const ActivityCarousal = () => {
             grabCursor={true}
             modules={[EffectCards]}
             slidesPerView={1}
-            pagination={{ clickable: true }}
             className="mySwiper"
         >
-            <SwiperSlide className="rectangle">
-                <div className="rectangle1">
-                    <div className="circle">
-                        <div className="image">
-                            <img src="images/pet.png" style={{ width: "115%"}} />
+            <SwiperSlide>
+                <div className="card-container">
+                    <div className="card-content">
+                        <div className="circle">
+                            <div className="image">
+                                <img src={Friendly} alt={Friendly.split("/")[3].split(".")[0]} />
+                            </div>
+                        </div>
+                        <p className="header">
+                            Hello
+                        </p>
+                        <div className="btngrp">
+                            <button className="btn">Start now</button>
+                            <button className="btn">Later</button>
                         </div>
                     </div>
-                    <p style={{ color:"rgba(15, 13, 13, 0.66)"}} id="header">
-                        Cuddle with your pet/s
-                    </p>
                 </div>
-                <div className="button">Start now</div>
-                <div className="button1">Later</div>
+            </SwiperSlide>
+            <SwiperSlide>
+                <div className="card-container">
+                    <div className="card-content">
+                        <div className="circle">
+                            <div className="image">
+                                <img src={Friendly} alt={Friendly.split("/")[3].split(".")[0]} />
+                            </div>
+                        </div>
+                        <p className="header">
+                            Cuddle with your pet/s
+                        </p>
+                        <div className="btngrp">
+                            <button className="btn">Start now</button>
+                            <button className="btn">Later</button>
+                        </div>
+                    </div>
+                </div>
             </SwiperSlide>
         </Swiper>
     )

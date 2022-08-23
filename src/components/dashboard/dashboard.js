@@ -9,9 +9,9 @@ import ActivityCarousal from "../activities/activityCarousal"
 import Likedcards from "../../assets/images/likedCards.svg"
 
 // categories
-import Environment from "../../assets/images/category/environment.svg" 
-import Social from "../../assets/images/category/social.svg" 
-import Physicalactivity from "../../assets/images/category/physicalactivity.svg" 
+import Environment from "../../assets/images/category/environment.svg"
+import Social from "../../assets/images/category/social.svg"
+import Physicalactivity from "../../assets/images/category/physicalactivity.svg"
 import Zen from "../../assets/images/category/zen.svg"
 import friendlyBiome from "../../assets/images/friendly.png"
 import unFriendlyBiome1 from "../../assets/images/minion/minion1.png"
@@ -43,21 +43,19 @@ const Dashboard = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(gameStats.activityOngoing) {
+        if (gameStats.activityOngoing) {
             setSheildImage(Charging)
         } else {
-            if(gameStats.activityPerformed === 0)
-                setSheildImage(Nostrength)
-            else if(gameStats.activityPerformed === 1)
+            if (gameStats.activityPerformed === 0) setSheildImage(Nostrength)
+            else if (gameStats.activityPerformed === 1)
                 setSheildImage(Partialstrength)
-            else if(gameStats.activityPerformed === 2)
+            else if (gameStats.activityPerformed === 2)
                 setSheildImage(Fullstrength)
-            else if(gameStats.activityPerformed === 3)
+            else if (gameStats.activityPerformed === 3)
                 setSheildImage(Diversitycheck)
-            else if(gameStats.activityPerformed === 4)
+            else if (gameStats.activityPerformed === 4)
                 setSheildImage(Superdiversity)
         }
-        
     }, [gameStats.activityPerformed])
 
     const handleVibrate = () => {
@@ -86,18 +84,38 @@ const Dashboard = () => {
             </div>
             <div className="points-view">
                 <div className="biomechar-container">
-                    <img onClick={handleVibrate} src={friendlyBiome} className="biomechar" />
+                    <img
+                        onClick={handleVibrate}
+                        src={friendlyBiome}
+                        className="biomechar"
+                    />
                     <div className="minion-group">
-                        <img onClick={handleVibrate} src={unFriendlyBiome2} className="minionchar" />
-                        <img onClick={handleVibrate} src={unFriendlyBiome1} className="minionchar shift-right" />
-                        <img onClick={handleVibrate} src={unFriendlyBiome3} className="minionchar" />
+                        <img
+                            onClick={handleVibrate}
+                            src={unFriendlyBiome2}
+                            className="minionchar"
+                        />
+                        <img
+                            onClick={handleVibrate}
+                            src={unFriendlyBiome1}
+                            className="minionchar shift-right"
+                        />
+                        <img
+                            onClick={handleVibrate}
+                            src={unFriendlyBiome3}
+                            className="minionchar"
+                        />
                     </div>
                 </div>
 
                 <div className="biomechar-container">
                     <div className="biome-stats">
                         <div className="shield-icon-container">
-                            <img src={shieldImage} alt="shield" className="shield-icon" />
+                            <img
+                                src={shieldImage}
+                                alt="shield"
+                                className="shield-icon"
+                            />
                         </div>
                         <div className="biome-points">15</div>
                     </div>
@@ -152,7 +170,11 @@ const Dashboard = () => {
             </div>
             <div className="bottom-view">
                 <div className="icon-container">
-                    <img src={Likedcards} style={{ color: "black" }} className="icon" />
+                    <img
+                        src={Likedcards}
+                        style={{ color: "black" }}
+                        className="icon"
+                    />
                 </div>
                 <div className="icon-container">
                     <BiShuffle className="icon" />

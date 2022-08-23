@@ -1,10 +1,15 @@
 .mySwiper {
-    width: 100vw;
-    height: 60vh;
+    width: 340px;
+    height: 420px;
 }
 
 .swiper-slide {
-    margin-left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .card-container {
@@ -12,9 +17,8 @@
     justify-content: center;
     align-items: center;
     width: 80%;
-    height: 60vh;
+    height: 100%;
     border-radius: 1rem;
-    background: #b886c1;
 }
  
 .card-content {
@@ -23,32 +27,13 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 5%;
-    width: 80%;
+    width: 70%;
     height: 80%;
     border: 0.1rem solid black;
 }
 
-@media (max-width: 630px) {
-    .card-content {
-        width: 60% !important;
-    }
-}
-
-@media (max-width: 421px) {
-    .card-content {
-        width: 70% !important;
-    }
-}
-
-@media (max-width: 335px) {
-    .card-content {
-        width: 90% !important;
-    }
-}
-
 .header {
     padding: 4.5rem 0rem;
-    font-size: 1.5rem;
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     color: rgba(15, 13, 13, 0.66);
@@ -79,7 +64,7 @@
  
 .circle {
     position: absolute;
-    margin-top: -2rem;
+    margin-top: -2.5rem;
     margin-left: calc(50% - 2.5rem);
     border: 0.1rem solid black;
     border-radius: 50%;

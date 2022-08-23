@@ -5,6 +5,12 @@ import { motion } from "framer-motion"
 import Gameboard from "../gameboard/gameboard"
 import ActivityCarousal from "../activities/activityCarousal"
 
+// game card details
+import { environmentGameCardDetails } from "../../data/environment"
+import { socialGameCardDetails } from "../../data/social"
+import { zenGameCardDetails } from "../../data/zen"
+import { physicalActivityGameCardDetails } from "../../data/physicalActivity"
+
 // liked cards
 import Likedcards from "../../assets/images/likedCards.svg"
 
@@ -32,7 +38,7 @@ import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
 
 import "./dashboard.css"
-import { Box, Modal, Typography } from "@mui/material"
+import { Box, Modal } from "@mui/material"
 
 const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem("user"))
@@ -40,6 +46,8 @@ const Dashboard = () => {
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
     const [shieldImage, setSheildImage] = useState(Nostrength)
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+    const [cardCategory, setCardCategory] = useState(null)
+    const [cardDetailsData, setCardDetailsData] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -62,7 +70,18 @@ const Dashboard = () => {
         pref?.vibrate ? window.navigator.vibrate(250) : null
     }
 
-    const handleCardModalOpen = () => {
+    const handleCardModalOpen = (categoryId) => {
+        setCardCategory(categoryId)
+
+        if(categoryId === 0)
+            setCardDetailsData(environmentGameCardDetails)
+        else if(categoryId === 1)
+            setCardDetailsData(physicalActivityGameCardDetails)
+        else if(categoryId === 2)
+            setCardDetailsData(socialGameCardDetails)
+        else
+            setCardDetailsData(zenGameCardDetails)
+
         setIsCardModalOpen(true)
     }
 
@@ -132,35 +151,35 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityCarousal />
+                        <ActivityCarousal cardDetailsData={cardDetailsData} cardCategory={cardCategory} />
                     </Box>
                 </Modal>
             </div>
             <div className="card-view">
                 <div className="activity-cards">
                     <div
-                        onClick={handleCardModalOpen}
+                        onClick={() => handleCardModalOpen(0)}
                         style={{ backgroundColor: "#94B394" }}
                         className="cards"
                     >
                         <img src={Environment} alt="environment" />
                     </div>
                     <div
-                        onClick={handleCardModalOpen}
+                        onClick={() => handleCardModalOpen(1)}
                         style={{ backgroundColor: "#FED966" }}
                         className="cards"
                     >
                         <img src={Physicalactivity} alt="physicalActivity" />
                     </div>
                     <div
-                        onClick={handleCardModalOpen}
+                        onClick={() => handleCardModalOpen(2)}
                         style={{ backgroundColor: "#B886C1" }}
                         className="cards"
                     >
                         <img src={Social} alt="social" />
                     </div>
                     <div
-                        onClick={handleCardModalOpen}
+                        onClick={() => handleCardModalOpen(3)}
                         style={{ backgroundColor: "#F2A1A0" }}
                         className="cards"
                     >

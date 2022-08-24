@@ -1,110 +1,110 @@
 export const environmentGameCardDetails = [
     {
+        "icon": "E1",
+        "category": "environment",
         "task": "Engage with soil and plants through a gardening activity",
-        "category": "Environment",
-        "points": 10,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "points": 15,
     },
     {
-        "task": "Lay on the grass and enjoy the view",
-        "category": "Environment",
-        "points": 5,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "E2",
+        "category": "environment",
+        "task": "Lay on the grass and embrace the view",
+        "points": 5
     },
     {
+        "icon": "E3",
+        "category": "environment",
         "task": "Cuddle with your pet(s)",
-        "category": "Environment",
-        "points": 10,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "points": 10
     },
     {
+        "icon": "E4",
+        "category": "environment",
         "task": "Let's go to the park/playground",
-        "category": "Environment",
-        "points": 15,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "points": 15
     },
     {
-        "task": "Walk barefoot on the soil and grass and engage in an earthing session",
-        "category": "Environment",
-        "points": 20,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "E5",
+        "category": "environment",
+        "task": "Engage in an earthing session by walking barefoot on the soil and grass",
+        "points": 15
     },
     {
+        "icon": "E6",
+        "category": "environment",
         "task": "Spend time in nature",
-        "category": "Environment",
-        "points": 5,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "points": 5
     },
     {
+        "icon": "E7_",
+        "category": "environment",
         "task": "Let yourself bathe in the morning/evening sunlight",
-        "category": "Environment",
-        "points": 15,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "points": 15
     },
     {
-        "task": "Let's step into the garden and take slow and deep breaths",
-        "category": "Environment",
-        "points": 5,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "E8",
+        "category": "environment",
+        "task": "Let's step into the garden and take slow and deep breaths ",
+        "points": 10
     },
     {
+        "icon": "E9",
+        "category": "environment",
         "task": "Enjoy the crisp forest air as you take a walk in the park. Breathe in and breathe out.",
-        "category": "Environment",
-        "points": 10,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "points": 10
     },
     {
+        "icon": "E10_",
+        "category": "environment",
         "task": "Let's step into the garden and smell some blooms",
-        "category": "Environment",
-        "points": 5,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "points": 5
     },
     {
-        "task": "Let's visit the botanical garden *",
-        "category": "Environment",
-        "points": 20,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "icon": "E11",
+        "category": "environment",
+        "task": "Let's visit the botanical garden ",
+        "points": 20
     },
     {
-        "task": "Let's visit a farm and play with farm animals*",
-        "category": "Environment",
-        "points": 20,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "icon": "E12",
+        "category": "environment",
+        "task": "Let's visit a farm and play with farm animals",
+        "points": 20
     },
     {
-        "task": "Let's go camping *",
-        "category": "Environment",
-        "points": 20,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "icon": "E13",
+        "category": "environment",
+        "task": "Let's go camping ",
+        "points": 20
     },
     {
-        "task": "Let's engage in some community composting *",
-        "category": "Environment",
-        "points": 15,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "icon": "E14",
+        "category": "environment",
+        "task": "Let's engage in some community composting ",
+        "points": 15
     },
     {
-        "task": "Visit the countryside *",
-        "category": "Environment",
-        "points": 20,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "icon": "E15",
+        "category": "environment",
+        "task": "Visit the countryside ",
+        "points": 20
     },
     {
-        "task": "Let's go on a hike *",
-        "category": "Environment",
-        "points": 25,
-        "icon": "<a href=\"https://storyset.com/nature\">Nature illustrations by Storyset</a>"
+        "icon": "E16",
+        "category": "environment",
+        "task": "Let's go on a hike ",
+        "points": 25
     },
     {
-        "task": "Let's go for a picnic! *",
-        "category": "Environment",
-        "points": 10,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "E17",
+        "category": "environment",
+        "task": "Let's go for a picnic! ",
+        "points": 10
     },
     {
-        "task": "Let's go kayaking in the lake*",
-        "category": "Environment",
-        "points": 20,
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "E18",
+        "category": "environment",
+        "task": "Let's go kayaking in the lake",
+        "points": 20
     }
 ]

@@ -53,6 +53,12 @@ const Login = () => {
         checked: {},
     })((props) => <Checkbox color="default" {...props} />)
 
+    /*
+        1. age
+        2. gender
+        (add skip for both)
+    */
+
     return (
         <div className="auth-container">
             <div className="auth-content">

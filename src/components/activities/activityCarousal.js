@@ -35,6 +35,8 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
     if(!cardDetailsData)
         return null
 
+    const gender = "M"
+
     const handleClick = () => {
         localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true }))
         setIsCardModalOpen(false)
@@ -49,13 +51,14 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
             className="mySwiper"
         >
             {cardDetailsData.map((obj, key) => {
+                const multiGenderAvaialble = obj.icon.split("_").length > 1 ? true : false
                 return (
                     <SwiperSlide key={key}>
                         <div className="card-container" style={{ backgroundColor: categoryTags[cardCategory].color }}>
                             <div className="card-content">
                                 <div className="circle">
                                     <div className="image">
-                                        <img src={Friendly} alt={Friendly.split("/")[3].split(".")[0]} />
+                                        <img src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
                                     </div>
                                 </div>
                                 <p className="header">
@@ -63,7 +66,6 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
                                 </p>
                                 <div className="btngrp">
                                     <button className="btn" onClick={handleClick}>Start now</button>
-                                    <button className="btn">Later</button>
                                 </div>
                             </div>
                         </div>

@@ -128,13 +128,13 @@ export default class BluePrint {
                     this.#drawPlus(this.plus, ctx, col, row, this.tileSize / 2)
                 }
 
-                // ctx.strokeStyle = "black"
-                // ctx.strokeRect(
-                //     col * this.tileSize,
-                //     row * this.tileSize,
-                //     this.tileSize,
-                //     this.tileSize
-                // )
+                ctx.strokeStyle = "black"
+                ctx.strokeRect(
+                    col * this.tileSize,
+                    row * this.tileSize,
+                    this.tileSize,
+                    this.tileSize
+                )
             }
         }
     }
@@ -212,7 +212,7 @@ class Biome {
         this.tileMap = tileMap
         this.gameStats = gameStats
         // this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
-        this.biomeMoveCount = (45 - 15) / 5
+        this.biomeMoveCount = (15 - 15) / 5
         this.#loadBiomeImages()
     }
 

@@ -1,80 +1,80 @@
 export const socialGameCardDetails = [
     {
-        "task": "Invite friends over and share some friendly biome*",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S1",
+        "category": "social",
+        "task": "Invite friends over and share some friendly biome",
+        "points": 10
     },
     {
-        "task": "Let's go to the mall *",
-        "points": 15,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S2",
+        "category": "social",
+        "task": "Let's go to the mall ",
+        "points": 15
     },
     {
-        "task": "Let's go to the cinemas *",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S3",
+        "category": "social",
+        "task": "Let's go to the cinemas ",
+        "points": 10
     },
     {
-        "task": "Let's go to the farmer's market *",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/job\">Job illustrations by Storyset</a>"
+        "icon": "S4",
+        "category": "social",
+        "task": "Let's go to the farmer's market ",
+        "points": 10
     },
     {
-        "task": "Let's dine at a restaurant *",
-        "points": 5,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/together\">Together illustrations by Storyset</a>"
+        "icon": "S5",
+        "category": "social",
+        "task": "Let's dine at a restaurant ",
+        "points": 5
     },
     {
-        "task": "Visit your family members *",
-        "points": 5,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S6",
+        "category": "social",
+        "task": "Visit your family members ",
+        "points": 5
     },
     {
-        "task": "Let's visit the winter night market *",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S7",
+        "category": "social",
+        "task": "Let's visit the night market ",
+        "points": 10
     },
     {
-        "task": "Let's attend a community event*",
-        "points": 15,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S8",
+        "category": "social",
+        "task": "Let's attend a community event",
+        "points": 15
     },
     {
-        "task": "Let's play a board game with friends/family *",
-        "points": 5,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S9",
+        "category": "social",
+        "task": "Let's play a board game with friends/family ",
+        "points": 5
     },
     {
-        "task": "Let's visit an art gallery *",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S10",
+        "category": "social",
+        "task": "Let's visit an art gallery ",
+        "points": 10
     },
     {
-        "task": "Go out with your friends/family*",
-        "points": 5,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S11",
+        "category": "social",
+        "task": "Go out with your friends/family",
+        "points": 5
     },
     {
-        "task": "Let's visit an exhibition/expo*",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S12",
+        "category": "social",
+        "task": "Let's visit an exhibition/expo",
+        "points": 10
     },
     {
-        "task": "Let's go dancing *",
-        "points": 10,
-        "category": "Social",
-        "icon": "<a href=\"https://storyset.com/people\">People illustrations by Storyset</a>"
+        "icon": "S13",
+        "category": "social",
+        "task": "Let's go dancing ",
+        "points": 10
     }
 ]

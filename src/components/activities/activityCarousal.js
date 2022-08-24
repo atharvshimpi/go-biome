@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 
@@ -31,9 +31,15 @@ const categoryTags = [
     },
 ]
 
-const ActivityCarousal = ({ cardDetailsData, cardCategory }) => {
+const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardModalOpen, setIsActivityProgressModalOpen }) => {
     if(!cardDetailsData)
         return null
+
+    const handleClick = () => {
+        localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true }))
+        setIsCardModalOpen(false)
+        setIsActivityProgressModalOpen(true)
+    }
 
     return (
         <Swiper
@@ -56,7 +62,7 @@ const ActivityCarousal = ({ cardDetailsData, cardCategory }) => {
                                     {obj.task}
                                 </p>
                                 <div className="btngrp">
-                                    <button className="btn">Start now</button>
+                                    <button className="btn" onClick={handleClick}>Start now</button>
                                     <button className="btn">Later</button>
                                 </div>
                             </div>

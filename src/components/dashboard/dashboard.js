@@ -39,19 +39,21 @@ import { BiShuffle } from "react-icons/bi"
 
 import "./dashboard.css"
 import { Box, Modal } from "@mui/material"
+import ActivityProgress from "../activities/activityProgress"
 
 const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
-    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+    const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [shieldImage, setSheildImage] = useState(Nostrength)
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+    const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] = useState(gameStats.activityOngoing)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (gameStats.activityOngoing) {
+        if (isActivityProgressModalOpen) {
             setSheildImage(Charging)
         } else {
             if (gameStats.activityPerformed === 0) setSheildImage(Nostrength)
@@ -64,7 +66,7 @@ const Dashboard = () => {
             else if (gameStats.activityPerformed === 4)
                 setSheildImage(Superdiversity)
         }
-    }, [gameStats.activityPerformed])
+    }, [gameStats, isActivityProgressModalOpen])
 
     const handleVibrate = () => {
         pref?.vibrate ? window.navigator.vibrate(250) : null
@@ -143,6 +145,7 @@ const Dashboard = () => {
             </div>
             <div className="game-board-container">
                 <Gameboard></Gameboard>
+                {/* carousal */}
                 <Modal
                     open={isCardModalOpen}
                     onClose={() => setIsCardModalOpen(false)}
@@ -151,7 +154,18 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityCarousal cardDetailsData={cardDetailsData} cardCategory={cardCategory} />
+                        <ActivityCarousal gameStats={gameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen}/>
+                    </Box>
+                </Modal>
+                {/* activity progress */}
+                <Modal
+                    open={isActivityProgressModalOpen}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityProgress gameStats={gameStats} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} />
                     </Box>
                 </Modal>
             </div>

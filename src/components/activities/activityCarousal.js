@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
-
 import ReactCardFlip from "react-card-flip"
 
 import "./activityCarousal.css"
 import "swiper/css"
 import "swiper/css/effect-cards"
+
+import { Box, CircularProgress } from "@mui/material"
 
 const categoryTags = [
     {
@@ -35,12 +36,19 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
     if(!cardDetailsData)
         return null
 
+    const [loading, setLoading] = useState(false)
     const gender = "M"
 
-    const handleClick = () => {
-        localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true }))
-        setIsCardModalOpen(false)
-        setIsActivityProgressModalOpen(true)
+    const handleClick = (e, obj) => {
+        e.stopPropagation()
+        setLoading(true)
+        localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true, currentActivity: obj }))
+        
+        setTimeout(() => {
+            setLoading(false)
+            setIsCardModalOpen(false)
+            setIsActivityProgressModalOpen(true)
+        }, 1500)
     }
 
     return (
@@ -67,7 +75,15 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
                                         {obj.task}
                                     </p>
                                     <div className="btngrp">
-                                        <button className="btn" onClick={handleClick}>Start now</button>
+                                        <button className="btn" onClick={(e) => handleClick(e, obj)}>
+                                            {loading ? 
+                                                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                                                    <CircularProgress /> 
+                                                </Box>
+                                                : 
+                                                "Start now"
+                                            }
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -36,7 +36,6 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
         return null
 
     const gender = "M"
-    const [isCardFlipped, setIsCardFlipped] = useState(false)
 
     const handleClick = () => {
         localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true }))
@@ -52,24 +51,27 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
             className="mySwiper"
         >
             {cardDetailsData.map((obj, key) => {
+                const [isCardFlipped, setIsCardFlipped] = useState(false)
                 const multiGenderAvaialble = obj.icon.split("_").length > 1 ? true : false
                 return (
                     <SwiperSlide key={key}>
-                        <div className="card-container" style={{ backgroundColor: categoryTags[cardCategory].color }}>
-                            <div className="card-content">
-                                <div className="circle">
-                                    <div className="image">
-                                        <img onClick={() => setIsCardFlipped(!setIsCardFlipped)} src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
+                        <ReactCardFlip isFlipped={isCardFlipped} flipDirection="horizontal">
+                            {/* Front Side */}
+                            <div className="card-container" style={{ backgroundColor: "#ffffff" }}>
+                                <img onClick={() => setIsCardFlipped(!isCardFlipped)} src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
+                            </div>
+                            {/* Back Side */}
+                            <div className="card-container" onClick={() => setIsCardFlipped(!isCardFlipped)} style={{ backgroundColor: categoryTags[cardCategory].color }}>
+                                <div className="card-content">
+                                    <p className="header">
+                                        {obj.task}
+                                    </p>
+                                    <div className="btngrp">
+                                        <button className="btn" onClick={handleClick}>Start now</button>
                                     </div>
                                 </div>
-                                <p className="header">
-                                    {obj.task}
-                                </p>
-                                <div className="btngrp">
-                                    <button className="btn" onClick={handleClick}>Start now</button>
-                                </div>
                             </div>
-                        </div>
+                        </ReactCardFlip>
                     </SwiperSlide>
                 )})}
         </Swiper>
@@ -77,3 +79,22 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
 }
 
 export default ActivityCarousal
+
+
+/*
+<div className="card-container" style={{ backgroundColor: categoryTags[cardCategory].color }}>
+                                <div className="card-content">
+                                    <div className="circle">
+                                        <div className="image">
+                                            <img onClick={() => setIsCardFlipped(!isCardFlipped)} src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
+                                        </div>
+                                    </div>
+                                    <p className="header">
+                                        {obj.task}
+                                    </p>
+                                    <div className="btngrp">
+                                        <button className="btn" onClick={handleClick}>Start now</button>
+                                    </div>
+                                </div>
+                            </div>
+*/

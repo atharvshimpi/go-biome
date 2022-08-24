@@ -28,7 +28,7 @@
     justify-content: space-between;
     border-radius: 5%;
     width: 70%;
-    height: 80%;
+    min-height: 80%;
     border: 0.1rem solid black;
 }
 
@@ -70,4 +70,25 @@
     border-radius: 50%;
     width: 5rem;
     background: white;
+}
+
+.react-card-flip {
+    width: 100%;
+}
+
+.react-card-flipper {
+    height: 60vh !important;
+}
+
+.react-card-front, .react-card-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Card Front */
+
+.card-front-container {
+
 }

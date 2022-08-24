@@ -54,14 +54,14 @@
 
 .btn {
     height: 3rem;
-    width: 45%;
+    width: 100%;
     font-size: 1rem;
     border: 0.1rem solid;
     border-radius: 1rem;
     background-color: #fff;
     font-family: 'Open Sans', sans-serif;
 }
- 
+
 .circle {
     position: absolute;
     margin-top: -2.5rem;

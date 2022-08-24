@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 
-import Friendly from "../../assets/images/friendly.png"
+import ReactCardFlip from "react-card-flip"
 
 import "./activityCarousal.css"
 import "swiper/css"
@@ -36,6 +36,7 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
         return null
 
     const gender = "M"
+    const [isCardFlipped, setIsCardFlipped] = useState(false)
 
     const handleClick = () => {
         localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true }))
@@ -58,7 +59,7 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
                             <div className="card-content">
                                 <div className="circle">
                                     <div className="image">
-                                        <img src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
+                                        <img onClick={() => setIsCardFlipped(!setIsCardFlipped)} src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
                                     </div>
                                 </div>
                                 <p className="header">

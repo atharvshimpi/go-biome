@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import moment from "moment"
+import { motion } from "framer-motion"
 
 import { Button } from "@material-ui/core"
 
@@ -16,7 +16,12 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
     const navigate = useNavigate()
 
     return (
-        <div className="usercard-bg-container">
+        <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            exit={{ x: window.innerWidth, transition: { duration: 0.2 } }} 
+            className="usercard-bg-container"
+        >
             <div className="top-view">
                 <div className="icon-container">
                     <IoIosArrowBack
@@ -68,7 +73,7 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

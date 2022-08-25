@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { motion } from "framer-motion"
 
 import TextField from "@mui/material/TextField"
 import { Avatar, Chip, InputAdornment } from "@mui/material"
@@ -39,14 +40,16 @@ const categoryTags = [
     },
 ]
 
-const initialState = {
-    location: "",
-    tag: categoryTags[0],
-    description: "",
-    createdAt: Date(),
-}
-
 const AddUserCard = () => {
+    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+    const [activityUserCard, setActivityUserCard] = useState(JSON.parse(localStorage.getItem("activity-user-card")))
+
+    const initialState = {
+        location: "",
+        tag: categoryTags[gameStats.currentActivity.categoryId],
+        description: "",
+        createdAt: Date(),
+    }
     const [isPreviewOn, setIsPreviewOn] = useState(false)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
@@ -69,6 +72,10 @@ const AddUserCard = () => {
         fileReader.readAsDataURL(e.target.files[0])
     }
 
+    const handleClick = () => {
+
+    }
+
     return (
         <>
             {isPreviewOn ? (
@@ -78,7 +85,12 @@ const AddUserCard = () => {
                     userImageData={userImageData}
                 />
             ) : (
-                <div className="add-usercard-bg-container">
+                <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+                    className="add-usercard-bg-container"
+                >
                     <div className="top-view">
                         <div className="icon-container">
                             <IoIosArrowBack
@@ -98,7 +110,7 @@ const AddUserCard = () => {
                         </div>
                     </div>
                     <div className="add-usercard-container">
-                        <div style={{ backgroundColor: categoryTags[0].color }} className="add-usercard-content">
+                        <div style={{ backgroundColor: categoryTags[gameStats.currentActivity.categoryId].color }} className="add-usercard-content">
                             <div className="add-usercard-location">
                                 <TextField
                                     fullWidth
@@ -212,13 +224,14 @@ const AddUserCard = () => {
                                     className="add-usercard-btn"
                                     fullWidth
                                     variant="contained"
+                                    onClick={handleClick}
                                 >
                                     Create
                                 </Button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             )}
         </>
     )

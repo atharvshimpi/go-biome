@@ -1,14 +1,17 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
 import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css" 
 
 const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen }) => {
+    const navigate  = useNavigate()
 
     const handleClick = () => {
         localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: false }))
         setIsActivityProgressModalOpen(false)
+        navigate("/card")
     }
 
     const defaultOptions = {

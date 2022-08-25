@@ -32,7 +32,7 @@ const categoryTags = [
     },
 ]
 
-const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardModalOpen, setIsActivityProgressModalOpen }) => {
+const ActivityCarousal = ({ gameStats, setGameStats, cardDetailsData, cardCategory, setIsCardModalOpen, setIsActivityProgressModalOpen }) => {
     if(!cardDetailsData)
         return null
 
@@ -42,7 +42,8 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
     const handleClick = (e, obj) => {
         e.stopPropagation()
         setLoading(true)
-        localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true, currentActivity: obj }))
+        setGameStats({ ...gameStats, activityOngoing: true, currentActivity: {...obj, categoryId: cardCategory} })
+        localStorage.setItem("gamestats", JSON.stringify({ ...gameStats, activityOngoing: true, currentActivity: {...obj, categoryId: cardCategory} }))
         
         setTimeout(() => {
             setLoading(false)

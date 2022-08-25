@@ -56,18 +56,20 @@ const Dashboard = () => {
         if (isActivityProgressModalOpen) {
             setSheildImage(Charging)
         } else {
-            if (gameStats.activityPerformed === 0) setSheildImage(Nostrength)
+            if (gameStats.activityPerformed === 0) 
+                setSheildImage(Nostrength)
             else if (gameStats.activityPerformed === 1)
                 setSheildImage(Partialstrength)
             else if (gameStats.activityPerformed === 2)
                 setSheildImage(Fullstrength)
             else if (gameStats.activityPerformed === 3)
                 setSheildImage(Diversitycheck)
-            else if (gameStats.activityPerformed === 4)
+            else if (gameStats.activityPerformed >= 4)
                 setSheildImage(Superdiversity)
         }
     }, [gameStats, isActivityProgressModalOpen])
 
+    // research about this part
     const handleVibrate = () => {
         pref?.vibrate ? window.navigator.vibrate(250) : null
     }
@@ -138,9 +140,9 @@ const Dashboard = () => {
                                 className="shield-icon"
                             />
                         </div>
-                        <div className="biome-points">15</div>
+                        <div className="biome-points">{gameStats.friendlyBiomePoints}</div>
                     </div>
-                    <div className="biome-points">85</div>
+                    <div className="biome-points">{gameStats.unFriendlyBiomePoints}</div>
                 </div>
             </div>
             <div className="game-board-container">

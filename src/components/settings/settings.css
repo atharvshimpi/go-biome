@@ -236,3 +236,12 @@
     width: 18rem;
     height: 35vh;
 }
+
+.activity-history-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    overflow: scroll;
+    margin: 0.5rem 0px 0px;
+}

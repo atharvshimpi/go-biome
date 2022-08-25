@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 import TextField from "@mui/material/TextField"
-import { Avatar, Chip, InputAdornment } from "@mui/material"
+import { Avatar, Box, Chip, CircularProgress, InputAdornment } from "@mui/material"
 import { Button } from "@material-ui/core"
 
 import UserCard from "./userCard"
@@ -42,7 +42,7 @@ const categoryTags = [
 
 const AddUserCard = () => {
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
-    const [activityUserCard, setActivityUserCard] = useState(JSON.parse(localStorage.getItem("activity-user-card")))
+    const [activityUserCard, setActivityUserCard] = useState(JSON.parse(localStorage.getItem("activity-user-cards")))
 
     const initialState = {
         location: "",
@@ -51,10 +51,13 @@ const AddUserCard = () => {
         createdAt: Date(),
     }
     const [isPreviewOn, setIsPreviewOn] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)
-    const isDisabled = userCardData.location === "" || userCardData.description === "" || !userImageData
+    const isDisabled = userCardData.location === "" || userCardData.description === ""
+    const multiGenderAvaialble = gameStats.currentActivity.icon.split("_").length > 1 ? true : false
+    const gender = "M"
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -73,7 +76,25 @@ const AddUserCard = () => {
     }
 
     const handleClick = () => {
+        setLoading(true)
+        activityUserCard.push({
+            location: userCardData.location,
+            description: userCardData.description,
+            cardImage: userImageData || require(`../../assets/images/cards/${gameStats.currentActivity.category}/${multiGenderAvaialble ? `${gameStats.currentActivity.icon}${gender}` : gameStats.currentActivity.icon}.png`),
+            activityTitle: gameStats.currentActivity.task,
+            activityCategory: gameStats.currentActivity.category,
+            activityCategoryId: gameStats.currentActivity.categoryId,
+            activityStartedAt: null,
+            activityEndedAt: null,
+            createdAt: userCardData.createdAt
+        })
+        setActivityUserCard(activityUserCard)
+        localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
 
+        setTimeout(() => {
+            setLoading(false)
+            navigate("/map")
+        }, 1500)
     }
 
     return (
@@ -82,7 +103,7 @@ const AddUserCard = () => {
                 <UserCard
                     setIsPreviewOn={setIsPreviewOn}
                     userCardData={userCardData}
-                    userImageData={userImageData}
+                    userImageData={userImageData || require(`../../assets/images/cards/${gameStats.currentActivity.category}/${multiGenderAvaialble ? `${gameStats.currentActivity.icon}${gender}` : gameStats.currentActivity.icon}.png`)}
                 />
             ) : (
                 <motion.div
@@ -226,7 +247,13 @@ const AddUserCard = () => {
                                     variant="contained"
                                     onClick={handleClick}
                                 >
-                                    Create
+                                    {loading ? 
+                                        <Box sx={{ display: "flex", justifyContent: "center", fontSize: "0.8rem" }}>
+                                            <CircularProgress style={{ width: "30px", height: "30px" }} /> 
+                                        </Box> 
+                                        : 
+                                        "Create"
+                                    }
                                 </Button>
                             </div>
                         </div>

@@ -5,6 +5,7 @@ import DateFnsUtils from "@date-io/date-fns"
 
 import emptyTemplate from "../../assets/images/emptyTemplate.svg"
 import { Avatar, IconButton } from "@mui/material"
+import { ActivityHistoryDrpDwn } from "../modals/activityHistoryDrpDwn"
 
 export const changeProfilePicture = ({
     notify,
@@ -123,9 +124,13 @@ export const activityCardStack = (activityUserCards) => {
 
 export const activityHistory = (activityHistory) => {
     return (
-        <div className="change-input-container">
+        <div className="activity-history-container" style={{ height: activityHistory.length > 4 ? "65vh" : "auto" }}>
             {activityHistory.length > 0 ? (
-                <h1>Exists</h1>
+                activityHistory.map((activity, key) => {
+                    return (
+                        <ActivityHistoryDrpDwn key={key} activity={activity} />
+                    )
+                })
             ) : (
                 <div className="empty-container">
                     <p className="empty-heading">

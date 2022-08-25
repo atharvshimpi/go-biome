@@ -1,11 +1,10 @@
-import { useState } from "react"
-
 import biome from "../../assets/images/gamemap/biome.png"
 import minion from "../../assets/images/gamemap/minion.png"
 import plus from "../../assets/images/gamemap/plus.png"
 
 // dashed
-import dashed from "../../assets/images/gamemap/dashed/dashed.png"
+import dashedTop from "../../assets/images/gamemap/dashed/dashedTop.png"
+import dashedBottom from "../../assets/images/gamemap/dashed/dashedBottom.png"
 import dashedLeftDown from "../../assets/images/gamemap/dashed/dashedLeftDown.png"
 import dashedLeftUp from "../../assets/images/gamemap/dashed/dashedLeftUp.png"
 import dashedRightDown from "../../assets/images/gamemap/dashed/dashedRightDown.png"
@@ -22,8 +21,11 @@ export default class BluePrint {
         this.minion = new Image()
         this.minion.src = minion
 
-        this.dashed = new Image()
-        this.dashed.src = dashed
+        this.dashedTop = new Image()
+        this.dashedTop.src = dashedTop
+
+        this.dashedBottom = new Image()
+        this.dashedBottom.src = dashedBottom
 
         this.dashedLeftDown = new Image()
         this.dashedLeftDown.src = dashedLeftDown
@@ -43,27 +45,27 @@ export default class BluePrint {
 
     /*
         Convention :-
-        0 - dashed/category
-        1 - dashed/category LeftDown
-        2 - dashed/category RightUp
-        3 - dashed/category RightDown
-        4 - dashed/category LeftUp
-        5 - biome
-        6 - minion
-        7 - plus
+        0 - dashedUp/category
+        1 - dashedDown/category
+        2 - dashed/category LeftDown
+        3 - dashed/category RightUp
+        4 - dashed/category RightDown
+        5 - dashed/category LeftUp
+        6 - biome
+        7 - minion
         8 - backgroundColor
     */
 
     map = [
-        [8, 8, 8, 8, 8, 6],
-        [1, 0, 7, 0, 7, 2],
-        [4, 7, 0, 7, 0, 3],
-        [1, 0, 7, 0, 7, 2],
-        [4, 7, 0, 7, 0, 3],
-        [1, 0, 7, 0, 7, 2],
-        [4, 7, 0, 7, 0, 3],
-        [1, 0, 7, 0, 7, 2],
-        [5, 8, 8, 8, 8, 8],
+        [8, 8, 8, 8, 8, 7],
+        [5, 0, 0, 0, 0, 4],
+        [2, 1, 1, 1, 1, 3],
+        [5, 1, 1, 1, 1, 4],
+        [2, 1, 1, 1, 1, 3],
+        [1, 0, 0, 0, 0, 2],
+        [4, 1, 1, 1, 1, 3],
+        [1, 0, 0, 0, 0, 2],
+        [6, 8, 8, 8, 8, 8],
     ]
 
     rects = [
@@ -89,17 +91,17 @@ export default class BluePrint {
                 let tile = this.map[row][col]
                 if (tile === 1)
                     this.#drawImg(
-                        this.dashedLeftDown,
+                        this.dashedBottom,
                         ctx,
                         col,
                         row,
                         this.tileSize
                     )
                 else if (tile === 0)
-                    this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    this.#drawImg(this.dashedTop, ctx, col, row, this.tileSize)
                 else if (tile === 2)
                     this.#drawImg(
-                        this.dashedRightUp,
+                        this.dashedLeftDown,
                         ctx,
                         col,
                         row,
@@ -107,7 +109,7 @@ export default class BluePrint {
                     )
                 else if (tile === 3)
                     this.#drawImg(
-                        this.dashedRightDown,
+                        this.dashedRightUp,
                         ctx,
                         col,
                         row,
@@ -115,34 +117,27 @@ export default class BluePrint {
                     )
                 else if (tile === 4)
                     this.#drawImg(
-                        this.dashedLeftUp,
+                        this.dashedRightDown,
                         ctx,
                         col,
                         row,
                         this.tileSize
                     )
-                else if (tile === 6)
-                    this.#drawImg(this.minion, ctx, col, row, this.tileSize)
+                else if (tile === 5)
+                    this.#drawImg(this.dashedLeftUp, ctx, col, row, this.tileSize)
                 else if (tile === 7) {
-                    this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
-                    this.#drawPlus(this.plus, ctx, col, row, this.tileSize / 2)
+                    this.#drawImg(this.minion, ctx, col, row, this.tileSize)
                 }
 
-                ctx.strokeStyle = "black"
-                ctx.strokeRect(
-                    col * this.tileSize,
-                    row * this.tileSize,
-                    this.tileSize,
-                    this.tileSize
-                )
+                // ctx.strokeStyle = "black"
+                // ctx.strokeRect(
+                //     col * this.tileSize,
+                //     row * this.tileSize,
+                //     this.tileSize,
+                //     this.tileSize
+                // )
             }
         }
-    }
-
-    #drawPlus(img, ctx, col, row, size) {
-        ctx.fillStyle = "#b17572"
-        ctx.fillRect(col * this.tileSize, row * this.tileSize, size, size)
-        ctx.drawImage(img, (col + 0.25) * this.tileSize, (row + 0.25) * this.tileSize, size, size)
     }
 
     #drawImg(img, ctx, col, row, size) {
@@ -155,7 +150,7 @@ export default class BluePrint {
         for (let row = 0; row < this.map.length; row++) {
             for (let col = 0; col < this.map[row].length; col++) {
                 let tile = this.map[row][col]
-                if (tile === 5) {
+                if (tile === 6) {
                     return new Biome(
                         col * this.tileSize,
                         row * this.tileSize,
@@ -211,8 +206,8 @@ class Biome {
         this.tileSize = tileSize
         this.tileMap = tileMap
         this.gameStats = gameStats
-        // this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
-        this.biomeMoveCount = (15 - 15) / 5
+        this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
+        // this.biomeMoveCount = (15 - 15) / 5
         this.#loadBiomeImages()
     }
 

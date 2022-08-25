@@ -77,8 +77,8 @@ const ActivityCarousal = ({ gameStats, cardDetailsData, cardCategory, setIsCardM
                                     <div className="btngrp">
                                         <button className="btn" onClick={(e) => handleClick(e, obj)}>
                                             {loading ? 
-                                                <Box sx={{ display: "flex", justifyContent: "center" }}>
-                                                    <CircularProgress /> 
+                                                <Box sx={{ display: "flex", justifyContent: "center", fontSize: "0.8rem" }}>
+                                                    <CircularProgress style={{ width: "30px", height: "30px" }} /> 
                                                 </Box>
                                                 : 
                                                 "Start now"

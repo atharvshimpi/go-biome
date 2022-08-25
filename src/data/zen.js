@@ -30,7 +30,7 @@ export const zenGameCardDetails = [
         "points": 10
     },
     {
-        "icon": "Z6_",
+        "icon": "Z6",
         "category": "zen",
         "task": "Enjoy a flow activity (for example: singing, playing, reading, writing, cooking, crocheting, painting etc.)",
         "points": 10

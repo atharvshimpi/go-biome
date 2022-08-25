@@ -46,7 +46,7 @@
 
 .btngrp {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0 0.5rem 0.5rem;
@@ -54,7 +54,7 @@
 
 .btn {
     height: 3rem;
-    width: 100%;
+    width: 50%;
     font-size: 1rem;
     border: 0.1rem solid;
     border-radius: 1rem;

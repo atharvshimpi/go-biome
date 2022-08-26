@@ -52,10 +52,9 @@ const Dashboard = () => {
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [shieldImage, setSheildImage] = useState(Nostrength)
-    const [friendlyBiomeArray, setFriendlyBiomeArray] = useState([friendlyBiome2, friendlyBiome1, friendlyBiome3])
+    const [friendlyBiomeArray, setFriendlyBiomeArray] = useState([friendlyBiome1, friendlyBiome2, friendlyBiome3])
     const [unFriendlyBiomeArray, setUnFriendlyBiomeArray] = useState([unFriendlyBiome2, unFriendlyBiome1, unFriendlyBiome3])
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
-    const [isUpdatedPointsModalOpen, setIsUpdatedPointsModalOpen] = useState(true)
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] = useState(gameStats.activityOngoing)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
@@ -96,6 +95,11 @@ const Dashboard = () => {
             setCardDetailsData(zenGameCardDetails)
 
         setIsCardModalOpen(true)
+    }
+
+    const handlePointReplay = () => {
+        setGameStats({...gameStats, activityPointReplayed: false})
+        localStorage.setItem("gamestats", JSON.stringify({...gameStats, activityPointReplayed: false }))
     }
 
     return (
@@ -146,7 +150,7 @@ const Dashboard = () => {
                     </div>
                     <div className="minion-group">
                         <img
-                            style={{ width: gameStats.unFriendlyBiomePoints < 85 ? "3rem" : "5rem" }}
+                            style={{ width: gameStats.unFriendlyBiomePoints <= 85 ? "3rem" : "5rem", marginRight: gameStats.unFriendlyBiomePoints <= 15 ? "0px" : "" }}
                             onClick={handleVibrate}
                             src={unFriendlyBiomeArray[0]}
                             className="minionchar"
@@ -165,7 +169,7 @@ const Dashboard = () => {
                             null
                             :
                             <img
-                                style={{ width: gameStats.unFriendlyBiomePoints < 85 ? "3rem" : "5rem" }}
+                                style={{ width: gameStats.unFriendlyBiomePoints <= 85 ? "3rem" : "5rem" }}
                                 onClick={handleVibrate}
                                 src={unFriendlyBiomeArray[2]}
                                 className="minionchar"
@@ -173,14 +177,6 @@ const Dashboard = () => {
                         }
                     </div>
                 </div>
-
-                {/* 
-                    15  85
-                    30  70
-                    45  55
-                    55  45
-                */}
-
                 <div className="biomepoints-container">
                     <div className="biome-stats">
                         <div className="shield-icon-container">
@@ -191,15 +187,15 @@ const Dashboard = () => {
                             />
                         </div>
                         <div className="biome-points">{gameStats.friendlyBiomePoints}</div>
-                        {isUpdatedPointsModalOpen ? 
-                            <div onClick={() => setIsUpdatedPointsModalOpen(false)} style={{ color: "green" }} className="biome-updated-points">{"+5"}</div>
+                        {gameStats.activityPointReplayed && gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85 ? 
+                            <div onClick={handlePointReplay} style={{ color: "green" }} className="biome-updated-points">{`+${gameStats.currentActivity.points}`}</div>
                             :
                             null
                         }
                     </div>
                     <div className="minion-stats">
-                        {isUpdatedPointsModalOpen ? 
-                            <div onClick={() => setIsUpdatedPointsModalOpen(false)} style={{ color: "red", marginRight: "10px" }} className="biome-updated-points">{"-5"}</div>
+                        {gameStats.activityPointReplayed && gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85 ? 
+                            <div onClick={handlePointReplay} style={{ color: "red", marginRight: "10px" }} className="biome-updated-points">{`-${gameStats.currentActivity.points}`}</div>
                             :
                             null
                         }

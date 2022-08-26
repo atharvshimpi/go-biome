@@ -18,20 +18,38 @@ const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen }) => {
             "activity-history",
             JSON.stringify(activityHistory)
         )
-        localStorage.setItem(
-            "gamestats",
-            JSON.stringify({
-                ...gameStats,
-                friendlyBiomePoints:
-                    gameStats.friendlyBiomePoints +
-                    gameStats.currentActivity.points,
-                unFriendlyBiomePoints:
-                    gameStats.unFriendlyBiomePoints -
-                    gameStats.currentActivity.points,
-                activityOngoing: false,
-                activityPerformed: gameStats.activityPerformed + 1,
-            })
-        )
+
+        // if biome points reach 85, don't increase them further
+        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
+            localStorage.setItem(
+                "gamestats",
+                JSON.stringify({
+                    ...gameStats,
+                    friendlyBiomePoints:
+                        gameStats.friendlyBiomePoints +
+                        gameStats.currentActivity.points,
+                    unFriendlyBiomePoints:
+                        gameStats.unFriendlyBiomePoints -
+                        gameStats.currentActivity.points,
+                    activityOngoing: false,
+                    activityPerformed: gameStats.activityPerformed + 1,
+                    activityPointReplayed: true,
+                })
+            )
+        else
+            localStorage.setItem(
+                "gamestats",
+                JSON.stringify({
+                    ...gameStats,
+                    friendlyBiomePoints: 85,
+                    unFriendlyBiomePoints: 15,
+                    activityOngoing: false,
+                    activityPerformed: gameStats.activityPerformed + 1,
+                    activityPointReplayed: true,
+                })
+            )
+
+        
         setIsActivityProgressModalOpen(false)
         navigate("/card")
     }

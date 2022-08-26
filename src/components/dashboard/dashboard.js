@@ -19,7 +19,13 @@ import Environment from "../../assets/images/category/environment.svg"
 import Social from "../../assets/images/category/social.svg"
 import Physicalactivity from "../../assets/images/category/physicalactivity.svg"
 import Zen from "../../assets/images/category/zen.svg"
-import friendlyBiome from "../../assets/images/friendly.png"
+
+// friendly biomes
+import friendlyBiome1 from "../../assets/images/biome/shield.png"
+import friendlyBiome2 from "../../assets/images/biome/ant.png"
+import friendlyBiome3 from "../../assets/images/biome/bugsy.png"
+
+// unfriendly biomes
 import unFriendlyBiome1 from "../../assets/images/minion/minion1.png"
 import unFriendlyBiome2 from "../../assets/images/minion/minion2.png"
 import unFriendlyBiome3 from "../../assets/images/minion/minion3.png"
@@ -46,7 +52,10 @@ const Dashboard = () => {
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [shieldImage, setSheildImage] = useState(Nostrength)
+    const [friendlyBiomeArray, setFriendlyBiomeArray] = useState([friendlyBiome2, friendlyBiome1, friendlyBiome3])
+    const [unFriendlyBiomeArray, setUnFriendlyBiomeArray] = useState([unFriendlyBiome2, unFriendlyBiome1, unFriendlyBiome3])
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+    const [isUpdatedPointsModalOpen, setIsUpdatedPointsModalOpen] = useState(true)
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] = useState(gameStats.activityOngoing)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
@@ -107,31 +116,72 @@ const Dashboard = () => {
             </div>
             <div className="points-view">
                 <div className="biomechar-container">
-                    <img
-                        onClick={handleVibrate}
-                        src={friendlyBiome}
-                        className="biomechar"
-                    />
                     <div className="minion-group">
                         <img
+                            style={{ width: gameStats.friendlyBiomePoints >= 50 ? "3rem" : "5rem" }}
                             onClick={handleVibrate}
-                            src={unFriendlyBiome2}
+                            src={friendlyBiomeArray[0]}
+                            className="biomechar"
+                        />
+                        {gameStats.friendlyBiomePoints >= 50 ? 
+                            <img
+                                style={{ width: gameStats.friendlyBiomePoints >= 50 ? "3rem" : "5rem" }}
+                                onClick={handleVibrate}
+                                src={friendlyBiomeArray[1]}
+                                className="biomechar"
+                            />
+                            :
+                            null
+                        }
+                        {gameStats.friendlyBiomePoints >= 85 ? 
+                            <img
+                                style={{ width: gameStats.friendlyBiomePoints >= 50 ? "3rem" : "5rem" }}
+                                onClick={handleVibrate}
+                                src={friendlyBiomeArray[2]}
+                                className="biomechar"
+                            />
+                            :
+                            null
+                        }
+                    </div>
+                    <div className="minion-group">
+                        <img
+                            style={{ width: gameStats.unFriendlyBiomePoints < 85 ? "3rem" : "5rem" }}
+                            onClick={handleVibrate}
+                            src={unFriendlyBiomeArray[0]}
                             className="minionchar"
                         />
-                        <img
-                            onClick={handleVibrate}
-                            src={unFriendlyBiome1}
-                            className="minionchar shift-right"
-                        />
-                        <img
-                            onClick={handleVibrate}
-                            src={unFriendlyBiome3}
-                            className="minionchar"
-                        />
+                        {gameStats.friendlyBiomePoints >= 50 ? 
+                            null
+                            :
+                            <img
+                                style={{ width: gameStats.unFriendlyBiomePoints < 85 ? "3rem" : "5rem" }}
+                                onClick={handleVibrate}
+                                src={unFriendlyBiomeArray[1]}
+                                className="minionchar shift-right"
+                            />
+                        }
+                        {gameStats.friendlyBiomePoints >= 85 ? 
+                            null
+                            :
+                            <img
+                                style={{ width: gameStats.unFriendlyBiomePoints < 85 ? "3rem" : "5rem" }}
+                                onClick={handleVibrate}
+                                src={unFriendlyBiomeArray[2]}
+                                className="minionchar"
+                            />
+                        }
                     </div>
                 </div>
 
-                <div className="biomechar-container">
+                {/* 
+                    15  85
+                    30  70
+                    45  55
+                    55  45
+                */}
+
+                <div className="biomepoints-container">
                     <div className="biome-stats">
                         <div className="shield-icon-container">
                             <img
@@ -141,8 +191,20 @@ const Dashboard = () => {
                             />
                         </div>
                         <div className="biome-points">{gameStats.friendlyBiomePoints}</div>
+                        {isUpdatedPointsModalOpen ? 
+                            <div onClick={() => setIsUpdatedPointsModalOpen(false)} style={{ color: "green" }} className="biome-updated-points">{"+5"}</div>
+                            :
+                            null
+                        }
                     </div>
-                    <div className="biome-points">{gameStats.unFriendlyBiomePoints}</div>
+                    <div className="minion-stats">
+                        {isUpdatedPointsModalOpen ? 
+                            <div onClick={() => setIsUpdatedPointsModalOpen(false)} style={{ color: "red", marginRight: "10px" }} className="biome-updated-points">{"-5"}</div>
+                            :
+                            null
+                        }
+                        <div className="biome-points">{gameStats.unFriendlyBiomePoints}</div>
+                    </div>
                 </div>
             </div>
             <div className="game-board-container">

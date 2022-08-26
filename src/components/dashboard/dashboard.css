@@ -32,23 +32,23 @@
 
 .points-view {
     margin-top: -1rem;
-    padding: 0 2rem;
+    padding: 0 0.5rem 0 0;
     flex-direction: column;
 }
 
-.biomechar-container {
+.biomechar-container, .biomepoints-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0 1rem 0 2rem;
 }
 
-.biomechar {
-    width: 3rem;
-    max-height: 4rem;
+.biomechar-container {
+    padding: 0 1rem 0 1rem;
 }
 
-.biome-points {
+.biome-points, .biome-updated-points {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,6 +58,13 @@
     border-radius: 0.3rem;
     border: 1px solid black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.biome-updated-points {
+    opacity: 0.8;
+    background-color: #ffffff;
+    margin-left: 10px;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .icon, .shield-icon {
@@ -150,10 +157,19 @@
     }
 }
 
-.biome-stats {
+.biomechar {
+    width: 5rem;
+    margin-right: -1.5rem;
+}
+
+.biome-stats, .minion-stats {
     display: flex;
     position: relative;
     right: 15px;
+}
+
+.minion-stats {
+    right: 5px;
 }
 
 .minion-group {
@@ -168,6 +184,7 @@
 }
 
 .shift-right {
+    width: 2rem !important;
     position: relative;
 }
 

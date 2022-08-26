@@ -145,8 +145,8 @@ class Biome {
         this.tileSize = tileSize
         this.tileMap = tileMap
         this.gameStats = gameStats
-        // this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
-        this.biomeMoveCount = (15 - 15) / 5
+        this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
+        // this.biomeMoveCount = (15 - 15) / 5
         this.#loadBiomeImages()
     }
 

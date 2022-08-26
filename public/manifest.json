@@ -1,11 +1,11 @@
 {
-    "short_name": "Go Biome",
-    "name": "Go Biome",
+    "short_name": "Go-Go Biome",
+    "name": "Go-Go Biome",
     "icons": [
         {
             "src": "/images/logo.png",
             "type": "image/png",
-            "sizes": "1024x1024",
+            "sizes": "200x200",
             "purpose": "any"
         }
     ],

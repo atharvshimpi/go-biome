@@ -8,17 +8,22 @@ import {
     IconButton,
     TextField,
     withStyles,
+    FormControl,
     FormControlLabel,
+    InputLabel,
     InputAdornment,
+    Select,
+    MenuItem,
 } from "@material-ui/core"
 import PersonIcon from "@mui/icons-material/Person"
+import DateRangeIcon from "@mui/icons-material/DateRange"
 import PasswordIcon from "@mui/icons-material/Password"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 
 import "./login.css"
 
-const initialState = { username: "", /*password: "",*/ agreedTerms: false, profilePicture: imageTemplate }
+const initialState = { username: "", /*password: "",*/ age: "", gender: "", agreedTerms: false, profilePicture: imageTemplate }
 
 const Login = () => {
     const [userData, setUserData] = useState(initialState)
@@ -53,17 +58,11 @@ const Login = () => {
         checked: {},
     })((props) => <Checkbox color="default" {...props} />)
 
-    /*
-        1. age
-        2. gender
-        (add skip for both)
-    */
-
     return (
         <div className="auth-container">
             <div className="auth-content">
                 <div className="auth-heading">
-                    <h1>Welcome to Go Biome!</h1>
+                    <h1>Welcome to Go-Go Biome!</h1>
                 </div>
                 <div className="auth-input-fields">
                     <TextField
@@ -84,6 +83,39 @@ const Login = () => {
                             ),
                         }}
                     />
+                    <TextField
+                        required
+                        type="number"        
+                        autoComplete="off"
+                        fullWidth
+                        variant="outlined"
+                        id="age"
+                        label="Age"
+                        className="auth-input"
+                        value={userData.age}
+                        onChange={handleChange}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <DateRangeIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <FormControl variant="outlined" fullWidth>
+                        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="gender"
+                            value={userData.gender}
+                            label="Gender"
+                            onChange={(e) => setUserData({...userData, gender: e.target.value}) }
+                        >
+                            <MenuItem value={"M"}>Male</MenuItem>
+                            <MenuItem value={"F"}>Female</MenuItem>
+                            <MenuItem value={"-1"}>None of the above</MenuItem>
+                        </Select>
+                    </FormControl>
                     {/* <TextField
                         required
                         fullWidth

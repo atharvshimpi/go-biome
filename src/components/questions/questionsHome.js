@@ -19,7 +19,7 @@ const QuestionsHome = () => {
             <div className="questions-content">
                 <div className="questions-heading">
                     <h1>
-                        Welcome to Go Biome,{" "}
+                        Welcome to Go-Go Biome,{" "}
                         <span className="username">{user.username}</span>!
                     </h1>
                 </div>

@@ -111,9 +111,10 @@ const Login = () => {
                             label="Gender"
                             onChange={(e) => setUserData({...userData, gender: e.target.value}) }
                         >
-                            <MenuItem value={"M"}>Male</MenuItem>
-                            <MenuItem value={"F"}>Female</MenuItem>
-                            <MenuItem value={"-1"}>None of the above</MenuItem>
+                            <MenuItem value={"M"}>Man</MenuItem>
+                            <MenuItem value={"F"}>Woman</MenuItem>
+                            <MenuItem value={"GQNB"}>Genderqueer/Non-Binary</MenuItem>
+                            <MenuItem value={"null"}>Prefer not to disclose</MenuItem>
                         </Select>
                     </FormControl>
                     {/* <TextField

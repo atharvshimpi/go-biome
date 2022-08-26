@@ -24,13 +24,6 @@ const Gamemap = () => {
             bluePrint.draw(ctx)
             biome.draw(ctx)
             // biome.update()
-
-            canvas.onclick = function (e) {
-                var x = e.offsetX
-                var y = e.offsetY
-
-                bluePrint.updatePlus(ctx, x, y)
-            }
         }
         
         bluePrint.setCanvasSize(canvas)

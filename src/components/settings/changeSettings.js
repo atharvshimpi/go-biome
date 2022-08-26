@@ -126,7 +126,7 @@ export const activityHistory = (activityHistory) => {
     return (
         <div className="activity-history-container" style={{ height: activityHistory.length > 4 ? "65vh" : "auto" }}>
             {activityHistory.length > 0 ? (
-                activityHistory.map((activity, key) => {
+                activityHistory.reverse().map((activity, key) => {
                     return (
                         <ActivityHistoryDrpDwn key={key} activity={activity} />
                     )

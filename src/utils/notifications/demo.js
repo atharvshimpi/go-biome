@@ -1,3 +1,5 @@
+import Logo from "../../assets/images/logo.png"
+
 export const demoNotification = () => {
     // Service Worker isn't supported on this browser, disable or hide UI.
     if (!("serviceWorker" in navigator)) {
@@ -13,9 +15,10 @@ export const demoNotification = () => {
         Notification.requestPermission((result) => {
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
-                    registration.showNotification("Vibration Sample", {
-                        body: "Buzz! Buzz!",
-                        icon: "../../../public/images/logo.png",
+                    registration.showNotification("Go-Go Biome", {
+                        body: "Demo Testing",
+                        icon: Logo,
+                        badge: Logo,
                         vibrate: [200, 100, 200, 100, 200, 100, 200],
                         tag: "vibration-sample",
                     })

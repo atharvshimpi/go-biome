@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Lottie from "react-lottie"
 
+import { demoNotification } from "../../utils/notifications/demo"
+
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
 
@@ -12,46 +14,48 @@ const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen }) => {
     const navigate = useNavigate()
 
     const handleClick = () => {
-        activityHistory.push(gameStats.currentActivity)
-        setActivityHistory(activityHistory)
-        localStorage.setItem(
-            "activity-history",
-            JSON.stringify(activityHistory)
-        )
+        demoNotification()
+        console.log("Demo Notif Clicked!")
+        // activityHistory.push(gameStats.currentActivity)
+        // setActivityHistory(activityHistory)
+        // localStorage.setItem(
+        //     "activity-history",
+        //     JSON.stringify(activityHistory)
+        // )
 
-        // if biome points reach 85, don't increase them further
-        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
-            localStorage.setItem(
-                "gamestats",
-                JSON.stringify({
-                    ...gameStats,
-                    friendlyBiomePoints:
-                        gameStats.friendlyBiomePoints +
-                        gameStats.currentActivity.points,
-                    unFriendlyBiomePoints:
-                        gameStats.unFriendlyBiomePoints -
-                        gameStats.currentActivity.points,
-                    activityOngoing: false,
-                    activityPerformed: gameStats.activityPerformed + 1,
-                    activityPointReplayed: true,
-                })
-            )
-        else
-            localStorage.setItem(
-                "gamestats",
-                JSON.stringify({
-                    ...gameStats,
-                    friendlyBiomePoints: 85,
-                    unFriendlyBiomePoints: 15,
-                    activityOngoing: false,
-                    activityPerformed: gameStats.activityPerformed + 1,
-                    activityPointReplayed: true,
-                })
-            )
+        // // if biome points reach 85, don't increase them further
+        // if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
+        //     localStorage.setItem(
+        //         "gamestats",
+        //         JSON.stringify({
+        //             ...gameStats,
+        //             friendlyBiomePoints:
+        //                 gameStats.friendlyBiomePoints +
+        //                 gameStats.currentActivity.points,
+        //             unFriendlyBiomePoints:
+        //                 gameStats.unFriendlyBiomePoints -
+        //                 gameStats.currentActivity.points,
+        //             activityOngoing: false,
+        //             activityPerformed: gameStats.activityPerformed + 1,
+        //             activityPointReplayed: true,
+        //         })
+        //     )
+        // else
+        //     localStorage.setItem(
+        //         "gamestats",
+        //         JSON.stringify({
+        //             ...gameStats,
+        //             friendlyBiomePoints: 85,
+        //             unFriendlyBiomePoints: 15,
+        //             activityOngoing: false,
+        //             activityPerformed: gameStats.activityPerformed + 1,
+        //             activityPointReplayed: true,
+        //         })
+        //     )
 
         
-        setIsActivityProgressModalOpen(false)
-        navigate("/card")
+        // setIsActivityProgressModalOpen(false)
+        // navigate("/card")
     }
 
     const defaultOptions = {

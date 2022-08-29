@@ -18,9 +18,8 @@ self.addEventListener("install", (event) => {
 self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then(() => {
-            return (
-                fetch(event.request)
-                    .catch(() => caches.match("offline.html"))
+            return fetch(event.request).catch(() =>
+                caches.match("offline.html")
             )
         })
     )
@@ -42,4 +41,35 @@ self.addEventListener("activate", (event) => {
             )
         )
     )
+})
+
+// Push notifications
+self.addEventListener("notificationclick", function (event) {
+    // Do something as the result of the notification click
+    const promiseChain = () => {
+        if (!event.action) {
+            // Was a normal notification click
+            console.log("Notification Click.")
+            return
+        }
+    
+        switch (event.action) {
+        case "coffee-action":
+            console.log("User ❤️️'s coffee.")
+            break
+        case "doughnut-action":
+            console.log("User ❤️️'s doughnuts.")
+            break
+        case "gramophone-action":
+            console.log("User ❤️️'s music.")
+            break
+        case "atom-action":
+            console.log("User ❤️️'s science.")
+            break
+        default:
+            console.log(`Unknown action clicked: '${event.action}'`)
+            break
+        }
+    }
+    event.waitUntil(promiseChain)
 })

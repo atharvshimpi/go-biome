@@ -12,6 +12,8 @@ export const demoNotification = () => {
     }
 
     function askPermission() {
+        const maxVisibleActions = Notification.maxActions
+        console.log("maxVisibleActions", maxVisibleActions)
         Notification.requestPermission((result) => {
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
@@ -19,8 +21,21 @@ export const demoNotification = () => {
                         body: "Demo Testing",
                         icon: Logo,
                         badge: Logo,
-                        vibrate: [200, 100, 200, 100, 200, 100, 200],
+                        vibrate: [
+                            500, 110, 500, 110, 450, 110, 200, 110, 170, 40,
+                            450, 110, 200, 110, 170, 40, 500,
+                        ],
+                        timestamp: Date.parse("01 Jan 2000 00:00:00"),
+                        // vibrate: [200, 100, 200, 100, 200, 100, 200],
                         tag: "vibration-sample",
+                        renotify: true,
+                        requireInteraction: true,
+                        actions: [
+                            {
+                                action: "coffee-action",
+                                title: "Coffee Action"
+                            },
+                        ],
                     })
                 })
             } else {

@@ -15,7 +15,6 @@ const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen }) => {
 
     const handleClick = () => {
         demoNotification()
-        console.log("Demo Notif Clicked!")
         // activityHistory.push(gameStats.currentActivity)
         // setActivityHistory(activityHistory)
         // localStorage.setItem(

@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext, createContext } from "react"
-import { Navigate } from "react-router-dom"
 import {
     GoogleAuthProvider,
-    signInWithPopup,
     signInWithRedirect,
     signOut,
     onAuthStateChanged,
@@ -18,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
         provider.setCustomParameters({
             prompt: "select_account"
         })
-        await signInWithPopup(auth, provider)
+        await signInWithRedirect(auth, provider)
     }
 
     const logOut = (navigate) => {

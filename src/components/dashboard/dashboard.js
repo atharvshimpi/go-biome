@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
 import ActivityCarousal from "../activities/activityCarousal"
+import { UserAuth } from "../../context/authContext"
 
 // game card details
 import { environmentGameCardDetails } from "../../data/environment"
@@ -48,7 +49,7 @@ import { Box, Modal } from "@mui/material"
 import ActivityProgress from "../activities/activityProgress"
 
 const Dashboard = () => {
-    const user = JSON.parse(localStorage.getItem("user"))
+    const userDetails = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [shieldImage, setSheildImage] = useState(Nostrength)
@@ -58,7 +59,16 @@ const Dashboard = () => {
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] = useState(gameStats.activityOngoing)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
+    const { user } = UserAuth()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!userDetails)
+            return <Navigate to="/userDetails" />
+        
+        if(!pref)
+            return <Navigate to="/questions-main" />
+    }, [userDetails, pref])
 
     useEffect(() => {
         if (isActivityProgressModalOpen) {
@@ -116,7 +126,7 @@ const Dashboard = () => {
                         className="icon"
                     />
                 </div>
-                <h3>{user.username}&apos;s Biome Land</h3>
+                <h3>{userDetails.username}&apos;s Biome Land</h3>
             </div>
             <div className="points-view">
                 <div className="biomechar-container">

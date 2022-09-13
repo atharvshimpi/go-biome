@@ -51,7 +51,7 @@
 }
 
 .auth-next-btn {
-    width: auto !important;
+    width: 100% !important;
 }
 
 @media (max-width: 361px) {

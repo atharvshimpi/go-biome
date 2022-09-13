@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
+import { UserAuth } from "../../context/authContext" 
 import { settingDetails } from "./settingsData"
 import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName, saveProgress } from "./changeSettings"
 
@@ -35,7 +36,16 @@ const Settings = () => {
     const [morningCheckInTime, handleMorningCheckInTimeChange] = useState(pref.morningCheckInTime)
     const [mealTime, handleMealTimeChange] = useState(pref.mealTime)
     const notify = () => toast.success("Updated Successfully!")
+    const { logOut } = UserAuth()
     const navigate = useNavigate()
+
+    const handleSignOut = async () => {
+        try {
+            await logOut(navigate)
+        } catch (error) {
+            console.log("Settings Error : ", error)
+        }
+    }
 
     useEffect(() => {
         setSelectedSetting(settingDetails.find(obj => obj.id === settingId))
@@ -68,7 +78,7 @@ const Settings = () => {
                     />
                 </div>
 
-                <UserSettings setOpen={setOpen} setSettingId={setSettingId} />
+                <UserSettings setOpen={setOpen} setSettingId={setSettingId} handleSignOut={handleSignOut} />
                 <GeneralSettings setOpen={setOpen} setSettingId={setSettingId} />
                 <CustomizationSettings setOpen={setOpen} setSettingId={setSettingId} />
                 <BackupSharingSettings setOpen={setOpen} setSettingId={setSettingId} />

@@ -4,56 +4,37 @@ import { AnimatePresence } from "framer-motion"
 import "./styles.css"
 
 import Dashboard from "./components/dashboard/dashboard"
+import PrivateRoute from "./components/private/privateRoute"
 import QuestionsHome from "./components/questions/questionsHome"
 import Questions from "./components/questions/questions"
 import Login from "./components/onboarding/login"
+import UserDetails from "./components/onboarding/userDetails"
 import Settings from "./components/settings/settings"
 import Gamemap from "./components/gameboard/gamemap"
 import AddUserCard from "./components/modals/addUserCard"
 import ActivityCarousal from "./components/activities/activityCarousal"
+import { AuthContextProvider } from "./context/authContext"
 
 const App = () => {
-    const [authenticated, setAuthenticated] = useState(null)
-    const [preferences, setPreferences] = useState(null)
-
-    useEffect(() => {
-        const userPresent = JSON.parse(localStorage.getItem("user"))
-        const prefPresent = JSON.parse(localStorage.getItem("preferences"))
-        if (userPresent) {
-            setAuthenticated(userPresent)
-        }
-
-        if (prefPresent) {
-            setPreferences(prefPresent)
-        }
-    }, [])
 
     return (
-        <Router>
-            <AnimatePresence exitBeforeEnter>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            authenticated ? (
-                                preferences ? (
-                                    <Dashboard />
-                                ) : (
-                                    <QuestionsHome />
-                                )
-                            ) : (
-                                <Login />
-                            )
-                        }
-                    />
-                    <Route path="/questions" element={<Questions />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/map" element={<Gamemap />} />
-                    <Route path="/card" element={<AddUserCard />} />
-                    <Route path="/carousal" element={<ActivityCarousal />} />
-                </Routes>
-            </AnimatePresence>
-        </Router>
+        <AuthContextProvider>
+            <Router>
+                <AnimatePresence exitBeforeEnter>
+                    <Routes>
+                        <Route path="/" element={ <PrivateRoute><Dashboard /></PrivateRoute> } />
+                        <Route path="/login" element={ <Login /> } />
+                        <Route path="/userDetails" element={ <UserDetails /> } />
+                        <Route path="/questions-main" element={<QuestionsHome />} />
+                        <Route path="/questions" element={<Questions />} />
+                        <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+                        <Route path="/map" element={<PrivateRoute><Gamemap /></PrivateRoute>} />
+                        <Route path="/card" element={<PrivateRoute><AddUserCard /></PrivateRoute>} />
+                        <Route path="/carousal" element={<PrivateRoute><ActivityCarousal /></PrivateRoute>} />
+                    </Routes>
+                </AnimatePresence>
+            </Router>
+        </AuthContextProvider>
     )
 }
 

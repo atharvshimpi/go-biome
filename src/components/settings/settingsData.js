@@ -22,6 +22,7 @@ import {
     GiSunPriest,
 } from "react-icons/gi"
 import { MdHistory, MdBackup } from "react-icons/md"
+import { FiLogOut } from "react-icons/fi"
 
 export const settingDetails = [
     {
@@ -51,61 +52,66 @@ export const settingDetails = [
     },
     {
         id: 5,
+        title: "Logout",
+        icon: <FiLogOut />,
+    },
+    {
+        id: 6,
         title: "Sound",
         icon: <BsFillVolumeUpFill />,
     },
     {
-        id: 6,
+        id: 7,
         title: "Haptic Vibration",
         icon: <BsPhoneVibrateFill />,
     },
     {
-        id: 7,
+        id: 8,
         title: "Tutorial",
         icon: <FaBookOpen />,
     },
     {
-        id: 8,
+        id: 9,
         title: "Information",
         icon: <FaInfo />,
     },
     {
-        id: 9,
+        id: 10,
         title: "Waking Hours",
         icon: <FaSun />,
     },
     {
-        id: 10,
+        id: 11,
         title: "Sleeping Hours",
         icon: <BsFillMoonFill />,
     },
     {
-        id: 11,
+        id: 12,
         title: "Morning Check-in Hours",
         icon: <GiSunPriest />,
     },
     {
-        id: 12,
+        id: 13,
         title: "Meal Time",
         icon: <GiForkKnifeSpoon />,
     },
     {
-        id: 13,
+        id: 14,
         title: "Set friendly Biome Name",
         icon: <FaBacterium />,
     },
     {
-        id: 14,
+        id: 15,
         title: "Set unfriendly Biome Name",
         icon: <FaVirus />,
     },
     {
-        id: 15,
+        id: 16,
         title: "Save Progress & feedback",
         icon: <MdBackup />,
     },
     {
-        id: 16,
+        id: 17,
         title: "Share with friends",
         icon: <BsFillShareFill />,
     },

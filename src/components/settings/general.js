@@ -30,7 +30,7 @@ const GeneralSettings = ({ setOpen, setSettingId }) => {
             <div className="general-settings-container">
                 <h2>General Settings</h2>
                 <div className="general-settings-content">
-                    {settingDetails.filter(obj => obj.id >= 5 && obj.id < 9).map((obj) => {
+                    {settingDetails.filter(obj => obj.id >= 6 && obj.id < 10).map((obj) => {
                         return (
                             <div key={obj.id} className="options">
                                 <div className="title-icon">

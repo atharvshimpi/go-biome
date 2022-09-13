@@ -37,7 +37,7 @@ const QuestionModal = ({ qNum }) => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            window.location.href = "/"
+            navigate("/")
         }, 1000)
     }
 

@@ -15,7 +15,7 @@ const CustomizationSettings = ({ setOpen, setSettingId }) => {
             <div className="general-settings-container">
                 <h2>Customization</h2>
                 <div className="general-settings-content">
-                    {settingDetails.filter(obj => obj.id >= 9 && obj.id < 15).map((obj) => {
+                    {settingDetails.filter(obj => obj.id >= 10 && obj.id < 16).map((obj) => {
                         return (
                             <div key={obj.id} className="options">
                                 <div className="title-icon">

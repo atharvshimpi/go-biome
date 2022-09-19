@@ -36,7 +36,7 @@
             "warn",
             "never"
         ],
-        "no-console": "warn",
+        "no-console": "off",
         "no-constant-condition": "off",
         "react/prop-types": 0,
         "no-unused-vars": "off"

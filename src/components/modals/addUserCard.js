@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import { ref, uploadBytes, listAll } from "firebase/storage"
+
+import UserCard from "./userCard"
+import { storage } from "../../firebase"
 
 import TextField from "@mui/material/TextField"
 import { Avatar, Box, Chip, CircularProgress, InputAdornment } from "@mui/material"
 import { Button } from "@material-ui/core"
-
-import UserCard from "./userCard"
 
 import { IoIosArrowBack } from "react-icons/io"
 import { FaTag } from "react-icons/fa"
@@ -16,6 +18,7 @@ import { BsCardImage } from "react-icons/bs"
 import { AiFillLock } from "react-icons/ai"
 
 import "./addUserCard.css"
+import { useEffect } from "react"
 
 const categoryTags = [
     {
@@ -41,6 +44,7 @@ const categoryTags = [
 ]
 
 const AddUserCard = () => {
+    const userDetails = JSON.parse(localStorage.getItem("user"))
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
     const [activityUserCard, setActivityUserCard] = useState(JSON.parse(localStorage.getItem("activity-user-cards")))
 
@@ -58,6 +62,7 @@ const AddUserCard = () => {
     const isDisabled = userCardData.location === "" || userCardData.description === ""
     const multiGenderAvaialble = gameStats.currentActivity.icon.split("_").length > 1 ? true : false
     const gender = "M"
+    const cardImageRef = ref(storage, `images/${userDetails.email.split("@")[0]}/${userCardData.createdAt}`)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -77,10 +82,18 @@ const AddUserCard = () => {
 
     const handleClick = () => {
         setLoading(true)
+
+        uploadBytes(cardImageRef, userImageFile || require(`../../assets/images/cards/${gameStats.currentActivity.category}/${multiGenderAvaialble ? `${gameStats.currentActivity.icon}${gender}` : gameStats.currentActivity.icon}.png`))
+            .then(() => {
+                console.log("Image Uploaded")
+            })
+            .catch((error) => {
+                console.log("Error : ", error)
+            })
+        
         activityUserCard.push({
             location: userCardData.location,
             description: userCardData.description,
-            cardImage: userImageData || require(`../../assets/images/cards/${gameStats.currentActivity.category}/${multiGenderAvaialble ? `${gameStats.currentActivity.icon}${gender}` : gameStats.currentActivity.icon}.png`),
             activityTitle: gameStats.currentActivity.task,
             activityCategory: gameStats.currentActivity.category,
             activityCategoryId: gameStats.currentActivity.categoryId,
@@ -96,6 +109,12 @@ const AddUserCard = () => {
             navigate("/map")
         }, 1500)
     }
+
+    // useEffect(() => {
+    //     listAll(cardImageRef).then((response) => {
+    //         console.log(response.items)
+    //     })
+    // }, [])
 
     return (
         <>

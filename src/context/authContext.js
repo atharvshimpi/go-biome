@@ -4,12 +4,17 @@ import {
     signInWithRedirect,
     signOut,
     onAuthStateChanged,
+    createUserWithEmailAndPassword
 } from "firebase/auth"
 import { auth } from "../firebase"
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+
+    const login = (email, password) => {
+        return createUserWithEmailAndPassword(email, password)
+    }
     
     const googleSignIn = async () => {
         const provider = new GoogleAuthProvider()

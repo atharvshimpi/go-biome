@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
+import { UserAuth } from "../../context/authContext"
+
 import imageTemplate from "../../assets/images/imageTemplate.svg"
 
 import {
+    Button,
     Checkbox,
+    IconButton,
     TextField,
     withStyles,
     FormControl,
@@ -13,7 +17,6 @@ import {
     InputAdornment,
     Select,
     MenuItem,
-    Button,
 } from "@material-ui/core"
 import PersonIcon from "@mui/icons-material/Person"
 import DateRangeIcon from "@mui/icons-material/DateRange"
@@ -31,6 +34,7 @@ const initialState = {
 const UserDetails = () => {
     const [userData, setUserData] = useState(initialState)
     const [loading, setLoading] = useState(false)
+    const { user } = UserAuth()
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -39,7 +43,7 @@ const UserDetails = () => {
 
     const handleSubmit = (e) => {
         setLoading(true)
-        localStorage.setItem("user", JSON.stringify(userData))
+        localStorage.setItem("user", JSON.stringify({ ...userData, email: user.email, profilePicture: user.photoURL ? user.photoURL : imageTemplate }))
         setTimeout(() => {
             setLoading(false)
             window.location.href = "/questions-main"

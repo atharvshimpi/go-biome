@@ -105,6 +105,8 @@ const Dashboard = () => {
             setCardDetailsData(zenGameCardDetails)
 
         setIsCardModalOpen(true)
+
+        
     }
 
     const handlePointReplay = () => {

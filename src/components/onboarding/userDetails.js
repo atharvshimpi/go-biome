@@ -61,12 +61,12 @@ const UserDetails = () => {
     })((props) => <Checkbox color="default" {...props} />)
 
     return (
-        <div className="auth-container">
-            <div className="auth-content">
-                <div className="auth-heading">
+        <div className="user-details-container">
+            <div className="user-details-content">
+                <div className="user-details-heading">
                     <h1>Welcome to Go-Go Biome!</h1>
                 </div>
-                <div className="auth-input-fields">
+                <div className="user-details-input-fields">
                     <TextField
                         required
                         autoComplete="off"
@@ -74,7 +74,7 @@ const UserDetails = () => {
                         variant="outlined"
                         id="username"
                         label="Username"
-                        className="auth-input"
+                        className="user-details-input"
                         value={userData.username}
                         onChange={handleChange}
                         InputProps={{
@@ -93,7 +93,7 @@ const UserDetails = () => {
                         variant="outlined"
                         id="age"
                         label="Age"
-                        className="auth-input"
+                        className="user-details-input"
                         value={userData.age}
                         onChange={handleChange}
                         InputProps={{
@@ -131,7 +131,7 @@ const UserDetails = () => {
                         </Select>
                     </FormControl>
                     <FormControlLabel
-                        className="auth-checkbox"
+                        className="user-details-checkbox"
                         control={
                             <YellowCheckbox
                                 id="checkbox"
@@ -148,11 +148,11 @@ const UserDetails = () => {
                         label="Agree to terms &amp; conditions"
                     />
                 </div>
-                <div className="auth-next-container">
+                <div className="user-details-next-container">
                     <Button
                         fullWidth
                         variant="contained"
-                        className="auth-next-btn"
+                        className="user-details-next-btn"
                         onClick={handleSubmit}
                         disabled={
                             userData.username === "" || !userData.agreedTerms

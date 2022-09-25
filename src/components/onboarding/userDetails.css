@@ -1,4 +1,4 @@
-.auth-container {
+.user-details-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -9,7 +9,7 @@
     padding: 1rem 1rem;
 }
 
-.auth-content {
+.user-details-content {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -20,55 +20,57 @@
     padding: 1rem 1rem;
 }
 
-.auth-logo-container {
+.user-details-logo-container {
     background-color: #ffffff;
     width: 150px;
 }
 
-.auth-heading h1 {
-    font-size: 2rem;
-    font-family: 'Bungee Shade', Geneva, Tahoma, sans-serif;
+.user-details-heading h1 {
+    font-size: 1.4rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.auth-input-fields {
+.user-details-input-fields {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: auto;
+    width: 100%;
+    margin-top: 1.5rem;
 }
 
-.auth-input,
-.auth-profile-photo {
+.user-details-input,
+.user-details-profile-photo {
     margin-bottom: 2rem !important;
 }
 
-.auth-profile-photo {
+.user-details-profile-photo {
     height: 3.5rem;
 }
 
-.auth-checkbox span {
+.user-details-checkbox span {
     font-size: 0.9rem;
 }
 
-.auth-next-container {
+.user-details-next-container {
     width: 100%;
     height: 3rem;
     cursor: pointer;
 }
 
-.auth-next-btn {
-    width: 100% !important;
+.user-details-next-btn {
+    width: 100%;
     height: 2.5rem;
     margin-bottom: 0.2rem;
 }
 
-@media (max-width: 361px) {
-    .auth-content {
+@media (max-width: 412px) {
+    .user-details-content {
         width: 80%;
         overflow: scroll;
     }
 }
 
-.auth-checkbox {
+.user-details-checkbox {
     margin: 1rem 0;
 }

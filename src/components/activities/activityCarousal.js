@@ -8,6 +8,7 @@ import "swiper/css"
 import "swiper/css/effect-cards"
 
 import { Box, CircularProgress } from "@mui/material"
+import { useEffect } from "react"
 
 const categoryTags = [
     {
@@ -61,13 +62,20 @@ const ActivityCarousal = ({ gameStats, setGameStats, cardDetailsData, cardCatego
         >
             {cardDetailsData.map((obj, key) => {
                 const [isCardFlipped, setIsCardFlipped] = useState(false)
+                const [cardLoading, setCardLoading] = useState(true)
                 const multiGenderAvaialble = obj.icon.split("_").length > 1 ? true : false
+                const imageLoaded = () => setCardLoading(false)
                 return (
                     <SwiperSlide key={key}>
                         <ReactCardFlip isFlipped={isCardFlipped} flipDirection="horizontal">
                             {/* Front Side */}
                             <div className="card-container" style={{ backgroundColor: "#ffffff" }}>
-                                <img onClick={() => setIsCardFlipped(!isCardFlipped)} src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
+                                {cardLoading &&
+                                    <Box sx={{ display: "flex", justifyContent: "center", fontSize: "0.8rem", position: "relative", left: cardLoading ? 0 : 0 }}>
+                                        <CircularProgress style={{ width: "30px", height: "30px" }} /> 
+                                    </Box>
+                                }
+                                <img style={{ opacity: cardLoading ? 0 : 1 }} onLoad={imageLoaded} onClick={() => setIsCardFlipped(!isCardFlipped)} src={require(`../../assets/images/cards/${obj.category}/${multiGenderAvaialble ? `${obj.icon}${gender}` : obj.icon}.png`)} alt={obj.icon} />
                             </div>
                             {/* Back Side */}
                             <div className="card-container" onClick={() => setIsCardFlipped(!isCardFlipped)} style={{ backgroundColor: categoryTags[cardCategory].color }}>

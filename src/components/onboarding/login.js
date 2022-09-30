@@ -126,7 +126,10 @@ const Login = () => {
                         fullWidth
                         variant="contained"
                         className="auth-next-btn"
-                        style={{ backgroundColor: "transparent", marginBottom: 0 }}
+                        style={{
+                            backgroundColor: "transparent",
+                            marginBottom: 0,
+                        }}
                         onClick={handleSubmit}
                         disabled={!loginData.email || !loginData.password}
                     >
@@ -154,7 +157,15 @@ const Login = () => {
                 </div>
             )}
             <div className="auth-privacy">
-                By signing up, you agree to our <Link className="auth-privacy-link" to="/terms">Terms and Conditions</Link> and acknowledge that our <Link className="auth-privacy-link" to="/privacy">Privacy Policy</Link> applies to you.
+                By signing up, you agree to our{" "}
+                <Link className="auth-privacy-link" to="/terms">
+                    Terms and Conditions
+                </Link>{" "}
+                and acknowledge that our{" "}
+                <Link className="auth-privacy-link" to="/privacy">
+                    Privacy Policy
+                </Link>{" "}
+                applies to you.
             </div>
         </div>
     )

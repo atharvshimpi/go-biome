@@ -3,12 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
 
+import { Box, CircularProgress } from "@mui/material"
+
 import "./activityCarousal.css"
 import "swiper/css"
 import "swiper/css/effect-cards"
-
-import { Box, CircularProgress } from "@mui/material"
-import { useEffect } from "react"
 
 const categoryTags = [
     {

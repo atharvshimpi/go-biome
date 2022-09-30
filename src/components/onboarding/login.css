@@ -35,7 +35,7 @@
 
 .auth-heading h1 {
     font-size: 2rem;
-    font-family: 'Bungee Shade', Geneva, Tahoma, sans-serif;
+    font-family: "Bungee Shade", Geneva, Tahoma, sans-serif;
 }
 
 .auth-input-fields {
@@ -65,13 +65,11 @@
 }
 
 .auth-next-btn {
-    width: auto !important;
     height: 2.5rem;
     margin-bottom: 0.5rem !important;
     border: 2px solid #333 !important;
-    text-transform: none !important;
     font-size: 1.2rem !important;
-    font-family: 'Reem Kufi Fun', Verdana, Geneva, Tahoma, sans-serif !important;
+    font-family: "Reem Kufi Fun", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @media (max-width: 361px) {
@@ -95,5 +93,5 @@
 }
 
 .auth-privacy-link {
-    color: #C96F53;
+    color: #c96f53;
 }

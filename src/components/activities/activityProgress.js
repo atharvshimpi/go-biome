@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Lottie from "react-lottie"
 
-import { demoNotification } from "../../utils/notifications/demo"
-
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
 

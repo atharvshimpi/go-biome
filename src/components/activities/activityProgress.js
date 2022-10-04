@@ -5,13 +5,16 @@ import Lottie from "react-lottie"
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
 
-const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen }) => {
+const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalOpen }) => {
     const [activityHistory, setActivityHistory] = useState(
         JSON.parse(localStorage.getItem("activity-history"))
     )
     const navigate = useNavigate()
 
     const handleClick = () => {
+        let tempActivityPerformed = gameStats.activityPerformed
+        tempActivityPerformed[gameStats.currentActivity.categoryId]++
+
         // demoNotification()
         activityHistory.push(gameStats.currentActivity)
         setActivityHistory(activityHistory)
@@ -33,7 +36,7 @@ const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen }) => {
                         gameStats.unFriendlyBiomePoints -
                         gameStats.currentActivity.points,
                     activityOngoing: false,
-                    activityPerformed: gameStats.activityPerformed + 1,
+                    activityPerformed: tempActivityPerformed,
                     activityPointReplayed: true,
                 })
             )

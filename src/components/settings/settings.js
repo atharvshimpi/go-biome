@@ -17,8 +17,10 @@ import BackupSharingSettings from "./backup_sharing"
 import { IoIosArrowBack } from "react-icons/io"
 import { GrFormClose } from "react-icons/gr"
 
-import "./settings.css"
 import { Avatar } from "@mui/material"
+
+import "./settings.css"
+import imageTemplate from "../../assets/images/imageTemplate.svg"
 
 const Settings = () => {
     // eslint-disable-next-line
@@ -69,7 +71,7 @@ const Settings = () => {
                     <h2>Settings</h2>
                     <Avatar
                         alt={user.username}
-                        src={JSON.parse(localStorage.getItem("user")).profilePicture}
+                        src={imageTemplate}
                         className="avatar"
                         onClick={() => {
                             setOpen(true),

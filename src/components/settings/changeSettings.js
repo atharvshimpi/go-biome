@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { TimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
 
+import imageTemplate from "../../assets/images/imageTemplate.svg"
+
 import emptyTemplate from "../../assets/images/emptyTemplate.svg"
 import { Avatar, IconButton } from "@mui/material"
 import { ActivityHistoryDrpDwn } from "../modals/activityHistoryDrpDwn"
@@ -48,7 +50,7 @@ export const changeProfilePicture = ({
                 <IconButton component="span">
                     <Avatar
                         alt={user.username}
-                        src={user.profilePicture}
+                        src={imageTemplate}
                         sx={{ width: 156, height: 156 }}
                     />
                 </IconButton>

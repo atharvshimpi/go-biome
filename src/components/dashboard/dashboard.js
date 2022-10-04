@@ -235,7 +235,7 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityProgress gameStats={gameStats} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} />
+                        <ActivityProgress gameStats={gameStats} setGameStats={setGameStats} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} />
                     </Box>
                 </Modal>
             </div>

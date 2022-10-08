@@ -75,14 +75,6 @@ const Dashboard = () => {
             return <Navigate to="/questions-main" />
     }, [userDetails, pref])
 
-    const actSum = (arr) => {
-        let sum = 0
-        for(let i = 0; i < arr.length; i++) {
-            sum += arr[i]
-        }
-        return sum
-    }
-
     const distAct = (arr) => {
         let count = 0
         for(let i = 0; i < arr.length; i++) {
@@ -93,17 +85,16 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        let numOfActPerformed = actSum(gameStats.activityPerformed)
         let numOfDistActPerformed = distAct(gameStats.activityPerformed)
 
         if (isActivityProgressModalOpen) {
             setSheildImage(Charging)
         } else {
-            if (numOfActPerformed === 0) 
+            if (numOfDistActPerformed === 0) 
                 setSheildImage(Nostrength)
-            else if (numOfActPerformed === 1)
+            else if (numOfDistActPerformed === 1)
                 setSheildImage(Partialstrength)
-            else if (numOfActPerformed === 2)
+            else if (numOfDistActPerformed === 2)
                 setSheildImage(Fullstrength)
             else if (numOfDistActPerformed === 3)
                 setSheildImage(Diversitycheck)

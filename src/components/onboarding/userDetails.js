@@ -17,6 +17,8 @@ import {
     InputAdornment,
     Select,
     MenuItem,
+    Box, 
+    CircularProgress
 } from "@material-ui/core"
 import PersonIcon from "@mui/icons-material/Person"
 import DateRangeIcon from "@mui/icons-material/DateRange"
@@ -158,7 +160,11 @@ const UserDetails = () => {
                             userData.username === "" || !userData.agreedTerms
                         }
                     >
-                        { loading ? "Loading..." : "Proceed" }
+                        { loading ? (
+                            <Box sx={{ display: "flex", justifyContent: "center", fontSize: "0.8rem" }}>
+                                <CircularProgress style={{ width: "25px", height: "25px" }} /> 
+                            </Box>
+                        ) : "Proceed" }
                     </Button>
                 </div>
             </div>

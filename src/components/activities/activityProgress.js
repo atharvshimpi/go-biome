@@ -5,7 +5,7 @@ import Lottie from "react-lottie"
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
 
-const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalOpen }) => {
+const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {
     const [activityHistory, setActivityHistory] = useState(
         JSON.parse(localStorage.getItem("activity-history"))
     )
@@ -16,12 +16,12 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
 
         // demoNotification()
-        activityHistory.push(gameStats.currentActivity)
-        setActivityHistory(activityHistory)
-        localStorage.setItem(
-            "activity-history",
-            JSON.stringify(activityHistory)
-        )
+        // activityHistory.push(gameStats.currentActivity)
+        // setActivityHistory(activityHistory)
+        // localStorage.setItem(
+        //     "activity-history",
+        //     JSON.stringify(activityHistory)
+        // )
 
         // if biome points reach 85, don't increase them further
         if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
@@ -45,8 +45,6 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
                 "gamestats",
                 JSON.stringify({
                     ...gameStats,
-                    friendlyBiomePoints: 85,
-                    unFriendlyBiomePoints: 15,
                     activityOngoing: false,
                     activityPerformed: gameStats.activityPerformed + 1,
                     activityPointReplayed: true,
@@ -55,7 +53,8 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
 
         
         setIsActivityProgressModalOpen(false)
-        navigate("/card")
+        setIsActivityModal2_1Open(true)
+        // navigate("/card")
     }
 
     const defaultOptions = {

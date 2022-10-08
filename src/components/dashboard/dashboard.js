@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
 import ActivityCarousal from "../activities/activityCarousal"
-import { UserAuth } from "../../context/authContext"
 
 // game card details
 import { environmentGameCardDetails } from "../../data/environment"
@@ -46,7 +45,11 @@ import { BiShuffle } from "react-icons/bi"
 
 import "./dashboard.css"
 import { Box, Modal } from "@mui/material"
+
 import ActivityProgress from "../activities/activityProgress"
+import ActivityModal1 from "../activities/modals/activityModal1"
+import ActivityModal2_1 from "../activities/modals/activityModal2.1"
+import ActivityModal3 from "../activities/modals/activityModal3"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -57,9 +60,11 @@ const Dashboard = () => {
     const [unFriendlyBiomeArray, setUnFriendlyBiomeArray] = useState([unFriendlyBiome2, unFriendlyBiome1, unFriendlyBiome3])
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] = useState(gameStats.activityOngoing)
+    const [isActivityModal1Open, setIsActivityModal1Open] = useState(false)
+    const [isActivityModal2_1Open, setIsActivityModal2_1Open] = useState(false)
+    const [isActivityModal3Open, setIsActivityModal3Open] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
-    const { user } = UserAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -70,19 +75,39 @@ const Dashboard = () => {
             return <Navigate to="/questions-main" />
     }, [userDetails, pref])
 
+    const actSum = (arr) => {
+        let sum = 0
+        for(let i = 0; i < arr.length; i++) {
+            sum += arr[i]
+        }
+        return sum
+    }
+
+    const distAct = (arr) => {
+        let count = 0
+        for(let i = 0; i < arr.length; i++) {
+            if(arr[i])
+                count++
+        }
+        return count
+    }
+
     useEffect(() => {
+        let numOfActPerformed = actSum(gameStats.activityPerformed)
+        let numOfDistActPerformed = distAct(gameStats.activityPerformed)
+
         if (isActivityProgressModalOpen) {
             setSheildImage(Charging)
         } else {
-            if (gameStats.activityPerformed === 0) 
+            if (numOfActPerformed === 0) 
                 setSheildImage(Nostrength)
-            else if (gameStats.activityPerformed === 1)
+            else if (numOfActPerformed === 1)
                 setSheildImage(Partialstrength)
-            else if (gameStats.activityPerformed === 2)
+            else if (numOfActPerformed === 2)
                 setSheildImage(Fullstrength)
-            else if (gameStats.activityPerformed === 3)
+            else if (numOfDistActPerformed === 3)
                 setSheildImage(Diversitycheck)
-            else if (gameStats.activityPerformed >= 4)
+            else if (numOfDistActPerformed === 4)
                 setSheildImage(Superdiversity)
         }
     }, [gameStats, isActivityProgressModalOpen])
@@ -224,10 +249,21 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityCarousal gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen}/>
+                        <ActivityCarousal gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open}/>
                     </Box>
                 </Modal>
-                {/* activity progress */}
+                {/* activity modal 1 */}
+                <Modal
+                    open={isActivityModal1Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal1 gameStats={gameStats} setGameStats={setGameStats} pref={pref} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} setIsActivityModal1Open={setIsActivityModal1Open} />
+                    </Box>
+                </Modal>
+                {/* activity progress (or activity modal 2) */}
                 <Modal
                     open={isActivityProgressModalOpen}
                     aria-labelledby="modal-modal-title"
@@ -235,7 +271,29 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityProgress gameStats={gameStats} setGameStats={setGameStats} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} />
+                        <ActivityProgress gameStats={gameStats} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} setIsActivityModal2_1Open={setIsActivityModal2_1Open} />
+                    </Box>
+                </Modal>
+                {/* activity modal 2.1 */}
+                <Modal
+                    open={isActivityModal2_1Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal2_1 pref={pref} setIsActivityProgressModalOpen={setIsActivityProgressModalOpen} setIsActivityModal2_1Open={setIsActivityModal2_1Open} setIsActivityModal3Open={setIsActivityModal3Open} />
+                    </Box>
+                </Modal>
+                {/* activity modal 3 */}
+                <Modal
+                    open={isActivityModal3Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal3 pref={pref} setIsActivityModal3Open={setIsActivityModal3Open} />
                     </Box>
                 </Modal>
             </div>

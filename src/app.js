@@ -11,7 +11,7 @@ import Login from "./components/onboarding/login"
 import UserDetails from "./components/onboarding/userDetails"
 import Settings from "./components/settings/settings"
 import Gamemap from "./components/gameboard/gamemap"
-import AddUserCard from "./components/modals/addUserCard"
+import AddUserCard from "./components/user/cards/addUserCard"
 import ActivityCarousal from "./components/activities/activityCarousal"
 import { AuthContextProvider } from "./context/authContext"
 

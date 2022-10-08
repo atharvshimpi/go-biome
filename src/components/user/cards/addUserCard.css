@@ -1,0 +1,68 @@
+.add-usercard-bg-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: hsl(3, 29%, 57%);
+}
+
+.top-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-usercard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 85vh;
+}
+
+.add-usercard-content {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid #333;
+    box-shadow: 0px 0px 1px 15px #fff;
+    height: auto;
+}
+
+@media (max-width: 500px) {
+    .add-usercard-content {
+        width: 80%;
+    }
+}
+
+.add-usercard-location,
+.add-usercard-image,
+.add-usercard-tags,
+.add-usercard-description,
+.add-usercard-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.add-usercard-btn {
+    padding: 16.5px 14px;
+}
+
+.add-usercard-input {
+    width: 70%;
+}
+
+.add-usercard-image-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.category-chip {
+    margin-left: 0.5rem;
+}

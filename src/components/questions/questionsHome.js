@@ -13,7 +13,7 @@ const QuestionsHome = () => {
         <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
-            exit={{ x: window.innerWidth, transition: { duration: 0.2 } }} 
+            exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
             className="questions-container"
         >
             <div className="questions-content">

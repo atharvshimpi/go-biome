@@ -37,7 +37,7 @@ const GeneralSettings = ({ setOpen, setSettingId }) => {
                                     {obj.icon}
                                     <p>{obj.title}</p>
                                 </div>
-                                {obj.id === 6 ? 
+                                {obj.id === 7 ? 
                                     <Switch
                                         checked={enabled}
                                         onChange={handleVibrate}

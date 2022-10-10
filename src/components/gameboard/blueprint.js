@@ -7,6 +7,11 @@ import dashedLeftDown from "../../assets/images/gamemap/dashed/dashedLeftDown.pn
 import dashedLeftUp from "../../assets/images/gamemap/dashed/dashedLeftUp.png"
 import dashedRightDown from "../../assets/images/gamemap/dashed/dashedRightDown.png"
 import dashedRightUp from "../../assets/images/gamemap/dashed/dashedRightUp.png"
+import minionRoad1 from "../../assets/images/gamemap/minion_road.png"
+import minionRoad2 from "../../assets/images/gamemap/minion_road2.png"
+import minionRoad3 from "../../assets/images/gamemap/minion_road3.png"
+
+const BIOME_INDEX = 5
 
 export default class BluePrint {
     constructor(tileSize) {
@@ -30,6 +35,15 @@ export default class BluePrint {
 
         this.dashedRightUp = new Image()
         this.dashedRightUp.src = dashedRightUp
+
+        this.minionRoad1 = new Image()
+        this.minionRoad1.src = minionRoad1
+
+        this.minionRoad2 = new Image()
+        this.minionRoad2.src = minionRoad2
+
+        this.minionRoad3 = new Image()
+        this.minionRoad3.src = minionRoad3
     }
 
     /*
@@ -42,17 +56,18 @@ export default class BluePrint {
         5 - biome
         6 - minion
         8 - backgroundColor
+        10, 11, 12 - minion on road
     */
 
     map = [
         [8, 8, 8, 8, 8, 6],
-        [1, 0, 0, 0, 0, 2],
-        [4, 0, 0, 0, 0, 3],
-        [1, 0, 0, 0, 0, 2],
-        [4, 0, 0, 0, 0, 3],
-        [1, 0, 0, 0, 0, 2],
-        [4, 0, 0, 0, 0, 3],
-        [1, 0, 0, 0, 0, 2],
+        [1, 0, 0, 10, 0, 2],
+        [4, 11, 0, 12, 0, 3],
+        [1, 0, 10, 0, 10, 2],
+        [4, 12, 0, 11, 0, 3],
+        [1, 0, 0, 0, 12, 2],
+        [4, 0, 11, 0, 0, 3],
+        [1, 0, 0, 10, 0, 2],
         [5, 8, 8, 8, 8, 8],
     ]
 
@@ -97,6 +112,34 @@ export default class BluePrint {
                 else if (tile === 6) {
                     this.#drawImg(this.minion, ctx, col, row, this.tileSize)
                 }
+                else if (tile === 10) {
+                    this.#drawImg(
+                        !this.isMinionCrossed([row, col]) ? this.minionRoad1 : this.dashed,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
+                    )
+                }
+                else if (tile === 11) {
+                    this.#drawImg(
+                        !this.isMinionCrossed([row, col]) ? this.minionRoad2 : this.dashed,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
+                    )
+                }
+                else if (tile === 12) {
+                    this.#drawImg(
+                        !this.isMinionCrossed([row, col]) ? this.minionRoad3 : this.dashed,
+                        ctx,
+                        col,
+                        row,
+                        this.tileSize
+                    )
+                }
+
 
                 // ctx.strokeStyle = "black"
                 // ctx.strokeRect(
@@ -135,6 +178,34 @@ export default class BluePrint {
     setCanvasSize(canvas) {
         canvas.width = this.map[0].length * this.tileSize
         canvas.height = this.map.length * this.tileSize
+    }
+
+    isMinionCrossed(tileIndex) {
+        const biomeIndex = []
+
+        for (let i = 0; i < this.map.length; i++) {
+            if (this.map[i].includes(BIOME_INDEX)) {
+                biomeIndex.push(i)
+                biomeIndex.push(this.map[i].indexOf(BIOME_INDEX))
+            }
+        }
+
+        if (tileIndex[0] > biomeIndex[0]) {
+            return true
+        }
+
+        if (biomeIndex[0] > tileIndex[0]) {
+            return false
+        }
+
+        console.log(biomeIndex[0] % 2 === 0)
+        console.log(biomeIndex[1], tileIndex[1])
+
+        if (biomeIndex[0] % 2 === 0) {
+            return tileIndex[1] > biomeIndex[1]
+        }
+        
+        return tileIndex[1] < biomeIndex[1]
     }
 }
 

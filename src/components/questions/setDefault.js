@@ -19,6 +19,8 @@ export const setDefault = () => {
             */
             activityOngoing: false,
             activityPreStart: false,
+            activityBiomePointsModal: false,
+            activityBiomeMovementModal: false,
             currentActivity: null,
         })
     )

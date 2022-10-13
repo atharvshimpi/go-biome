@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
@@ -9,52 +8,10 @@ const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActi
     const [activityHistory, setActivityHistory] = useState(
         JSON.parse(localStorage.getItem("activity-history"))
     )
-    const navigate = useNavigate()
 
     const handleClick = () => {
-        let tempActivityPerformed = gameStats.activityPerformed
-        tempActivityPerformed[gameStats.currentActivity.categoryId]++
-
-        // demoNotification()
-        // activityHistory.push(gameStats.currentActivity)
-        // setActivityHistory(activityHistory)
-        // localStorage.setItem(
-        //     "activity-history",
-        //     JSON.stringify(activityHistory)
-        // )
-
-        // if biome points reach 85, don't increase them further
-        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
-            localStorage.setItem(
-                "gamestats",
-                JSON.stringify({
-                    ...gameStats,
-                    friendlyBiomePoints:
-                        gameStats.friendlyBiomePoints +
-                        gameStats.currentActivity.points,
-                    unFriendlyBiomePoints:
-                        gameStats.unFriendlyBiomePoints -
-                        gameStats.currentActivity.points,
-                    activityOngoing: false,
-                    activityPerformed: tempActivityPerformed,
-                    activityPointReplayed: true,
-                })
-            )
-        else
-            localStorage.setItem(
-                "gamestats",
-                JSON.stringify({
-                    ...gameStats,
-                    activityOngoing: false,
-                    activityPerformed: gameStats.activityPerformed + 1,
-                    activityPointReplayed: true,
-                })
-            )
-
-        
         setIsActivityProgressModalOpen(false)
         setIsActivityModal2_1Open(true)
-        // navigate("/card")
     }
 
     const defaultOptions = {

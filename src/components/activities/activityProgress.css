@@ -15,6 +15,7 @@
 }
 
 .activity-progress-btn {
+    width: 60%;
     padding: 0.5rem;
     background: #fff;
     border-radius: 0.5rem;
@@ -24,4 +25,12 @@
 .modal-content {
     display: flex;
     justify-content: center;
+}
+
+.activity-img-group {
+    display: flex;
+}
+
+.activity-points-earned {
+    
 }

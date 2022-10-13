@@ -60,7 +60,7 @@ const AddUserCard = () => {
     const [userCardData, setUserCardData] = useState(initialState)
     const isDisabled = userCardData.location === "" || userCardData.description === ""
     const multiGenderAvaialble = gameStats.currentActivity.icon.split("_").length > 1 ? true : false
-    const gender = "M"
+    const gender = userDetails.gender
     const cardImageRef = ref(storage, `images/${userDetails.email.split("@")[0]}/${userCardData.createdAt}`)
     const navigate = useNavigate()
 
@@ -105,7 +105,7 @@ const AddUserCard = () => {
 
         setTimeout(() => {
             setLoading(false)
-            navigate("/map")
+            navigate("/")
         }, 1500)
     }
 

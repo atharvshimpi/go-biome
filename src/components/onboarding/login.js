@@ -16,8 +16,6 @@ import PasswordIcon from "@mui/icons-material/Password"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 
-/* GMail Account Password : gogobiome@6489 */
-
 import "./login.css"
 
 const initialState = { email: "", password: "" }

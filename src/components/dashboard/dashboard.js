@@ -50,6 +50,8 @@ import ActivityProgress from "../activities/activityProgress"
 import ActivityModal1 from "../activities/modals/activityModal1"
 import ActivityModal2_1 from "../activities/modals/activityModal2.1"
 import ActivityModal3 from "../activities/modals/activityModal3"
+import ActivityModal5 from "../activities/modals/activityModal5"
+import ActivityModal6 from "../activities/modals/activityModal6"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -63,6 +65,8 @@ const Dashboard = () => {
     const [isActivityModal1Open, setIsActivityModal1Open] = useState(false)
     const [isActivityModal2_1Open, setIsActivityModal2_1Open] = useState(false)
     const [isActivityModal3Open, setIsActivityModal3Open] = useState(false)
+    const [isActivityModal5Open, setIsActivityModal5Open] = useState(gameStats.activityBiomePointsModal)
+    const [isActivityModal6Open, setIsActivityModal6Open] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
     const navigate = useNavigate()
@@ -87,7 +91,7 @@ const Dashboard = () => {
     useEffect(() => {
         let numOfDistActPerformed = distAct(gameStats.activityPerformed)
 
-        if (isActivityProgressModalOpen) {
+        if (gameStats.activityOngoing) {
             setSheildImage(Charging)
         } else {
             if (numOfDistActPerformed === 0) 
@@ -284,7 +288,29 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityModal3 pref={pref} setIsActivityModal3Open={setIsActivityModal3Open} />
+                        <ActivityModal3 gameStats={gameStats} pref={pref} setIsActivityModal3Open={setIsActivityModal3Open} setIsActivityModal5Open={setIsActivityModal5Open} />
+                    </Box>
+                </Modal>
+                {/* activity modal 5 */}
+                <Modal
+                    open={isActivityModal5Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal5 gameStats={gameStats} setIsActivityModal5Open={setIsActivityModal5Open} setIsActivityModal6Open={setIsActivityModal6Open} />
+                    </Box>
+                </Modal>
+                {/* activity modal 6 */}
+                <Modal
+                    open={isActivityModal6Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal6 gameStats={gameStats} pref={pref} setIsActivityModal6Open={setIsActivityModal6Open} />
                     </Box>
                 </Modal>
             </div>

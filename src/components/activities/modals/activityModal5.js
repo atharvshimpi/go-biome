@@ -21,11 +21,11 @@ const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal
             </div>
             <div className="activity-img-group">
                 <div className="activity-img-container">
-                    <img src={} alt="friendly" />
+                    <img src="" alt="friendly" />
                     <div className="activity-points-earned"></div>
                 </div>
                 <div className="activity-img-container">
-                    <img src={} alt="unfriendly" />
+                    <img src="" alt="unfriendly" />
                 </div>
             </div>
             <div>

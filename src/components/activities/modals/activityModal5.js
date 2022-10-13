@@ -1,5 +1,8 @@
 import React from "react"
 
+import biomePoints from "../../../assets/images/biome/points.png"
+import minionPoints from "../../../assets/images/minion/minion1.png"
+
 const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal6Open }) => {
     const handleLogActivity = () => {
         localStorage.setItem(
@@ -15,22 +18,24 @@ const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal
     }
 
     return (
-        <div className="activity-progress-container">
+        <div className="activity-progress-container" style={{ width: "100%" }}>
             <div className="activity-progress-heading">
                 <b>Biome Points</b>
             </div>
             <div className="activity-img-group">
                 <div className="activity-img-container">
-                    <img src="" alt="friendly" />
-                    <div className="activity-points-earned"></div>
+                    <img className="activity-img" src={biomePoints} alt="friendly" />
+                    <div className="activity-points-earned">+{gameStats.currentActivity.points}</div>
                 </div>
                 <div className="activity-img-container">
-                    <img src="" alt="unfriendly" />
+                    <img className="activity-img" src={minionPoints} alt="unfriendly" style={{ position: "relative", height: "8rem", right: "1rem", }} />
+                    <div className="activity-points-earned">-{gameStats.currentActivity.points}</div>
                 </div>
             </div>
-            <div>
+            <div className="activity-img-details">
                 Current Biome Balance
-                30:70
+                <br />
+                <b className="activity-img-currentScore">{gameStats.friendlyBiomePoints} : {gameStats.unFriendlyBiomePoints}</b>
             </div>
             <button onClick={handleLogActivity} className="activity-progress-btn">
                 CONTINUE

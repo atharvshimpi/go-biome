@@ -5,10 +5,6 @@ import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
 
 const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {
-    const [activityHistory, setActivityHistory] = useState(
-        JSON.parse(localStorage.getItem("activity-history"))
-    )
-
     const handleClick = () => {
         setIsActivityProgressModalOpen(false)
         setIsActivityModal2_1Open(true)

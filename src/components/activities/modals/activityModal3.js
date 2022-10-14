@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivityModal5Open }) => {
+    const [activityHistory, setActivityHistory] = useState(JSON.parse(localStorage.getItem("activity-history")))
     const navigate = useNavigate()
     
     const handleLogActivity = () => {
@@ -9,12 +10,12 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
 
         // demoNotification()
-        // activityHistory.push(gameStats.currentActivity)
-        // setActivityHistory(activityHistory)
-        // localStorage.setItem(
-        //     "activity-history",
-        //     JSON.stringify(activityHistory)
-        // )
+        activityHistory.push(gameStats.currentActivity)
+        setActivityHistory(activityHistory)
+        localStorage.setItem(
+            "activity-history",
+            JSON.stringify(activityHistory)
+        )
 
         // if biome points reach 85, don't increase them further
         if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)

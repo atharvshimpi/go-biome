@@ -14,7 +14,7 @@ import { IoIosArrowBack } from "react-icons/io"
 import { FaTag } from "react-icons/fa"
 import { MdLocationPin } from "react-icons/md"
 import { RiDoubleQuotesL } from "react-icons/ri"
-import { BsCardImage } from "react-icons/bs"
+import { BsCardImage, BsFillSkipEndFill } from "react-icons/bs"
 import { AiFillLock } from "react-icons/ai"
 
 import "./addUserCard.css"
@@ -272,6 +272,17 @@ const AddUserCard = () => {
                                         : 
                                         "Create"
                                     }
+                                </Button>
+                            </div>
+                            <div className="add-usercard-btn-container">
+                                <Button
+                                    startIcon={<BsFillSkipEndFill />}
+                                    onClick={() => navigate("/")}
+                                    className="add-usercard-btn"
+                                    fullWidth
+                                    variant="contained"
+                                >
+                                    Skip
                                 </Button>
                             </div>
                         </div>

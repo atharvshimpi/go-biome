@@ -18,15 +18,16 @@ export const demoNotification = (username, biomename) => {
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
                     registration.showNotification("Go-Go Biome", {
-                        body: `Congratulations ${username} on completing the activity!\n${biomename} has achieved Full Strength!`,
+                        body: `Congratulations ${username} on completing the activity!`,
                         icon: Logo,
                         badge: Logo,
                         vibrate: [
                             500, 110, 500, 110, 450, 110, 200, 110, 170, 40,
                             450, 110, 200, 110, 170, 40, 500,
                         ],
-                        timestamp: Date.now(),
+                        timestamp: Date.parse(Date.now()),
                         // vibrate: [200, 100, 200, 100, 200, 100, 200],
+                        tag: "vibration-sample",
                         renotify: true,
                         requireInteraction: true,
                     })

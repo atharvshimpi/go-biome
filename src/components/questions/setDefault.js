@@ -36,6 +36,8 @@ export const setDefault = () => {
         JSON.stringify({
             active: "shield.png",
             chars: ["shield.png"],
+            prevPtr: [0, 0, 0, 0],
+            currPtr: [0, 0, 0, 0],
         })
     )
 }

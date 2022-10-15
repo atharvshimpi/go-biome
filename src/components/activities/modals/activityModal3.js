@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivityModal5Open }) => {
+    const mapStats = JSON.parse(localStorage.getItem("mapstats"))
     const [activityHistory, setActivityHistory] = useState(JSON.parse(localStorage.getItem("activity-history")))
     const navigate = useNavigate()
     
@@ -15,6 +16,20 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
         localStorage.setItem(
             "activity-history",
             JSON.stringify(activityHistory)
+        )
+
+        // mapStats update
+        localStorage.setItem(
+            "mapstats",
+            JSON.stringify({
+                ...mapStats,
+                friendlyBiomePoints:
+                    mapStats.friendlyBiomePoints +
+                    gameStats.currentActivity.points,
+                unFriendlyBiomePoints:
+                    mapStats.unFriendlyBiomePoints -
+                    gameStats.currentActivity.points,
+            })
         )
 
         // if biome points reach 85, don't increase them further

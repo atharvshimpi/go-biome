@@ -26,12 +26,12 @@ const categoryTags = [
 ]
 
 export const ActivityHistoryDrpDwn = ({ activity }) => {
+    const userDetails = JSON.parse(localStorage.getItem("user"))
     const multiGenderAvaialble = activity.icon.split("_").length > 1 ? true : false
-    const gender = "M"
     return (
         <div className="drp-dwn-container" style={{ backgroundColor: categoryTags[activity.categoryId].color }}>
             <div className="activity-history-icon-container">
-                <img src={require(`../../assets/images/cards/${activity.category}/${multiGenderAvaialble ? `${activity.icon}${gender}` : activity.icon}.png`)} alt={activity.icon} />
+                <img src={require(`../../assets/images/cards/${activity.category}/${multiGenderAvaialble ? `${activity.icon}${userDetails.gender}` : activity.icon}.png`)} alt={activity.icon} />
             </div>
             <div className="activity-history-details-container">
                 <h6 className="drp-dwn-heading">{activity.task}</h6>

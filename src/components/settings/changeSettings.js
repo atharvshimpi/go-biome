@@ -126,7 +126,7 @@ export const activityCardStack = (activityUserCards) => {
 
 export const activityHistory = (activityHistory) => {
     return (
-        <div className="activity-history-container" style={{ height: activityHistory.length > 4 ? "65vh" : "auto" }}>
+        <div className="activity-history-container" style={{ height: activityHistory.length > 4 ? "90vh" : "auto" }}>
             {activityHistory.length > 0 ? (
                 activityHistory.reverse().map((activity, key) => {
                     return (

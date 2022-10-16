@@ -13,7 +13,7 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
         let tempActivityPerformed = gameStats.activityPerformed
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
 
-        demoNotification(userDetails.username)
+        demoNotification(userDetails.username, pref.friendlyBiome, gameStats.currentActivity.points)
         activityHistory.push(gameStats.currentActivity)
         setActivityHistory(activityHistory)
         localStorage.setItem(

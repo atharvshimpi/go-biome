@@ -1,6 +1,6 @@
 import Logo from "../../assets/images/logo.png"
 
-export const demoNotification = (username, biomename) => {
+export const demoNotification = (username, biomename, points) => {
     // Service Worker isn't supported on this browser, disable or hide UI.
     if (!("serviceWorker" in navigator)) {
         return
@@ -11,14 +11,14 @@ export const demoNotification = (username, biomename) => {
         return
     }
 
+    const bodyTemplate = `Congratulations ${username} on completing the activity!\n${biomename} has grown by ${points} points!`
+
     function askPermission() {
-        const maxVisibleActions = Notification.maxActions
-        console.log("maxVisibleActions", maxVisibleActions)
         Notification.requestPermission((result) => {
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
                     registration.showNotification("Go-Go Biome", {
-                        body: `Congratulations ${username} on completing the activity!`,
+                        body: bodyTemplate,
                         icon: Logo,
                         badge: Logo,
                         vibrate: [

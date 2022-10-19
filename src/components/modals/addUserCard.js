@@ -20,7 +20,7 @@ import { AiFillLock } from "react-icons/ai"
 
 import "./addUserCard.css"
 import { useEffect } from "react"
-import { addDoc, collection, setDoc } from "firebase/firestore"
+import { addDoc, doc, setDoc } from "firebase/firestore"
 
 const categoryTags = [
     {
@@ -108,7 +108,7 @@ const AddUserCard = () => {
 
         const username = JSON.parse(localStorage.getItem("user")).username
 
-        setDoc(doc(firestore, "activities", username), {
+        setDoc(doc(firestore, username, "activities"), {
             ...activityUserCard
         })
 

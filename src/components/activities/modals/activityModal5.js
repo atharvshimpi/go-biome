@@ -3,7 +3,7 @@ import React from "react"
 import biomePoints from "../../../assets/images/biome/points.png"
 import minionPoints from "../../../assets/images/minion/minion1.png"
 
-const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal6Open }) => {
+const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal6Open, setIsActivityModal8Open }) => {
     const handleLogActivity = () => {
         localStorage.setItem(
             "gamestats",
@@ -12,9 +12,12 @@ const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal
                 activityBiomePointsModal: false
             })
         )
-
+        
         setIsActivityModal5Open(false)
-        setIsActivityModal6Open(true)
+        if(gameStats.friendlyBiomePoints == 85 && !gameStats.activityBiomeCongMsg)
+            setIsActivityModal8Open(true)
+        else
+            setIsActivityModal6Open(true)
     }
 
     return (

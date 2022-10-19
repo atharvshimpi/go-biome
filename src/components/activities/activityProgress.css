@@ -10,9 +10,6 @@
     border-radius: 1rem;
 }
 
-.activity-progress-heading {
-}
-
 .activity-progress-btn {
     width: 60%;
     padding: 0.5rem;
@@ -58,5 +55,20 @@
 
 .activity-img-currentScore {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
+}
+
+.activity-biomecong-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 0.3rem;
+}
+
+.activity-biomecong-img {
+    width: 70%;
+}
+
+.activity-biome-congra-img {
+    width: 25%;
+    margin-bottom: 0.3rem;
 }

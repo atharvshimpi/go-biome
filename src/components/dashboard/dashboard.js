@@ -52,6 +52,7 @@ import ActivityModal2_1 from "../activities/modals/activityModal2.1"
 import ActivityModal3 from "../activities/modals/activityModal3"
 import ActivityModal5 from "../activities/modals/activityModal5"
 import ActivityModal6 from "../activities/modals/activityModal6"
+import ActivityModal8 from "../activities/modals/activityModal8"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -67,6 +68,7 @@ const Dashboard = () => {
     const [isActivityModal3Open, setIsActivityModal3Open] = useState(false)
     const [isActivityModal5Open, setIsActivityModal5Open] = useState(gameStats.activityBiomePointsModal)
     const [isActivityModal6Open, setIsActivityModal6Open] = useState(false)
+    const [isActivityModal8Open, setIsActivityModal8Open] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
     const navigate = useNavigate()
@@ -299,7 +301,18 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityModal5 gameStats={gameStats} setIsActivityModal5Open={setIsActivityModal5Open} setIsActivityModal6Open={setIsActivityModal6Open} />
+                        <ActivityModal5 gameStats={gameStats} setIsActivityModal5Open={setIsActivityModal5Open} setIsActivityModal6Open={setIsActivityModal6Open} setIsActivityModal8Open={setIsActivityModal8Open} />
+                    </Box>
+                </Modal>
+                {/* activity modal 8 */}
+                <Modal
+                    open={isActivityModal8Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal8 gameStats={gameStats} setGameStats={setGameStats} pref={pref} setIsActivityModal8Open={setIsActivityModal8Open} setIsActivityModal6Open={setIsActivityModal6Open} />
                     </Box>
                 </Modal>
                 {/* activity modal 6 */}

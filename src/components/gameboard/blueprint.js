@@ -44,6 +44,8 @@ export default class BluePrint {
 
         this.minionRoad3 = new Image()
         this.minionRoad3.src = minionRoad3
+
+        this.minionLocations = []
     }
 
     /*
@@ -113,31 +115,28 @@ export default class BluePrint {
                     this.#drawImg(this.minion, ctx, col, row, this.tileSize)
                 }
                 else if (tile === 10) {
-                    this.#drawImg(
-                        !this.isMinionCrossed([row, col]) ? this.minionRoad1 : this.dashed,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize
-                    )
+                    if (!this.isMinionCrossed([row, col])) {
+                        this.#drawImg(this.minionRoad1, ctx, col, row, this.tileSize)
+                    }
+                    else {
+                        this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    }
                 }
                 else if (tile === 11) {
-                    this.#drawImg(
-                        !this.isMinionCrossed([row, col]) ? this.minionRoad2 : this.dashed,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize
-                    )
+                    if (!this.isMinionCrossed([row, col])) {
+                        this.#drawImg(this.minionRoad2, ctx, col, row, this.tileSize)
+                    }
+                    else {
+                        this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    }
                 }
                 else if (tile === 12) {
-                    this.#drawImg(
-                        !this.isMinionCrossed([row, col]) ? this.minionRoad3 : this.dashed,
-                        ctx,
-                        col,
-                        row,
-                        this.tileSize
-                    )
+                    if (!this.isMinionCrossed([row, col])) {
+                        this.#drawImg(this.minionRoad3, ctx, col, row, this.tileSize)
+                    }
+                    else {
+                        this.#drawImg(this.dashed, ctx, col, row, this.tileSize)
+                    }
                 }
 
 

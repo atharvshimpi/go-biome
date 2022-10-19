@@ -5,6 +5,9 @@ import { UserAuth } from "../../context/authContext"
 
 import imageTemplate from "../../assets/images/imageTemplate.svg"
 
+import {collection, addDoc} from "firebase/firestore"
+import {firestore} from "../../firebase"
+
 import {
     Button,
     Checkbox,
@@ -44,6 +47,11 @@ const UserDetails = () => {
     const handleSubmit = (e) => {
         setLoading(true)
         localStorage.setItem("user", JSON.stringify({ ...userData, email: user.email, profilePicture: user.photoURL ? user.photoURL : imageTemplate }))
+        addDoc(collection(firestore, "users"), {
+            ...userData,
+            email: user.email,
+            profilePicture: user.photoURL ? user.photoURL : imageTemplate,
+        })
         setTimeout(() => {
             setLoading(false)
             window.location.href = "/questions-main"

@@ -5,6 +5,7 @@ import { ref, uploadBytes, listAll } from "firebase/storage"
 
 import UserCard from "./userCard"
 import { storage } from "../../firebase"
+import {firestore} from '../../firebase'
 
 import TextField from "@mui/material/TextField"
 import { Avatar, Box, Chip, CircularProgress, InputAdornment } from "@mui/material"
@@ -19,6 +20,7 @@ import { AiFillLock } from "react-icons/ai"
 
 import "./addUserCard.css"
 import { useEffect } from "react"
+import { addDoc, collection, setDoc } from "firebase/firestore"
 
 const categoryTags = [
     {
@@ -103,6 +105,12 @@ const AddUserCard = () => {
         })
         setActivityUserCard(activityUserCard)
         localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
+
+        const username = JSON.parse(localStorage.getItem("user")).username
+
+        setDoc(doc(firestore, "activities", username), {
+            ...activityUserCard
+        })
 
         setTimeout(() => {
             setLoading(false)

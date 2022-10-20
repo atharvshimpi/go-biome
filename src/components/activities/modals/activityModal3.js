@@ -62,7 +62,7 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
                     friendlyBiomePoints: 85,
                     unFriendlyBiomePoints: 15,
                     activityOngoing: false,
-                    activityBiomePointsModal: true,
+                    activityBiomePointsModal: false,
                     activityPerformed: tempActivityPerformed,
                     activityPointReplayed: true,
                 })
@@ -70,7 +70,7 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
         
         setIsActivityModal3Open(false)
         setIsActivityModal5Open(true)
-        navigate("/card")
+        navigate("/card")            
     }
 
     return (

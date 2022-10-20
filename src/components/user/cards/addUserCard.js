@@ -79,6 +79,13 @@ const AddUserCard = () => {
         fileReader.readAsDataURL(e.target.files[0])
     }
 
+    const navigateUtil = () => {
+        if(gameStats.friendlyBiomePoints == 85)
+            navigate("/map")
+        else
+            navigate("/")
+    }
+
     const handleClick = () => {
         setLoading(true)
 
@@ -105,7 +112,7 @@ const AddUserCard = () => {
 
         setTimeout(() => {
             setLoading(false)
-            navigate("/")
+            navigateUtil()
         }, 1500)
     }
 
@@ -277,7 +284,7 @@ const AddUserCard = () => {
                             <div className="add-usercard-btn-container">
                                 <Button
                                     startIcon={<BsFillSkipEndFill />}
-                                    onClick={() => navigate("/")}
+                                    onClick={navigateUtil}
                                     className="add-usercard-btn"
                                     fullWidth
                                     variant="contained"

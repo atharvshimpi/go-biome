@@ -53,6 +53,7 @@ import ActivityModal3 from "../activities/modals/activityModal3"
 import ActivityModal5 from "../activities/modals/activityModal5"
 import ActivityModal6 from "../activities/modals/activityModal6"
 import ActivityModal8 from "../activities/modals/activityModal8"
+import ActivityModal9 from "../activities/modals/activityModal9"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -69,6 +70,7 @@ const Dashboard = () => {
     const [isActivityModal5Open, setIsActivityModal5Open] = useState(gameStats.activityBiomePointsModal)
     const [isActivityModal6Open, setIsActivityModal6Open] = useState(false)
     const [isActivityModal8Open, setIsActivityModal8Open] = useState(false)
+    const [isActivityModal9Open, setIsActivityModal9Open] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
     const navigate = useNavigate()
@@ -323,7 +325,18 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityModal6 gameStats={gameStats} pref={pref} setIsActivityModal6Open={setIsActivityModal6Open} />
+                        <ActivityModal6 gameStats={gameStats} pref={pref} setIsActivityModal6Open={setIsActivityModal6Open} setIsActivityModal9Open={setIsActivityModal9Open} />
+                    </Box>
+                </Modal>
+                {/* activity modal 9 */}
+                <Modal
+                    open={isActivityModal9Open}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <ActivityModal9 pref={pref} setIsActivityModal9Open={setIsActivityModal9Open} />
                     </Box>
                 </Modal>
             </div>

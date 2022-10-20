@@ -7,7 +7,7 @@ import Fullstrength from "../../../assets/images/shield/fullstrength.svg"
 import Diversitycheck from "../../../assets/images/shield/diversitycheck.svg"
 import Superdiversity from "../../../assets/images/shield/superdiversity.svg"
 
-const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open }) => {
+const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open, setIsActivityModal9Open }) => {
     const [shieldImage, setSheildImage] = useState(Nostrength)
     const biomeStatusNames = ["Partial Strength", "Full Strength", "Biome Diversity", "Super Diversity"]
     const navigate = useNavigate()
@@ -44,7 +44,11 @@ const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open }) => {
         )
 
         setIsActivityModal6Open(false)
-        navigate("/map")
+
+        if(numOfDistActPerformed >= 3 && gameStats.friendlyBiomePoints != 85)
+            setIsActivityModal9Open(true)
+        else
+            navigate("/map")
     }
 
     return (

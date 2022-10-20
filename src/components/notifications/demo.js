@@ -1,6 +1,6 @@
 import Logo from "../../assets/images/logo.png"
 
-export const demoNotification = (username, biomename, points) => {
+export const demoNotification = (msgTemplate) => {
     // Service Worker isn't supported on this browser, disable or hide UI.
     if (!("serviceWorker" in navigator)) {
         return
@@ -11,14 +11,12 @@ export const demoNotification = (username, biomename, points) => {
         return
     }
 
-    const bodyTemplate = `Congratulations ${username} on completing the activity!\n${biomename} has grown by ${points} points!`
-
     function askPermission() {
         Notification.requestPermission((result) => {
             if (result === "granted") {
                 navigator.serviceWorker.ready.then((registration) => {
                     registration.showNotification("Go-Go Biome", {
-                        body: bodyTemplate,
+                        body: msgTemplate,
                         icon: Logo,
                         badge: Logo,
                         vibrate: [
@@ -27,7 +25,7 @@ export const demoNotification = (username, biomename, points) => {
                         ],
                         timestamp: Date.parse(Date.now()),
                         // vibrate: [200, 100, 200, 100, 200, 100, 200],
-                        tag: "vibration-sample",
+                        tag: "go-go-biome",
                         renotify: true,
                         requireInteraction: true,
                     })

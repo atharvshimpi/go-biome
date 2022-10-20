@@ -248,7 +248,7 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityCarousal gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open}/>
+                        <ActivityCarousal userDetails={userDetails} gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open}/>
                     </Box>
                 </Modal>
                 {/* activity modal 1 */}

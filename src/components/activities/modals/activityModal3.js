@@ -7,13 +7,14 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const mapStats = JSON.parse(localStorage.getItem("mapstats"))
     const [activityHistory, setActivityHistory] = useState(JSON.parse(localStorage.getItem("activity-history")))
+    const msgTemplate = `Congratulations ${userDetails.username} on completing the activity!\n${pref.friendlyBiome} has grown by ${gameStats.currentActivity.points} points!`
     const navigate = useNavigate()
     
     const handleLogActivity = () => {
         let tempActivityPerformed = gameStats.activityPerformed
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
 
-        demoNotification(userDetails.username, pref.friendlyBiome, gameStats.currentActivity.points)
+        demoNotification(msgTemplate)
         activityHistory.push(gameStats.currentActivity)
         setActivityHistory(activityHistory)
         localStorage.setItem(

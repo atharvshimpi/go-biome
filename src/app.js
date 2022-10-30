@@ -10,7 +10,8 @@ import Questions from "./components/questions/questions"
 import Login from "./components/onboarding/login"
 import UserDetails from "./components/onboarding/userDetails"
 import Settings from "./components/settings/settings"
-import Gamemap from "./components/gameboard/gamemap"
+import GameMap_v2 from "./components/gameboard/gamemap_v2"
+import SocialMap from "./components/gameboard/socialmap"
 import AddUserCard from "./components/modals/addUserCard"
 import ActivityCarousal from "./components/activities/activityCarousal"
 import { AuthContextProvider } from "./context/authContext"
@@ -28,7 +29,8 @@ const App = () => {
                         <Route path="/questions-main" element={<QuestionsHome />} />
                         <Route path="/questions" element={<Questions />} />
                         <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
-                        <Route path="/map" element={<PrivateRoute><Gamemap /></PrivateRoute>} />
+                        <Route path="/map" element={<PrivateRoute><GameMap_v2 /></PrivateRoute>} />
+                        <Route path="/socialMap" element={<PrivateRoute><SocialMap /></PrivateRoute>} />
                         <Route path="/card" element={<PrivateRoute><AddUserCard /></PrivateRoute>} />
                         <Route path="/carousal" element={<PrivateRoute><ActivityCarousal /></PrivateRoute>} />
                     </Routes>

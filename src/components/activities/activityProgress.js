@@ -4,6 +4,8 @@ import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
+import {firestore} from "../../firebase"
+import {collection, addDoc, setDoc, doc} from "firebase/firestore"
 
 const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalOpen }) => {
     const [activityHistory, setActivityHistory] = useState(
@@ -23,8 +25,10 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
             JSON.stringify(activityHistory)
         )
 
+        const user = JSON.parse(localStorage.getItem("user"))
+
         // if biome points reach 85, don't increase them further
-        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
+        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85) {
             localStorage.setItem(
                 "gamestats",
                 JSON.stringify({
@@ -40,7 +44,11 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
                     activityPointReplayed: true,
                 })
             )
-        else
+            setDoc(doc(firestore, user.username, "stats"), {
+                friendlyBiomePoints: friendlyBiomePoints + gameStats.currentActivity.points
+            })
+        }
+        else {
             localStorage.setItem(
                 "gamestats",
                 JSON.stringify({
@@ -52,6 +60,10 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
                     activityPointReplayed: true,
                 })
             )
+            setDoc(doc(firestore, user.username, "stats"), {
+                friendlyBiomePoints: 85
+            })
+        }
 
         
         setIsActivityProgressModalOpen(false)

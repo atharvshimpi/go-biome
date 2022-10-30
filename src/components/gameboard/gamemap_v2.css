@@ -1,0 +1,14 @@
+.gamemap_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.right {
+	justify-content: flex-end;
+	margin-right: 40px;
+}

@@ -20,7 +20,7 @@ const ActivityModal2_1 = ({ pref, setIsActivityProgressModalOpen, setIsActivityM
             <button onClick={handleYes} className="activity-progress-btn">
                 YES
             </button>
-            <button onClick={handleNo} className="activity-progress-btn">
+            <button onClick={handleNo} className="activity-cancel-progress-btn">
                 NO, GO BACK
             </button>
         </div>

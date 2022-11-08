@@ -18,6 +18,14 @@
     border: 1px solid black;
 }
 
+.activity-cancel-progress-btn {
+    width: 60%;
+    padding: 0.5rem;
+    background: #ff9e80;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+}
+
 .modal-content {
     display: flex;
     justify-content: center;

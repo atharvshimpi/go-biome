@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@500&display=swap');
 .dashboard-container {
     position: relative;
     display: flex;
@@ -9,7 +10,15 @@
     background: #b17572;
 }
 
-.top-view,
+.top-view{
+    display: flex;
+    width: 100%;
+    text-align: center;
+    right: -1.5rem;
+    /* justify-content: space-between;
+    align-items: center; */
+    margin: 0.5rem 1.5rem 1.5rem;
+}
 .points-view {
     display: flex;
     width: 100%;
@@ -23,11 +32,12 @@
 }
 
 .top-view h3 {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #ffdfb8;
-    border-radius: 0.3rem;
-    border: 1px solid black;
-    padding: 0 0.5rem;
+    font-family: 'Reem Kufi Fun', sans-serif;
+    /* background-color: #ffdfb8; */
+    /* border-radius: 0.3rem; */
+    /* border: 1px solid black; */
+    
+    padding: 1.5 0.5rem;
 }
 
 .points-view {

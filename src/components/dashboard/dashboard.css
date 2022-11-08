@@ -67,14 +67,14 @@
     width: 3rem;
     height: 2.5rem;
     background-color: #ffdfb8;
-    border-radius: 0.3rem;
-    border: 1px solid black;
+    /* border-radius: 0.3rem;
+    border: 1px solid black; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .biome-updated-points {
     opacity: 0.8;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     margin-left: 10px;
     transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }

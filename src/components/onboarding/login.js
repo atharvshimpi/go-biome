@@ -155,15 +155,11 @@ const Login = () => {
                 </div>
             )}
             <div className="auth-privacy">
-                By signing up, you agree to our{" "}
+                Go-Go Biome is a research prototype, by signing up, you agree to the {" "}
                 <Link className="auth-privacy-link" to="/terms">
                     Terms and Conditions
                 </Link>{" "}
-                and acknowledge that our{" "}
-                <Link className="auth-privacy-link" to="/privacy">
-                    Privacy Policy
-                </Link>{" "}
-                applies to you.
+                of the game.
             </div>
         </div>
     )

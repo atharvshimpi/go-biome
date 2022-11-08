@@ -127,6 +127,9 @@ const UserDetails = () => {
                             <MenuItem value={"GQNB"}>
                                 Genderqueer/Non-Binary
                             </MenuItem>
+                            <MenuItem value={"I"}>
+                                I identify myself as
+                            </MenuItem>
                             <MenuItem value={"null"}>
                                 Prefer not to disclose
                             </MenuItem>

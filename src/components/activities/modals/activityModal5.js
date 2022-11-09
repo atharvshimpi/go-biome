@@ -1,8 +1,10 @@
 import React from "react"
-
+import ringer from "./Alert_pop.mp3"
+import led from "./Led_zep.mp3"
 import biomePoints from "../../../assets/images/biome/points.png"
 import minionPoints from "../../../assets/images/minion/minion1.png"
 
+export const audio = new Audio(led)
 const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal6Open, setIsActivityModal8Open }) => {
     const handleLogActivity = () => {
         localStorage.setItem(
@@ -14,12 +16,14 @@ const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal
         )
         
         setIsActivityModal5Open(false)
+        audio.play()
         if(gameStats.friendlyBiomePoints == 85 && !gameStats.activityBiomeCongMsg)
             setIsActivityModal8Open(true)
         else
             setIsActivityModal6Open(true)
     }
 
+    
     return (
         <div className="activity-progress-container" style={{ width: "100%" }}>
             <div className="activity-progress-heading">

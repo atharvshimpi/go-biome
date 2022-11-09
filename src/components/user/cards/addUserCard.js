@@ -263,7 +263,7 @@ const AddUserCard = () => {
                                     Preview
                                 </Button>
                             </div>
-                            <div className="add-usercard-btn-container">
+                            <div className="add-usercard-btn-container-create">
                                 <Button
                                     startIcon={isDisabled ? <AiFillLock /> : null}
                                     disabled={isDisabled}
@@ -288,6 +288,7 @@ const AddUserCard = () => {
                                     className="add-usercard-btn"
                                     fullWidth
                                     variant="contained"
+                                    background-color="red"
                                 >
                                     Skip
                                 </Button>

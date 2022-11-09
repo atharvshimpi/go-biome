@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
+import ActivityModal7 from "../activities/modals/activityModal7"
+
 import BluePrint from "./blueprint"
+import { Box, Modal } from "@mui/material"
 import { IoIosArrowBack } from "react-icons/io"
 
 import "./gamemap.css"
 
 const Gamemap = () => {
+    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [isActivityModal7Open, setIsActivityModal7Open] = useState(gameStats.activityBiomeMovementModal)
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -49,6 +55,17 @@ const Gamemap = () => {
                     <IoIosArrowBack className="icon" />
                 </div>
             </div>
+            {/* activity modal 7 */}
+            <Modal
+                open={isActivityModal7Open}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                className="modal-container"
+            >
+                <Box className="modal-content">
+                    <ActivityModal7 gameStats={gameStats} pref={pref} setIsActivityModal7Open={setIsActivityModal7Open} />
+                </Box>
+            </Modal>
             <canvas id="gamemap"></canvas>
             <div className="top-view" style={{ opacity: 0 }}>
                 <div className="icon-container">

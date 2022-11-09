@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
@@ -7,12 +6,7 @@ import "./activityProgress.css"
 import {firestore} from "../../firebase"
 import {collection, addDoc, setDoc, doc} from "firebase/firestore"
 
-const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalOpen }) => {
-    const [activityHistory, setActivityHistory] = useState(
-        JSON.parse(localStorage.getItem("activity-history"))
-    )
-    const navigate = useNavigate()
-
+const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {
     const handleClick = () => {
         let tempActivityPerformed = gameStats.activityPerformed
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
@@ -44,8 +38,10 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
                     activityPointReplayed: true,
                 })
             )
-            setDoc(doc(firestore, user.username, "stats"), {
-                friendlyBiomePoints: friendlyBiomePoints + gameStats.currentActivity.points
+            setDoc(doc(firestore, "users", user.username), {
+                stats: {
+                    friendlyBiomePoints: friendlyBiomePoints + gameStats.currentActivity.points
+                }
             })
         }
         else {
@@ -60,14 +56,16 @@ const ActivityProgress = ({ gameStats, setGameStats, setIsActivityProgressModalO
                     activityPointReplayed: true,
                 })
             )
-            setDoc(doc(firestore, user.username, "stats"), {
-                friendlyBiomePoints: 85
+            setDoc(doc(firestore, "users", user.username), {
+                stats: {
+                    friendlyBiomePoints: 85
+                }
             })
         }
 
         
         setIsActivityProgressModalOpen(false)
-        navigate("/card")
+        setIsActivityModal2_1Open(true)
     }
 
     const defaultOptions = {

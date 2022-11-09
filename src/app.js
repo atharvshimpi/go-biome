@@ -12,7 +12,7 @@ import UserDetails from "./components/onboarding/userDetails"
 import Settings from "./components/settings/settings"
 import GameMap_v2 from "./components/gameboard/gamemap_v2"
 import SocialMap from "./components/gameboard/socialmap"
-import AddUserCard from "./components/modals/addUserCard"
+import AddUserCard from "./components/user/cards/addUserCard"
 import ActivityCarousal from "./components/activities/activityCarousal"
 import { AuthContextProvider } from "./context/authContext"
 

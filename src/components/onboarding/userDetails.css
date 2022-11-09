@@ -15,6 +15,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: #ffcf85;
+    height: 85vh;
     border-radius: 1rem;
     box-shadow: 0px 0px 1px 15px #fff;
     padding: 1rem 1rem;
@@ -66,7 +67,7 @@
 
 @media (max-width: 412px) {
     .user-details-content {
-        width: 80%;
+        width: 85%;
         overflow: scroll;
     }
 }

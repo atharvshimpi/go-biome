@@ -16,7 +16,7 @@ const BIOME_INDEX = 5
 export default class BluePrint {
     constructor(tileSize) {
         this.tileSize = tileSize
-        this.gameStats = JSON.parse(localStorage.getItem("gamestats"))
+        this.mapStats = JSON.parse(localStorage.getItem("mapstats"))
 
         this.minion = new Image()
         this.minion.src = minion
@@ -167,7 +167,7 @@ export default class BluePrint {
                         row * this.tileSize,
                         this.tileSize,
                         this,
-                        this.gameStats
+                        this.mapStats
                     )
                 }
             }
@@ -209,13 +209,13 @@ export default class BluePrint {
 }
 
 class Biome {
-    constructor(x, y, tileSize, tileMap, gameStats) {
+    constructor(x, y, tileSize, tileMap, mapStats) {
         this.x = x
         this.y = y
         this.tileSize = tileSize
         this.tileMap = tileMap
-        this.gameStats = gameStats
-        this.biomeMoveCount = (this.gameStats.friendlyBiomePoints - 15) / 5
+        this.mapStats = mapStats
+        this.biomeMoveCount = (this.mapStats.friendlyBiomePoints - 15) / 5
         // this.biomeMoveCount = (15 - 15) / 5
         this.#loadBiomeImages()
     }

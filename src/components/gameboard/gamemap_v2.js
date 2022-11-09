@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 
 import BluePrint from "./blueprint"
 import { IoIosArrowBack } from "react-icons/io"
+import { Box, Modal } from "@mui/material"
+import ActivityModal7 from "../activities/modals/activityModal7"
 
 import biome from "../../assets/images/gamemap/biome.png"
 import dashed from "../../assets/images/gamemap/dashed/dashed.png"
@@ -30,9 +32,15 @@ const GameMap_v2 = () => {
 										[1, 0, 0, 10, 0, 2],
 										[8, 8, 8, 8, 8, 8]
 	])
+	const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+	const pref = JSON.parse(localStorage.getItem("preferences"))
+	const [isActivityModal7Open, setIsActivityModal7Open] = useState(gameStats.activityBiomeMovementModal)
 	const navigate = useNavigate()
 
 	const [biomePosition, setBiomePosition] = useState([8, 0])
+
+	// get data from localstorage (gameStats)
+	// get modal from gamemap.js
 
 	const navigateToSocialMap = () => {
 		navigate("/socialmap")
@@ -83,32 +91,32 @@ const GameMap_v2 = () => {
 
 	const getTile = (val, row, col) => {
 		if (row === biomePosition[0] && col === biomePosition[1]) {
-			return <img src={biome} width="64px" height="64px" />
+			return <img key={row*8 + col} src={biome} width="64px" height="64px" />
 		}
 		if (val === 0) {
-			return <img src={dashed} width="64px" height="64px" />
+			return <img key={row*8 + col} src={dashed} width="64px" height="64px" />
 		}
 		if (val === 1) {
-			return <img src={dashedLeftDown} width="64px" height="64px" />
+			return <img key={row*8 + col} src={dashedLeftDown} width="64px" height="64px" />
 		}
 		if (val === 2) {
-			return <img src={dashedRightUp} width="64px" height="64px" />
+			return <img key={row*8 + col} src={dashedRightUp} width="64px" height="64px" />
 		}
 		if (val === 3) {
-			return <img src={dashedRightDown} width="64px" height="64px" />
+			return <img key={row*8 + col} src={dashedRightDown} width="64px" height="64px" />
 		}
 		if (val === 4) {
-			return <img src={dashedLeftUp} width="64px" height="64px" />
+			return <img key={row*8 + col} src={dashedLeftUp} width="64px" height="64px" />
 		}
 		if (val === 5) {
-			return <img src={biome} width="64px" height="64px" />
+			return <img key={row*8 + col} src={biome} width="64px" height="64px" />
 		}
 		if (val === 6) {
-			return <img src={minion} width="64px" height="64px" className="right_aligned" />
+			return <img key={row*8 + col} src={minion} width="64px" height="64px" className="right_aligned" />
 		}
 		if (val === 10) {
 			if (!isMinionCrossed([row, col])) {
-				return <img src={minionRoad1} width="64px" height="64px" />
+				return <img key={row*8 + col} src={minionRoad1} width="64px" height="64px" />
 			}
 			else {
 				return <img src={dashed} width="64px" height="64px" />
@@ -139,6 +147,16 @@ const GameMap_v2 = () => {
 			<div className="socialmap_button">
 				<button onClick={navigateToSocialMap}>Social Map</button>
 			</div>
+			<Modal
+                open={isActivityModal7Open}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                className="modal-container"
+            >
+                <Box className="modal-content">
+                    <ActivityModal7 gameStats={gameStats} pref={pref} setIsActivityModal7Open={setIsActivityModal7Open} />
+                </Box>
+            </Modal>
 			{board.map((row, rowIdx) => {
 				return <div key={rowIdx} className={"row" + (rowIdx === 0 ? " right" : "")}>
 					{row.map((val, index) => {

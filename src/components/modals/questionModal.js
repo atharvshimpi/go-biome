@@ -11,6 +11,8 @@ import {
     setSleepTime,
 } from "../questions/setQuestions"
 
+import { Box, CircularProgress } from "@material-ui/core"
+
 const initialState = {
     friendlyBiome: "Bugsy",
     unFriendlyBiome: "Minion",
@@ -86,7 +88,11 @@ const QuestionModal = ({ qNum }) => {
                     >
                         {qNum >= 4
                             ? loading
-                                ? "Loading..."
+                                ? (
+                                    <Box sx={{ display: "flex", justifyContent: "center", fontSize: "0.8rem" }}>
+                                        <CircularProgress style={{ width: "25px", height: "25px" }} /> 
+                                    </Box>
+                                )
                                 : "Submit"
                             : "Proceed"}
                     </button>

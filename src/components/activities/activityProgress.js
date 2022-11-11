@@ -3,9 +3,12 @@ import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
+import positive from "../../assets/sounds/Positive.mp3"
 
 const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {
     const handleClick = () => {
+        const audio = new Audio(positive)
+        audio.play()
         setIsActivityProgressModalOpen(false)
         setIsActivityModal2_1Open(true)
     }

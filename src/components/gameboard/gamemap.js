@@ -7,7 +7,7 @@ import ActivityModal7 from "../activities/modals/activityModal7"
 import BluePrint from "./blueprint"
 import { Box, Modal } from "@mui/material"
 import { IoIosArrowBack } from "react-icons/io"
-
+import select from "../../assets/sounds/Selecting.mp3"
 import "./gamemap.css"
 
 const Gamemap = () => {
@@ -42,10 +42,11 @@ const Gamemap = () => {
             animate={{ width: "100%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
             className="gamemap-container"
-        >
+        >   
             <div className="top-view">
                 <div className="icon-container">
                     <IoIosArrowBack
+    
                         onClick={() => navigate("/")}
                         className="icon"
                     />

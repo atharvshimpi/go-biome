@@ -12,6 +12,7 @@ import {
 } from "../questions/setQuestions"
 
 import { Box, CircularProgress } from "@material-ui/core"
+import select from "../../assets/sounds/Selecting.mp3"
 
 const initialState = {
     friendlyBiome: "Bugsy",
@@ -37,6 +38,8 @@ const QuestionModal = ({ qNum }) => {
         setDefault()
         localStorage.setItem("preferences", JSON.stringify(answers))
         setLoading(true)
+        const audio = new Audio(select)
+        audio.play()
         setTimeout(() => {
             setLoading(false)
             navigate("/")

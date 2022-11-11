@@ -55,6 +55,9 @@ import ActivityModal6 from "../activities/modals/activityModal6"
 import ActivityModal8 from "../activities/modals/activityModal8"
 import ActivityModal9 from "../activities/modals/activityModal9"
 
+import select from "../../assets/sounds/Selecting.mp3"
+import select1 from "../../assets/sounds/create.mp3"
+
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
@@ -118,7 +121,8 @@ const Dashboard = () => {
 
     const handleCardModalOpen = (categoryId) => {
         setCardCategory(categoryId)
-
+        const audio = new Audio(select1)
+        audio.play()
         if(categoryId === 0)
             setCardDetailsData(environmentGameCardDetails)
         else if(categoryId === 1)

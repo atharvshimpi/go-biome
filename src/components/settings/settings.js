@@ -106,16 +106,16 @@ const Settings = () => {
                                 </div>
                                 { settingId === 0 ? changeProfilePicture({notify, user, setUser, loading, setLoading, setOpen}) : null }
                                 { settingId === 1 ? changeUsername({notify, pref, user, setUser, loading, setLoading, setOpen}) : null }
-                                { settingId === 2 ? activityCardStack(activityUserCards) : null }
+                                { settingId === 2 ? activityCardStack(activityUserCards, setOpen) : null }
                                 { settingId === 3 ? activityHistory(activityHistoryData) : null }
                                 { settingId === 4 ? biomeGarden(biomeChars, loading, setLoading) : null }
-                                { settingId === 9 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 10 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 11 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 12 ? changeMealHours({notify, pref, setPref, mealTime, handleMealTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 13 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
-                                { settingId === 14 ? changeUnFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
-                                { settingId === 15 ? saveProgress() : null }
+                                { settingId === 10 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 11 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 12 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 13 ? changeMealHours({notify, pref, setPref, mealTime, handleMealTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 14 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
+                                { settingId === 15 ? changeUnFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
+                                { settingId === 16 ? saveProgress() : null }
                             </div>
                         </SettingsDetails>
                     )}

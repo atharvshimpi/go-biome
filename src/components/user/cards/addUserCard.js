@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
-import { ref, uploadBytes, listAll } from "firebase/storage"
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
 
 import UserCard from "./userCard"
 import { storage } from "../../../firebase"
@@ -58,6 +58,7 @@ const AddUserCard = () => {
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)
+    const [icon, setIcon] = useState(gameStats.currentActivity.icon)
     const isDisabled = userCardData.location === "" || userCardData.description === ""
     const multiGenderAvaialble = gameStats.currentActivity.icon.split("_").length > 1 ? true : false
     const gender = userDetails.gender
@@ -89,38 +90,55 @@ const AddUserCard = () => {
     const handleClick = () => {
         setLoading(true)
 
-        uploadBytes(cardImageRef, userImageFile || require(`../../../assets/images/cards/${gameStats.currentActivity.category}/${multiGenderAvaialble ? `${gameStats.currentActivity.icon}${gender}` : gameStats.currentActivity.icon}.png`))
-            .then(() => {
-                console.log("Image Uploaded")
+        if(userImageFile) {
+            uploadBytes(cardImageRef, userImageFile)
+                .then(() => {
+                    console.log("Image Uploaded")
+
+                    listAll(ref(storage, `images/${userDetails.email.split("@")[0]}`)).then((response) => {
+                        getDownloadURL(response.items[response.items.length - 1]).then((url) => {
+                            activityUserCard.push({
+                                location: userCardData.location,
+                                description: userCardData.description,
+                                task: gameStats.currentActivity.task,
+                                category: gameStats.currentActivity.category,
+                                categoryId: gameStats.currentActivity.categoryId,
+                                icon: url,
+                                activityStartedAt: null,
+                                activityEndedAt: null,
+                                createdAt: userCardData.createdAt
+                            })
+                            
+                            setActivityUserCard(activityUserCard)
+                            localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
+                        })
+                    })
+                })
+                .catch((error) => {
+                    console.log("Error : ", error)
+                })
+        } else {
+            activityUserCard.push({
+                location: userCardData.location,
+                description: userCardData.description,
+                task: gameStats.currentActivity.task,
+                category: gameStats.currentActivity.category,
+                categoryId: gameStats.currentActivity.categoryId,
+                icon: gameStats.currentActivity.icon,
+                activityStartedAt: null,
+                activityEndedAt: null,
+                createdAt: userCardData.createdAt
             })
-            .catch((error) => {
-                console.log("Error : ", error)
-            })
-        
-        activityUserCard.push({
-            location: userCardData.location,
-            description: userCardData.description,
-            activityTitle: gameStats.currentActivity.task,
-            activityCategory: gameStats.currentActivity.category,
-            activityCategoryId: gameStats.currentActivity.categoryId,
-            activityStartedAt: null,
-            activityEndedAt: null,
-            createdAt: userCardData.createdAt
-        })
-        setActivityUserCard(activityUserCard)
-        localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
+            
+            setActivityUserCard(activityUserCard)
+            localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
+        }
 
         setTimeout(() => {
             setLoading(false)
             navigateUtil()
         }, 1500)
     }
-
-    // useEffect(() => {
-    //     listAll(cardImageRef).then((response) => {
-    //         console.log(response.items)
-    //     })
-    // }, [])
 
     return (
         <>

@@ -1,6 +1,7 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
+
 import "./styles.css"
 
 import Dashboard from "./components/dashboard/dashboard"
@@ -16,7 +17,6 @@ import ActivityCarousal from "./components/activities/activityCarousal"
 import { AuthContextProvider } from "./context/authContext"
 
 const App = () => {
-
     return (
         <AuthContextProvider>
             <Router>

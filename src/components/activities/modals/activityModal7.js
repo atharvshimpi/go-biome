@@ -1,9 +1,10 @@
 import React from "react"
-
+import select from "../../../assets/sounds/Selecting.mp3"
 import biomePoints from "../../../assets/images/biome/points.png"
 
 const ActivityModal7 = ({ gameStats, pref, setIsActivityModal7Open }) => {
     const handleClick = () => {
+        const audio = new Audio(select)
         localStorage.setItem(
             "gamestats",
             JSON.stringify({
@@ -11,6 +12,7 @@ const ActivityModal7 = ({ gameStats, pref, setIsActivityModal7Open }) => {
                 activityBiomeMovementModal: false
             })
         )
+        audio.play()
         setIsActivityModal7Open(false)
     }
     return (

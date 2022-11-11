@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
-
+import select from "../../assets/sounds/Alert_pop.mp3"
 import { demoNotification } from "../notifications/demo"
 
 import { Box, CircularProgress } from "@mui/material"
@@ -66,7 +66,8 @@ const ActivityCarousal = ({
                 currentActivity: { ...obj, categoryId: cardCategory },
             })
         )
-
+        const audio = new Audio(select)
+        audio.play()
         setTimeout(() => {
             setLoading(false)
             setIsCardModalOpen(false)

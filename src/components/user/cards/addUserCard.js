@@ -16,7 +16,8 @@ import { MdLocationPin } from "react-icons/md"
 import { RiDoubleQuotesL } from "react-icons/ri"
 import { BsCardImage, BsFillSkipEndFill } from "react-icons/bs"
 import { AiFillLock } from "react-icons/ai"
-
+import skip from "../../../assets/sounds/skip.mp3"
+import create from "../../../assets/sounds/create.mp3"
 import "./addUserCard.css"
 
 const categoryTags = [
@@ -80,6 +81,8 @@ const AddUserCard = () => {
     }
 
     const navigateUtil = () => {
+        const audio = new Audio(skip)
+        audio.play()
         if(gameStats.friendlyBiomePoints == 85)
             navigate("/map")
         else
@@ -109,7 +112,8 @@ const AddUserCard = () => {
         })
         setActivityUserCard(activityUserCard)
         localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
-
+        const audio = new Audio(create)
+        audio.play()
         setTimeout(() => {
             setLoading(false)
             navigateUtil()

@@ -1,11 +1,13 @@
 import React from "react"
-
+import select from "../../../assets/sounds/Selecting.mp3"
+const audio1 = new Audio(select)
 import "./preStartInfo.css"
 
 const ActivityModal1 = ({ pref, setIsActivityProgressModalOpen, setIsActivityModal1Open }) => {
     const handleClick = () => {
         setIsActivityModal1Open(false)
         setIsActivityProgressModalOpen(true)
+        audio1.play()
     }
 
     return (

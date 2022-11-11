@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
+import select from "../../../assets/sounds/Selecting.mp3"
 import { demoNotification } from "../../notifications/demo"
 
+const audio1 = new Audio(select)
 const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivityModal5Open }) => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const mapStats = JSON.parse(localStorage.getItem("mapstats"))
@@ -13,7 +14,7 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
     const handleLogActivity = () => {
         let tempActivityPerformed = gameStats.activityPerformed
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
-
+        audio1.play()
         demoNotification(msgTemplate)
         activityHistory.push(gameStats.currentActivity)
         setActivityHistory(activityHistory)

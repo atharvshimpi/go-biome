@@ -6,11 +6,9 @@ import Partialstrength from "../../../assets/images/shield/partialstrength.svg"
 import Fullstrength from "../../../assets/images/shield/fullstrength.svg"
 import Diversitycheck from "../../../assets/images/shield/diversitycheck.svg"
 import Superdiversity from "../../../assets/images/shield/superdiversity.svg"
-import ringer from "./Alert_pop.mp3"
-import audio from "./activityModal5"
+import select from "../../../assets/sounds/Selecting.mp3"
 
-
-const audio1 = new Audio(ringer)
+const audio1 = new Audio(select)
 const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open, setIsActivityModal9Open }) => {
     const [shieldImage, setSheildImage] = useState(Nostrength)
     const biomeStatusNames = ["Partial Strength", "Full Strength", "Biome Diversity", "Super Diversity"]
@@ -48,8 +46,7 @@ const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open, setIsActivit
         )
 
         setIsActivityModal6Open(false)
-        
-        // audio.pause()
+
         audio1.play()
         if(numOfDistActPerformed >= 3 && gameStats.friendlyBiomePoints != 85)
             setIsActivityModal9Open(true)

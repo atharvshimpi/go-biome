@@ -1,10 +1,9 @@
 import React from "react"
-import ringer from "./Alert_pop.mp3"
-import led from "./Led_zep.mp3"
+import select from "../../../assets/sounds/Selecting.mp3"
 import biomePoints from "../../../assets/images/biome/points.png"
 import minionPoints from "../../../assets/images/minion/minion1.png"
 
-export const audio = new Audio(led)
+export const audio = new Audio(select)
 const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal6Open, setIsActivityModal8Open }) => {
     const handleLogActivity = () => {
         localStorage.setItem(

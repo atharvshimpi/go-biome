@@ -127,7 +127,7 @@ const UserDetails = () => {
                             <MenuItem value={"GQNB"}>
                                 Genderqueer/Non-Binary
                             </MenuItem>
-                            <MenuItem value={"I"}>
+                            <MenuItem value={"OTHER"}>
                                 I identify myself as
                             </MenuItem>
                             <MenuItem value={"null"}>

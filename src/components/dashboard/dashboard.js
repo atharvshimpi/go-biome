@@ -150,7 +150,11 @@ const Dashboard = () => {
             <div className="top-view">
                 <div className="icon-container">
                     <AiFillSetting
-                        onClick={() => navigate("/settings")}
+                        onClick={() => 
+                        {navigate("/settings")
+                        const audio = new Audio(select)
+                        audio.play()
+                    }}
                         className="icon"
                     />
                 </div>
@@ -390,7 +394,11 @@ const Dashboard = () => {
                 <div className="icon-container">
                     <MdLocationPin
                         className="icon"
-                        onClick={() => navigate("/map")}
+                        onClick={() => 
+                        {   navigate("/map")
+                            const audio = new Audio(select)
+                            audio.play()
+                        }}
                     />
                 </div>
             </div>

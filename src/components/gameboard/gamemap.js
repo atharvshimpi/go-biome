@@ -71,7 +71,12 @@ const Gamemap = () => {
             <div className="top-view" style={{ opacity: 0 }}>
                 <div className="icon-container">
                     <IoIosArrowBack
-                        onClick={() => navigate("/")}
+                        onClick={() => 
+                        {   
+                            const audio = new Audio(select)
+                            audio.play()
+                            navigate("/")
+                        }}
                         className="icon"
                     />
                 </div>

@@ -3,13 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
 
-import { demoNotification } from "../notifications/demo"
-
 import { Box, CircularProgress } from "@mui/material"
-
-import "./activityCarousal.css"
 import "swiper/css"
 import "swiper/css/effect-cards"
+
 
 const categoryTags = [
     {
@@ -34,44 +31,7 @@ const categoryTags = [
     },
 ]
 
-const ActivityCarousal = ({
-    gender,
-    gameStats,
-    setGameStats,
-    cardDetailsData,
-    cardCategory,
-    setIsCardModalOpen,
-    setIsActivityModal1Open,
-}) => {
-    if (!cardDetailsData) return null
-
-    const [loading, setLoading] = useState(false)
-    const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
-
-    const handleClick = (e, obj) => {
-        e.stopPropagation()
-        setLoading(true)
-        demoNotification(msgTemplate)
-        setGameStats({
-            ...gameStats,
-            activityOngoing: true,
-            currentActivity: { ...obj, categoryId: cardCategory },
-        })
-        localStorage.setItem(
-            "gamestats",
-            JSON.stringify({
-                ...gameStats,
-                activityOngoing: true,
-                currentActivity: { ...obj, categoryId: cardCategory },
-            })
-        )
-
-        setTimeout(() => {
-            setLoading(false)
-            setIsCardModalOpen(false)
-            setIsActivityModal1Open(true)
-        }, 1500)
-    }
+const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
 
     return (
         <Swiper
@@ -80,7 +40,7 @@ const ActivityCarousal = ({
             modules={[EffectCards]}
             className="mySwiper"
         >
-            {cardDetailsData.map((obj, key) => {
+            {activityUserCards.map((obj, key) => {
                 const [isCardFlipped, setIsCardFlipped] = useState(false)
                 const [cardLoading, setCardLoading] = useState(true)
                 const multiGenderAvaialble =
@@ -121,7 +81,7 @@ const ActivityCarousal = ({
                                     onClick={() =>
                                         setIsCardFlipped(!isCardFlipped)
                                     }
-                                    src={require(`../../assets/images/cards/${
+                                    src={obj.icon.length > 4 ? obj.icon : require(`../../assets/images/cards/${
                                         obj.category
                                     }/${
                                         multiGenderAvaialble
@@ -147,7 +107,7 @@ const ActivityCarousal = ({
                                             className="btn"
                                             onClick={(e) => handleClick(e, obj)}
                                         >
-                                            {loading ? (
+                                            {cardLoading ? (
                                                 <Box
                                                     sx={{
                                                         display: "flex",
@@ -178,4 +138,4 @@ const ActivityCarousal = ({
     )
 }
 
-export default ActivityCarousal
+export default SwiperModal

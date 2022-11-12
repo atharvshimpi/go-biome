@@ -11,18 +11,13 @@ export const setDefault = () => {
                 3 = zen
             */
             activityPerformed: [0, 0, 0, 0],
-            /*
-                Make an array of these elements to simplify things
-                0 = activityOngoing
-                1 = activityPreStart
-                2 = activityPostTask
-            */
             activityOngoing: false,
             activityPreStart: false,
             activityBiomePointsModal: false,
             activityBiomeMovementModal: false,
             activityBiomeCongMsg: false,
             currentActivity: null,
+            prevDate: new Date(new Date().setUTCHours(0, 0, 0, 0)) // gives nearest midnight in the past
         })
     )
     localStorage.setItem("mapstats", JSON.stringify({

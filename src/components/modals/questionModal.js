@@ -20,8 +20,7 @@ const initialState = {
     sleepTime: null,
     morningCheckInTime: null,
     mealTime: null,
-    vibrate: false,
-    activityCountBound: 3,
+    vibrate: false
 }
 
 const QuestionModal = ({ qNum }) => {

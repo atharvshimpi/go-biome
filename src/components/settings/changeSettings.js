@@ -8,6 +8,7 @@ import imageTemplate from "../../assets/images/imageTemplate.svg"
 import emptyTemplate from "../../assets/images/emptyTemplate.svg"
 import { Avatar, IconButton } from "@mui/material"
 import { ActivityHistoryDrpDwn } from "../modals/activityHistoryDrpDwn"
+import ActivityCardStack from "../activities/activityCardStack"
 
 export const changeProfilePicture = ({
     notify,
@@ -100,11 +101,11 @@ export const changeUsername = ({
     )
 }
 
-export const activityCardStack = (activityUserCards) => {
+export const activityCardStack = (activityUserCards, setOpen) => {
     return (
         <div className="change-input-container">
             {activityUserCards.length > 0 ? (
-                <h1>Exists</h1>
+                <ActivityCardStack activityUserCards={activityUserCards} setOpen={setOpen} />
             ) : (
                 <div className="empty-container">
                     <p className="empty-heading">

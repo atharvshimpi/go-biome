@@ -73,7 +73,31 @@ const Dashboard = () => {
     const [isActivityModal9Open, setIsActivityModal9Open] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
+    const [prevGame, setPrevGame] = useState(gameStats.prevDate)
     const navigate = useNavigate()
+
+    // Day Reset
+    useEffect(() => {
+        if(prevGame) {
+            const prevDate = new Date(prevGame)
+            const currDate = new Date()
+
+            if(prevDate.getDate() + 1 <=  currDate.getDate()) {
+                console.log("New Day!")
+                prevDate.setDate(prevDate.getDate() + 1)
+                setPrevGame(prevDate)
+                localStorage.setItem("gamestats", JSON.stringify({
+                    ...gameStats,
+                    activityPerformed: [0, 0, 0, 0],
+                    currentActivity: null,
+                    friendlyBiomePoints: 15,
+                    unFriendlyBiomePoints: 85,
+                    activityBiomeCongMsg: false,
+                    prevDate: prevDate
+                }))
+            }
+        }
+    }, [prevGame])
 
     useEffect(() => {
         if(!userDetails)
@@ -248,7 +272,7 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityCarousal userDetails={userDetails} gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open}/>
+                        <ActivityCarousal gender={userDetails.gender} gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open}/>
                     </Box>
                 </Modal>
                 {/* activity modal 1 */}

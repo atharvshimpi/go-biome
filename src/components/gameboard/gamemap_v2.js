@@ -39,8 +39,16 @@ const GameMap_v2 = () => {
 
 	const [biomePosition, setBiomePosition] = useState([8, 0])
 
-	// get data from localstorage (gameStats)
-	// get modal from gamemap.js
+	useEffect(() => {
+		if (!isActivityModal7Open) {
+			if (gameStats.currentActivity) {
+				steps = gameStats.currentActivity.points
+				for (let i = 0; i < steps; i++) {
+					setTimeout(incrementBiomePosition, 100 * i)
+				}
+			}
+		}
+	}, [isActivityModal7Open])
 
 	const navigateToSocialMap = () => {
 		navigate("/socialmap")

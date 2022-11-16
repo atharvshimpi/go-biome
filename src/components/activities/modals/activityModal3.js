@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom"
 
 import { demoNotification } from "../../notifications/demo"
 
+import {firestore} from "../../../firebase"
+import {collection, addDoc, setDoc, doc} from "firebase/firestore"
+
 const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivityModal5Open }) => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const mapStats = JSON.parse(localStorage.getItem("mapstats"))
@@ -36,8 +39,10 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
             })
         )
 
+        const user = JSON.parse(localStorage.getItem("user"))
+        
         // if biome points reach 85, don't increase them further
-        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85)
+        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85) {
             localStorage.setItem(
                 "gamestats",
                 JSON.stringify({
@@ -54,7 +59,14 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
                     activityPointReplayed: true,
                 })
             )
-        else
+
+            setDoc(doc(firestore, "users", user.username), {
+                stats: {
+                    friendlyBiomePoints: gameStats.friendlyBiomePoints + gameStats.currentActivity.points
+                }
+            })
+        }
+        else {
             localStorage.setItem(
                 "gamestats",
                 JSON.stringify({
@@ -68,6 +80,13 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
                     activityPointReplayed: true,
                 })
             )
+
+            setDoc(doc(firestore, "users", user.username), {
+                stats: {
+                    friendlyBiomePoints: gameStats.friendlyBiomePoints + gameStats.currentActivity.points
+                }
+            })
+        }
         
         setIsActivityModal3Open(false)
         setIsActivityModal5Open(true)

@@ -17,6 +17,7 @@ import minion from "../../assets/images/gamemap/minion1.png"
 import minionRoad1 from "../../assets/images/gamemap/minion_road.png"
 import minionRoad2 from "../../assets/images/gamemap/minion_road2.png"
 import minionRoad3 from "../../assets/images/gamemap/minion_road3.png"
+import unfriendlyBiome1 from '../../assets/images/gamemap/minions/unfriendlyBiome1.png'
 
 import "./gamemap_v2.css"
 
@@ -24,11 +25,11 @@ const GameMap_v2 = () => {
 	const [board, setBoard] = useState([
 										[8, 8, 8, 8, 8, 6],
 										[1, 0, 0, 10, 0, 2],
-										[4, 11, 0, 12, 0, 3],
+										[4, 10, 0, 10, 0, 3],
 										[1, 0, 10, 0, 10, 2],
-										[4, 12, 0, 11, 0, 3],
-										[1, 0, 0, 0, 12, 2],
-										[4, 0, 11, 0, 0, 3],
+										[4, 10, 0, 10, 0, 3],
+										[1, 0, 0, 0, 10, 2],
+										[4, 0, 10, 0, 0, 3],
 										[1, 0, 0, 10, 0, 2],
 										[8, 8, 8, 8, 8, 8]
 	])
@@ -36,19 +37,30 @@ const GameMap_v2 = () => {
 	const pref = JSON.parse(localStorage.getItem("preferences"))
 	const [isActivityModal7Open, setIsActivityModal7Open] = useState(gameStats.activityBiomeMovementModal)
 	const navigate = useNavigate()
+	const [biomeSteps, setBiomeSteps] = useState(0)
 
-	const [biomePosition, setBiomePosition] = useState([8, 0])
+	const [biomePosition, setBiomePosition] = useState(localStorage.getItem('solo-map-position') ? JSON.parse(localStorage.getItem('solo-map-position')) : [8, 0])
 
 	useEffect(() => {
 		if (!isActivityModal7Open) {
 			if (gameStats.currentActivity) {
-				steps = gameStats.currentActivity.points
-				for (let i = 0; i < steps; i++) {
-					setTimeout(incrementBiomePosition, 100 * i)
-				}
+				const steps = gameStats.currentActivity.points / 5
+				setBiomeSteps(steps)
 			}
 		}
 	}, [isActivityModal7Open])
+
+	useEffect(() => {
+		if (biomeSteps > 0) {
+			setTimeout(() => {
+				incrementBiomePosition()
+				setBiomeSteps(biomeSteps - 1)
+			}, 100)	
+		}
+		else {
+			localStorage.setItem('solo-map-position', JSON.stringify(biomePosition))
+		}
+	}, [biomeSteps])
 
 	const navigateToSocialMap = () => {
 		navigate("/socialmap")
@@ -172,7 +184,6 @@ const GameMap_v2 = () => {
 					})}
 				</div>
 			})}
-			<button onClick={incrementBiomePosition}>Move</button>
 		</div>
 	)
 }

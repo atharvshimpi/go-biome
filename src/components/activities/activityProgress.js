@@ -3,67 +3,9 @@ import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
 import "./activityProgress.css"
-import {firestore} from "../../firebase"
-import {collection, addDoc, setDoc, doc} from "firebase/firestore"
 
 const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {
     const handleClick = () => {
-        let tempActivityPerformed = gameStats.activityPerformed
-        tempActivityPerformed[gameStats.currentActivity.categoryId]++
-
-        // demoNotification()
-        activityHistory.push(gameStats.currentActivity)
-        setActivityHistory(activityHistory)
-        localStorage.setItem(
-            "activity-history",
-            JSON.stringify(activityHistory)
-        )
-
-        const user = JSON.parse(localStorage.getItem("user"))
-
-        // if biome points reach 85, don't increase them further
-        if(gameStats.friendlyBiomePoints + gameStats.currentActivity.points <= 85) {
-            localStorage.setItem(
-                "gamestats",
-                JSON.stringify({
-                    ...gameStats,
-                    friendlyBiomePoints:
-                        gameStats.friendlyBiomePoints +
-                        gameStats.currentActivity.points,
-                    unFriendlyBiomePoints:
-                        gameStats.unFriendlyBiomePoints -
-                        gameStats.currentActivity.points,
-                    activityOngoing: false,
-                    activityPerformed: tempActivityPerformed,
-                    activityPointReplayed: true,
-                })
-            )
-            setDoc(doc(firestore, "users", user.username), {
-                stats: {
-                    friendlyBiomePoints: friendlyBiomePoints + gameStats.currentActivity.points
-                }
-            })
-        }
-        else {
-            localStorage.setItem(
-                "gamestats",
-                JSON.stringify({
-                    ...gameStats,
-                    friendlyBiomePoints: 85,
-                    unFriendlyBiomePoints: 15,
-                    activityOngoing: false,
-                    activityPerformed: gameStats.activityPerformed + 1,
-                    activityPointReplayed: true,
-                })
-            )
-            setDoc(doc(firestore, "users", user.username), {
-                stats: {
-                    friendlyBiomePoints: 85
-                }
-            })
-        }
-
-        
         setIsActivityProgressModalOpen(false)
         setIsActivityModal2_1Open(true)
     }

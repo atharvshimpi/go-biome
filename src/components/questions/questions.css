@@ -1,0 +1,130 @@
+.questions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #ffdfb8;
+}
+
+.questions-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffcf85;
+    height: 85vh;
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+    transition: all 0.4s ease-in-out;
+}
+
+.questions-heading,
+.questions-about,
+.questions-btn-container {
+    margin: 2rem 1rem 0rem;
+    width: 100%;
+}
+
+.questions-heading {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.9rem;
+    margin-bottom: 1rem;
+}
+
+.space-between {
+    display: flex;
+    flex: 1;
+}
+
+.questions-about p {
+    font-size: 1.2rem;
+}
+
+.questions-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.questions-btn-a {
+    width: 100%;
+    height: 3rem;
+    text-decoration: none;
+    text-align: center;
+}
+
+.questions-btn {
+    width: 100%;
+    height: 3rem;
+    background: white;
+    border-color: #333;
+    border-radius: 1rem;
+    border-width: 0.1rem;
+    margin-top: 1.5rem;
+    transition: opacity 0.1s ease-in-out;
+    position: relative;
+    background-color: #a66d27;
+    box-shadow: 0 5px 5px 0 #a66d27;
+}
+
+.auth-next-btn {
+    height: 2.5rem;
+    margin-bottom: 0.5rem !important;
+    border: 2px solid #333 !important;
+    font-size: 1.2rem !important;
+    font-family: "Reem Kufi Fun", Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.questions-btn:active {
+    top: 0.1rem;
+    box-shadow: none;
+}
+
+.answer-text-input {
+    width: 100%;
+    height: auto;
+}
+
+.biome-name {
+    width: 100%;
+    height: 3rem;
+    font-size: 1.5rem;
+}
+
+.answer-time-input-container {
+    width: 100%;
+}
+
+.answer-time-label {
+    font-weight: 700;
+}
+
+.answer-time-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.username {
+    background: #f3b04d;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+@media (max-width: 968px) {
+    .questions-content {
+        width: 85%;
+        overflow-x: hidden;
+    }
+
+    .questions-heading {
+        margin-bottom: 2.5rem;
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "indent": [
+            "warn",
+            4
+        ],
+        "linebreak-style": [
+            "off",
+            "windows"
+        ],
+        "quotes": [
+            "warn",
+            "double",
+            { "allowTemplateLiterals": true }
+        ],
+        "semi": [
+            "warn",
+            "never"
+        ],
+        "no-console": "off",
+        "no-constant-condition": "off",
+        "react/prop-types": 0,
+        "no-unused-vars": "off",
+        "no-undef": "off"
+    },
+    "ignorePatterns": [
+        "**/*.html"
+    ]
+}

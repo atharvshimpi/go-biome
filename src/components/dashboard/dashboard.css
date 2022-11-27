@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@500&display=swap');
+
+.dashboard-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #b17572;
+}
+
+
+.top-view{
+    
+    width: 100%;
+    text-align: left;
+    padding-left: 10rem;
+    margin: 0.5rem 0rem 0rem;
+}
+.points-view {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0rem 0rem;
+}
+
+.top-view {
+    padding: 0 1rem;
+}
+
+.top-view h3 {
+    font-family: "Reem Kufi Fun", sans-serif;
+    padding: 1.5rem 0.5rem;
+}
+
+.points-view {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -1rem;
+    padding: 0 0.5rem 0 0;
+}
+
+.biomechar-container,
+.biomepoints-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem 0 2rem;
+}
+
+.biomechar-container {
+    padding: 0 1rem 0 1rem;
+}
+
+.biome-points,
+.biome-updated-points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    width: 3rem;
+    height: 2.5rem;
+    background-color: #ffdfb8;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.biome-updated-points {
+    opacity: 0.8;
+    margin-left: 10px;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.icon,
+.shield-icon {
+    margin: 0rem 0.5rem;
+    font-size: 1rem;
+    width: 1.5rem;
+}
+
+.icon-container {
+    border: 1px solid #333;
+    border-radius: 0.3rem;
+    padding: 0.2rem 0;
+    background-color: #ffdfb8;
+}
+.shield-icon-container {
+    padding: 0.3rem 0rem;
+    background-color: #70beca;
+    border: 1px solid #333;
+    border-radius: 0.3rem;
+    margin-right: 10px;
+    height: 2.5rem;
+}
+
+.shield-icon {
+    width: 1.8rem;
+}
+
+.activity-cards {
+    display: flex;
+    width: 50%;
+    border: 2px solid #333;
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    background-color: #ffdfb8;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #333;
+    transition: opacity 0.1s ease-in-out;
+    margin-right: 0.4rem;
+}
+
+.cards:active {
+    opacity: 0.5;
+}
+
+.cards:last-child {
+    margin-right: 0;
+}
+
+.cards img {
+    width: 1.8rem;
+}
+
+.custom-card {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+}
+
+.bottom-view,
+.card-view {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-view {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: 0rem 0rem 0.5rem;
+}
+
+.game-board-container {
+    width: 60%;
+}
+
+@media screen and (max-width: 768px) {
+    .game-board-container {
+        width: 100%;
+    }
+}
+
+.biomechar {
+    width: 5rem;
+    margin-right: -1.5rem;
+}
+
+.biome-stats,
+.minion-stats {
+    display: flex;
+    position: relative;
+    right: 15px;
+}
+
+.minion-stats {
+    right: 5px;
+}
+
+.minion-group {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.minionchar {
+    height: 3rem;
+    margin-right: -1rem;
+}
+
+.shift-right {
+    width: 2rem !important;
+    position: relative;
+}
+
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.modal-content {
+    background-color: transparent;
+    outline: none;
+}

@@ -1,0 +1,20 @@
+.gamemap-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-view {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    overflow: hidden;
+}
+
+.right {
+	justify-content: flex-end;
+}

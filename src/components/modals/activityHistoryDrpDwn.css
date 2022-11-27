@@ -1,0 +1,41 @@
+.drp-dwn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    height: auto;
+    padding: 0 0.5rem;
+    border: 1px solid #333;
+    border-radius: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.activity-history-icon-container { 
+    width: 100px;
+}
+
+.activity-history-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 0.4rem;
+}
+
+.drp-dwn-heading {
+    font-size: 0.9rem;
+    text-align: left;
+    margin-bottom: 0.2rem;
+}
+
+.drp-dwn-category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-radius: 0.2rem;
+    padding: 0.1rem 0.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.drp-dwn-points {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

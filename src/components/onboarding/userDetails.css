@@ -1,0 +1,77 @@
+.user-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #ffdfb8;
+    padding: 1rem 1rem;
+}
+
+.user-details-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffcf85;
+    height: 85vh;
+    border-radius: 1rem;
+    padding: 1rem 1rem;
+}
+
+.user-details-logo-container {
+    background-color: #ffffff;
+    width: 150px;
+}
+
+.user-details-heading h1 {
+    font-size: 1.4rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.user-details-input-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.user-details-input,
+.user-details-profile-photo {
+    margin-bottom: 2rem !important;
+}
+
+.user-details-profile-photo {
+    height: 3.5rem;
+}
+
+.user-details-checkbox span {
+    font-size: 0.9rem;
+}
+
+.user-details-next-container {
+    width: 100%;
+    height: 3rem;
+    cursor: pointer;
+}
+
+.user-details-next-btn {
+    width: 100%;
+    height: 2.5rem;
+    background-color: aqua;
+    margin-bottom: 0.2rem;
+}
+
+@media (max-width: 412px) {
+    .user-details-content {
+        width: 85%;
+        overflow: scroll;
+    }
+}
+
+.user-details-checkbox {
+    margin: 1rem 0;
+}

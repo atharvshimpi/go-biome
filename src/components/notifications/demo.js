@@ -1,3 +1,4 @@
+// change file name to notifTemplate
 import Logo from "../../assets/images/logo.png"
 
 export const demoNotification = (msgTemplate) => {
@@ -27,7 +28,6 @@ export const demoNotification = (msgTemplate) => {
                         // vibrate: [200, 100, 200, 100, 200, 100, 200],
                         tag: "go-go-biome",
                         renotify: true,
-                        requireInteraction: true,
                     })
                 })
             } else {

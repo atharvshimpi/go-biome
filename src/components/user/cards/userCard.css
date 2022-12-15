@@ -65,6 +65,7 @@
 .usercard-preview-image-container img {
     width: 300px;
     height: 200px;
+    border-radius: 1rem;
 }
 
 .usercard-btn {

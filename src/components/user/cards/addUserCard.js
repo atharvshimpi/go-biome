@@ -262,7 +262,7 @@ const AddUserCard = () => {
                                     variant="outlined"
                                     id="description"
                                     label="Description"
-                                    inputProps={{ maxLength: 30 }}
+                                    inputProps={{ maxLength: 80 }}
                                     value={userCardData.description}
                                     onChange={(e) => handleChange(e)}
                                     multiline

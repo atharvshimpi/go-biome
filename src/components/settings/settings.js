@@ -6,13 +6,12 @@ import "react-toastify/dist/ReactToastify.css"
 
 import { UserAuth } from "../../context/authContext" 
 import { settingDetails } from "./settingsData"
-import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName, saveProgress } from "./changeSettings"
+import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName } from "./changeSettings"
 
 import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
 import GeneralSettings from "./general"
 import CustomizationSettings from "./customization"
-import BackupSharingSettings from "./backup_sharing"
 
 import { IoIosArrowBack } from "react-icons/io"
 import { GrFormClose } from "react-icons/gr"
@@ -83,7 +82,6 @@ const Settings = () => {
                 <UserSettings setOpen={setOpen} setSettingId={setSettingId} handleSignOut={handleSignOut} />
                 <GeneralSettings setOpen={setOpen} setSettingId={setSettingId} />
                 <CustomizationSettings setOpen={setOpen} setSettingId={setSettingId} />
-                <BackupSharingSettings setOpen={setOpen} setSettingId={setSettingId} />
 
                 <AnimatePresence>
                     {open && (
@@ -115,7 +113,6 @@ const Settings = () => {
                                 { settingId === 13 ? changeMealHours({notify, pref, setPref, mealTime, handleMealTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 14 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
                                 { settingId === 15 ? changeUnFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
-                                { settingId === 16 ? saveProgress() : null }
                             </div>
                         </SettingsDetails>
                     )}
@@ -126,7 +123,7 @@ const Settings = () => {
                     toastStyle={{ backgroundColor: "#ffdfb8" }}
                     position="top-center"
                     autoClose={5000}
-                    hideProgressBar={false}
+                    hideProgressBar
                     newestOnTop={false}
                     closeOnClick
                     rtl={false}

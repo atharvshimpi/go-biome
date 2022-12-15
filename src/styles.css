@@ -17,4 +17,6 @@
 
 body {
     background-color: #ffdfb8;
+    /* To prevent reload upon scroll  */
+    overscroll-behavior-y: contain;
 }

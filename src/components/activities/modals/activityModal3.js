@@ -18,7 +18,9 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
 
         audio.play()        
-        activityHistory.push({...gameStats.currentActivity, activityStartTime: null, activityEndTime: null})
+        activityHistory.push({
+            ...gameStats.currentActivity
+        })
         setActivityHistory(activityHistory)
         localStorage.setItem(
             "activity-history",

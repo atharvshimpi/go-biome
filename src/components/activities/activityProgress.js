@@ -3,7 +3,7 @@ import Lottie from "react-lottie"
 
 import animationData from "../../assets/lotties/timer.json"
 
-import positive from "../../assets/sounds/Positive.mp3"
+import positive from "../../assets/sounds/UI/Yes.mp3"
 import "./activityProgress.css"
 
 const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {

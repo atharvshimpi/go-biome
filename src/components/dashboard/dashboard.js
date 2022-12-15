@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
 import ActivityCarousal from "../activities/activityCarousal"
+import ActivityProgress from "../activities/activityProgress"
+import LikedCards from "../activities/likedCards"
 
 // game card details
 import { environmentGameCardDetails } from "../../data/environment"
@@ -46,7 +48,6 @@ import { BiShuffle } from "react-icons/bi"
 import "./dashboard.css"
 import { Box, Modal } from "@mui/material"
 
-import ActivityProgress from "../activities/activityProgress"
 import ActivityModal1 from "../activities/modals/activityModal1"
 import ActivityModal2_1 from "../activities/modals/activityModal2.1"
 import ActivityModal3 from "../activities/modals/activityModal3"
@@ -55,17 +56,20 @@ import ActivityModal6 from "../activities/modals/activityModal6"
 import ActivityModal8 from "../activities/modals/activityModal8"
 import ActivityModal9 from "../activities/modals/activityModal9"
 
-import select from "../../assets/sounds/Selecting.mp3"
-import select1 from "../../assets/sounds/create.mp3"
+import select from "../../assets/sounds/UI/Shuffle_button.mp3"
+import select1 from "../../assets/sounds/UI/Proceed.mp3"
+import { demoNotification } from "../notifications/demo"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [likedCardsDetails, setLikedCardsDetails] = useState(JSON.parse(localStorage.getItem("liked-cards")))
     const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [shieldImage, setSheildImage] = useState(Nostrength)
     const [friendlyBiomeArray, setFriendlyBiomeArray] = useState([friendlyBiome1, friendlyBiome2, friendlyBiome3])
     const [unFriendlyBiomeArray, setUnFriendlyBiomeArray] = useState([unFriendlyBiome2, unFriendlyBiome1, unFriendlyBiome3])
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
+    const [isLikedCardsModalOpen, setIsLikedCardsModalOpen] = useState(false)
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] = useState(gameStats.activityOngoing)
     const [isActivityModal1Open, setIsActivityModal1Open] = useState(false)
     const [isActivityModal2_1Open, setIsActivityModal2_1Open] = useState(false)
@@ -77,6 +81,7 @@ const Dashboard = () => {
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
     const [prevGame, setPrevGame] = useState(gameStats.prevDate)
+    const [morningGameNotif, setMorningNotif] = useState(pref.wakeupTime)
     const navigate = useNavigate()
 
     // Day Reset
@@ -101,6 +106,34 @@ const Dashboard = () => {
             }
         }
     }, [prevGame])
+
+    // Notifications
+    // 1. Morning
+    const morningMsg = `Your Biome Digest is waiting for you!`
+    useEffect(() => {
+        const morningGameNotifTime = new Date(morningGameNotif)
+        const currDate = new Date()
+
+        if(currDate.getHours() >= morningGameNotifTime.getHours() + 2 && morningGameNotifTime.getDate() + 1 <= currDate.getDate()) {
+            demoNotification(morningMsg)
+            morningGameNotifTime.setDate(morningGameNotifTime.getDate() + 1)
+            setMorningNotif(morningGameNotifTime)
+            localStorage.setItem("preferences", JSON.stringify({
+                ...pref,
+                wakeupTime: morningGameNotifTime
+            }))
+        }
+    }, [morningGameNotif])
+
+    // 5. Inactivity
+    // const day1InactivityMsg = `${pref.friendlyBiome} misses you!`
+    // useEffect(() => {
+    //     const morningGameNotifTime = new Date(morningGameNotif)
+    //     const currDate = new Date()
+
+        
+    // }, [morningGameNotif])
+
 
     useEffect(() => {
         if(!userDetails)
@@ -149,16 +182,22 @@ const Dashboard = () => {
         const audio = new Audio(select1)
         audio.play()
 
-        if(categoryId === 0)
+        if(categoryId === 0) {
             setCardDetailsData(environmentGameCardDetails)
-        else if(categoryId === 1)
+            setIsCardModalOpen(true)
+        } else if(categoryId === 1) {
             setCardDetailsData(physicalActivityGameCardDetails)
-        else if(categoryId === 2)
+            setIsCardModalOpen(true)
+        } else if(categoryId === 2) {
             setCardDetailsData(socialGameCardDetails)
-        else
+            setIsCardModalOpen(true)
+        } else if(categoryId === 3) {
             setCardDetailsData(zenGameCardDetails)
-
-        setIsCardModalOpen(true)
+            setIsCardModalOpen(true)
+        } else {
+            setCardDetailsData(likedCardsDetails)
+            setIsLikedCardsModalOpen(true)
+        }
     }
 
     const handlePointReplay = () => {
@@ -282,7 +321,19 @@ const Dashboard = () => {
                     className="modal-container"
                 >
                     <Box className="modal-content">
-                        <ActivityCarousal gender={userDetails.gender} gameStats={gameStats} setGameStats={setGameStats} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open}/>
+                        <ActivityCarousal gender={userDetails.gender} gameStats={gameStats} setGameStats={setGameStats} likedCardsDetails={likedCardsDetails} setLikedCardsDetails={setLikedCardsDetails} cardDetailsData={cardDetailsData} cardCategory={cardCategory} setIsCardModalOpen={setIsCardModalOpen} setIsActivityModal1Open={setIsActivityModal1Open} />
+                    </Box>
+                </Modal>
+                {/* liked-cards */}
+                <Modal
+                    open={isLikedCardsModalOpen}
+                    onClose={() => setIsLikedCardsModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <LikedCards gender={userDetails.gender} gameStats={gameStats} setGameStats={setGameStats} likedCardsDetails={likedCardsDetails} setLikedCardsDetails={setLikedCardsDetails} cardCategory={cardCategory} setIsLikedCardsModalOpen={setIsLikedCardsModalOpen} setIsActivityModal1Open={setIsActivityModal1Open} />
                     </Box>
                 </Modal>
                 {/* activity modal 1 */}
@@ -412,10 +463,18 @@ const Dashboard = () => {
                         src={Likedcards}
                         style={{ color: "black" }}
                         className="icon"
+                        onClick={() => handleCardModalOpen(4)}
                     />
                 </div>
                 <div className="icon-container">
-                    <BiShuffle className="icon" />
+                    <BiShuffle 
+                        className="icon" 
+                        onClick={() => {
+                            handleCardModalOpen(Math.floor(Math.random() * (3 - 0 + 1)))
+                            const audio = new Audio(select)
+                            audio.play()
+                        }}
+                    />
                 </div>
                 <div className="icon-container">
                     <MdLocationPin

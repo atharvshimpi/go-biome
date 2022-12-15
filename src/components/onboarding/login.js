@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom"
 
 import { UserAuth } from "../../context/authContext"
 
+import { Switch } from "@headlessui/react"
 import logo from "../../assets/images/logo.png"
 
 import {
@@ -25,7 +26,8 @@ const Login = () => {
     const [loginData, setLoginData] = useState(initialState)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showPassword, setShowPassword] = useState(true)
-    const { googleSignIn, user } = UserAuth()
+    const [enabled, setEnabled] = useState(true)
+    const { googleSignIn, signIn, signUp, forgotPassword, user } = UserAuth()
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -36,7 +38,9 @@ const Login = () => {
         setShowPassword(!showPassword)
     }
 
-    const handleSubmit = () => {}
+    const handleSetSignMethod = () => {
+        setEnabled(!enabled)
+    }
 
     const handleGoogleSubmit = async () => {
         try {
@@ -44,6 +48,28 @@ const Login = () => {
         } catch (error) {
             console.log("Error: ", error)
         }
+    }
+
+    const handleSubmit = async () => {
+        try {
+            if(enabled)
+                await signIn(loginData.email, loginData.password)
+            else
+                await signUp(loginData.email, loginData.password)
+        } catch (error) {
+            console.log("Error: ", error)
+        }
+    }
+
+    const handleForgetPassword = async () => {
+        if(loginData.email)
+            await forgotPassword(loginData.email)
+                .then(() => {
+                    setLoginData({
+                        ...loginData,
+                        email: ""
+                    })
+                })
     }
 
     /* If user then redirect to some other page */
@@ -64,6 +90,18 @@ const Login = () => {
             </div>
             {isModalOpen ? (
                 <div className="auth-input-fields">
+                    <div className="auth-toggle-container">
+                        <Switch
+                            checked={enabled}
+                            onChange={handleSetSignMethod}
+                            className={`auth-toggle ${enabled ? "bg-yellow-600" : "bg-[#ffbc58]"} relative inline-flex h-6 w-11 mb-3 items-center rounded-full`}
+                        >   
+                            <span
+                                className={`auth-toggle ${enabled ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 transform transition ease-in-out duration-200 rounded-full bg-white`}
+                            />
+                        </Switch>
+                        <span className="auth-toggle-label">{enabled ? "Sign In" : "Sign Up"}</span>
+                    </div>
                     <TextField
                         required
                         autoComplete="off"
@@ -88,7 +126,7 @@ const Login = () => {
                         variant="outlined"
                         id="password"
                         label="Password"
-                        className="auth-input"
+                        className="auth-input-password"
                         type={showPassword ? "password" : "text"}
                         value={loginData.password}
                         onChange={handleChange}
@@ -111,6 +149,13 @@ const Login = () => {
                             ),
                         }}
                     />
+                    <Button 
+                        style={{ color: "#800080" }}
+                        className="auth-forgot-password-link"
+                        onClick={handleForgetPassword} 
+                    >
+                        Forgot Password
+                    </Button>
                     <Button
                         fullWidth
                         variant="contained"

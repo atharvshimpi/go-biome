@@ -4,17 +4,15 @@ import {
     signInWithRedirect,
     signOut,
     onAuthStateChanged,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
 } from "firebase/auth"
 import { auth } from "../firebase"
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-
-    const login = (email, password) => {
-        return createUserWithEmailAndPassword(email, password)
-    }
     
     const googleSignIn = async () => {
         const provider = new GoogleAuthProvider()
@@ -24,9 +22,25 @@ export const AuthContextProvider = ({ children }) => {
         await signInWithRedirect(auth, provider)
     }
 
-    const logOut = (navigate) => {
-        signOut(auth)
+    const signUp = async (email, password) => {
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then((res) => console.log(res))
+            .catch((err) => console.error("signUp : ", err))
+    }
+
+    const signIn = async (email, password) => {
+        await signInWithEmailAndPassword(auth, email, password)
+            .then((res) => console.log(res))
+            .catch((err) => console.error("signIn : ", err))
+    }
+
+    const logOut = async (navigate) => {
+        await signOut(auth)
         navigate("/login")
+    }
+
+    const forgotPassword = (email) => {
+        return sendPasswordResetEmail(auth, email)
     }
 
     useEffect(() => {
@@ -42,7 +56,7 @@ export const AuthContextProvider = ({ children }) => {
 
     return (
         // eslint-disable-next-line react/react-in-jsx-scope
-        <AuthContext.Provider value={{ googleSignIn, logOut, user }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ googleSignIn, signIn, signUp, logOut, forgotPassword, user }}>{children}</AuthContext.Provider>
     )
 }
 

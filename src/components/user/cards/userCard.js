@@ -23,9 +23,9 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
             className="usercard-bg-container"
         >
             <div className="top-view">
-                <div style={{ opacity: 0 }} className="icon-container">
+                <div className="icon-container">
                     <IoIosArrowBack
-                        onClick={() => navigate("/")}
+                        onClick={() => setIsPreviewOn(false)}
                         className="icon"
                     />
                 </div>
@@ -60,16 +60,6 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
                     <div className="usercard-createdAt">
                         <AiFillClockCircle className="usercard-icons" />
                         <h5>{userCardData.createdAt.substring(4, 15)}</h5>
-                    </div>
-                    <div className="usercard-btn-container">
-                        <Button
-                            className="usercard-btn"
-                            fullWidth
-                            variant="contained"
-                            onClick={() => setIsPreviewOn(false)}
-                        >
-                            Go Back
-                        </Button>
                     </div>
                 </div>
             </div>

@@ -14,14 +14,24 @@ import {
 import { Box, CircularProgress } from "@material-ui/core"
 import select from "../../assets/sounds/Selecting.mp3"
 
+const updateTime = (hours, minutes, seconds) => {
+    const newDate = new Date()
+    newDate.setHours(hours)
+    newDate.setMinutes(minutes)
+    newDate.setSeconds(seconds)
+
+    return newDate.toISOString()
+}
+
 const initialState = {
     friendlyBiome: "Bugsy",
     unFriendlyBiome: "Minion",
-    wakeupTime: null,
-    sleepTime: null,
-    morningCheckInTime: null,
-    mealTime: null,
-    vibrate: false
+    wakeupTime: updateTime(9, 0, 0),
+    sleepTime: updateTime(23, 0, 0),
+    morningCheckInTime: updateTime(10, 30, 0),
+    mealTime: updateTime(14, 0, 0),
+    vibrate: false,
+    sound: false
 }
 
 const QuestionModal = ({ qNum }) => {

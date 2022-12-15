@@ -1,12 +1,28 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
 
+import { IoIosArrowBack } from "react-icons/io"
 import "./terms.css"
 
 const Terms = () => {
+    const navigate = useNavigate()
     return(
         <div className="contain">
             <div className="header">
-                <h1> <b>Terms and Conditions</b></h1>
+                <div className="icon-container">
+                    <IoIosArrowBack
+                        onClick={() => navigate("/")}
+                        className="icon"
+                    />
+                </div>
+                <h1><b>Terms and Conditions</b></h1>
+                {/* Hide this part to maintain center align */}
+                <div style={{ opacity: 0 }} className="icon-container">
+                    <IoIosArrowBack
+                        onClick={() => navigate("/")}
+                        className="icon"
+                    />
+                </div>
             </div>
 
             <div className="main-text">
@@ -41,7 +57,7 @@ const Terms = () => {
                     Wherever possible, users are requested to anonymise themselves in usernames and description tags so as to help us maintain your privacy.
                 </p>
 
-                <p className="text-para2">
+                <p style={{ marginBottom: "0.5rem" }} className="text-para2">
                     Other information regarding this research and data handling can be accessed in the About section under the Settings tab. For further details about this research, please contact the research team at <a href="mailto: hafp.tech@gmail.com">hafp.tech@gmail.com</a>.
                 </p>
             </div>

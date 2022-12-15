@@ -3,8 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
 
-import select from "../../assets/sounds/UI/Proceed.mp3"
 import { demoNotification } from "../notifications/demo"
+import select from "../../assets/sounds/Alert_pop.mp3"
 
 import { BsHeart, BsHeartFill } from "react-icons/bs"
 import { Box, CircularProgress } from "@mui/material"
@@ -36,19 +36,17 @@ const categoryTags = [
     },
 ]
 
-const ActivityCarousal = ({
+const LikedCards = ({ 
     gender,
     gameStats,
     setGameStats,
     likedCardsDetails,
     setLikedCardsDetails,
-    cardDetailsData,
     cardCategory,
-    setIsCardModalOpen,
+    setIsLikedCardsModalOpen,
     setIsActivityModal1Open,
 }) => {
-    if (!cardDetailsData) return null
-
+    if (!likedCardsDetails) return null
     const [loading, setLoading] = useState(false)
     const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
 
@@ -62,8 +60,7 @@ const ActivityCarousal = ({
             ...gameStats,
             activityOngoing: true,
             currentActivity: { 
-                ...obj, 
-                categoryId: cardCategory,
+                ...obj,
                 activityTimings: { 
                     activityStart: new Date().toISOString(), 
                     activityFinish: null 
@@ -78,8 +75,7 @@ const ActivityCarousal = ({
                 ...gameStats,
                 activityOngoing: true,
                 currentActivity: { 
-                    ...obj, 
-                    categoryId: cardCategory, 
+                    ...obj,
                     activityTimings: { 
                         activityStart: new Date().toISOString(), 
                         activityFinish: null 
@@ -92,7 +88,7 @@ const ActivityCarousal = ({
         audio.play()
         setTimeout(() => {
             setLoading(false)
-            setIsCardModalOpen(false)
+            setIsLikedCardsModalOpen(false)
             setIsActivityModal1Open(true)
         }, 1500)
     }
@@ -102,6 +98,7 @@ const ActivityCarousal = ({
     
         const filterArr = likedCardsDetails.filter(likedObj => likedObj.icon !== obj.icon)
 
+        // no such liked card exists --> then add one
         if(filterArr.length === likedCardsDetails.length) {
             likedCardsDetails.push({
                 ...obj, 
@@ -112,6 +109,7 @@ const ActivityCarousal = ({
                 "liked-cards",
                 JSON.stringify(likedCardsDetails)
             )
+            // such a liked card exists --> then remove that
         } else {
             setLikedCardsDetails(filterArr)
             localStorage.setItem(
@@ -128,12 +126,11 @@ const ActivityCarousal = ({
             modules={[EffectCards]}
             className="mySwiper"
         >
-            {cardDetailsData.map((obj, key) => {
+            {likedCardsDetails.map((obj, key) => {
                 const [isCardFlipped, setIsCardFlipped] = useState(false)
                 const [cardLoading, setCardLoading] = useState(true)
                 const [isLikePressed, setIsLikePressed] = useState(false)
-                const multiGenderAvaialble =
-                    obj.icon.split("_").length > 1 ? true : false
+                const multiGenderAvaialble = obj.icon.split("_").length > 1 ? true : false
                 const imageLoaded = () => setCardLoading(false)
                 // const isLikedCardFound = likedCardsDetails.find(function(likeObj) {
                 //     likeObj.task === obj.task
@@ -189,23 +186,12 @@ const ActivityCarousal = ({
                                 onClick={() => setIsCardFlipped(!isCardFlipped)}
                                 style={{
                                     backgroundColor:
-                                        categoryTags[cardCategory != null ? cardCategory : obj.categoryId].color,
+                                        categoryTags[obj.categoryId].color,
                                 }}
                             >
                                 <div className="card-content">
                                     <p className="header">{obj.task}</p>
                                     <div className="btngrp">
-                                        <button 
-                                            type="button" 
-                                            className={`${isLikePressed ? `text-white bg-red-700 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700` : `text-red-700 border border-red-700 hover:bg-red-700 hover:text-white dark:border-red-500 dark:text-red-500 dark:hover:text-white`} focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 mb-1 text-center inline-flex items-center dark:focus:ring-red-800`}
-                                            onClick={(e) => {
-                                                handleLike(e, obj)
-                                                setIsLikePressed(!isLikePressed)
-                                            }}
-                                        >
-                                            {isLikePressed ? <BsHeartFill /> : <BsHeart />}
-                                            <span className="sr-only">{isLikePressed ? "Unlike Button" : "Like Button"}</span>
-                                        </button>
                                         <button
                                             className="btn"
                                             onClick={(e) => handleClick(e, obj)}
@@ -241,4 +227,4 @@ const ActivityCarousal = ({
     )
 }
 
-export default ActivityCarousal
+export default LikedCards

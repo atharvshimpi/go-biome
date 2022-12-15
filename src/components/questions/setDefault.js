@@ -26,6 +26,7 @@ export const setDefault = () => {
     }))
     localStorage.setItem("activity-user-cards", JSON.stringify([]))
     localStorage.setItem("activity-history", JSON.stringify([]))
+    localStorage.setItem("liked-cards", JSON.stringify([]))
     localStorage.setItem("biome-pool", JSON.stringify([]))
     localStorage.setItem(
         "biome-garden",

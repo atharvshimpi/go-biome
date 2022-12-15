@@ -105,14 +105,4 @@ export const settingDetails = [
         title: "Set unfriendly Biome Name",
         icon: <FaVirus />,
     },
-    {
-        id: 16,
-        title: "Save Progress & feedback",
-        icon: <MdBackup />,
-    },
-    {
-        id: 17,
-        title: "Share with friends",
-        icon: <BsFillShareFill />,
-    },
 ]

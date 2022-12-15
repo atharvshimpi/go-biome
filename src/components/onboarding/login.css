@@ -50,6 +50,10 @@
     margin-bottom: 2rem !important;
 }
 
+.auth-input-password {
+    margin-bottom: 0.5rem !important;
+}
+
 .auth-profile-photo {
     height: 3.5rem;
 }
@@ -94,4 +98,26 @@
 
 .auth-privacy-link {
     color: #c96f53;
+}
+
+.auth-forgot-password-link {
+    justify-content: flex-start !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.auth-toggle-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.auth-toggle {
+    margin-right: 1rem;
+}
+
+.auth-toggle-label {
+    position: relative;
+    top: -2px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(133, 133, 133);
 }

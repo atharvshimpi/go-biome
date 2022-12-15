@@ -1,27 +1,33 @@
-import React , { useState } from "react"
+import React, { useState } from "react"
 import { Switch } from "@headlessui/react"
 
 import { settingDetails } from "./settingsData"
 
 import { IoIosArrowForward } from "react-icons/io"
-// eslint-disable-next-line
+
 const GeneralSettings = ({ setOpen, setSettingId }) => {
-    const [pref, setPref] = useState(JSON.parse(localStorage.getItem("preferences")))
-    const [enabled, setEnabled] = useState(pref.vibrate)
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
+    const [vibrateEnabled, setVibrateEnabled] = useState(pref.vibrate)
 
     const handleClick = (id) => {
         setSettingId(id)
         setOpen(true)
     }
 
-    // messed up code - do it properly
-    const handleVibrate = () => {
-        setEnabled(!enabled)
-        setPref({ ...pref, vibrate: enabled })
-        localStorage.setItem("preferences", JSON.stringify({ ...pref, vibrate: !enabled }))
+    const handleToggle = (objId) => {
+        if(objId === 6) {
+            setSoundEnabled(!soundEnabled)
 
-        if(!enabled) {
-            window.navigator.vibrate(250)
+            localStorage.setItem("preferences", JSON.stringify({ ...pref, vibrate: vibrateEnabled, sound: !soundEnabled }))
+        } else {
+            setVibrateEnabled(!vibrateEnabled)
+
+            if(!vibrateEnabled) {
+                window.navigator.vibrate(250)
+            }
+
+            localStorage.setItem("preferences", JSON.stringify({ ...pref, vibrate: !vibrateEnabled, sound: soundEnabled }))
         }
     }
 
@@ -37,14 +43,16 @@ const GeneralSettings = ({ setOpen, setSettingId }) => {
                                     {obj.icon}
                                     <p>{obj.title}</p>
                                 </div>
-                                {obj.id === 7 ? 
+                                {(obj.id === 6 || obj.id === 7) ? 
                                     <Switch
-                                        checked={enabled}
-                                        onChange={handleVibrate}
-                                        className={`${enabled ? "bg-yellow-600" : "bg-[#ffbc58]"} relative inline-flex h-6 w-11 items-center rounded-full`}
+                                        name="s1"
+                                        checked={obj.id === 6 ? soundEnabled : vibrateEnabled}
+                                        onChange={() => handleToggle(obj.id)}
+                                        className={`${(obj.id === 6 ? soundEnabled : vibrateEnabled) ? "bg-yellow-600" : "bg-[#ffbc58]"} relative inline-flex h-6 w-11 items-center rounded-full`}
                                     >
+                                        <span className="sr-only">{obj.id === 6 ? "Sound" : "Vibrate"}</span>
                                         <span
-                                            className={`${enabled ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 transform transition ease-in-out duration-200 rounded-full bg-white`}
+                                            className={`${(obj.id === 6 ? soundEnabled : vibrateEnabled) ? "translate-x-6" : "translate-x-1"} inline-block h-4 w-4 transform transition ease-in-out duration-200 rounded-full bg-white`}
                                         />
                                     </Switch>
                                     :

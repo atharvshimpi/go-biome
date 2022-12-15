@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { setDoc, doc } from "firebase/firestore"
 import { firestore } from "../../firebase"
 
@@ -37,6 +38,7 @@ const UserDetails = () => {
     const [userData, setUserData] = useState(initialState)
     const [loading, setLoading] = useState(false)
     const { user } = UserAuth()
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.id]: e.target.value })
@@ -48,20 +50,21 @@ const UserDetails = () => {
             ...userData, 
             email: user.email, 
             // if -1, then use the default template, no need to populate it in local storage
-            profilePicture: user.photoURL ? user.photoURL : -1 ,
+            profilePicture: user.photoURL,
         }))
 
         // save user info in firebase 
-        setDoc(doc(firestore, "users", userData.username), {
+        setDoc(doc(firestore, "users", user.email.split("@")[0]), {
             details: {
                 ...userData,
                 email: user.email,
-                profilePicture: user.photoURL ? user.photoURL : -1,
+                profilePicture: user.photoURL,
             }
         })
+        
         setTimeout(() => {
             setLoading(false)
-            window.location.href = "/questions-main"
+            navigate("/questions-main")
         }, 1000)
     }
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import "./questions.css"
 
-const QuestionsHome = () => {
+const GameNarrative = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -17,15 +17,15 @@ const QuestionsHome = () => {
             className="questions-container"
         >
             <div className="questions-content">
-                <div className="questions-heading">
-                    <h1>
-                        Welcome to Go-Go Biome,{" "}
-                        <span className="username">{user.username}</span>!
-                    </h1>
-                </div>
                 <div className="questions-about">
                     <p>
-                    Go-Go Biome is an open-ended digital game designed to engage players in real-world activities that can influence gut microbial diversity. The human gut consists of diverse friendly and unfriendly microbial species which is important for a healthy gut, and the balance between the two is crucial to protect the human body against various illnesses.<br />
+                    It was once a splendid trail where Bugsy, the friendly biome, and Minion, the unfriendly biome lived in harmony with one another. But suddenly, owing to some human factors, the minions increased in population, destroying most of bugsy&apos;s friends along with the beloved gut trail. The trail is now a dark and eerie place with minions lurking around every corner. Your mission is to energise bugsy- the friendly biome, and help bring its friends back. Help bugsy by increasing the friendly biome population and decreasing the unfriendly biome population to a ratio of 85:15, that depicts the state of a happy and balanced gut.
+					<br />
+					<br />
+					Go on, engage in diverse activities and help bugsy restore the balance they and their friends once enjoyed. Beware, the minions have to be kept under check everyday to protect the trail.
+                        <br /><br />
+                        Before you begin, please answer the next few questions for better
+                        experience!
                     </p>
                 </div>
                 <div className="questions-btn-container">
@@ -35,7 +35,7 @@ const QuestionsHome = () => {
                             marginBottom: 0,
                         }}
                         className="questions-btn"
-                        onClick={() => navigate("/game-narrative")}
+                        onClick={() => navigate("/questions?q=1")}
                     >
                         Proceed
                     </button>
@@ -45,4 +45,4 @@ const QuestionsHome = () => {
     )
 }
 
-export default QuestionsHome
+export default GameNarrative

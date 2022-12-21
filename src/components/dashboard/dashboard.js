@@ -216,8 +216,8 @@ const Dashboard = () => {
                 <div className="icon-container">
                     <AiFillSetting
                         onClick={() => { 
-                            const audio = new Audio(select)
-                            audio.play()
+                            // const audio = new Audio(select)
+                            // audio.play()
                             navigate("/settings")
                         }}
                         className="icon"

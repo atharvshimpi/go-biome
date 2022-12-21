@@ -39,11 +39,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    padding-top: 0.2rem;
 }
 
 .general-settings-container {
     width: 100%;
-    margin: 1rem;
+    /* margin: 1rem; */
 }
 
 .general-settings-container h2 {

@@ -15,6 +15,7 @@ import {
     FaSun,
     FaBacterium,
     FaVirus,
+    FaBook,
 } from "react-icons/fa"
 import {
     GiPlantsAndAnimals,
@@ -105,4 +106,9 @@ export const settingDetails = [
         title: "Set unfriendly Biome Name",
         icon: <FaVirus />,
     },
+    {
+        id: 16,
+        title: "Terms and Conditions",
+        icon: <FaBook />,
+    }
 ]

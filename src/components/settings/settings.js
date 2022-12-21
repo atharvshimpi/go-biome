@@ -12,6 +12,7 @@ import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
 import GeneralSettings from "./general"
 import CustomizationSettings from "./customization"
+import AboutSettings from './aboutSettings'
 
 import { IoIosArrowBack } from "react-icons/io"
 import { GrFormClose } from "react-icons/gr"
@@ -82,6 +83,7 @@ const Settings = () => {
                 <UserSettings setOpen={setOpen} setSettingId={setSettingId} handleSignOut={handleSignOut} />
                 <GeneralSettings setOpen={setOpen} setSettingId={setSettingId} />
                 <CustomizationSettings setOpen={setOpen} setSettingId={setSettingId} />
+                <AboutSettings setOpen={setOpen} setSettingId={setSettingId} navigate={navigate} />
 
                 <AnimatePresence>
                     {open && (

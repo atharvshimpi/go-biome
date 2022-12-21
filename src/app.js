@@ -7,6 +7,7 @@ import "./styles.css"
 import Dashboard from "./components/dashboard/dashboard"
 import PrivateRoute from "./components/private/privateRoute"
 import QuestionsHome from "./components/questions/questionsHome"
+import GameNarrative from './components/questions/gameNarrative'
 import Questions from "./components/questions/questions"
 import Login from "./components/onboarding/login"
 import Terms from "./components/about/terms"
@@ -29,6 +30,7 @@ const App = () => {
                         <Route path="/terms" element={ <Terms /> } />
                         <Route path="/userDetails" element={ <UserDetails /> } />
                         <Route path="/questions-main" element={<QuestionsHome />} />
+                        <Route path="/game-narrative" element={<GameNarrative />} />
                         <Route path="/questions" element={<Questions />} />
                         <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
                         <Route path="/map" element={<PrivateRoute><Gamemap /></PrivateRoute>} />

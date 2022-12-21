@@ -76,7 +76,7 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                         >
                             {/* Front Side */}
                             <div
-                                className="card-container"
+                                className="activity-cardstack-card-container"
                                 style={{ backgroundColor: "#ffffff" }}
                             >
                                 {cardLoading && (
@@ -97,12 +97,16 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                         />
                                     </Box>
                                 )}
+                                {/* <h1 className="swiper-modal-activity-title">{obj.task}</h1> */}
+                                <div className="activity-cardstack-location">
+                                    <GoLocation /><p>{obj.location}</p>
+                                </div>
                                 <img
                                     style={{ opacity: cardLoading ? 0 : 1 }}
                                     onLoad={imageLoaded}
-                                    onClick={() =>
-                                        setIsCardFlipped(!isCardFlipped)
-                                    }
+                                    // onClick={() =>
+                                    //     setIsCardFlipped(!isCardFlipped)
+                                    // }
                                     src={obj.icon.length > 4 ? obj.icon : require(`../../assets/images/cards/${
                                         obj.category
                                     }/${
@@ -112,6 +116,21 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                     }.png`)}
                                     alt={obj.icon}
                                 />
+                                <div className="activity-cardstack-card-description-container" style={{
+                                    backgroundColor:
+                                    categoryTags[cardCategory != null ? cardCategory : obj.categoryId].color,
+                                }}>
+                                     <div className="activity-cardstack-card-description">
+                                        <p className=""><strong>Description</strong>: {obj.description}</p>
+                                    </div>
+                                    <div className="activity-cardstack-date-container">
+                                        <AiOutlineCalendar />
+                                        <div><p className="">Mon, 22 Aug 2022</p></div>
+                                    </div>
+                                    <div onClick={() => {}} className="repeat-button">
+                                        Repeat Activity
+                                    </div>
+                                </div>
                             </div>
                             {/* Back Side */}
                             <div

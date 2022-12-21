@@ -27,17 +27,36 @@ const Terms = () => {
 
             <div className="main-text">
                 <p className="text-para1">
-                    By playing Go-Go Biome you consent to participate in a research study 
-                    on the design of interactive experiences to engage with gut health factors.
-                    The following data as listed below will be collected for academic research purposes.
-                    You may choose to provide additional consent for the use of your data 
-                    (images and activity descriptions) in our research publications and promotion in both digital and analog formats.<br/>
+                By agreeing to play Go-Go Biome you consent to participate in a research study on the design of interactive experiences to engage with gut health factors. Playing Go-Go Biome requires users to participate in real world activities as part of the gameplay. The choice of activities will be up to the individual user to choose from a set of activities listed in the game cards. As part of the gameplay, we will be collecting the following data from you for academic research purposes.<br/>
                 </p>
+            </div>
 
-                <p className="text-para2">
-                    Playing Go-Go Biome requires users to participate in real world activities as part of the gameplay. 
-                    The choice of activities will be up to the individual user to decide from a set of activities listed in the game cards. <br/>
-                </p>
+            <div className="data-images">
+                <div className="data-image">
+                    <img src={require("../../assets/images/tnc/check.png")} width="60px" height="60px" style={{margin: "-10px"}} />
+                    <img src={require("../../assets/images/tnc/images.png")} width="60px" height="60px" />
+                    <h2 className="data-image-title">Images</h2>
+                </div>
+                <div className="data-image">
+                    <img src={require("../../assets/images/tnc/check.png")} width="60px" height="60px" style={{margin: "-10px"}} />
+                    <img src={require("../../assets/images/tnc/image_description.png")} width="60px" height="60px" />
+                    <h2 className="data-image-title">Image Description</h2>
+                </div>
+                <div className="data-image">
+                    <img src={require("../../assets/images/tnc/check.png")} width="60px" height="60px" style={{margin: "-10px"}} />
+                    <img src={require("../../assets/images/tnc/voice_note.png")} width="60px" height="60px" />
+                    <h2 className="data-image-title">Voice Notes</h2>
+                </div>
+                <div className="data-image">
+                    <img src={require("../../assets/images/tnc/check.png")} width="60px" height="60px" style={{margin: "-10px"}} />
+                    <img src={require("../../assets/images/tnc/game_analytics.png")} width="60px" height="60px" />
+                    <h2 className="data-image-title">Game Analytics</h2>
+                </div>
+                <div className="data-image">
+                    <img src={require("../../assets/images/tnc/check.png")} width="60px" height="60px" style={{margin: "-10px"}} />
+                    <img src={require("../../assets/images/tnc/survey.png")} width="60px" height="60px" />
+                    <h2 className="data-image-title">Survey</h2>
+                </div>
             </div>
 
             <div className="header">
@@ -46,19 +65,11 @@ const Terms = () => {
 
             <div className="main-text-data">
                 <p className="text-para1">
-                    By agreeing to play Go-Go Biome you consent to participate in a research study
-                    on the design of interactive experiences to engage with gut health factors. 
-                    Playing Go-Go Biome requires users to participate in real world activities as part of the gameplay. 
-                    The choice of activities will be up to the individual user to choose from a set of activities listed in the game cards. 
-                    As part of the gameplay, we will be collecting the following data from you for academic research purpose.<br/>
-                </p>
-
-                <p className="text-para2">
-                    Wherever possible, users are requested to anonymise themselves in usernames and description tags so as to help us maintain your privacy.
+                Playing Go-Go Biome requires users to take images of the activities they engage in during the course of the game to make a visual record of their game moves in the form of user activity cards. These cards include <strong>images</strong> from activities, any <strong>image description</strong> added by you, and a <strong>voice note</strong> in case you wish to record any experiences pertaining to the activity. Users can be creative in the way they capture images- and avoid taking selfies where possible. All data collected through this game will be accessed only by the user and later by the research team for the sake of data analysis for our research. All such data will be handled as per our research data management plan. Kindly note, &quot;you&quot; (the user) are not the subject of our research, we are interested in the ways in which the game is played and the activities users participate in, the corresponding feedback from the game, and your interaction with the game components. Wherever possible, users are requested to anonymise themselves in usernames and description tags so as to help us maintain your privacy. Data in the form of <strong>game analytics</strong> will be collected to understand your interaction with the game features. You are also invited to participate in a <strong>survey</strong> to help us understand your experience with the game, this can be greatly beneficial for our research.
                 </p>
 
                 <p style={{ marginBottom: "0.5rem" }} className="text-para2">
-                    Other information regarding this research and data handling can be accessed in the About section under the Settings tab. For further details about this research, please contact the research team at <a href="mailto: hafp.tech@gmail.com">hafp.tech@gmail.com</a>.
+                    Other information regarding this research and data handling can be accessed under the <strong>Settings tab &gt; About section</strong>. For further details about this research, please feel free to contact the research team at <a href="mailto:hafp.tech@gmail.com" style={{color: "#000", fontWeight: "bold", textDecoration: "underline"}}>hafp.tech@gmail.com</a>.
                 </p>
             </div>
         </div>

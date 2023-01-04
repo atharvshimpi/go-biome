@@ -9,7 +9,7 @@ import select from "../../assets/sounds/Alert_pop.mp3"
 import { BsHeart, BsHeartFill } from "react-icons/bs"
 import { Box, CircularProgress } from "@mui/material"
 
-import "./activityCarousal.css"
+import "./carousal/activityCarousal.css"
 import "swiper/css"
 import "swiper/css/effect-cards"
 

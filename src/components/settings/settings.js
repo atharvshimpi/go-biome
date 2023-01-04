@@ -12,7 +12,7 @@ import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
 import GeneralSettings from "./general"
 import CustomizationSettings from "./customization"
-import AboutSettings from './aboutSettings'
+import AboutSettings from "./aboutSettings"
 
 import { IoIosArrowBack } from "react-icons/io"
 import { GrFormClose } from "react-icons/gr"

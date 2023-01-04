@@ -120,7 +120,7 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                     backgroundColor:
                                     categoryTags[cardCategory != null ? cardCategory : obj.categoryId].color,
                                 }}>
-                                     <div className="activity-cardstack-card-description">
+                                    <div className="activity-cardstack-card-description">
                                         <p className=""><strong>Description</strong>: {obj.description}</p>
                                     </div>
                                     <div className="activity-cardstack-date-container">

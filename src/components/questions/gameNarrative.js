@@ -19,10 +19,9 @@ const GameNarrative = () => {
             <div className="questions-content">
                 <div className="questions-about">
                     <p>
-                    It was once a splendid trail where Bugsy, the friendly biome, and Minion, the unfriendly biome lived in harmony with one another. But suddenly, owing to some human factors, the minions increased in population, destroying most of bugsy&apos;s friends along with the beloved gut trail. The trail is now a dark and eerie place with minions lurking around every corner. Your mission is to energise bugsy- the friendly biome, and help bring its friends back. Help bugsy by increasing the friendly biome population and decreasing the unfriendly biome population to a ratio of 85:15, that depicts the state of a happy and balanced gut.
-					<br />
-					<br />
-					Go on, engage in diverse activities and help bugsy restore the balance they and their friends once enjoyed. Beware, the minions have to be kept under check everyday to protect the trail.
+                        It was once a splendid trail where Bugsy, the friendly biome, and Minion, the unfriendly biome lived in harmony with one another. But suddenly, owing to some human factors, the minions increased in population, destroying most of bugsy&apos;s friends along with the beloved gut trail. The trail is now a dark and eerie place with minions lurking around every corner. Your mission is to energise bugsy- the friendly biome, and help bring its friends back. Help bugsy by increasing the friendly biome population and decreasing the unfriendly biome population to a ratio of 85:15, that depicts the state of a happy and balanced gut.
+                        <br /><br />
+                        Go on, engage in diverse activities and help bugsy restore the balance they and their friends once enjoyed. Beware, the minions have to be kept under check everyday to protect the trail.
                         <br /><br />
                         Before you begin, please answer the next few questions for better
                         experience!

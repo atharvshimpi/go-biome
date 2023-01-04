@@ -8,7 +8,7 @@ const AboutSettings = ({ setOpen, setSettingId, handleSignOut, navigate }) => {
     const handleClick = (id) => {
         // setSettingId(id)
         // setOpen(true)
-		navigate("/terms")
+        navigate("/terms")
     }
 
     return (

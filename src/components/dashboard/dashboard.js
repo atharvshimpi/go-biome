@@ -3,8 +3,8 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 import Gameboard from "../gameboard/gameboard"
-import ActivityCarousal from "../activities/activityCarousal"
-import ActivityProgress from "../activities/activityProgress"
+import ActivityCarousal from "../activities/carousal/activityCarousal"
+import ActivityProgress from "../activities/modals/activityProgress"
 import LikedCards from "../activities/likedCards"
 
 // game card details

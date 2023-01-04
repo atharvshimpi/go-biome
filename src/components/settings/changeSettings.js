@@ -8,9 +8,9 @@ import imageTemplate from "../../assets/images/imageTemplate.svg"
 import emptyTemplate from "../../assets/images/emptyTemplate.svg"
 import { Avatar, IconButton } from "@mui/material"
 import { ActivityHistoryDrpDwn } from "../modals/activityHistoryDrpDwn"
-import ActivityCardStack from "../activities/activityCardStack"
-import ActivityHistory from "../activities/activityHistory"
-import BiomeGarden from "../activities/biomeGarden"
+import ActivityCardStack from "../activities/cardStack/activityCardStack"
+import ActivityHistory from "../activities/history/activityHistory"
+import BiomeGarden from "../activities/biomeGarden/biomeGarden"
 
 export const changeProfilePicture = ({
     notify,

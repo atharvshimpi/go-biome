@@ -42,6 +42,7 @@ import Diversitycheck from "../../assets/images/shield/diversitycheck.svg"
 import Superdiversity from "../../assets/images/shield/superdiversity.svg"
 
 import { AiFillSetting } from "react-icons/ai"
+import { GiEncirclement } from "react-icons/gi"
 import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
 
@@ -94,6 +95,24 @@ const Dashboard = () => {
                 console.log("New Day!")
                 prevDate.setDate(prevDate.getDate() + 1)
                 setPrevGame(prevDate)
+
+                const actPerfSum = gameStats.activityPerformed.reduce((x, y) => { return x + y }, 0)
+                // if inactive, then gameState - 1
+                if(!actPerfSum) {
+                    if(gameStats.gameState > 0)
+                        localStorage.setItem("gamestats", JSON.stringify({
+                            ...gameStats,
+                            gameState: gameStats.gameState - 1
+                        }))
+                // else gameState + 1
+                } else {
+                    if(gameStats.gameState < 3)
+                        localStorage.setItem("gamestats", JSON.stringify({
+                            ...gameStats,
+                            gameState: gameStats.gameState + 1
+                        }))
+                }
+
                 localStorage.setItem("gamestats", JSON.stringify({
                     ...gameStats,
                     activityPerformed: [0, 0, 0, 0],
@@ -101,7 +120,7 @@ const Dashboard = () => {
                     friendlyBiomePoints: 15,
                     unFriendlyBiomePoints: 85,
                     activityBiomeCongMsg: false,
-                    prevDate: prevDate
+                    prevDate: prevDate,
                 }))
             }
         }
@@ -213,15 +232,27 @@ const Dashboard = () => {
             className="dashboard-container"
         >
             <div className="top-view">
-                <div className="icon-container">
-                    <AiFillSetting
-                        onClick={() => { 
-                            // const audio = new Audio(select)
-                            // audio.play()
-                            navigate("/settings")
-                        }}
-                        className="icon"
-                    />
+                <div className="icon-group">
+                    <div className="icon-container" style={{ marginRight: "0.2rem" }}>
+                        <AiFillSetting
+                            onClick={() => { 
+                                // const audio = new Audio(select)
+                                // audio.play()
+                                navigate("/settings")
+                            }}
+                            className="icon"
+                        />
+                    </div>
+                    <div className="icon-container">
+                        <GiEncirclement
+                            onClick={() => { 
+                                // const audio = new Audio(select)
+                                // audio.play()
+                                navigate("/")
+                            }}
+                            className="icon"
+                        />
+                    </div>
                 </div>
                 <h3 className="top-view-name">{userDetails.username}&apos;s Biome Land</h3>
             </div>

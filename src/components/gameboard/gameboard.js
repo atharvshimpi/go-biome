@@ -1,17 +1,17 @@
 import React, { useEffect } from "react"
 
-import gameBG1 from "../../assets/images/bg/Layer_1.png"
-import gameBG2 from "../../assets/images/bg/Layer_2.png"
-import gameBG3 from "../../assets/images/bg/Layer_3.png"
-import gameBG4 from "../../assets/images/bg/Layer_5.png"
-import gameBG5 from "../../assets/images/bg/Layer_6.png"
-import gameBG6 from "../../assets/images/bg/Layer_7.png"
+import gameBG1 from "../../assets/images/bg/gameState0.png"
+import gameBG2 from "../../assets/images/bg/gameState1.png"
+import gameBG3 from "../../assets/images/bg/gameState2.png"
+import gameBG4 from "../../assets/images/bg/gameState3.png"
 
 import biomeImg1 from "../../assets/images/friendly.png"
 
 import "./gameboard.css"
 
 const Gameboard = () => {
+    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+
     useEffect(() => {
         const canvas = document.getElementById("game-board")
         const ctx = canvas.getContext("2d")
@@ -28,10 +28,6 @@ const Gameboard = () => {
         backgroundLayer3.src = gameBG3
         const backgroundLayer4 = new Image()
         backgroundLayer4.src = gameBG4
-        const backgroundLayer5 = new Image()
-        backgroundLayer5.src = gameBG5
-        const backgroundLayer6 = new Image()
-        backgroundLayer6.src = gameBG6
 
         const biomeImg = new Image()
         biomeImg.src = biomeImg1
@@ -69,7 +65,7 @@ const Gameboard = () => {
             constructor(image, speedModifier) {
                 this.x = 0
                 this.y = 0
-                this.width = 3420
+                this.width = 1000
                 this.height = window.outerHeight
                 this.image = image
                 this.speedModifier = speedModifier
@@ -104,22 +100,20 @@ const Gameboard = () => {
         }
 
         const layer1 = new Layer(backgroundLayer1, 1)
-        const layer2 = new Layer(backgroundLayer2, 0.8)
-        const layer3 = new Layer(backgroundLayer3, 0.6)
-        const layer4 = new Layer(backgroundLayer4, 0.4)
-        const layer5 = new Layer(backgroundLayer5, 0.6)
-        const layer6 = new Layer(backgroundLayer6, 0.2)
+        const layer2 = new Layer(backgroundLayer2, 1)
+        const layer3 = new Layer(backgroundLayer3, 1)
+        const layer4 = new Layer(backgroundLayer4, 1)
 
         const biome1 = new Player(CANVAS_WIDTH, CANVAS_HEIGHT)
 
-        const gameObjects = [layer6, layer4, layer3, layer5, layer2, layer1]
+        // change game background based on activity and inactivity
+        const gameObject = [layer1, layer2, layer3, layer4]
+        // else some error
 
         function animate() {
             ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-            gameObjects.forEach((object) => {
-                object.draw()
-                // object.update()
-            })
+            gameObject[gameStats.gameState].draw()
+            // object.update()
             biome1.draw(ctx)
             requestAnimationFrame(animate)
         }

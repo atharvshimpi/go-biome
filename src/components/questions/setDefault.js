@@ -17,7 +17,8 @@ export const setDefault = () => {
             activityBiomeMovementModal: false,
             activityBiomeCongMsg: false,
             currentActivity: null,
-            prevDate: new Date(new Date().setUTCHours(0, 0, 0, 0)) // gives nearest midnight in the past
+            prevDate: new Date(new Date().setUTCHours(0, 0, 0, 0)), // gives nearest midnight in the past
+            gameState: 0
         })
     )
     localStorage.setItem("mapstats", JSON.stringify({

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 
@@ -10,12 +10,12 @@ import Zen from "../../assets/images/category/zen.svg"
 
 import { GoLocation } from "react-icons/go"
 import { AiOutlineCalendar } from "react-icons/ai"
+import { FcSpeaker } from "react-icons/fc"
 import { Box, CircularProgress } from "@mui/material"
 
 import "swiper/css"
 import "swiper/css/effect-cards"
 import "./swiperModal.css"
-import { useEffect } from "react"
 
 const categoryTags = [
     {
@@ -41,6 +41,26 @@ const categoryTags = [
 ]
 
 const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+    const audio = new Audio(select)
+
+    // On song end, set isAudioPlaying to false
+
+    const toggleAudio = () => {
+        var audioElem = document.getElementById("audio")
+        
+        // If audio is already playing, stop it
+        if(isAudioPlaying) {
+            setIsAudioPlaying(false)
+            audioElem.pause()
+
+        // Else start playing it
+        } else {
+            setIsAudioPlaying(true)
+            audioElem.play()
+        }
+    }
+
     return (
         <Swiper
             effect={"cards"}
@@ -54,6 +74,10 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                 const multiGenderAvaialble =
                     obj.icon.split("_").length > 1 ? true : false
                 const imageLoaded = () => setCardLoading(false)
+                const file = new File(obj?.audio, "demo.mp3", {
+                    type: "audio/mp3",
+                    lastModified: Date.now()
+                })
 
                 useEffect(() => {
                     if(obj.categoryId == 0)
@@ -100,9 +124,9 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                             <img
                                 style={{ opacity: cardLoading ? 0 : 1 }}
                                 onLoad={imageLoaded}
-                                // onClick={() =>
-                                //     setIsCardFlipped(!isCardFlipped)
-                                // }
+                                onClick={() =>
+                                    audio.play()
+                                }
                                 src={obj.icon.length > 4 ? obj.icon : require(`../../assets/images/cards/${
                                     obj.category
                                 }/${
@@ -123,7 +147,14 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                     <AiOutlineCalendar />
                                     <div><p className="cardstack-card-date">Mon, 22 Aug 2022</p></div>
                                 </div>
-                                <div onClick={() => {}} className="repeat-button">
+                                <div className="activity-cardstack-date-container">
+                                    <FcSpeaker />
+                                    <div><p onClick={toggleAudio} className="cardstack-card-date">{isAudioPlaying ? "Pause" : "Play"} Me</p></div>
+                                    <audio id="audio" src={obj?.audio} preload="auto">
+
+                                    </audio>
+                                </div>
+                                <div onClick={() => {audio.play()}} className="repeat-button">
                                     Repeat Activity
                                 </div>
                             </div>

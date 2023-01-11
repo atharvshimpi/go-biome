@@ -27,7 +27,7 @@ const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal
     return (
         <div className="activity-progress-container" style={{ width: "100%" }}>
             <div className="activity-progress-heading">
-                <b>Biome Points</b>
+                <b>Biome Population</b>
             </div>
             <div className="activity-img-group">
                 <div className="activity-img-container">

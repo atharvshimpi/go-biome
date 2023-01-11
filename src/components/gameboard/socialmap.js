@@ -13,13 +13,15 @@ import dashedRightDown from "../../assets/images/gamemap/dashed/dashedRightDown.
 import dashedRightUp from "../../assets/images/gamemap/dashed/dashedRightUp.png"
 import minion from "../../assets/images/gamemap/minion.png"
 
+import select from "../../assets/sounds/UI/Game_map.mp3"
+
 import { firestore } from "../../firebase"
 import { collection, getDocs } from "firebase/firestore"
 
 import "./socialmap.css"
 
 const SocialMap = () => {
-
+    const audio = new Audio(select)
     const navigate = useNavigate()
 
     const [board, setBoard] = useState([
@@ -153,7 +155,7 @@ const SocialMap = () => {
     return(
         <div className="gamemap_container">
             <div className="socialmap_button">
-                <button onClick={() => navigate("/map")}>Personal Map</button>
+                <button onClick={() =>{ audio.play(),navigate("/map")}}>Personal Map</button>
             </div>
             {board.map((row, rowIdx) => {
                 return <div key={k++} className={"row" + (rowIdx === 0 ? " right" : "")}>

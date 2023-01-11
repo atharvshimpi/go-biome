@@ -6,6 +6,7 @@ import { firestore } from "../../firebase"
 import { UserAuth } from "../../context/authContext"
 
 import imageTemplate from "../../assets/images/imageTemplate.svg"
+import select from "../../assets/sounds/UI/Proceed.mp3"
 
 import {
     Button,
@@ -38,6 +39,7 @@ const UserDetails = () => {
     const [userData, setUserData] = useState(initialState)
     const [loading, setLoading] = useState(false)
     const { user } = UserAuth()
+    const audio = new Audio(select)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -169,7 +171,10 @@ const UserDetails = () => {
                         fullWidth
                         variant="contained"
                         className="user-details-next-btn"
-                        onClick={handleSubmit}
+                        onClick={() => {
+                            audio.play(),
+                            handleSubmit
+                        }}
                         disabled={
                             userData.username === "" || !userData.agreedTerms
                         }

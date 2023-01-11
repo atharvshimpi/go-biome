@@ -2,16 +2,22 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 
 import { IoIosArrowBack } from "react-icons/io"
+import select from "../../assets/sounds/UI/Proceed.mp3"
 import "./terms.css"
 
 const Terms = () => {
+    const audio = new Audio(select)
     const navigate = useNavigate()
+
     return(
         <div className="contain">
             <div className="header">
                 <div className="icon-container">
                     <IoIosArrowBack
-                        onClick={() => navigate("/")}
+                        onClick={() => {
+                            audio.play(),
+                            navigate("/")
+                        }}
                         className="icon"
                     />
                 </div>
@@ -19,7 +25,10 @@ const Terms = () => {
                 {/* Hide this part to maintain center align */}
                 <div style={{ opacity: 0 }} className="icon-container">
                     <IoIosArrowBack
-                        onClick={() => navigate("/")}
+                        onClick={() => {
+                            audio.play(),
+                            navigate("/")
+                        }}
                         className="icon"
                     />
                 </div>

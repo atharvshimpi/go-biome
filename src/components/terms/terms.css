@@ -7,6 +7,16 @@
     justify-content: space-around;
     align-items: center;
     font-size: 1.25rem;
+    color: #191919;
+    margin-top: -0.5rem;
+}
+
+.header-intro {
+    display: flex;
+    margin-top: -0.5rem;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.25rem;
 }
 
 .main-text{

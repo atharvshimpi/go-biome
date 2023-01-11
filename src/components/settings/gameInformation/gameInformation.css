@@ -1,0 +1,91 @@
+.gameInformation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15%;
+    overflow: scroll;
+    font-size: 10px;
+}
+
+.gameInformation-backButton-container {
+    position: absolute;
+    top: 5%;
+    left: 8%;
+    background-color: #ffdfb8;
+    height: 40px;
+    width: 40px;
+    border-radius: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.gameInformation-header {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.gameInformation-section-header {
+    background-color: #ff9e80;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.gameInformation-section-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.gameInformation-section-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row-center {
+    justify-content: center;
+}
+
+.row-baseline {
+    align-items: flex-start;
+}
+
+.col-center {
+    align-items: center;
+}
+
+.gameInformation-container p {
+    margin-right: 20px;
+}
+
+.gameInformation-container img {
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.secondary-features-image-container {
+    border: 1px solid black;
+    border-radius: 0.6rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}

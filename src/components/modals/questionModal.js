@@ -12,7 +12,7 @@ import {
 } from "../questions/setQuestions"
 
 import { Box, CircularProgress } from "@material-ui/core"
-import select from "../../assets/sounds/Selecting.mp3"
+import select from "../../assets/sounds/UI/Proceed.mp3"
 
 const updateTime = (hours, minutes, seconds) => {
     const newDate = new Date()
@@ -37,6 +37,7 @@ const initialState = {
 const QuestionModal = ({ qNum }) => {
     const [answers, setAnswers] = useState(initialState)
     const [loading, setLoading] = useState(false)
+    const audio = new Audio(select)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -48,7 +49,6 @@ const QuestionModal = ({ qNum }) => {
         localStorage.setItem("preferences", JSON.stringify(answers))
         setLoading(true)
 
-        const audio = new Audio(select)
         audio.play()
         setTimeout(() => {
             setLoading(false)
@@ -62,6 +62,8 @@ const QuestionModal = ({ qNum }) => {
             animate={{ width: "100%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
             className="questions-container"
+            // Env Var value might be causing problem 
+            style={{backgroundImage: `url(${process.env.REACT_APP_PUBLIC_URL+ "/images/background.png"})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}
         >
             <div className="questions-content">
                 <div className="questions-heading">
@@ -88,6 +90,7 @@ const QuestionModal = ({ qNum }) => {
                         }}
                         className="questions-btn"
                         onClick={() => {
+                            audio.play()
                             if (qNum <= 1) navigate("/questions")
                             else navigate(`/questions?q=${qNum - 1}`)
                         }}
@@ -101,6 +104,7 @@ const QuestionModal = ({ qNum }) => {
                         }}
                         className="questions-btn"
                         onClick={() => {
+                            audio.play()
                             if (qNum < 4) navigate(`/questions?q=${qNum + 1}`)
                             else handleSubmit()
                         }}

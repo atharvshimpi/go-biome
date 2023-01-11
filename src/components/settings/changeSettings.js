@@ -11,6 +11,7 @@ import { ActivityHistoryDrpDwn } from "../modals/activityHistoryDrpDwn"
 import ActivityCardStack from "../activities/cardStack/activityCardStack"
 import ActivityHistory from "../activities/history/activityHistory"
 import BiomeGarden from "../activities/biomeGarden/biomeGarden"
+import select1 from "../../assets/sounds/UI/Proceed.mp3"
 
 export const changeProfilePicture = ({
     notify,
@@ -22,6 +23,7 @@ export const changeProfilePicture = ({
 }) => {
     const handleImage = (e) => {
         const fileReader = new FileReader()
+        const audio = new Audio(select1)
 
         fileReader.addEventListener("load", () => {
             setUser({ ...user, profilePicture: fileReader.result })
@@ -31,6 +33,7 @@ export const changeProfilePicture = ({
     }
 
     const handleSubmit = () => {
+        audio.play()
         localStorage.setItem("user", JSON.stringify(user))
         setLoading(true)
         setTimeout(() => {
@@ -79,6 +82,7 @@ export const changeUsername = ({
     setOpen,
 }) => {
     const handleSubmit = () => {
+        audio.play()
         localStorage.setItem("user", JSON.stringify(user))
         setLoading(true)
         setTimeout(() => {

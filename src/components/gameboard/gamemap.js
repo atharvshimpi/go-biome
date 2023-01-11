@@ -7,6 +7,9 @@ import ActivityModal7 from "../activities/modals/activityModal7"
 import { Box, Modal } from "@mui/material"
 import { IoIosArrowBack } from "react-icons/io"
 
+import select from "../../assets/sounds/UI/Sprite_Movement.mp3"
+import select1 from "../../assets/sounds/UI/Proceed.mp3"
+
 import biome from "../../assets/images/gamemap/biome.png"
 import dashed from "../../assets/images/gamemap/dashed/dashed.png"
 import dashedLeftDown from "../../assets/images/gamemap/dashed/dashedLeftDown.png"
@@ -18,6 +21,8 @@ import minionRoad1 from "../../assets/images/minion/minion1.png"
 import minionRoad2 from "../../assets/images/minion/minion2.png"
 import minionRoad3 from "../../assets/images/minion/minion3.png"
 
+const audio = new Audio(select)
+const audio1 = new Audio(select1)
 import "./gamemap.css"
 
 const Gamemap = () => {
@@ -106,7 +111,7 @@ const Gamemap = () => {
 
     const getTile = (val, row, col) => {
         if (row === biomePosition[0] && col === biomePosition[1]) {
-            return <button onClick={() => setBiomeSteps(gameStats.currentActivity.points / 5)}><img key={row*8 + col} src={biome} width="64px" height="64px" /></button>
+            return <button onClick={() =>{audio.play() ,setBiomeSteps(gameStats.currentActivity.points / 5)}}><img key={row*8 + col} src={biome} width="64px" height="64px" /></button>
         }
         if (val === 0) {
             return <img key={row*8 + col} src={dashed} width="64px" height="64px" />
@@ -169,7 +174,7 @@ const Gamemap = () => {
             <div className="top-view" style={{ margin: 0 }}>
                 <div className="icon-container">
                     <IoIosArrowBack
-                        onClick={() => navigate("/")}
+                        onClick={() =>{audio1.play(),navigate("/")}}
                         className="icon"
                     />
                 </div>

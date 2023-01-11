@@ -19,6 +19,8 @@ import { GrFormClose } from "react-icons/gr"
 
 import { Avatar } from "@mui/material"
 
+import select1 from "../../assets/sounds/UI/Proceed.mp3"
+
 import "./settings.css"
 import imageTemplate from "../../assets/images/imageTemplate.svg"
 
@@ -39,6 +41,7 @@ const Settings = () => {
     const [mealTime, handleMealTimeChange] = useState(pref.mealTime)
     const notify = () => toast.success("Updated Successfully!")
     const { logOut } = UserAuth()
+    const audio = new Audio(select1)
     const navigate = useNavigate()
 
     const handleSignOut = async () => {
@@ -64,7 +67,10 @@ const Settings = () => {
                 <div className="top-view">
                     <div className="icon-container">
                         <IoIosArrowBack
-                            onClick={() => navigate("/")}
+                            onClick={() => {
+                                audio.play(), 
+                                navigate("/")
+                            }}
                             className="icon"
                         />
                     </div>
@@ -99,7 +105,10 @@ const Settings = () => {
                                     <div className="inset-y-0 right-2 text-3xl">
                                         <button>
                                             <GrFormClose 
-                                                onClick={() => setOpen(false)} 
+                                                onClick={() => {
+                                                    audio.play(),
+                                                    setOpen(false)
+                                                }} 
                                             />
                                         </button>
                                     </div>

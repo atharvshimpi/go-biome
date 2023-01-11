@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
 
-import select from "../../../assets/sounds/UI/Proceed.mp3"
+import select from "../../../assets/sounds/UI/Card_Turn.mp3"
 import { demoNotification } from "../../notifications/demo"
 
 import { BsHeart, BsHeartFill } from "react-icons/bs"
@@ -46,11 +46,13 @@ const ActivityCarousal = ({
     cardCategory,
     setIsCardModalOpen,
     setIsActivityModal1Open,
+    initialActiveCardId
 }) => {
     if (!cardDetailsData) return null
 
     const [loading, setLoading] = useState(false)
     const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
+    const audio = new Audio(select)
 
     const handleClick = (e, obj) => {
         e.stopPropagation()
@@ -127,6 +129,7 @@ const ActivityCarousal = ({
             grabCursor={true}
             modules={[EffectCards]}
             className="mySwiper"
+            initialSlide={initialActiveCardId}
         >
             {cardDetailsData.map((obj, key) => {
                 const [isCardFlipped, setIsCardFlipped] = useState(false)
@@ -170,8 +173,9 @@ const ActivityCarousal = ({
                                 <img
                                     style={{ opacity: cardLoading ? 0 : 1 }}
                                     onLoad={imageLoaded}
-                                    onClick={() =>
-                                        setIsCardFlipped(!isCardFlipped)
+                                    onClick={() => {
+                                        audio.play(),
+                                        setIsCardFlipped(!isCardFlipped)}
                                     }
                                     src={require(`../../../assets/images/cards/${
                                         obj.category
@@ -186,7 +190,10 @@ const ActivityCarousal = ({
                             {/* Back Side */}
                             <div
                                 className="card-container"
-                                onClick={() => setIsCardFlipped(!isCardFlipped)}
+                                onClick={() => {
+                                    audio.play(),
+                                    setIsCardFlipped(!isCardFlipped)
+                                }}
                                 style={{
                                     backgroundColor:
                                         categoryTags[cardCategory != null ? cardCategory : obj.categoryId].color,
@@ -199,6 +206,7 @@ const ActivityCarousal = ({
                                             type="button" 
                                             className={`${isLikePressed ? `text-white bg-red-700 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700` : `text-red-700 border border-red-700 hover:bg-red-700 hover:text-white dark:border-red-500 dark:text-red-500 dark:hover:text-white`} focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 mb-1 text-center inline-flex items-center dark:focus:ring-red-800`}
                                             onClick={(e) => {
+                                                audio.play()
                                                 handleLike(e, obj)
                                                 setIsLikePressed(!isLikePressed)
                                             }}
@@ -208,7 +216,10 @@ const ActivityCarousal = ({
                                         </button>
                                         <button
                                             className="btn"
-                                            onClick={(e) => handleClick(e, obj)}
+                                            onClick={(e) => {
+                                                audio.play(), 
+                                                handleClick(e, obj)
+                                            }}
                                         >
                                             {loading ? (
                                                 <Box

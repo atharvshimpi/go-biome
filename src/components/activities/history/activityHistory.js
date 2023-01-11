@@ -4,6 +4,7 @@ import { EffectCreative } from "swiper"
 import { addDays, eachWeekOfInterval, format, subDays } from "date-fns"
 import { eachDayOfInterval } from "date-fns/esm"
 
+import select from "../../../assets/sounds/UI/Proceed.mp3"
 import "./activityHistory.css"
 import "swiper/css"
 import "swiper/css/effect-cards"
@@ -31,6 +32,7 @@ const dates = eachWeekOfInterval(
 const ActivityHistory = ({ activityHistory }) => {
     const [selectedDay, setSelectedDay] = useState(new Date()) // default set to today's date
     const [displayData, setDisplayData] = useState({})
+    const audio = new Audio(select)
     // activityHistory.reverse().map((activity, key) => {
     //     return (
     //         <ActivityHistoryDrpDwn key={key} activity={activity} />
@@ -49,6 +51,7 @@ const ActivityHistory = ({ activityHistory }) => {
             new Date(obj.activityTimings.activityFinish).getYear() === day.getYear()
         )
         setDisplayData(tempData)
+        audio.play()
     }
 
     return (

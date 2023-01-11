@@ -10,9 +10,11 @@ import { RiDoubleQuotesL } from "react-icons/ri"
 import { FaTags } from "react-icons/fa"
 import { AiFillClockCircle } from "react-icons/ai"
 
+import select from "../../../assets/sounds/UI/Proceed.mp3"
 import "./userCard.css"
 
 const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
+    const audio = new Audio(select)
     const navigate = useNavigate()
 
     return (
@@ -25,7 +27,10 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
             <div className="top-view">
                 <div className="icon-container">
                     <IoIosArrowBack
-                        onClick={() => setIsPreviewOn(false)}
+                        onClick={() => {
+                            audio.play(), 
+                            setIsPreviewOn(false)
+                        }}
                         className="icon"
                     />
                 </div>

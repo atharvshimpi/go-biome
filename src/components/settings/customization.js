@@ -2,9 +2,12 @@ import React from "react"
 
 import { settingDetails } from "./settingsData"
 
+import select from "../../assets/sounds/UI/Proceed.mp3"
 import { IoIosArrowForward } from "react-icons/io"
 // eslint-disable-next-line
 const CustomizationSettings = ({ setOpen, setSettingId }) => {
+    const audio = new Audio(select)
+
     const handleClick = (id) => {
         setSettingId(id)
         setOpen(true)
@@ -22,7 +25,7 @@ const CustomizationSettings = ({ setOpen, setSettingId }) => {
                                     {obj.icon}
                                     <p>{obj.title}</p>
                                 </div>
-                                <IoIosArrowForward className="icon" onClick={() => handleClick(obj.id)}/>
+                                <IoIosArrowForward className="icon" onClick={() => { audio.play(); handleClick(obj.id)}}/>
                             </div>  
                         )
                     })}

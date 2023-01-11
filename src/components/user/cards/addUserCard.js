@@ -9,9 +9,10 @@ import { storage } from "../../../firebase"
 
 import skip from "../../../assets/sounds/skip.mp3"
 import create from "../../../assets/sounds/create.mp3"
+import select from "../../../assets/sounds/UI/Proceed.mp3"
 
 import TextField from "@mui/material/TextField"
-import { Avatar, Box, Chip, CircularProgress, InputAdornment } from "@mui/material"
+import { Avatar, Box, Chip, CircularProgress, InputAdornment, Modal } from "@mui/material"
 import { Button } from "@material-ui/core"
 
 import { IoIosArrowBack } from "react-icons/io"
@@ -20,8 +21,10 @@ import { MdLocationPin } from "react-icons/md"
 import { RiDoubleQuotesL } from "react-icons/ri"
 import { BsCardImage, BsFillSkipEndFill } from "react-icons/bs"
 import { AiFillLock } from "react-icons/ai"
+import { BiMicrophone } from "react-icons/bi"
 
 import "./addUserCard.css"
+import MicModal from "./micModal"
 
 const categoryTags = [
     {
@@ -58,15 +61,20 @@ const AddUserCard = () => {
         createdAt: Date(),
     }
     const [isPreviewOn, setIsPreviewOn] = useState(false)
+    const [isMicModalOn, setIsMicModalOn] = useState(false)
     const [loading, setLoading] = useState(false)
     const [userImageFile, setUserImageFile] = useState(null)
     const [userImageData, setUserImageData] = useState(null)
+    const [micData, setMicData] = useState(null)
     const [userCardData, setUserCardData] = useState(initialState)
     const isDisabled = userCardData.location === "" || userCardData.description === ""
     const multiGenderAvaialble = gameStats.currentActivity.icon.split("_").length > 1 ? true : false
     const gender = userDetails.gender
     const cardImageRef = ref(storage, `images/${userDetails.email.split("@")[0]}/${userCardData.createdAt}`)
     const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
+    const audio = new Audio(select)
+    const skip1 = new Audio(skip)
+    const prev1 = new Audio(create)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -85,9 +93,8 @@ const AddUserCard = () => {
     }
 
     const navigateUtil = () => {
-        demoNotification(msgTemplate)
-        const audio = new Audio(skip)
         audio.play()
+        demoNotification(msgTemplate)
         if(gameStats.friendlyBiomePoints == 85)
             navigate("/map")
         else
@@ -97,6 +104,7 @@ const AddUserCard = () => {
     const handleClick = () => {
         setLoading(true)
 
+        skip.play()
         if(userImageFile) {
             uploadBytes(cardImageRef, userImageFile)
                 .then(() => {
@@ -111,7 +119,8 @@ const AddUserCard = () => {
                                 category: gameStats.currentActivity.category,
                                 categoryId: gameStats.currentActivity.categoryId,
                                 icon: url,
-                                createdAt: userCardData.createdAt
+                                createdAt: userCardData.createdAt,
+                                audio: micData
                             })
                             
                             setActivityUserCard(activityUserCard)
@@ -132,7 +141,8 @@ const AddUserCard = () => {
                 icon: gameStats.currentActivity.icon,
                 activityStartedAt: null,
                 activityEndedAt: null,
-                createdAt: userCardData.createdAt
+                createdAt: userCardData.createdAt,
+                audio: micData
             })
             
             setActivityUserCard(activityUserCard)
@@ -162,10 +172,25 @@ const AddUserCard = () => {
                     exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
                     className="add-usercard-bg-container"
                 >
+                    {/* mic modal */}
+                    <Modal
+                        open={isMicModalOn}
+                        onClose={() => setIsMicModalOn(false)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                        className="modal-container"
+                    >
+                        <Box className="modal-content">
+                            <MicModal setMicData={setMicData} categoryId={gameStats.currentActivity.categoryId} />
+                        </Box>
+                    </Modal>
                     <div className="top-view">
                         <div style={{ opacity: 0 }} className="icon-container">
                             <IoIosArrowBack
-                                onClick={() => navigate("/")}
+                                onClick={() => {
+                                    audio.play(),
+                                    navigate("/")
+                                }}
                                 className="icon"
                             />
                         </div>
@@ -278,9 +303,23 @@ const AddUserCard = () => {
                             </div>
                             <div className="add-usercard-btn-container">
                                 <Button
+                                    startIcon={ <BiMicrophone /> }
+                                    onClick={() => setIsMicModalOn(true)}
+                                    className="add-usercard-btn"
+                                    fullWidth
+                                    variant="contained"
+                                >
+                                    Record 
+                                </Button>
+                            </div>
+                            <div className="add-usercard-btn-container">
+                                <Button
                                     startIcon={isDisabled ? <AiFillLock /> : null}
                                     disabled={isDisabled}
-                                    onClick={() => setIsPreviewOn(true)}
+                                    onClick={() => {
+                                        audio.play(),
+                                        setIsPreviewOn(true)
+                                    }}
                                     className="add-usercard-btn"
                                     fullWidth
                                     variant="contained"

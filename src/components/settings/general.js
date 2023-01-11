@@ -3,12 +3,14 @@ import { Switch } from "@headlessui/react"
 
 import { settingDetails } from "./settingsData"
 
+import select from "../../assets/sounds/UI/Proceed.mp3"
 import { IoIosArrowForward } from "react-icons/io"
 
 const GeneralSettings = ({ setOpen, setSettingId }) => {
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const [vibrateEnabled, setVibrateEnabled] = useState(pref.vibrate)
+    const audio = new Audio(select)
 
     const handleClick = (id) => {
         setSettingId(id)
@@ -56,7 +58,7 @@ const GeneralSettings = ({ setOpen, setSettingId }) => {
                                         />
                                     </Switch>
                                     :
-                                    <IoIosArrowForward className="icon" onClick={() => handleClick(obj.id)}/>
+                                    <IoIosArrowForward className="icon" onClick={() =>{ audio.play(), handleClick(obj.id)}}/>
                                 }
                             </div>  
                         )

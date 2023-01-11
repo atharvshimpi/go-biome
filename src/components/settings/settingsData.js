@@ -16,6 +16,8 @@ import {
     FaBacterium,
     FaVirus,
     FaBook,
+    FaResearchgate,
+    FaGamepad,
 } from "react-icons/fa"
 import {
     GiPlantsAndAnimals,
@@ -24,6 +26,11 @@ import {
 } from "react-icons/gi"
 import { MdHistory, MdBackup } from "react-icons/md"
 import { FiLogOut } from "react-icons/fi"
+import { 
+    AiOutlineQuestionCircle,
+    AiOutlineTeam,
+    AiOutlineCopyrightCircle
+} from "react-icons/ai"
 
 export const settingDetails = [
     {
@@ -110,5 +117,30 @@ export const settingDetails = [
         id: 16,
         title: "Terms and Conditions",
         icon: <FaBook />,
-    }
+    },
+    {
+        id: 17,
+        title: "About this research",
+        icon: <FaResearchgate />,
+    },
+    {
+        id: 18,
+        title: "Questionnaire",
+        icon: <AiOutlineQuestionCircle/>,
+    },
+    {
+        id: 19,
+        title: "Your Participation and Consent",
+        icon: <AiOutlineTeam/>,
+    },
+    {
+        id: 20,
+        title: "Creative Commons Attribution",
+        icon: <AiOutlineCopyrightCircle/>,
+    },
+    {
+        id: 21,
+        title: "Game Information",
+        icon: <FaGamepad />,
+    },
 ]

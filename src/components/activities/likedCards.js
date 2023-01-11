@@ -5,6 +5,7 @@ import ReactCardFlip from "react-card-flip"
 
 import { demoNotification } from "../notifications/demo"
 import select from "../../assets/sounds/Alert_pop.mp3"
+import select1 from "../../assets/sounds/UI/Proceed.mp3"
 
 import { BsHeart, BsHeartFill } from "react-icons/bs"
 import { Box, CircularProgress } from "@mui/material"
@@ -49,6 +50,7 @@ const LikedCards = ({
     if (!likedCardsDetails) return null
     const [loading, setLoading] = useState(false)
     const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
+    const audio = new Audio(select1)
 
     const handleClick = (e, obj) => {
         e.stopPropagation()
@@ -95,6 +97,7 @@ const LikedCards = ({
 
     const handleLike = (e, obj) => {
         e.stopPropagation()
+        audio.play()
     
         const filterArr = likedCardsDetails.filter(likedObj => likedObj.icon !== obj.icon)
 
@@ -167,9 +170,10 @@ const LikedCards = ({
                                 <img
                                     style={{ opacity: cardLoading ? 0 : 1 }}
                                     onLoad={imageLoaded}
-                                    onClick={() =>
+                                    onClick={() => {
+                                        audio.play(),
                                         setIsCardFlipped(!isCardFlipped)
-                                    }
+                                    }}
                                     src={require(`../../assets/images/cards/${
                                         obj.category
                                     }/${
@@ -183,7 +187,10 @@ const LikedCards = ({
                             {/* Back Side */}
                             <div
                                 className="card-container"
-                                onClick={() => setIsCardFlipped(!isCardFlipped)}
+                                onClick={() => {
+                                    audio.play(), 
+                                    setIsCardFlipped(!isCardFlipped)
+                                }}
                                 style={{
                                     backgroundColor:
                                         categoryTags[obj.categoryId].color,
@@ -194,7 +201,10 @@ const LikedCards = ({
                                     <div className="btngrp">
                                         <button
                                             className="btn"
-                                            onClick={(e) => handleClick(e, obj)}
+                                            onClick={(e) => {
+                                                audio.play(), 
+                                                handleClick(e, obj)
+                                            }}
                                         >
                                             {loading ? (
                                                 <Box

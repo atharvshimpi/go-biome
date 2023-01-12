@@ -63,7 +63,7 @@ const QuestionModal = ({ qNum }) => {
             exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
             className="questions-container"
             // Env Var value might be causing problem 
-            style={{backgroundImage: `url(${process.env.REACT_APP_PUBLIC_URL+ "/images/background.png"})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}
+            style={{backgroundImage: `url(${require("../../assets/images/bg/gameState3.png")})`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
         >
             <div className="questions-content">
                 <div className="questions-heading">

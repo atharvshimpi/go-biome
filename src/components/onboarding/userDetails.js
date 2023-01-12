@@ -50,6 +50,7 @@ const UserDetails = () => {
     }
 
     const handleSubmit = (e) => {
+        audio.play()
         setLoading(true)
         localStorage.setItem("user", JSON.stringify({ 
             ...userData, 
@@ -207,10 +208,7 @@ const UserDetails = () => {
                         fullWidth
                         variant="contained"
                         className="user-details-next-btn"
-                        onClick={() => {
-                            audio.play(),
-                            handleSubmit
-                        }}
+                        onClick={() => handleSubmit()}
                         disabled={
                             userData.username === "" || !userData.agreedTerms
                         }

@@ -22,8 +22,10 @@ import {
     Box, 
     CircularProgress
 } from "@material-ui/core"
+
 import PersonIcon from "@mui/icons-material/Person"
 import DateRangeIcon from "@mui/icons-material/DateRange"
+import GroupsIcon from "@mui/icons-material/Groups"
 
 import "./userDetails.css"
 
@@ -31,6 +33,7 @@ const initialState = {
     username: "",
     age: "",
     gender: "",
+    groupId: "",
     agreedTerms: false,
     profilePicture: imageTemplate,
 }
@@ -83,7 +86,7 @@ const UserDetails = () => {
     return (
         <div className="user-details-container">
             <div className="user-details-content">
-                <div className="user-details-heading">
+                <div className="user-details-heading" style={{ marginTop: userData.gender === "OTHER" ? "4rem" : "0rem"}}>
                     <h1>Welcome to Go-Go Biome!</h1>
                 </div>
                 <div className="user-details-input-fields">
@@ -124,6 +127,25 @@ const UserDetails = () => {
                             ),
                         }}
                     />
+                    <TextField
+                        required
+                        type="number"
+                        autoComplete="off"
+                        fullWidth
+                        variant="outlined"
+                        id="groupId"
+                        label="Group Id"
+                        className="user-details-input"
+                        value={userData.groupId}
+                        onChange={handleChange}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <GroupsIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
                     <FormControl variant="outlined" fullWidth>
                         <InputLabel id="demo-simple-select-label">
                             Gender
@@ -148,6 +170,20 @@ const UserDetails = () => {
                             <MenuItem value={"null"}>Prefer not to disclose</MenuItem>
                         </Select>
                     </FormControl>
+                    {userData.gender === "OTHER" ? (
+                        <TextField
+                            required
+                            type="text"
+                            autoComplete="off"
+                            fullWidth
+                            variant="outlined"
+                            id="otherGender"
+                            label="Enter Your Gender Here"
+                            style={{ marginTop: "2rem" }}
+                            value={userData.otherGender}
+                            onChange={handleChange}
+                        />
+                    ) : null}
                     <FormControlLabel
                         className="user-details-checkbox"
                         control={

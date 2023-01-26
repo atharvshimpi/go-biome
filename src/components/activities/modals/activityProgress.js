@@ -32,7 +32,7 @@ const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActi
                 <Lottie options={defaultOptions} height={100} width={100} />
             </div>
             <button onClick={handleClick} className="activity-progress-btn">
-                End Activity!
+                END ACTIVITY!
             </button>
         </div>
     )

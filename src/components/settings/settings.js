@@ -30,7 +30,7 @@ const Settings = () => {
     const [pref, setPref] = useState(JSON.parse(localStorage.getItem("preferences")))
     const activityUserCards = JSON.parse(localStorage.getItem("activity-user-cards"))
     const activityHistoryData = JSON.parse(localStorage.getItem("activity-history"))
-    const biomeChars = JSON.parse(localStorage.getItem("biome-garden"))
+    const [biomeChars, setBiomeChars] = useState(JSON.parse(localStorage.getItem("biome-garden")))
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [settingId, setSettingId] = useState(-1)
@@ -117,7 +117,7 @@ const Settings = () => {
                                 { settingId === 1 ? changeUsername({notify, pref, user, setUser, loading, setLoading, setOpen}) : null }
                                 { settingId === 2 ? activityCardStack(activityUserCards, setOpen) : null }
                                 { settingId === 3 ? activityHistory(activityHistoryData) : null }
-                                { settingId === 4 ? biomeGarden(biomeChars, loading, setLoading) : null }
+                                { settingId === 4 ? biomeGarden(biomeChars, setBiomeChars, loading, setLoading) : null }
                                 { settingId === 10 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 11 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 12 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }

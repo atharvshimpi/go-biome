@@ -56,6 +56,12 @@ import ActivityModal5 from "../activities/modals/activityModal5"
 import ActivityModal6 from "../activities/modals/activityModal6"
 import ActivityModal8 from "../activities/modals/activityModal8"
 import ActivityModal9 from "../activities/modals/activityModal9"
+import StatusModal from "../activities/modals/statusModal"
+import FlashModal from "../activities/modals/flash"
+import FlashEmojiModal from "../activities/modals/flash-emoji"
+import FlashEmojiNoModal from "../activities/modals/flash-emoji-no"
+import FlashGoodEmojiModal from "../activities/modals/flash-good-emoji"
+import FlashGoodEmojiNoModal from "../activities/modals/flash-good-emoji-no"
 
 import select from "../../assets/sounds/UI/Shuffle_button.mp3"
 import select1 from "../../assets/sounds/UI/Proceed.mp3"
@@ -96,6 +102,12 @@ const Dashboard = () => {
     const [isActivityModal6Open, setIsActivityModal6Open] = useState(false)
     const [isActivityModal8Open, setIsActivityModal8Open] = useState(false)
     const [isActivityModal9Open, setIsActivityModal9Open] = useState(false)
+    const [isStatusModalOpen, setIsStatusModalOpen] = useState(false)
+    const [isFlashModalOpen, setIsFlashModalOpen] = useState(false)
+    const [isFlashEmojiModalOpen, setIsFlashEmojiModalOpen] = useState(false)
+    const [isFlashEmojiNoModalOpen, setIsFlashEmojiNoModalOpen] = useState(false)
+    const [isFlashGoodEmojiModalOpen, setIsFlashGoodEmojiModalOpen] = useState(false)
+    const [isFlashGoodEmojiNoModalOpen, setIsFlashGoodEmojiNoModalOpen] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
     const [prevGame, setPrevGame] = useState(gameStats.prevDate)
@@ -120,6 +132,8 @@ const Dashboard = () => {
                     },
                     0
                 )
+
+                // et
 
                 // if inactive, then gameState - 1
                 if (!actPerfSum) {
@@ -179,6 +193,20 @@ const Dashboard = () => {
                     wakeupTime: morningGameNotifTime,
                 })
             )
+        }
+    }, [morningGameNotif])
+
+    useEffect(() => {
+        const morningGameNotifTime = new Date(morningGameNotif)
+        const currDate = new Date()
+        var hours=morningGameNotifTime.getHours()
+
+        if (
+            (currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&
+            morningGameNotifTime.getDate() + 1 <= currDate.getDate()) ||(currDate.getHours() >= hours + 2)
+        ) {
+            hours=currDate.getHours()
+            handleCardModalOpen(6)
         }
     }, [morningGameNotif])
 
@@ -243,9 +271,13 @@ const Dashboard = () => {
         } else if (categoryId === 3) {
             setCardDetailsData(zenGameCardDetails)
             setIsCardModalOpen(true)
-        } else {
+        } else if (categoryId === 4) {
             setCardDetailsData(likedCardsDetails)
             setIsLikedCardsModalOpen(true)
+        } else if (categoryId === 5) {
+            setIsStatusModalOpen(true)
+        } else if(categoryId === 6){
+            setIsFlashModalOpen(true)
         }
     }
 
@@ -265,21 +297,21 @@ const Dashboard = () => {
             && activityHistory.some(activity => activity.category === "physicalactivity")
             && activityHistory.some(activity => activity.category === "social")
             && activityHistory.some(activity => activity.category === "zen")) {
-                // at least one activity from each category is done.
-                
-                let activeCardId = 0
-                let activityCategoryId = 0
-                
-                do {
-                    const activityCategoryId = Math.floor(Math.random() * 4)
-                } while (activityHistory[activityHistory.length - 1].category === activityCategories[activityCategoryId])
+            // at least one activity from each category is done.
+            
+            let activeCardId = 0
+            let activityCategoryId = 0
+            
+            do {
+                const activityCategoryId = Math.floor(Math.random() * 4)
+            } while (activityHistory[activityHistory.length - 1].category === activityCategories[activityCategoryId])
 
-                do {
-                    activeCardId = Math.floor(Math.random() * 10)
-                } while (activityHistory.some(activity => activity.icon.startsWith(activityCategories[activityCategoryId].charAt(0).toUpperCase() + (activeCardId + 1))))
+            do {
+                activeCardId = Math.floor(Math.random() * 10)
+            } while (activityHistory.some(activity => activity.icon.startsWith(activityCategories[activityCategoryId].charAt(0).toUpperCase() + (activeCardId + 1))))
 
-                handleCardModalOpen(activityCategoryId, activeCardId)
-            }
+            handleCardModalOpen(activityCategoryId, activeCardId)
+        }
         else {
             // there is some category from which no activity has been done. Generate a random card from that category
             let activityCategoryId = 0
@@ -294,7 +326,7 @@ const Dashboard = () => {
     return (
         <motion.div
             initial={{ width: 0 }}
-            animate={{ width: "100%" }}
+            animate={{ width: "100%" }}   
             exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
             className="dashboard-container"
         >
@@ -306,7 +338,7 @@ const Dashboard = () => {
                     >
                         <AiFillSetting
                             onClick={() => {
-                                const audio = new Audio(select)
+                                const audio = new Audio(select1)
                                 audio.play()
                                 navigate("/settings")
                             }}
@@ -318,7 +350,7 @@ const Dashboard = () => {
                             onClick={() => {
                                 const audio = new Audio(select)
                                 audio.play()
-                                navigate("/")
+                                navigate("/settings")
                             }}
                             className="icon"
                         />
@@ -338,7 +370,10 @@ const Dashboard = () => {
                                         ? "3rem"
                                         : "5rem",
                             }}
-                            onClick={handleVibrate}
+                            onClick={(handleVibrate => {
+                                handleVibrate
+                                handleCardModalOpen(5)
+                            })}
                             src={friendlyBiomeArray[0]}
                             className="biomechar"
                         />
@@ -350,7 +385,10 @@ const Dashboard = () => {
                                             ? "3rem"
                                             : "5rem",
                                 }}
-                                onClick={handleVibrate}
+                                onClick={() => {
+                                    handleVibrate
+                                    handleCardModalOpen(5)
+                                }}
                                 src={friendlyBiomeArray[1]}
                                 className="biomechar"
                             />
@@ -363,7 +401,10 @@ const Dashboard = () => {
                                             ? "3rem"
                                             : "5rem",
                                 }}
-                                onClick={handleVibrate}
+                                onClick={() => {
+                                    handleVibrate
+                                    handleCardModalOpen(5)
+                                }}
                                 src={friendlyBiomeArray[2]}
                                 className="biomechar"
                             />
@@ -381,7 +422,10 @@ const Dashboard = () => {
                                         ? "0px"
                                         : "",
                             }}
-                            onClick={handleVibrate}
+                            onClick={() => {
+                                handleVibrate
+                                handleCardModalOpen(5)
+                            }}
                             src={unFriendlyBiomeArray[0]}
                             className="minionchar"
                         />
@@ -393,7 +437,10 @@ const Dashboard = () => {
                                             ? "3rem"
                                             : "5rem",
                                 }}
-                                onClick={handleVibrate}
+                                onClick={() => {
+                                    handleVibrate
+                                    handleCardModalOpen(5)
+                                }}
                                 src={unFriendlyBiomeArray[1]}
                                 className="minionchar shift-right"
                             />
@@ -406,7 +453,10 @@ const Dashboard = () => {
                                             ? "3rem"
                                             : "5rem",
                                 }}
-                                onClick={handleVibrate}
+                                onClick={() => {
+                                    handleVibrate
+                                    handleCardModalOpen(5)
+                                }}
                                 src={unFriendlyBiomeArray[2]}
                                 className="minionchar"
                             />
@@ -438,7 +488,9 @@ const Dashboard = () => {
                             null
                         } */}
                         <div className="biome-points">
-                            {gameStats.unFriendlyBiomePoints}
+                            <button>
+                                {gameStats.unFriendlyBiomePoints}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -462,9 +514,10 @@ const Dashboard = () => {
                             setLikedCardsDetails={setLikedCardsDetails} 
                             cardDetailsData={cardDetailsData} 
                             cardCategory={cardCategory} 
-                            setIsCardModalOpen={setIsCardModalOpen} 
+                            setIsCardModalOpen={setIsCardModalOpen}
+                            setIsStatusModalOpen={setIsStatusModalOpen}
                             setIsActivityModal1Open={setIsActivityModal1Open} 
-                            initialActiveCardId={activeCardIdx} 
+                            initialActiveCardId={activeCardIdx}
                         />
                     </Box>
                 </Modal>
@@ -486,6 +539,130 @@ const Dashboard = () => {
                             cardCategory={cardCategory}
                             setIsLikedCardsModalOpen={setIsLikedCardsModalOpen}
                             setIsActivityModal1Open={setIsActivityModal1Open}
+                        />
+                    </Box>
+                </Modal>
+                {/*Biome Status Modal*/}
+                <Modal
+                    open={isStatusModalOpen}
+                    onClose={() => setIsStatusModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <StatusModal
+                            gender={userDetails.gender} 
+                            gameStats={gameStats} 
+                            setGameStats={setGameStats}
+                            setIsActivityProgressModalOpen={
+                                setIsActivityProgressModalOpen
+                            } 
+                            setIsStatusModalOpen={setIsStatusModalOpen}  
+                        />
+                    </Box>
+                </Modal>
+                {/* Flash Cards */}
+                <Modal
+                    open={isFlashModalOpen}
+                    onClose={() => setIsFlashModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <FlashModal
+                            gender={userDetails.gender} 
+                            gameStats={gameStats} 
+                            setGameStats={setGameStats}
+                            setIsActivityProgressModalOpen={
+                                setIsActivityProgressModalOpen
+                            } 
+                            setIsFlashModalOpen={setIsFlashModalOpen}
+                            setIsFlashEmojiModalOpen={setIsFlashEmojiModalOpen}
+                            setIsFlashGoodEmojiModalOpen={setIsFlashGoodEmojiModalOpen}  
+                            setIsFlashEmojiNoModalOpen={setIsFlashEmojiNoModalOpen}
+                            setIsFlashGoodEmojiNoModalOpen={setIsFlashGoodEmojiNoModalOpen}
+                        />
+                    </Box>
+                </Modal>
+
+                <Modal
+                    open={isFlashEmojiModalOpen}
+                    onClose={() => setIsFlashEmojiModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <FlashEmojiModal
+                            gender={userDetails.gender} 
+                            gameStats={gameStats} 
+                            setGameStats={setGameStats}
+                            setIsActivityProgressModalOpen={
+                                setIsActivityProgressModalOpen
+                            } 
+                            setIsFlashEmojiModalOpen={setIsFlashEmojiModalOpen}  
+                        />
+                    </Box>
+                </Modal>
+
+                <Modal
+                    open={isFlashEmojiNoModalOpen}
+                    onClose={() => setIsFlashEmojiNoModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <FlashEmojiNoModal
+                            gender={userDetails.gender} 
+                            gameStats={gameStats} 
+                            setGameStats={setGameStats}
+                            setIsActivityProgressModalOpen={
+                                setIsActivityProgressModalOpen
+                            } 
+                            setIsFlashEmojiModalOpen={setIsFlashEmojiModalOpen}  
+                        />
+                    </Box>
+                </Modal>
+
+                <Modal
+                    open={isFlashGoodEmojiModalOpen}
+                    onClose={() => setIsFlashGoodEmojiModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <FlashGoodEmojiModal
+                            gender={userDetails.gender} 
+                            gameStats={gameStats} 
+                            setGameStats={setGameStats}
+                            setIsActivityProgressModalOpen={
+                                setIsActivityProgressModalOpen
+                            } 
+                            setIsFlashGoodEmojiModalOpen={setIsFlashGoodEmojiModalOpen}  
+                        />
+                    </Box>
+                </Modal>
+
+                <Modal
+                    open={isFlashGoodEmojiNoModalOpen}
+                    onClose={() => setIsFlashGoodEmojiNoModalOpen(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className="modal-container"
+                >
+                    <Box className="modal-content">
+                        <FlashGoodEmojiNoModal
+                            gender={userDetails.gender} 
+                            gameStats={gameStats} 
+                            setGameStats={setGameStats}
+                            setIsActivityProgressModalOpen={
+                                setIsActivityProgressModalOpen
+                            } 
+                            setIsFlashGoodEmojiModalOpen={setIsFlashGoodEmojiModalOpen}  
                         />
                     </Box>
                 </Modal>

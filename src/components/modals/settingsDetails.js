@@ -31,7 +31,7 @@ const SettingsDetails = ({ settingId, children, onClose }) => {
                     initial={{ y: "100%" }}
                     animate={{
                         // ask whether to lock in portrait mode or not
-                        y: `${settingId === 4 ? "30vh" : ( (settingId === 2 || settingId === 3) ? "0vh" : "50vh")}`,
+                        y: `${settingId === 4 ? "1vh" : ( (settingId === 2 || settingId === 3) ? "0vh" : "50vh")}`,
                         transition: {
                             duration: 0.4,
                             ease: "easeOut",
@@ -44,7 +44,7 @@ const SettingsDetails = ({ settingId, children, onClose }) => {
                             ease: "easeIn",
                         },
                     }}
-                    className="z-0 flex flex-col w-full h-full bg-white rounded-t-lg shadow-xl"
+                    className="z-0 flex flex-col w-full h-full bg-white rounded-t-lg shadow-xl bgGameState"
                     style={{ backgroundColor: "#ffbc58" }}
                 >
                     {children}

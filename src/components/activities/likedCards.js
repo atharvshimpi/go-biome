@@ -223,7 +223,7 @@ const LikedCards = ({
                                                     />
                                                 </Box>
                                             ) : (
-                                                "Start now"
+                                                "START NOW"
                                             )}
                                         </button>
                                     </div>

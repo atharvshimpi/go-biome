@@ -60,7 +60,8 @@ const ActivityHistory = ({ activityHistory }) => {
                 effect={"cards"}
                 grabCursor={true}
                 modules={[EffectCreative]}
-                className="mySwiper"
+                className="mySwiper swiper-history"
+                initialSlide={2}
             >
                 {dates.map((week, index) => {
                     return (

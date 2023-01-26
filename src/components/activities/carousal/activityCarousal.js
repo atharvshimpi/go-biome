@@ -238,7 +238,7 @@ const ActivityCarousal = ({
                                                     />
                                                 </Box>
                                             ) : (
-                                                "Start now"
+                                                "START NOW"
                                             )}
                                         </button>
                                     </div>

@@ -32,22 +32,24 @@ export const setDefault = () => {
     localStorage.setItem(
         "biome-garden",
         JSON.stringify({
-            active: "fb11.4",
-            chars: {
-                fb1: 0,
-                fb2: 0,
-                fb3: 0,
-                fb4: 0,
-                fb5: 0,
-                fb6: 0,
-                fb7: 0,
-                fb8: 0,
-                fb9: 0,
-                fb10: 0,
-                fb11: 0,
-                fb12: 0,
-                fb13: 0,
-            }
+            active: "FB11.4",
+            chars: [
+                // biomeName: isUnlocked
+                {FB1: false},
+                {FB2: false},
+                {FB3: false},
+                {FB4: false},
+                {FB5: false},
+                {FB6: false},
+                {FB7: false},
+                {FB8: false},
+                {FB9: false},
+                {FB10: false},
+                {FB11: false},
+                {FB12: false},
+                {FB13: false},
+            ],
+            defaults: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         })
     )
 }

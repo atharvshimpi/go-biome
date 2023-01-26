@@ -12,7 +12,7 @@ import game_narrative_2 from "../../assets/images/onboarding/game_narrative_2.pn
 import bugsy from "../../assets/images/friendly.png"
 import icons from "../../assets/images/icons.png"
 
-import select1 from "../../assets/sounds/UI/CardTap.mp3"
+import select1 from "../../assets/sounds/UI/Proceed.mp3"
 import "./questions.css"
 
 const QuestionsHome = () => {

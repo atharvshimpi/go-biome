@@ -17,7 +17,7 @@ const ActivityModal7 = ({ gameStats, pref, setIsActivityModal7Open }) => {
         setIsActivityModal7Open(false)
     }
     return (
-        <div className="activity-progress-container" style={{ width: "100%" }}>
+        <div className="activity-progress-container-map" style={{ width: "100%" }}>
             <div className="activity-progress-heading">
                 <b>Biome Movement</b>  
             </div>

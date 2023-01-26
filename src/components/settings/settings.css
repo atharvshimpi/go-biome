@@ -148,17 +148,32 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    height: 63vh;
-    padding: 0 0.5rem 2rem;
+    height: 90vh;
+    padding: 0 0.5rem;
     overflow: scroll;
 }
 
+.bgGameState {
+    background: url(../../assets/images/bg/gameState2.png);
+}
+
+.biome-char {
+    position: relative;
+    top: -140px;
+}
+
 .biome-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 25%;
     padding: 1rem;
     margin-top: 1rem;
-    border-width: 0.5rem;
-    border-style: ridge;
+}
+
+.biome-image:nth-child(1) {
+    margin-top: 5rem;
 }
 
 .biome-active-image {
@@ -166,9 +181,14 @@
 }
 
 @media (max-width: 768px) {
+    .biome-variant-image {
+        width: 100%;
+        height: 35%;
+    }
+
     .biome-image {
         width: 48%;
-        height: auto;
+        height: 35%;
     }
 }
 
@@ -245,4 +265,51 @@
     flex-wrap: wrap;
     overflow: scroll;
     margin: 0.5rem 0px 0px;
+}
+
+.biome-variant-modal-container > div {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.biome-variant-default-img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+}
+
+.biome-variant-bg {
+    max-width: 400px !important;
+}
+
+.biome-variant-default-char {
+    position: relative;
+    top: -350px;
+    max-width: 150px !important;
+}
+
+.biome-variant-char {
+    position: relative;
+    top: -350px;
+    width: 25%;
+}
+
+.biome-variant-img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 5vh;
+    padding: 0 1rem;
+}
+
+.biome-default-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

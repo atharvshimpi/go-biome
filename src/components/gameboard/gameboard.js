@@ -10,6 +10,7 @@ import biomeImg1 from "../../assets/images/friendly.png"
 import "./gameboard.css"
 
 const Gameboard = () => {
+    const biomeGarden = JSON.parse(localStorage.getItem("biome-garden"))
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const Gameboard = () => {
         backgroundLayer4.src = gameBG4
 
         const biomeImg = new Image()
-        biomeImg.src = biomeImg1
+        biomeImg.src = require(`../../assets/images/biome/${biomeGarden.active}.${biomeGarden.defaults[Number(biomeGarden.active.split("FB")[1]) - 1]}.png`)
 
         class Player {
             constructor(gameWidth, gameHeight) {

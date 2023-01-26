@@ -155,10 +155,10 @@ export const activityHistory = (activityHistory) => {
     )
 }
 
-export const biomeGarden = (biomeGarden, loading, setLoading) => {
+export const biomeGarden = (biomeGarden, setBiomeGarden, loading , setLoading) => {
     return (
         <div className="biome-container">
-            <BiomeGarden biomeGarden={biomeGarden} loading={loading} />
+            <BiomeGarden biomeGarden={biomeGarden} setBiomeGarden={setBiomeGarden} loading={loading} />
         </div>
     )
 }

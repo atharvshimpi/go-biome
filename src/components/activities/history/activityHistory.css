@@ -10,6 +10,10 @@
     height: auto;
 }
 
+.swiper-history {
+    margin-bottom: 1rem;
+}
+
 .activity-history-content {
     display: flex;
     flex-direction: column;
@@ -17,7 +21,7 @@
     align-items: stretch;
     margin: 0 0.5rem;
     /* Update this later on */
-    height: 75vh;
+    height: auto;
 }
 
 .curr-day {

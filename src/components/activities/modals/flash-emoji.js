@@ -90,12 +90,11 @@ const yes_emoji = [
     EM33,
     EM15,
 ]
-const userDetails = JSON.parse(localStorage.getItem("user"))
 var image
 
-const FlashEmojiModal = ({ pref, setIsFlashEmojiModalOpen, ind, EmValue }) => {
+const FlashEmojiModal = ({ userDetails, setIsFlashEmojiModalOpen, ind, EmValue }) => {
     var ind_emoji = Math.floor(Math.random() * (7 - 0) + 0)
-    console.log(ind_emoji)
+    
     const handleYes = () => {
         const audio = new Audio(select)
         audio.play()

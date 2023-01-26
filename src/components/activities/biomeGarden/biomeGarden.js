@@ -48,7 +48,7 @@ const BiomeGarden = ({ biomeGarden, setBiomeGarden, loading }) => {
                 <img
                     className="biome-char"
                     style={{ maxWidth: "50%" }}
-                    src={require(`../../../assets/images/biome/${biomeGarden.active}.${biomeGarden.defaults[Number(biomeGarden.active.split("FB")[1]) - 1]}.png`)}
+                    src={require(`../../../assets/images/biome/${biomeGarden.active}.png`)}
                     alt={biomeGarden.active}
                 />
             </div>

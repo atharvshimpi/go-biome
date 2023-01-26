@@ -31,7 +31,7 @@ const Gameboard = () => {
         backgroundLayer4.src = gameBG4
 
         const biomeImg = new Image()
-        biomeImg.src = require(`../../assets/images/biome/${biomeGarden.active}.${biomeGarden.defaults[Number(biomeGarden.active.split("FB")[1]) - 1]}.png`)
+        biomeImg.src = require(`../../assets/images/biome/${biomeGarden.active}.png`)
 
         class Player {
             constructor(gameWidth, gameHeight) {

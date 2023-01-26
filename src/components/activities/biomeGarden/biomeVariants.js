@@ -20,12 +20,12 @@ const BiomeVariants = ({ biomeGarden, setBiomeGarden, biomeNum, loading, setIsBi
         setBiomeGarden({
             ...biomeGarden,
             defaults: tempArr,
-            active: `FB${biomeNum}`
+            active: `FB${biomeNum}.${variantNum}`
         })
         localStorage.setItem("biome-garden", JSON.stringify({
             ...biomeGarden,
             defaults: tempArr,
-            active: `FB${biomeNum}`
+            active: `FB${biomeNum}.${variantNum}`
         }))
     }
 

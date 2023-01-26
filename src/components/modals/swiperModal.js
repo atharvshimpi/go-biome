@@ -45,7 +45,6 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
     const audio = new Audio(select)
 
     // On song end, set isAudioPlaying to false
-
     const toggleAudio = () => {
         var audioElem = document.getElementById("audio")
         
@@ -74,10 +73,10 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                 const multiGenderAvaialble =
                     obj.icon.split("_").length > 1 ? true : false
                 const imageLoaded = () => setCardLoading(false)
-                const file = new File(obj?.audio, "demo.mp3", {
-                    type: "audio/mp3",
-                    lastModified: Date.now()
-                })
+                // const file = new File(obj?.audio, "demo.mp3", {
+                //     type: "audio/mp3",
+                //     lastModified: Date.now()
+                // })
 
                 useEffect(() => {
                     if(obj.categoryId == 0)
@@ -147,13 +146,13 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                     <AiOutlineCalendar />
                                     <div><p className="cardstack-card-date">Mon, 22 Aug 2022</p></div>
                                 </div>
-                                <div className="activity-cardstack-date-container">
+                                {/* <div className="activity-cardstack-date-container">
                                     <FcSpeaker />
                                     <div><p onClick={toggleAudio} className="cardstack-card-date">{isAudioPlaying ? "Pause" : "Play"} Me</p></div>
                                     <audio id="audio" src={obj?.audio} preload="auto">
 
                                     </audio>
-                                </div>
+                                </div> */}
                                 <div onClick={() => {audio.play()}} className="repeat-button">
                                     Repeat Activity
                                 </div>

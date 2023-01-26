@@ -9,6 +9,8 @@ import "./activityHistory.css"
 import "swiper/css"
 import "swiper/css/effect-cards"
 import { ActivityHistoryDrpDwn } from "../../modals/activityHistoryDrpDwn"
+import { Box, Modal } from "@material-ui/core"
+import HistoryModal from "../../modals/historyModal"
 
 // month
 const dates = eachWeekOfInterval(
@@ -30,6 +32,8 @@ const dates = eachWeekOfInterval(
 }, [])
 
 const ActivityHistory = ({ activityHistory }) => {
+    const userDetails = JSON.parse(localStorage.getItem("user"))
+    const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false)
     const [selectedDay, setSelectedDay] = useState(new Date()) // default set to today's date
     const [displayData, setDisplayData] = useState({})
     const audio = new Audio(select)
@@ -86,7 +90,18 @@ const ActivityHistory = ({ activityHistory }) => {
                     displayData.map((activity, key) => {
                         return (
                             <div key={key}>
-                                <ActivityHistoryDrpDwn activity={activity} />
+                                <Modal
+                                    open={isHistoryModalOpen}
+                                    onClose={() => setIsHistoryModalOpen(false)}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                    className="modal-container"
+                                >
+                                    <Box className="modal-content">
+                                        {/* <HistoryModal gender={userDetails.gender} cardCategory={null} activity={activity} /> */}
+                                    </Box>
+                                </Modal>
+                                {!isHistoryModalOpen && <ActivityHistoryDrpDwn activity={activity} setIsHistoryModalOpen={setIsHistoryModalOpen} />}
                             </div>
                         )
                     })

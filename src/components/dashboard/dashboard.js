@@ -172,6 +172,21 @@ const Dashboard = () => {
         }
     }, [prevGame])
 
+    // Biome Flash Cards
+    useEffect(() => {
+        const morningGameNotifTime = new Date(morningGameNotif)
+        const currDate = new Date()
+        var hours = morningGameNotifTime.getHours()
+
+        if (
+            (currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&
+            morningGameNotifTime.getDate() + 1 <= currDate.getDate())
+        ) {
+            hours = currDate.getHours()
+            handleCardModalOpen(6)
+        }
+    }, [morningGameNotif])
+
     // Notifications
     // 1. Morning
     const morningMsg = `Your Biome Digest is waiting for you!`
@@ -193,20 +208,6 @@ const Dashboard = () => {
                     wakeupTime: morningGameNotifTime,
                 })
             )
-        }
-    }, [morningGameNotif])
-
-    useEffect(() => {
-        const morningGameNotifTime = new Date(morningGameNotif)
-        const currDate = new Date()
-        var hours=morningGameNotifTime.getHours()
-
-        if (
-            (currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&
-            morningGameNotifTime.getDate() + 1 <= currDate.getDate()) ||(currDate.getHours() >= hours + 2)
-        ) {
-            hours=currDate.getHours()
-            handleCardModalOpen(6)
         }
     }, [morningGameNotif])
 
@@ -616,7 +617,7 @@ const Dashboard = () => {
                 >
                     <Box className="modal-content">
                         <FlashEmojiNoModal
-                            gender={userDetails.gender} 
+                            userDetails={userDetails}
                             gameStats={gameStats} 
                             setGameStats={setGameStats}
                             setIsActivityProgressModalOpen={
@@ -636,6 +637,7 @@ const Dashboard = () => {
                 >
                     <Box className="modal-content">
                         <FlashGoodEmojiModal
+                            userDetails={userDetails}
                             gender={userDetails.gender} 
                             gameStats={gameStats} 
                             setGameStats={setGameStats}

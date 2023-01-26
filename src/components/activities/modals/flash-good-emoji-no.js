@@ -74,11 +74,11 @@ const messages = [
     "Want to play with clean soil in your backyard? ",
     "Want to watch a netflix episode past your sleep time? ",
 ]
-const userDetails = JSON.parse(localStorage.getItem("user"))
-var image
-const no_emoji = [EM16, EM27, EM21, EM2, EM32, EM29, EM37]
 
-const FlashGoodEmojiNoModal = ({ pref, setIsFlashEmojiNoModalOpen, ind }) => {
+var image
+
+const FlashGoodEmojiNoModal = ({ userDetails, pref, setIsFlashEmojiNoModalOpen, ind }) => {
+    const no_emoji = [EM16, EM27, EM21, EM2, EM32, EM29, EM37]
     var indno_emoji = Math.floor(Math.random() * (7 - 0) + 0)
     const handleYes = () => {
         const audio = new Audio(select)

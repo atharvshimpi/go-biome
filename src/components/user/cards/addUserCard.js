@@ -104,7 +104,7 @@ const AddUserCard = () => {
     const handleClick = () => {
         setLoading(true)
 
-        skip.play()
+        skip1.play()
         if(userImageFile) {
             uploadBytes(cardImageRef, userImageFile)
                 .then(() => {

@@ -44,8 +44,8 @@ const QuestionsHome = () => {
             style={{
                 backgroundImage:
                     cardShown === 4
-                        ? `url(${require("../../assets/images/bg/gameState3.png")})`
-                        : `url(${require("../../assets/images/bg/gameState1.png")})`,
+                        ? `url(${require("../../assets/images/bg/gameState1.png")})`
+                        : `url(${require("../../assets/images/bg/gameState3.png")})`,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
             }}

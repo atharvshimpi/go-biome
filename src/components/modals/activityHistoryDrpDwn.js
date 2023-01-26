@@ -25,11 +25,20 @@ const categoryTags = [
     },
 ]
 
-export const ActivityHistoryDrpDwn = ({ activity }) => {
+export const ActivityHistoryDrpDwn = ({ activity, setIsHistoryModalOpen }) => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const multiGenderAvaialble = activity.icon.split("_").length > 1 ? true : false
+
+    const handleClick = () => {
+        setIsHistoryModalOpen(true)
+    }
+
     return (
-        <div className="drp-dwn-container" style={{ backgroundColor: categoryTags[activity.categoryId].color }}>
+        <div 
+            className="drp-dwn-container" 
+            style={{ backgroundColor: categoryTags[activity.categoryId].color }}
+            onClick={handleClick}
+        >
             <div className="activity-history-icon-container">
                 <img src={require(`../../assets/images/cards/${activity.category}/${multiGenderAvaialble ? `${activity.icon}${userDetails.gender}` : activity.icon}.png`)} alt={activity.icon} />
             </div>

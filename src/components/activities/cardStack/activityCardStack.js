@@ -20,7 +20,7 @@ const ActivityCardStack = ({ activityUserCards, setOpen }) => {
     const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [cardDetailsData, setCardDetailsData] = useState([])
-    const audio = new Audio(select)
+    const audio = new Audio(select) 
     
     const handleCardModalOpen = (categoryId) => {
         const tempData = activityUserCards.filter(obj => obj.categoryId == categoryId)

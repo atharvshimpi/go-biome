@@ -126,7 +126,8 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                     style={{ 
                                         opacity: cardLoading ? 0 : 1, 
                                         marginBottom: obj.icon.length > 4 ? "2rem" : "0rem",
-                                        width: "80%"
+                                        width: "80%",
+                                        height: "50%"
                                     }}
                                     onLoad={imageLoaded}
                                     onClick={() =>

@@ -144,6 +144,7 @@
     justify-content: space-evenly;
     width: 100%;
     padding-bottom: 0.6rem;
+    height: 50%;
 }
 
 .activity-cardstack-card-description {
@@ -153,6 +154,7 @@
     border-radius: 0.6rem;
     padding: 1rem;
     width: 80%;
+    overflow: scroll;
 }
 
 .activity-cardstack-date-container {
@@ -172,6 +174,7 @@
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 .activity-cardstack-location > p {
@@ -195,4 +198,13 @@
 
 .cardstack-card-date {
     font-size: 1.2rem;
+}
+
+.activity-cardstack-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70%;
 }

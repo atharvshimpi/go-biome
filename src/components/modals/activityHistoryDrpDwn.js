@@ -25,11 +25,12 @@ const categoryTags = [
     },
 ]
 
-export const ActivityHistoryDrpDwn = ({ activity, setIsHistoryModalOpen }) => {
+export const ActivityHistoryDrpDwn = ({ activity, setIsHistoryModalOpen, setActivityId }) => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const multiGenderAvaialble = activity.icon.split("_").length > 1 ? true : false
 
     const handleClick = () => {
+        setActivityId(activity.activityId)
         setIsHistoryModalOpen(true)
     }
 

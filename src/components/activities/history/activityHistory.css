@@ -35,3 +35,8 @@
     padding: 0 6px;
     border-radius: 0.5rem;
 }
+
+.activity-history-month {
+    font-size: 2rem;
+    font-weight: bolder;
+}

@@ -3,6 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
 
+import { firestore } from "../../../firebase"
+import { doc, updateDoc } from "firebase/firestore"
+
+
 import select from "../../../assets/sounds/UI/Card_Turn.mp3"
 import { demoNotification } from "../../notifications/demo"
 
@@ -37,6 +41,7 @@ const categoryTags = [
 ]
 
 const ActivityCarousal = ({
+    userDetails,
     gender,
     gameStats,
     setGameStats,
@@ -49,7 +54,6 @@ const ActivityCarousal = ({
     initialActiveCardId
 }) => {
     if (!cardDetailsData) return null
-
     const [loading, setLoading] = useState(false)
     const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
     const audio = new Audio(select)
@@ -64,7 +68,7 @@ const ActivityCarousal = ({
             ...gameStats,
             activityOngoing: true,
             currentActivity: { 
-                ...obj, 
+                ...obj,
                 categoryId: cardCategory,
                 activityTimings: { 
                     activityStart: new Date().toISOString(), 
@@ -114,12 +118,22 @@ const ActivityCarousal = ({
                 "liked-cards",
                 JSON.stringify(likedCardsDetails)
             )
+
+            // Update to Firebase
+            updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
+                likedCards: likedCardsDetails
+            })
         } else {
             setLikedCardsDetails(filterArr)
             localStorage.setItem(
                 "liked-cards",
                 JSON.stringify(filterArr)
             )
+            
+            // Update to Firebase
+            updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
+                likedCards: filterArr
+            })
         }
     }
 
@@ -134,7 +148,10 @@ const ActivityCarousal = ({
             {cardDetailsData.map((obj, key) => {
                 const [isCardFlipped, setIsCardFlipped] = useState(false)
                 const [cardLoading, setCardLoading] = useState(true)
-                const [isLikePressed, setIsLikePressed] = useState(false)
+
+                const likedCardPresent = likedCardsDetails.filter(likedCard => likedCard.icon === obj.icon).length > 0 ? true : false
+
+                const [isLikePressed, setIsLikePressed] = useState(likedCardPresent)
                 const multiGenderAvaialble =
                     obj.icon.split("_").length > 1 ? true : false
                 const imageLoaded = () => setCardLoading(false)

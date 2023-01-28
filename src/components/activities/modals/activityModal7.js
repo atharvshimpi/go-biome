@@ -1,9 +1,8 @@
 import React from "react"
 
 import select from "../../../assets/sounds/UI/Proceed.mp3"
-import biomePoints from "../../../assets/images/biome/points.png"
 
-const ActivityModal7 = ({ gameStats, pref, setIsActivityModal7Open }) => {
+const ActivityModal7 = ({ biomeGarden, gameStats, pref, setIsActivityModal7Open }) => {
     const handleClick = () => {
         const audio = new Audio(select)
         localStorage.setItem(
@@ -22,7 +21,7 @@ const ActivityModal7 = ({ gameStats, pref, setIsActivityModal7Open }) => {
                 <b>Biome Movement</b>  
             </div>
             <div className="activity-img-container">
-                <img className="activity-img" src={biomePoints} alt="friendly" style={{ width: "5rem" }} />
+                <img className="activity-img" src={require(`../../../assets/images/biome/${biomeGarden.active}.png`)} alt="friendly" style={{ width: "5rem" }} />
             </div>
             <div>
                 {`Move ${pref.friendlyBiome} `} <b>{gameStats.currentActivity.points / 5}</b> {` steps forward`}

@@ -10,13 +10,12 @@ import { IoIosArrowBack } from "react-icons/io"
 import select from "../../assets/sounds/UI/Sprite_Movement.mp3"
 import select1 from "../../assets/sounds/UI/Proceed.mp3"
 
-import biome from "../../assets/images/gamemap/biome.png"
 import dashed from "../../assets/images/gamemap/dashed/dashed.png"
 import dashedLeftDown from "../../assets/images/gamemap/dashed/dashedLeftDown.png"
 import dashedLeftUp from "../../assets/images/gamemap/dashed/dashedLeftUp.png"
 import dashedRightDown from "../../assets/images/gamemap/dashed/dashedRightDown.png"
 import dashedRightUp from "../../assets/images/gamemap/dashed/dashedRightUp.png"
-import minion from "../../assets/images/gamemap/minion.png"
+import minion from "../../assets/images/minion/UFB1.1.png"
 import minionRoad1 from "../../assets/images/minion/minion1.png"
 import minionRoad2 from "../../assets/images/minion/minion2.png"
 import minionRoad3 from "../../assets/images/minion/minion3.png"
@@ -39,6 +38,7 @@ const Gamemap = () => {
     ])
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
+    const biomeGarden = JSON.parse(localStorage.getItem("biome-garden"))
     const [isActivityModal7Open, setIsActivityModal7Open] = useState(gameStats.activityBiomeMovementModal)
     const [biomePosition, setBiomePosition] = useState(localStorage.getItem("solo-map-position") ? JSON.parse(localStorage.getItem("solo-map-position")) : [8, 0])
     const [biomeSteps, setBiomeSteps] = useState(0)
@@ -111,7 +111,7 @@ const Gamemap = () => {
 
     const getTile = (val, row, col) => {
         if (row === biomePosition[0] && col === biomePosition[1]) {
-            return <button onClick={() =>{audio.play() ,setBiomeSteps(gameStats.currentActivity.points / 5)}}><img key={row*8 + col} src={biome} width="64px" height="64px" /></button>
+            return <button onClick={() =>{audio.play() ,setBiomeSteps(gameStats.currentActivity.points / 5)}}><img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} width="64px" height="64px" /></button>
         }
         if (val === 0) {
             return <img key={row*8 + col} src={dashed} width="64px" height="64px" />
@@ -129,7 +129,7 @@ const Gamemap = () => {
             return <img key={row*8 + col} src={dashedLeftUp} width="64px" height="64px" />
         }
         if (val === 5) {
-            return <img key={row*8 + col} src={biome} width="64px" height="64px" />
+            return <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} width="64px" height="64px" />
         }
         if (val === 6) {
             return <img key={row*8 + col} src={minion} width="64px" height="64px" className="right_aligned" />
@@ -191,7 +191,12 @@ const Gamemap = () => {
                 className="modal-container"
             >
                 <Box className="modal-content">
-                    <ActivityModal7 gameStats={gameStats} pref={pref} setIsActivityModal7Open={setIsActivityModal7Open} />
+                    <ActivityModal7 
+                        biomeGarden={biomeGarden}
+                        gameStats={gameStats} 
+                        pref={pref} 
+                        setIsActivityModal7Open={setIsActivityModal7Open} 
+                    />
                 </Box>
             </Modal>
             {board.map((row, rowIdx) => {

@@ -1,10 +1,9 @@
 import React from "react"
 
 import select from "../../../assets/sounds/UI/Proceed.mp3"
-import biomePoints from "../../../assets/images/biome/points.png"
-import minionPoints from "../../../assets/images/minion/minion1.png"
+import minionPoints from "../../../assets/images/minion/UFB1.1.png"
 
-const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal6Open, setIsActivityModal8Open }) => {   
+const ActivityModal5 = ({ biomeGarden, gameStats, setIsActivityModal5Open, setIsActivityModal6Open, setIsActivityModal8Open }) => {   
     const audio = new Audio(select)
     
     const handleLogActivity = () => {
@@ -31,11 +30,11 @@ const ActivityModal5 = ({ gameStats, setIsActivityModal5Open, setIsActivityModal
             </div>
             <div className="activity-img-group">
                 <div className="activity-img-container">
-                    <img className="activity-img" src={biomePoints} alt="friendly" />
+                    <img className="activity-img" src={require(`../../../assets/images/biome/${biomeGarden.active}.png`)} alt="friendly" />
                     <div className="activity-points-earned">+{gameStats.currentActivity.points}</div>
                 </div>
                 <div className="activity-img-container">
-                    <img className="activity-img" src={minionPoints} alt="unfriendly" style={{ position: "relative", height: "8rem", right: "1rem", }} />
+                    <img className="activity-img" src={minionPoints} alt="unfriendly" />
                     <div className="activity-points-earned">-{gameStats.currentActivity.points}</div>
                 </div>
             </div>

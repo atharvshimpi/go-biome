@@ -5,12 +5,14 @@ import { firestore } from "../../../firebase"
 import { doc, updateDoc } from "firebase/firestore"
 
 import select from "../../../assets/sounds/UI/Proceed.mp3"
+import uuid from "react-uuid"
 
 const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivityModal5Open }) => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const mapStats = JSON.parse(localStorage.getItem("mapstats"))
     const [activityHistory, setActivityHistory] = useState(JSON.parse(localStorage.getItem("activity-history")))
     const audio = new Audio(select)
+    const newUUID = uuid()
     const navigate = useNavigate()
     
     const handleLogActivity = () => {
@@ -19,13 +21,18 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
 
         audio.play()        
         activityHistory.push({
-            ...gameStats.currentActivity
+            ...gameStats.currentActivity,
+            activityId: newUUID,
         })
         setActivityHistory(activityHistory)
         localStorage.setItem(
             "activity-history",
             JSON.stringify(activityHistory)
         )
+
+        updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
+            activityHistory: activityHistory
+        })
 
         // mapStats update
         localStorage.setItem(
@@ -47,6 +54,10 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
                 "gamestats",
                 JSON.stringify({
                     ...gameStats,
+                    currentActivity: {
+                        ...gameStats.currentActivity,
+                        activityId: newUUID
+                    },
                     friendlyBiomePoints:
                         gameStats.friendlyBiomePoints +
                         gameStats.currentActivity.points,
@@ -60,10 +71,10 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
                 })
             )
 
-            updateDoc(doc(firestore, "users", userDetails.username), {
-                stats: {
-                    friendlyBiomePoints: gameStats.friendlyBiomePoints + gameStats.currentActivity.points
-                    /* Ask nandini what kind of data she wants */
+            updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
+                gameStats: {
+                    friendlyBiomePoints: gameStats.friendlyBiomePoints + gameStats.currentActivity.points,
+                    activityPerformed: tempActivityPerformed,
                 }
             })
         } else {
@@ -81,9 +92,10 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
                 })
             )
 
-            updateDoc(doc(firestore, "users", userDetails.username), {
+            updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
                 stats: {
-                    friendlyBiomePoints: 85
+                    friendlyBiomePoints: 85,
+                    activityPerformed: tempActivityPerformed,
                 }
             })
         }

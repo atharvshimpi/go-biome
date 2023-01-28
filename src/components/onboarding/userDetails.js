@@ -61,7 +61,7 @@ const UserDetails = () => {
 
         // save user info in firebase 
         setDoc(doc(firestore, "users", user.email.split("@")[0]), {
-            details: {
+            userDetails: {
                 ...userData,
                 email: user.email,
                 profilePicture: user.photoURL,

@@ -73,6 +73,7 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                 const multiGenderAvaialble =
                     obj.icon.split("_").length > 1 ? true : false
                 const imageLoaded = () => setCardLoading(false)
+                const dateArr = obj.createdAt.split(" ").slice(0, 4)
                 // const file = new File(obj?.audio, "demo.mp3", {
                 //     type: "audio/mp3",
                 //     lastModified: Date.now()
@@ -113,28 +114,34 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                     />
                                 </Box>
                             )}
-                            <div className="activity-cardstack-category-container">
-                                <img src={require(`../../assets/images/category/${obj.category}.svg`)} style={{ backgroundColor: categoryTags[obj.categoryId].color }} alt={obj.task} />
+                            <div className="activity-cardstack-top">
+                                <div className="activity-cardstack-category-container">
+                                    <img src={require(`../../assets/images/category/${obj.category}.svg`)} style={{ backgroundColor: categoryTags[obj.categoryId].color }} alt={obj.task} />
+                                </div>
+                                <h1 className="swiper-modal-activity-title">{obj.task}</h1>
+                                <div className="activity-cardstack-location">
+                                    <GoLocation /><p>{obj.location}</p>
+                                </div>
+                                <img
+                                    style={{ 
+                                        opacity: cardLoading ? 0 : 1, 
+                                        marginBottom: obj.icon.length > 4 ? "2rem" : "0rem",
+                                        width: "80%"
+                                    }}
+                                    onLoad={imageLoaded}
+                                    onClick={() =>
+                                        audio.play()
+                                    }
+                                    src={obj.icon.length > 4 ? obj.icon : require(`../../assets/images/cards/${
+                                        obj.category
+                                    }/${
+                                        multiGenderAvaialble
+                                            ? `${obj.icon}${gender}`
+                                            : obj.icon
+                                    }.png`)}
+                                    alt={obj.icon}
+                                />
                             </div>
-                            <h1 className="swiper-modal-activity-title">{obj.task}</h1>
-                            <div className="activity-cardstack-location">
-                                <GoLocation /><p>{obj.location}</p>
-                            </div>
-                            <img
-                                style={{ opacity: cardLoading ? 0 : 1 }}
-                                onLoad={imageLoaded}
-                                onClick={() =>
-                                    audio.play()
-                                }
-                                src={obj.icon.length > 4 ? obj.icon : require(`../../assets/images/cards/${
-                                    obj.category
-                                }/${
-                                    multiGenderAvaialble
-                                        ? `${obj.icon}${gender}`
-                                        : obj.icon
-                                }.png`)}
-                                alt={obj.icon}
-                            />
                             <div className="activity-cardstack-card-description-container" style={{
                                 backgroundColor:
                                 categoryTags[cardCategory != null ? cardCategory : obj.categoryId].color,
@@ -144,7 +151,11 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                                 </div>
                                 <div className="activity-cardstack-date-container">
                                     <AiOutlineCalendar />
-                                    <div><p className="cardstack-card-date">Mon, 22 Aug 2022</p></div>
+                                    {/* 0   1   2  3
+                                        Sat Jan 28 2023
+                                        
+                                    */}
+                                    <div><p className="cardstack-card-date">{`${dateArr[0]}, ${dateArr[2]} ${dateArr[1]} ${dateArr[3]}`}</p></div>
                                 </div>
                                 {/* <div className="activity-cardstack-date-container">
                                     <FcSpeaker />
@@ -153,9 +164,6 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
 
                                     </audio>
                                 </div> */}
-                                <div onClick={() => {audio.play()}} className="repeat-button">
-                                    Repeat Activity
-                                </div>
                             </div>
                         </div>
                     </SwiperSlide>

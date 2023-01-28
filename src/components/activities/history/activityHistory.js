@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCreative } from "swiper"
 import { addDays, eachWeekOfInterval, format, subDays } from "date-fns"
@@ -31,8 +31,11 @@ const dates = eachWeekOfInterval(
     return acc
 }, [])
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 const ActivityHistory = ({ activityHistory }) => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
+    const [activityId, setActivityId] = useState(null)
     const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false)
     const [selectedDay, setSelectedDay] = useState(new Date()) // default set to today's date
     const [displayData, setDisplayData] = useState({})
@@ -43,7 +46,7 @@ const ActivityHistory = ({ activityHistory }) => {
     //     )
     // })
 
-    const handleClick = (day) => {
+    const handleSetActivityData = (day) => {
         setSelectedDay(day)
 
         // set the "display data" to all the activities performed in that day(date-month-year)
@@ -55,11 +58,24 @@ const ActivityHistory = ({ activityHistory }) => {
             new Date(obj.activityTimings.activityFinish).getYear() === day.getYear()
         )
         setDisplayData(tempData)
+    }
+
+    const handleClick = (day) => {
+        handleSetActivityData(day)
         audio.play()
     }
 
+    useEffect(() => {
+        handleSetActivityData(selectedDay)
+    }, [])
+
     return (
         <div>
+            <h1
+                className="activity-history-month"    
+            >
+                {months[selectedDay.getMonth()]}, {selectedDay.getFullYear()}
+            </h1>
             <Swiper
                 effect={"cards"}
                 grabCursor={true}
@@ -74,7 +90,11 @@ const ActivityHistory = ({ activityHistory }) => {
                                 {week.map((day, key) => {
                                     const dayTxt = format(day, "EEEEE")
                                     return (
-                                        <div key={key} onClick={() => handleClick(day)} className={`${day.getDate() === new Date().getDate() && day.getMonth() === new Date().getMonth() ? `curr-day` : ``} ${selectedDay.getDate() === day.getDate() && selectedDay.getMonth() === day.getMonth() ? `selected-day` : ``}`}>
+                                        <div 
+                                            key={key} 
+                                            onClick={() => handleClick(day)} 
+                                            className={`${day.getDate() === new Date().getDate() && day.getMonth() === new Date().getMonth() ? `curr-day` : ``} ${selectedDay.getDate() === day.getDate() && selectedDay.getMonth() === day.getMonth() ? `selected-day` : ``}`}
+                                        >
                                             <p>{dayTxt}</p>
                                             <p>{day.getDate()}</p>
                                         </div>
@@ -88,6 +108,7 @@ const ActivityHistory = ({ activityHistory }) => {
             <div className="activity-history-content">
                 {displayData.length > 0 ? (
                     displayData.map((activity, key) => {
+                        
                         return (
                             <div key={key}>
                                 <Modal
@@ -98,10 +119,10 @@ const ActivityHistory = ({ activityHistory }) => {
                                     className="modal-container"
                                 >
                                     <Box className="modal-content">
-                                        {/* <HistoryModal gender={userDetails.gender} cardCategory={null} activity={activity} /> */}
+                                        <HistoryModal gender={userDetails.gender} cardCategory={null} activityId={activityId} />
                                     </Box>
                                 </Modal>
-                                {!isHistoryModalOpen && <ActivityHistoryDrpDwn activity={activity} setIsHistoryModalOpen={setIsHistoryModalOpen} />}
+                                {!isHistoryModalOpen && <ActivityHistoryDrpDwn activity={activity} setIsHistoryModalOpen={setIsHistoryModalOpen} setActivityId={setActivityId} />}
                             </div>
                         )
                     })

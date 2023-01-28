@@ -27,18 +27,22 @@ const categoryTags = [
     },
 ]
 
-const HistoryModal = ({ gender, cardCategory, activity }) => {
+const HistoryModal = ({ gender, cardCategory, activityId  }) => {
+    const activityCardStack = JSON.parse(localStorage.getItem("activity-user-cards"))
+    const filteredCard = activityCardStack.filter(card => card.activityId === activityId)[0]
+    
     const [cardLoading, setCardLoading] = useState(true)
     const multiGenderAvaialble =
-    activity.icon.split("_").length > 1 ? true : false
+    filteredCard?.icon.split("_").length > 1 ? true : false
     const imageLoaded = () => setCardLoading(false)
+    const dateArr = filteredCard.createdAt.split(" ").slice(0, 4)
 
     return (
         <div
             className="activity-cardstack-card-container"
-            style={{ backgroundColor: "#ffffff" }}
+            style={{ backgroundColor: "#ffffff", margin: "0 1rem" }}
         >
-            {cardLoading && (
+            {cardLoading && filteredCard !== undefined && (
                 <Box
                     sx={{
                         display: "flex",
@@ -56,71 +60,76 @@ const HistoryModal = ({ gender, cardCategory, activity }) => {
                     />
                 </Box>
             )}
-            <div className="activity-cardstack-category-container">
-                <img
-                    src={require(`../../assets/images/category/${activity.category}.svg`)}
-                    style={{
-                        backgroundColor: categoryTags[activity.categoryId].color,
-                    }}
-                    alt={activity.task}
-                />
-            </div>
-            <h1 className="swiper-modal-activity-title">{activity.task}</h1>
-            <div className="activity-cardstack-location">
-                <GoLocation />
-                <p>{activity.location}</p>
-            </div>
-            <img
-                style={{ opacity: cardLoading ? 0 : 1 }}
-                onLoad={imageLoaded}
-                onClick={() => audio.play()}
-                src={
-                    activity.icon.length > 4
-                        ? activity.icon
-                        : require(`../../assets/images/cards/${activity.category}/${
-                            multiGenderAvaialble
-                                ? `${activity.icon}${gender}`
-                                : activity.icon
-                        }.png`)
-                }
-                alt={activity.icon}
-            />
-            <div
-                className="activity-cardstack-card-description-container"
-                style={{
-                    backgroundColor:
-                        categoryTags[
-                            cardCategory != null ? cardCategory : activity.categoryId
-                        ].color,
-                }}
-            >
-                <div className="activity-cardstack-card-description">
-                    <p className="cardstack-card-text">
-                        <strong>Description</strong>: {activity.description}
-                    </p>
-                </div>
-                <div className="activity-cardstack-date-container">
-                    <AiOutlineCalendar />
-                    <div>
-                        <p className="cardstack-card-date">Mon, 22 Aug 2022</p>
+            {filteredCard === undefined ? (
+                <h1>No Card Made</h1>
+            ) : (
+                <>
+                    <div className="activity-cardstack-top">
+                        <div className="activity-cardstack-category-container">
+                            <img
+                                src={require(`../../assets/images/category/${filteredCard.category}.svg`)}
+                                style={{
+                                    backgroundColor: categoryTags[filteredCard.categoryId].color,
+                                }}
+                                alt={filteredCard.task}
+                            />
+                        </div>
+                        <h1 className="swiper-modal-activity-title">{filteredCard.task}</h1>
+                        <div className="activity-cardstack-location">
+                            <GoLocation />
+                            <p>{filteredCard.location}</p>
+                        </div>
+                        <img
+                            style={{ 
+                                opacity: cardLoading ? 0 : 1, 
+                                marginBottom: filteredCard.icon.length > 4 ? "2rem" : "0rem",
+                                width: "80%"
+                            }}
+                            onLoad={imageLoaded}
+                            onClick={() => audio.play()}
+                            src={
+                                filteredCard.icon.length > 4
+                                    ? filteredCard.icon
+                                    : require(`../../assets/images/cards/${filteredCard.category}/${
+                                        multiGenderAvaialble
+                                            ? `${filteredCard.icon}${gender}`
+                                            : filteredCard.icon
+                                    }.png`)
+                            }
+                            alt={filteredCard.icon}
+                        />
                     </div>
-                </div>
-                {/* <div className="activity-cardstack-date-container">
-                                <FcSpeaker />
-                                <div><p onClick={toggleAudio} className="cardstack-card-date">{isAudioPlaying ? "Pause" : "Play"} Me</p></div>
-                                <audio id="audio" src={activity?.audio} preload="auto">
+                    <div
+                        className="activity-cardstack-card-description-container"
+                        style={{
+                            backgroundColor:
+                                categoryTags[
+                                    cardCategory != null ? cardCategory : filteredCard.categoryId
+                                ].color,
+                        }}
+                    >
+                        <div className="activity-cardstack-card-description">
+                            <p className="cardstack-card-text">
+                                <strong>Description</strong>: {filteredCard.description}
+                            </p>
+                        </div>
+                        <div className="activity-cardstack-date-container">
+                            <AiOutlineCalendar />
+                            <div>
+                                <p className="cardstack-card-date">{`${dateArr[0]}, ${dateArr[2]} ${dateArr[1]} ${dateArr[3]}`}</p>
+                            </div>
+                        </div>
+                        {/* <div className="activity-cardstack-date-container">
+                                        <FcSpeaker />
+                                        <div><p onClick={toggleAudio} className="cardstack-card-date">{isAudioPlaying ? "Pause" : "Play"} Me</p></div>
+                                        <audio id="audio" src={activity?.audio} preload="auto">
 
-                                </audio>
-                            </div> */}
-                <div
-                    onClick={() => {
-                        audio.play()
-                    }}
-                    className="repeat-button"
-                >
-                    Repeat Activity
-                </div>
-            </div>
+                                        </audio>
+                                    </div> */}
+                    </div>
+                </>
+            )}
+            
         </div>
     )
 }

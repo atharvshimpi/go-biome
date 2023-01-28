@@ -28,9 +28,9 @@ import friendlyBiome2 from "../../assets/images/biome/ant.png"
 import friendlyBiome3 from "../../assets/images/biome/bugsy.png"
 
 // unfriendly biomes
-import unFriendlyBiome1 from "../../assets/images/minion/minion1.png"
-import unFriendlyBiome2 from "../../assets/images/minion/minion2.png"
-import unFriendlyBiome3 from "../../assets/images/minion/minion3.png"
+import unFriendlyBiome1 from "../../assets/images/minion/UFB1.4.png"
+import unFriendlyBiome2 from "../../assets/images/minion/UFB3.5.png"
+import unFriendlyBiome3 from "../../assets/images/minion/UFB4.2.png"
 
 // biome shield strength
 import Nostrength from "../../assets/images/shield/nostrength.svg"
@@ -71,6 +71,7 @@ import { demoNotification } from "../notifications/demo"
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const pref = JSON.parse(localStorage.getItem("preferences"))
+    const biomeGarden = JSON.parse(localStorage.getItem("biome-garden"))
     const [likedCardsDetails, setLikedCardsDetails] = useState(
         JSON.parse(localStorage.getItem("liked-cards"))
     )
@@ -335,21 +336,10 @@ const Dashboard = () => {
                 <div className="icon-group">
                     <div
                         className="icon-container"
-                        style={{ marginRight: "0.2rem" }}
                     >
                         <AiFillSetting
                             onClick={() => {
                                 const audio = new Audio(select1)
-                                audio.play()
-                                navigate("/settings")
-                            }}
-                            className="icon"
-                        />
-                    </div>
-                    <div className="icon-container">
-                        <GiEncirclement
-                            onClick={() => {
-                                const audio = new Audio(select)
                                 audio.play()
                                 navigate("/settings")
                             }}
@@ -375,7 +365,7 @@ const Dashboard = () => {
                                 handleVibrate
                                 handleCardModalOpen(5)
                             })}
-                            src={friendlyBiomeArray[0]}
+                            src={require(`../../assets/images/biome/${biomeGarden.active}.png`)}
                             className="biomechar"
                         />
                         {gameStats.friendlyBiomePoints >= 50 ? (
@@ -508,6 +498,7 @@ const Dashboard = () => {
                 >
                     <Box className="modal-content">
                         <ActivityCarousal 
+                            userDetails={userDetails}
                             gender={userDetails.gender} 
                             gameStats={gameStats} 
                             setGameStats={setGameStats} 
@@ -753,6 +744,7 @@ const Dashboard = () => {
                 >
                     <Box className="modal-content">
                         <ActivityModal5
+                            biomeGarden={biomeGarden}
                             gameStats={gameStats}
                             setIsActivityModal5Open={setIsActivityModal5Open}
                             setIsActivityModal6Open={setIsActivityModal6Open}

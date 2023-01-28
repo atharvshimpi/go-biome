@@ -37,7 +37,7 @@ const categoryTags = [
     },
 ]
 
-const LikedCards = ({ 
+const LikedCards = ({
     gender,
     gameStats,
     setGameStats,

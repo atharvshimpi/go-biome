@@ -56,7 +56,10 @@ export const settingDetails = [
     {
         id: 4,
         title: "Biome Garden",
-        icon: <GiPlantsAndAnimals />,
+        icon: <img
+            src={require(`../../assets/images/biomeGarden.png`)}
+            style={{ width: "16px" }}
+        />,
     },
     {
         id: 5,
@@ -68,78 +71,78 @@ export const settingDetails = [
         title: "Sound",
         icon: <BsFillVolumeUpFill />,
     },
+    // {
+    //     id: 7,
+    //     title: "Haptic Vibration",
+    //     icon: <BsPhoneVibrateFill />,
+    // },
+    // {
+    //     id: 7,
+    //     title: "Tutorial",
+    //     icon: <FaBookOpen />,
+    // },
+    // {
+    //     id: 8,
+    //     title: "Information",
+    //     icon: <FaInfo />,
+    // },
     {
         id: 7,
-        title: "Haptic Vibration",
-        icon: <BsPhoneVibrateFill />,
-    },
-    {
-        id: 8,
-        title: "Tutorial",
-        icon: <FaBookOpen />,
-    },
-    {
-        id: 9,
-        title: "Information",
-        icon: <FaInfo />,
-    },
-    {
-        id: 10,
         title: "Waking Hours",
         icon: <FaSun />,
     },
     {
-        id: 11,
+        id: 8,
         title: "Sleeping Hours",
         icon: <BsFillMoonFill />,
     },
     {
-        id: 12,
+        id: 9,
         title: "Morning Check-in Hours",
         icon: <GiSunPriest />,
     },
     {
-        id: 13,
+        id: 10,
         title: "Meal Time",
         icon: <GiForkKnifeSpoon />,
     },
     {
-        id: 14,
+        id: 11,
         title: "Set friendly Biome Name",
         icon: <FaBacterium />,
     },
+    // {
+    //     id: 14,
+    //     title: "Set unfriendly Biome Name",
+    //     icon: <FaVirus />,
+    // },
     {
-        id: 15,
-        title: "Set unfriendly Biome Name",
-        icon: <FaVirus />,
-    },
-    {
-        id: 16,
+        id: 12,
         title: "Terms and Conditions",
         icon: <FaBook />,
     },
     {
-        id: 17,
+        id: 13,
         title: "About this research",
         icon: <FaResearchgate />,
     },
     {
-        id: 18,
+        id: 14,
         title: "Questionnaire",
         icon: <AiOutlineQuestionCircle/>,
     },
+    // {
+    //     id: 18,
+    //     title: "Your Participation and Consent",
+    //     icon: <AiOutlineTeam/>,
+    // },
     {
-        id: 19,
-        title: "Your Participation and Consent",
-        icon: <AiOutlineTeam/>,
-    },
-    {
-        id: 20,
+        id: 15,
         title: "Creative Commons Attribution",
         icon: <AiOutlineCopyrightCircle/>,
     },
     {
-        id: 21,
+        id: 16,
         title: "Game Information",
         icon: <FaGamepad />,
     },

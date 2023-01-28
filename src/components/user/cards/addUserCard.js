@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import { firestore } from "../../../firebase"
+import { doc, updateDoc } from "firebase/firestore"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
 
 import { demoNotification } from "../../notifications/demo"
@@ -107,25 +109,24 @@ const AddUserCard = () => {
         skip1.play()
         if(userImageFile) {
             uploadBytes(cardImageRef, userImageFile)
-                .then(() => {
+                .then((uploadedObj) => {
                     console.log("Image Uploaded")
 
-                    listAll(ref(storage, `images/${userDetails.email.split("@")[0]}`)).then((response) => {
-                        getDownloadURL(response.items[response.items.length - 1]).then((url) => {
-                            activityUserCard.push({
-                                location: userCardData.location,
-                                description: userCardData.description,
-                                task: gameStats.currentActivity.task,
-                                category: gameStats.currentActivity.category,
-                                categoryId: gameStats.currentActivity.categoryId,
-                                icon: url,
-                                createdAt: userCardData.createdAt,
-                                audio: micData
-                            })
-                            
-                            setActivityUserCard(activityUserCard)
-                            localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
+                    getDownloadURL(uploadedObj.ref).then((url) => {
+                        activityUserCard.push({
+                            activityId: gameStats.currentActivity.activityId,
+                            location: userCardData.location,
+                            description: userCardData.description,
+                            task: gameStats.currentActivity.task,
+                            category: gameStats.currentActivity.category,
+                            categoryId: gameStats.currentActivity.categoryId,
+                            icon: url,
+                            createdAt: userCardData.createdAt,
+                            audio: micData
                         })
+                        
+                        setActivityUserCard(activityUserCard)
+                        localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
                     })
                 })
                 .catch((error) => {
@@ -133,14 +134,13 @@ const AddUserCard = () => {
                 })
         } else {
             activityUserCard.push({
+                activityId: gameStats.currentActivity.activityId,
                 location: userCardData.location,
                 description: userCardData.description,
                 task: gameStats.currentActivity.task,
                 category: gameStats.currentActivity.category,
                 categoryId: gameStats.currentActivity.categoryId,
                 icon: gameStats.currentActivity.icon,
-                activityStartedAt: null,
-                activityEndedAt: null,
                 createdAt: userCardData.createdAt,
                 audio: micData
             })
@@ -148,7 +148,12 @@ const AddUserCard = () => {
             setActivityUserCard(activityUserCard)
             localStorage.setItem("activity-user-cards", JSON.stringify(activityUserCard))
         }
-        
+
+        // Update the user activity cards to firebase
+        updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
+            userCards: activityUserCard
+        })
+
         const audio = new Audio(create)
         audio.play()
         setTimeout(() => {
@@ -301,7 +306,7 @@ const AddUserCard = () => {
                                     }}
                                 />
                             </div>
-                            <div className="add-usercard-btn-container">
+                            {/* <div className="add-usercard-btn-container">
                                 <Button
                                     startIcon={ <BiMicrophone /> }
                                     onClick={() => setIsMicModalOn(true)}
@@ -311,7 +316,7 @@ const AddUserCard = () => {
                                 >
                                     Record 
                                 </Button>
-                            </div>
+                            </div> */}
                             <div className="add-usercard-btn-container">
                                 <Button
                                     startIcon={isDisabled ? <AiFillLock /> : null}

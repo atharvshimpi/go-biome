@@ -35,12 +35,12 @@ const HistoryModal = ({ gender, cardCategory, activityId  }) => {
     const multiGenderAvaialble =
     filteredCard?.icon.split("_").length > 1 ? true : false
     const imageLoaded = () => setCardLoading(false)
-    const dateArr = filteredCard.createdAt.split(" ").slice(0, 4)
+    const dateArr = filteredCard?.createdAt.split(" ").slice(0, 4)
 
     return (
         <div
-            className="activity-cardstack-card-container"
-            style={{ backgroundColor: "#ffffff", margin: "0 1rem" }}
+            className="activity-history-card-container"
+            style={{ backgroundColor: "#ffffff", margin: "0 1rem", width: "300px" }}
         >
             {cardLoading && filteredCard !== undefined && (
                 <Box
@@ -61,7 +61,9 @@ const HistoryModal = ({ gender, cardCategory, activityId  }) => {
                 </Box>
             )}
             {filteredCard === undefined ? (
-                <h1>No Card Made</h1>
+                <Box>
+                    No Card Made
+                </Box>
             ) : (
                 <>
                     <div className="activity-cardstack-top">

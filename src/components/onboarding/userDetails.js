@@ -33,7 +33,6 @@ const initialState = {
     username: "",
     age: "",
     gender: "",
-    groupId: "",
     agreedTerms: false,
     profilePicture: imageTemplate,
 }
@@ -128,7 +127,7 @@ const UserDetails = () => {
                             ),
                         }}
                     />
-                    <TextField
+                    {/* <TextField
                         required
                         type="number"
                         autoComplete="off"
@@ -146,7 +145,7 @@ const UserDetails = () => {
                                 </InputAdornment>
                             ),
                         }}
-                    />
+                    /> */}
                     <FormControl variant="outlined" fullWidth>
                         <InputLabel id="demo-simple-select-label">
                             Gender

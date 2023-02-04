@@ -15,8 +15,8 @@ import HistoryModal from "../../modals/historyModal"
 // month
 const dates = eachWeekOfInterval(
     {
-        start: subDays(new Date(), 14),
-        end: addDays(new Date(), 14),
+        start: new Date("2023-02-01"),
+        end: new Date("2023-05-31"),
     },
     {
         weekStartsOn: 1,
@@ -65,6 +65,12 @@ const ActivityHistory = ({ activityHistory }) => {
         audio.play()
     }
 
+    function diffInWeeks(date2, date1) {
+        let diff =(date2.getTime() - date1.getTime()) / 1000
+        diff /= (60 * 60 * 24 * 7)
+        return Math.abs(Math.round(diff))
+    }
+
     useEffect(() => {
         handleSetActivityData(selectedDay)
     }, [])
@@ -81,7 +87,7 @@ const ActivityHistory = ({ activityHistory }) => {
                 grabCursor={true}
                 modules={[EffectCreative]}
                 className="mySwiper swiper-history"
-                initialSlide={2}
+                initialSlide={diffInWeeks(new Date(), new Date("2023-02-01"))}
             >
                 {dates.map((week, index) => {
                     return (
@@ -127,7 +133,9 @@ const ActivityHistory = ({ activityHistory }) => {
                         )
                     })
                 ) : (
-                    <h1>No Activity Performed on this day!</h1>
+                    <Box className="activity-history-empty-message">
+                        Uh-oh, you have not performed any activity on this day.
+                    </Box>
                 )}
             </div>
         </div>

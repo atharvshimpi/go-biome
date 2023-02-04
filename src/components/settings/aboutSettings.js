@@ -13,15 +13,12 @@ const AboutSettings = ({ setOpen, setSettingId, handleSignOut, navigate }) => {
         // setSettingId(id)
         // setOpen(true)
         audio.play()
-        if(id==16){
-            navigate("/terms")
-        }
-
-        else if(id==17){navigate("/about-research")}
-        else if(id==18){navigate("/questionnaire")}
-        else if(id==19){navigate("/participation")}
-        else if (id==20){navigate("/creative")}
-        else if (id==21){navigate("/gameInformation")}
+        if(id == 10) navigate("/terms")
+        else if(id == 11) navigate("/about-research")
+        else if(id == 12) navigate("/questionnaire")
+        // else if(id == 19) navigate("/participation")
+        else if (id == 13) navigate("/creative")
+        else if (id == 14) navigate("/gameInformation")
     }
 
     return (
@@ -29,7 +26,7 @@ const AboutSettings = ({ setOpen, setSettingId, handleSignOut, navigate }) => {
             <div className="general-settings-container">
                 <h2>About</h2>
                 <div className="general-settings-content">
-                    {settingDetails.filter(obj => obj.id >= 12 && obj.id < 17).map((obj) => {
+                    {settingDetails.filter(obj => obj.id >= 10 && obj.id < 17).map((obj) => {
                         return (
                             <div key={obj.id} className="options">
                                 <div className="title-icon">

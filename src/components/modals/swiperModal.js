@@ -11,6 +11,7 @@ import Zen from "../../assets/images/category/zen.svg"
 import { GoLocation } from "react-icons/go"
 import { AiOutlineCalendar } from "react-icons/ai"
 import { FcSpeaker } from "react-icons/fc"
+import { BsThreeDotsVertical } from "react-icons/bs"
 import { Box, CircularProgress } from "@mui/material"
 
 import "swiper/css"
@@ -40,7 +41,7 @@ const categoryTags = [
     },
 ]
 
-const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
+const SwiperModal = ({ gender, activityUserCards, setActivityUserCards, cardCategory, setIsCardModalOpen }) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false)
     const audio = new Audio(select)
 
@@ -58,6 +59,14 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
             setIsAudioPlaying(true)
             audioElem.play()
         }
+    }
+
+    const handleDelete = (activityId, categoryId) => {
+        const filteredUserCards = activityUserCards.filter(card => card.activityId !== activityId)
+        console.log(filteredUserCards)
+        setActivityUserCards(filteredUserCards)
+        localStorage.setItem("activity-user-cards", JSON.stringify(filteredUserCards))
+        setIsCardModalOpen(false)
     }
 
     return (
@@ -116,14 +125,22 @@ const SwiperModal = ({ gender, activityUserCards, cardCategory }) => {
                             )}
                             <div className="activity-cardstack-top">
                                 <div className="activity-cardstack-category-container">
+                                    {/* Dummy Tag to adjust alignment */}
+                                    <img src={require(`../../assets/images/category/${obj.category}.svg`)} style={{ opacity: 0 }} alt={obj.task} />
                                     <img src={require(`../../assets/images/category/${obj.category}.svg`)} style={{ backgroundColor: categoryTags[obj.categoryId].color }} alt={obj.task} />
+                                    <div className="activity-cardstack-ellipsis">
+                                        <BsThreeDotsVertical 
+                                            onClick={() => handleDelete(obj.activityId)}
+                                            style={{ marginLeft: "0rem" }} 
+                                        />
+                                    </div>
                                 </div>
                                 <h1 className="swiper-modal-activity-title">{obj.task}</h1>
                                 <div className="activity-cardstack-location">
                                     <GoLocation /><p>{obj.location}</p>
                                 </div>
                                 <img
-                                    style={{ 
+                                    style={{
                                         opacity: cardLoading ? 0 : 1, 
                                         marginBottom: obj.icon.length > 4 ? "2rem" : "0rem",
                                         width: "80%",

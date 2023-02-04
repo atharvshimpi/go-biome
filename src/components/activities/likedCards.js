@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 import ReactCardFlip from "react-card-flip"
 
-import { demoNotification } from "../notifications/demo"
 import select from "../../assets/sounds/Alert_pop.mp3"
 import select1 from "../../assets/sounds/UI/Proceed.mp3"
 
@@ -49,13 +48,13 @@ const LikedCards = ({
 }) => {
     if (!likedCardsDetails) return null
     const [loading, setLoading] = useState(false)
-    const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
+    // const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
     const audio = new Audio(select1)
 
     const handleClick = (e, obj) => {
         e.stopPropagation()
         setLoading(true)
-        demoNotification(msgTemplate)
+        // demoNotification(msgTemplate)
 
         // set current ongoing activity & it's start time 
         setGameStats({

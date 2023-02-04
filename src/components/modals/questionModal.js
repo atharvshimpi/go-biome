@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import { updateDoc, doc } from "firebase/firestore"
 
+import { firestore } from "../../firebase"
 import { data } from "../questions/questionsData"
 import { setDefault } from "../questions/setDefault"
 import {
@@ -28,13 +30,14 @@ const initialState = {
     unFriendlyBiome: "Minion",
     wakeupTime: updateTime(9, 0, 0),
     sleepTime: updateTime(23, 0, 0),
-    morningCheckInTime: updateTime(10, 30, 0),
-    mealTime: updateTime(14, 0, 0),
-    vibrate: false,
+    // morningCheckInTime: updateTime(10, 30, 0),
+    // mealTime: updateTime(14, 0, 0),
+    // vibrate: false,
     sound: false
 }
 
 const QuestionModal = ({ qNum }) => {
+    const user = JSON.parse(localStorage.getItem("user"))
     const [answers, setAnswers] = useState(initialState)
     const [loading, setLoading] = useState(false)
     const audio = new Audio(select)
@@ -47,6 +50,12 @@ const QuestionModal = ({ qNum }) => {
     const handleSubmit = () => {
         setDefault()
         localStorage.setItem("preferences", JSON.stringify(answers))
+
+        // Update to Firebase at the same time
+        updateDoc(doc(firestore, "users", user.email.split("@")[0]), {
+            preferences: answers
+        })
+
         setLoading(true)
 
         audio.play()

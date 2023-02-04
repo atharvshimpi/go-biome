@@ -107,11 +107,11 @@ export const changeUsername = ({
     )
 }
 
-export const activityCardStack = (activityUserCards, setOpen) => {
+export const activityCardStack = (activityUserCards, setActivityUserCards, setOpen) => {
     return (
         <div className="change-input-container" style={{ height: "100vh" }}>
             {activityUserCards.length > 0 ? (
-                <ActivityCardStack activityUserCards={activityUserCards} setOpen={setOpen} />
+                <ActivityCardStack activityUserCards={activityUserCards} setActivityUserCards={setActivityUserCards} setOpen={setOpen} />
             ) : (
                 <div className="empty-container">
                     <p className="empty-heading">

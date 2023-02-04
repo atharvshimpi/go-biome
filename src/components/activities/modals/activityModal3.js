@@ -73,6 +73,7 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
 
             updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
                 gameStats: {
+                    ...gameStats,
                     friendlyBiomePoints: gameStats.friendlyBiomePoints + gameStats.currentActivity.points,
                     activityPerformed: tempActivityPerformed,
                 }
@@ -93,7 +94,8 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
             )
 
             updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
-                stats: {
+                gameStats: {
+                    ...gameStats,
                     friendlyBiomePoints: 85,
                     activityPerformed: tempActivityPerformed,
                 }

@@ -191,12 +191,12 @@
 }
 
 .minionchar {
-    height: 3rem;
-    margin-right: -1rem;
+    height: 4rem;
+    margin-right: -1.2rem;
 }
 
 .shift-right {
-    width: 2rem !important;
+    width: 3rem !important;
     position: relative;
 }
 

@@ -4,14 +4,14 @@ import gameBG1 from "../../assets/images/bg/gameState0.png"
 import gameBG2 from "../../assets/images/bg/gameState1.png"
 import gameBG3 from "../../assets/images/bg/gameState2.png"
 import gameBG4 from "../../assets/images/bg/gameState3.png"
+import gameBG5 from "../../assets/images/bg/gameState4.png"
 
 import biomeImg1 from "../../assets/images/friendly.png"
 
 import "./gameboard.css"
 
-const Gameboard = () => {
+const Gameboard = ({ gameStats }) => {
     const biomeGarden = JSON.parse(localStorage.getItem("biome-garden"))
-    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
 
     useEffect(() => {
         const canvas = document.getElementById("game-board")
@@ -29,6 +29,8 @@ const Gameboard = () => {
         backgroundLayer3.src = gameBG3
         const backgroundLayer4 = new Image()
         backgroundLayer4.src = gameBG4
+        const backgroundLayer5 = new Image()
+        backgroundLayer5.src = gameBG5
 
         const biomeImg = new Image()
         biomeImg.src = require(`../../assets/images/biome/${biomeGarden.active}.png`)
@@ -104,11 +106,12 @@ const Gameboard = () => {
         const layer2 = new Layer(backgroundLayer2, 1)
         const layer3 = new Layer(backgroundLayer3, 1)
         const layer4 = new Layer(backgroundLayer4, 1)
+        const layer5 = new Layer(backgroundLayer5, 1)
 
         const biome1 = new Player(CANVAS_WIDTH, CANVAS_HEIGHT)
 
         // change game background based on activity and inactivity
-        const gameObject = [layer1, layer2, layer3, layer4]
+        const gameObject = [layer1, layer2, layer3, layer4, layer5]
         // else some error
 
         function animate() {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { doc, getDoc } from "firebase/firestore"
 
+import { firestore } from "../../firebase"
 import { UserAuth } from "../../context/authContext"
 
 import { Switch } from "@headlessui/react"
@@ -22,7 +24,7 @@ import "./login.css"
 const initialState = { email: "", password: "" }
 
 const Login = () => {
-    const preferences = JSON.parse(localStorage.getItem("preferences"))
+    const [preferences, setPreferences] = useState(JSON.parse(localStorage.getItem("preferences")))
     const [loginData, setLoginData] = useState(initialState)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showPassword, setShowPassword] = useState(true)
@@ -72,12 +74,54 @@ const Login = () => {
                 })
     }
 
+    const retrieveData = async () => {
+        const docSnap = await getDoc(doc(firestore, "users", user?.email.split("@")[0]))
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data())
+
+            // Store the retrieved data back into localstorage
+            
+            // Set user
+            localStorage.setItem("user", JSON.stringify(docSnap.data().userDetails))
+            
+            // Set pref
+            localStorage.setItem("preferences", JSON.stringify(docSnap.data().preferences))
+            // setPreferences(docSnap.data().preferences)
+            // Set Game Stats 
+            localStorage.setItem("gamestats", JSON.stringify(docSnap.data().gameStats))
+            
+            // Set Map Stats 
+            localStorage.setItem("mapstats", JSON.stringify(docSnap.data().mapStats))
+            
+            // Set Liked Cards
+            localStorage.setItem("liked-cards", JSON.stringify(docSnap.data().likedCards))
+            
+            // Set Activity History
+            localStorage.setItem("activity-history", JSON.stringify(docSnap.data().activityHistory))
+            
+            // Set Activity Card Stack
+            localStorage.setItem("activity-user-cards", JSON.stringify(docSnap.data().activityCardStack))
+            
+            // Set Biome Garden
+            localStorage.setItem("biome-garden", JSON.stringify(docSnap.data().biomeGarden))
+
+            // Navigate to Dashboard
+            navigate("/")
+        } else {
+        // doc.data() will be undefined in this case
+            console.log("New User as No Such Document Found")
+            navigate("/userDetails")
+        }
+    }
+
     /* If user then redirect to some other page */
 
     useEffect(() => {
         console.log(user)
-        if (user && !preferences) navigate("/userDetails")
-        else if (user) navigate("/")
+
+        // If user is logged back again, then populate the localstorage from firebase
+        if(user)
+            retrieveData()
     }, [user])
 
     return (
@@ -189,14 +233,14 @@ const Login = () => {
                     >
                         Sign-up with Google
                     </Button>
-                    <Button
+                    {/* <Button
                         fullWidth
                         variant="outlined"
                         className="auth-next-btn"
                         onClick={() => setIsModalOpen(true)}
                     >
                         Sign-up with Email
-                    </Button>
+                    </Button> */}
                 </div>
             )}
             <div className="auth-privacy">

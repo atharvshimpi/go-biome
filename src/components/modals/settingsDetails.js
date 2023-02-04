@@ -44,7 +44,7 @@ const SettingsDetails = ({ settingId, children, onClose }) => {
                             ease: "easeIn",
                         },
                     }}
-                    className="z-0 flex flex-col w-full h-full bg-white rounded-t-lg shadow-xl bgGameState"
+                    className={`z-0 flex flex-col w-full h-full bg-white rounded-t-lg shadow-xl ${settingId === 4 ? "bgGameState" : null}`}
                     style={{ backgroundColor: "#ffbc58" }}
                 >
                     {children}

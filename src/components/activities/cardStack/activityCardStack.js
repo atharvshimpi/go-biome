@@ -11,7 +11,7 @@ import Zen from "../../../assets/images/category/zen.svg"
 import select from "../../../assets/sounds/UI/Proceed.mp3"
 import "./activityCardStack.css"
 
-const ActivityCardStack = ({ activityUserCards, setOpen }) => {
+const ActivityCardStack = ({ activityUserCards, setActivityUserCards, setOpen }) => {
     // if activty card array is empty 
     if(!activityUserCards)
         return 
@@ -44,7 +44,7 @@ const ActivityCardStack = ({ activityUserCards, setOpen }) => {
                 className="modal-container"
             >
                 <Box className="modal-content">
-                    <SwiperModal gender={userDetails.gender} activityUserCards={cardDetailsData} cardCategory={null} />
+                    <SwiperModal gender={userDetails.gender} activityUserCards={cardDetailsData} setActivityUserCards={setActivityUserCards} cardCategory={null} setIsCardModalOpen={setIsCardModalOpen} />
                 </Box>
             </Modal>
             <div className="activity-card-stack-container">

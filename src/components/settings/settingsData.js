@@ -96,18 +96,18 @@ export const settingDetails = [
         title: "Sleeping Hours",
         icon: <BsFillMoonFill />,
     },
+    // {
+    //     id: 9,
+    //     title: "Morning Check-in Hours",
+    //     icon: <GiSunPriest />,
+    // },
+    // {
+    //     id: 10,
+    //     title: "Meal Time",
+    //     icon: <GiForkKnifeSpoon />,
+    // },
     {
         id: 9,
-        title: "Morning Check-in Hours",
-        icon: <GiSunPriest />,
-    },
-    {
-        id: 10,
-        title: "Meal Time",
-        icon: <GiForkKnifeSpoon />,
-    },
-    {
-        id: 11,
         title: "Set friendly Biome Name",
         icon: <FaBacterium />,
     },
@@ -117,17 +117,17 @@ export const settingDetails = [
     //     icon: <FaVirus />,
     // },
     {
-        id: 12,
+        id: 10,
         title: "Terms and Conditions",
         icon: <FaBook />,
     },
     {
-        id: 13,
+        id: 11,
         title: "About this research",
         icon: <FaResearchgate />,
     },
     {
-        id: 14,
+        id: 12,
         title: "Questionnaire",
         icon: <AiOutlineQuestionCircle/>,
     },
@@ -137,12 +137,12 @@ export const settingDetails = [
     //     icon: <AiOutlineTeam/>,
     // },
     {
-        id: 15,
+        id: 13,
         title: "Creative Commons Attribution",
         icon: <AiOutlineCopyrightCircle/>,
     },
     {
-        id: 16,
+        id: 14,
         title: "Game Information",
         icon: <FaGamepad />,
     },

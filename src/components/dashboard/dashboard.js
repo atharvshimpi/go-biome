@@ -66,7 +66,7 @@ import FlashGoodEmojiNoModal from "../activities/modals/flash-good-emoji-no"
 import select from "../../assets/sounds/UI/Shuffle_button.mp3"
 import select1 from "../../assets/sounds/UI/Proceed.mp3"
 import select2 from "../../assets/sounds/UI/CardTap.mp3"
-import { demoNotification } from "../notifications/demo"
+import { UserAuth } from "../../context/authContext"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -90,6 +90,7 @@ const Dashboard = () => {
         unFriendlyBiome3,
     ])
     const [activeCardIdx, setActiveCardIdx] = useState(0)
+    const [numOfDistActPerformed, setNumOfDistActPerformed] = useState(null)
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [isLikedCardsModalOpen, setIsLikedCardsModalOpen] = useState(false)
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] =
@@ -113,6 +114,7 @@ const Dashboard = () => {
     const [cardDetailsData, setCardDetailsData] = useState([])
     const [prevGame, setPrevGame] = useState(gameStats.prevDate)
     const [morningGameNotif, setMorningNotif] = useState(pref.wakeupTime)
+    const { user } = UserAuth()
     const card = new Audio(select2)
     const navigate = useNavigate()
 
@@ -134,8 +136,6 @@ const Dashboard = () => {
                     0
                 )
 
-                // et
-
                 // if inactive, then gameState - 1
                 if (!actPerfSum) {
                     if (gameStats.gameState > 0)
@@ -143,7 +143,7 @@ const Dashboard = () => {
                             "gamestats",
                             JSON.stringify({
                                 ...gameStats,
-                                gameState: gameStats.gameState - 1,
+                                // gameState: gameStats.gameState - 1,
                                 activityPerformed: [0, 0, 0, 0],
                                 currentActivity: null,
                                 friendlyBiomePoints: 15,
@@ -159,7 +159,7 @@ const Dashboard = () => {
                             "gamestats",
                             JSON.stringify({
                                 ...gameStats,
-                                gameState: gameStats.gameState + 1,
+                                // gameState: gameStats.gameState + 1,
                                 activityPerformed: [0, 0, 0, 0],
                                 currentActivity: null,
                                 friendlyBiomePoints: 15,
@@ -188,41 +188,8 @@ const Dashboard = () => {
         }
     }, [morningGameNotif])
 
-    // Notifications
-    // 1. Morning
-    const morningMsg = `Your Biome Digest is waiting for you!`
-    useEffect(() => {
-        const morningGameNotifTime = new Date(morningGameNotif)
-        const currDate = new Date()
-
-        if (
-            currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&
-            morningGameNotifTime.getDate() + 1 <= currDate.getDate()
-        ) {
-            demoNotification(morningMsg)
-            morningGameNotifTime.setDate(morningGameNotifTime.getDate() + 1)
-            setMorningNotif(morningGameNotifTime)
-            localStorage.setItem(
-                "preferences",
-                JSON.stringify({
-                    ...pref,
-                    wakeupTime: morningGameNotifTime,
-                })
-            )
-        }
-    }, [morningGameNotif])
-
-    // 5. Inactivity
-    // const day1InactivityMsg = `${pref.friendlyBiome} misses you!`
-    // useEffect(() => {
-    //     const morningGameNotifTime = new Date(morningGameNotif)
-    //     const currDate = new Date()
-
-    // }, [morningGameNotif])
-
     useEffect(() => {
         if (!userDetails) return <Navigate to="/userDetails" />
-
         if (!pref) return <Navigate to="/questions-main" />
     }, [userDetails, pref])
 
@@ -235,19 +202,26 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        let numOfDistActPerformed = distAct(gameStats.activityPerformed)
+        setNumOfDistActPerformed(distAct(gameStats.activityPerformed))
+        setGameStats({
+            ...gameStats,
+            gameState: distAct(gameStats.activityPerformed)
+        })
+        localStorage.setItem("gamestats", JSON.stringify({
+            ...gameStats,
+            gameState: distAct(gameStats.activityPerformed)
+        }))
 
         if (gameStats.activityOngoing) {
             setSheildImage(Charging)
         } else {
             if (numOfDistActPerformed === 0) setSheildImage(Nostrength)
-            else if (numOfDistActPerformed === 1)
-                setSheildImage(Partialstrength)
+            else if (numOfDistActPerformed === 1) setSheildImage(Partialstrength)
             else if (numOfDistActPerformed === 2) setSheildImage(Fullstrength)
             else if (numOfDistActPerformed === 3) setSheildImage(Diversitycheck)
             else if (numOfDistActPerformed === 4) setSheildImage(Superdiversity)
         }
-    }, [gameStats, isActivityProgressModalOpen])
+    }, [isActivityProgressModalOpen])
 
     // research about this part
     const handleVibrate = () => {
@@ -352,13 +326,18 @@ const Dashboard = () => {
                 </h3>
             </div>
             <div className="points-view">
-                <div className="biomechar-container">
+                <div 
+                    className="biomechar-container" 
+                    style={ gameStats.friendlyBiomePoints >= 85 ? {
+                        padding: "0rem 1rem 0rem 0rem"
+                    } : null}
+                >
                     <div className="minion-group">
                         <img
                             style={{
                                 width:
                                     gameStats.friendlyBiomePoints >= 50
-                                        ? "3rem"
+                                        ? "4rem"
                                         : "5rem",
                             }}
                             onClick={(handleVibrate => {
@@ -373,7 +352,7 @@ const Dashboard = () => {
                                 style={{
                                     width:
                                         gameStats.friendlyBiomePoints >= 50
-                                            ? "3rem"
+                                            ? "4rem"
                                             : "5rem",
                                 }}
                                 onClick={() => {
@@ -389,7 +368,7 @@ const Dashboard = () => {
                                 style={{
                                     width:
                                         gameStats.friendlyBiomePoints >= 50
-                                            ? "3rem"
+                                            ? "4rem"
                                             : "5rem",
                                 }}
                                 onClick={() => {
@@ -406,7 +385,7 @@ const Dashboard = () => {
                             style={{
                                 width:
                                     gameStats.unFriendlyBiomePoints <= 85
-                                        ? "3rem"
+                                        ? "4rem"
                                         : "5rem",
                                 marginRight:
                                     gameStats.unFriendlyBiomePoints <= 15
@@ -425,7 +404,7 @@ const Dashboard = () => {
                                 style={{
                                     width:
                                         gameStats.unFriendlyBiomePoints < 85
-                                            ? "3rem"
+                                            ? "4rem"
                                             : "5rem",
                                 }}
                                 onClick={() => {
@@ -441,7 +420,7 @@ const Dashboard = () => {
                                 style={{
                                     width:
                                         gameStats.unFriendlyBiomePoints <= 85
-                                            ? "3rem"
+                                            ? "4rem"
                                             : "5rem",
                                 }}
                                 onClick={() => {
@@ -487,7 +466,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="game-board-container">
-                <Gameboard></Gameboard>
+                <Gameboard gameStats={gameStats}></Gameboard>
                 {/* carousal */}
                 <Modal
                     open={isCardModalOpen}

@@ -8,7 +8,6 @@ import { doc, updateDoc } from "firebase/firestore"
 
 
 import select from "../../../assets/sounds/UI/Card_Turn.mp3"
-import { demoNotification } from "../../notifications/demo"
 
 import { BsHeart, BsHeartFill } from "react-icons/bs"
 import { Box, CircularProgress } from "@mui/material"
@@ -55,13 +54,13 @@ const ActivityCarousal = ({
 }) => {
     if (!cardDetailsData) return null
     const [loading, setLoading] = useState(false)
-    const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
+    // const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
     const audio = new Audio(select)
 
     const handleClick = (e, obj) => {
         e.stopPropagation()
         setLoading(true)
-        demoNotification(msgTemplate)
+        // demoNotification(msgTemplate)
 
         // set current ongoing activity & it's start time 
         setGameStats({

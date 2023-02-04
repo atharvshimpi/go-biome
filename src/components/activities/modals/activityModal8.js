@@ -24,7 +24,7 @@ const ActivityModal8 = ({ gameStats, setGameStats, pref, setIsActivityModal8Open
     return (
         <div className="activity-progress-container">
             <div className="activity-biomecong-container">
-                <img className="activity-biomecong-img" src={celebration} alt="friendly" />
+                <img className="activity-biomecong-img" src={celebration} alt="celebration" />
             </div>
             <div className="activity-progress-heading">
                 {`Go-go Biome! You have successfully balanced your biome today. ${pref.friendlyBiome} sends you a hug!`}

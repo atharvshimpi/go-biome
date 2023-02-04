@@ -5,7 +5,6 @@ import { firestore } from "../../../firebase"
 import { doc, updateDoc } from "firebase/firestore"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
 
-import { demoNotification } from "../../notifications/demo"
 import UserCard from "./userCard"
 import { storage } from "../../../firebase"
 
@@ -73,7 +72,7 @@ const AddUserCard = () => {
     const multiGenderAvaialble = gameStats.currentActivity.icon.split("_").length > 1 ? true : false
     const gender = userDetails.gender
     const cardImageRef = ref(storage, `images/${userDetails.email.split("@")[0]}/${userCardData.createdAt}`)
-    const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
+    // const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
     const audio = new Audio(select)
     const skip1 = new Audio(skip)
     const prev1 = new Audio(create)
@@ -96,8 +95,8 @@ const AddUserCard = () => {
 
     const navigateUtil = () => {
         audio.play()
-        demoNotification(msgTemplate)
-        if(gameStats.friendlyBiomePoints == 85)
+        // demoNotification(msgTemplate)
+        if(gameStats.friendlyBiomePoints === 85)
             navigate("/map")
         else
             navigate("/")
@@ -111,7 +110,6 @@ const AddUserCard = () => {
             uploadBytes(cardImageRef, userImageFile)
                 .then((uploadedObj) => {
                     console.log("Image Uploaded")
-
                     getDownloadURL(uploadedObj.ref).then((url) => {
                         activityUserCard.push({
                             activityId: gameStats.currentActivity.activityId,
@@ -150,9 +148,9 @@ const AddUserCard = () => {
         }
 
         // Update the user activity cards to firebase
-        updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
-            userCards: activityUserCard
-        })
+        // updateDoc(doc(firestore, "users", userDetails.email.split("@")[0]), {
+        //     activityCardStack: activityUserCard
+        // })
 
         const audio = new Audio(create)
         audio.play()

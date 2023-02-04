@@ -12,7 +12,7 @@ const AboutResearch = () => {
                 <div className="icon-container">
                     <IoIosArrowBack
                         onClick={() => {
-                            audio.play(),
+                            // audio.play(),
                             navigate("/settings")
                         }}
                         className="icon"
@@ -23,7 +23,7 @@ const AboutResearch = () => {
                 <div style={{ opacity: 0 }} className="icon-container">
                     <IoIosArrowBack
                         onClick={() => {
-                            audio.play(),
+                            // audio.play(),
                             navigate("/")
                         }}
                         className="icon"

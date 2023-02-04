@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 import { UserAuth } from "../../context/authContext" 
+import { updateDoc, doc } from "firebase/firestore"
+import { firestore } from "../../firebase"
 import { settingDetails } from "./settingsData"
 import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName } from "./changeSettings"
 
@@ -28,9 +30,12 @@ const Settings = () => {
     // eslint-disable-next-line
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
     const [pref, setPref] = useState(JSON.parse(localStorage.getItem("preferences")))
-    const activityUserCards = JSON.parse(localStorage.getItem("activity-user-cards"))
+    const [activityUserCards, setActivityUserCards] = useState(JSON.parse(localStorage.getItem("activity-user-cards")))
     const activityHistoryData = JSON.parse(localStorage.getItem("activity-history"))
     const [biomeChars, setBiomeChars] = useState(JSON.parse(localStorage.getItem("biome-garden")))
+    const likedCards = JSON.parse(localStorage.getItem("liked-cards"))
+    const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+    const mapStats = JSON.parse(localStorage.getItem("mapstats"))
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [settingId, setSettingId] = useState(-1)
@@ -46,9 +51,24 @@ const Settings = () => {
 
     const handleSignOut = async () => {
         try {
+            // First backup all the data to firebase and,  
+            await updateDoc(doc(firestore, "users", user.email.split("@")[0]), {
+                userDetails: user,
+                preferences: pref,
+                activityHistory: activityHistoryData,
+                activityCardStack: activityUserCards,
+                likedCards: likedCards,
+                gameStats: gameStats,
+                mapStats: mapStats,
+                biomeGarden: biomeChars
+            })
+            
+            // Then clear localstorage everytime user logs out
+            localStorage.clear()
+
             await logOut(navigate)
         } catch (error) {
-            console.log("Settings Error : ", error)
+            console.log("Error while SignOut: ", error)
         }
     }
 
@@ -115,15 +135,15 @@ const Settings = () => {
                                 </div>
                                 { settingId === 0 ? changeProfilePicture({notify, user, setUser, loading, setLoading, setOpen}) : null }
                                 { settingId === 1 ? changeUsername({notify, pref, user, setUser, loading, setLoading, setOpen}) : null }
-                                { settingId === 2 ? activityCardStack(activityUserCards, setOpen) : null }
+                                { settingId === 2 ? activityCardStack(activityUserCards, setActivityUserCards, setOpen) : null }
                                 { settingId === 3 ? activityHistory(activityHistoryData) : null }
                                 { settingId === 4 ? biomeGarden(biomeChars, setBiomeChars, loading, setLoading) : null }
-                                { settingId === 10 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 11 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 12 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 13 ? changeMealHours({notify, pref, setPref, mealTime, handleMealTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 14 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
-                                { settingId === 15 ? changeUnFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
+                                { settingId === 7 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 8 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 15 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 16 ? changeMealHours({notify, pref, setPref, mealTime, handleMealTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 9 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
+                                { settingId === 17 ? changeUnFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
                             </div>
                         </SettingsDetails>
                     )}

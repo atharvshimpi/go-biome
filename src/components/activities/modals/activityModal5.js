@@ -17,7 +17,7 @@ const ActivityModal5 = ({ biomeGarden, gameStats, setIsActivityModal5Open, setIs
         
         setIsActivityModal5Open(false)
         audio.play()
-        if(gameStats.friendlyBiomePoints == 85 && !gameStats.activityBiomeCongMsg)
+        if(gameStats.friendlyBiomePoints === 85 && !gameStats.activityBiomeCongMsg)
             setIsActivityModal8Open(true)
         else
             setIsActivityModal6Open(true)

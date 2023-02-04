@@ -29,9 +29,14 @@ export const ActivityHistoryDrpDwn = ({ activity, setIsHistoryModalOpen, setActi
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const multiGenderAvaialble = activity.icon.split("_").length > 1 ? true : false
 
+    const activityCardStack = JSON.parse(localStorage.getItem("activity-user-cards"))
+    const filteredCard = activityCardStack.filter(card => card.activityId === activity.activityId)[0]
+
     const handleClick = () => {
-        setActivityId(activity.activityId)
-        setIsHistoryModalOpen(true)
+        if(filteredCard !== undefined) {
+            setActivityId(activity.activityId)
+            setIsHistoryModalOpen(true)
+        }
     }
 
     return (

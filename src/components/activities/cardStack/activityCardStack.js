@@ -44,7 +44,7 @@ const ActivityCardStack = ({ activityUserCards, setActivityUserCards, setOpen })
                 className="modal-container"
             >
                 <Box className="modal-content">
-                    <SwiperModal gender={userDetails.gender} activityUserCards={cardDetailsData} setActivityUserCards={setActivityUserCards} cardCategory={null} setIsCardModalOpen={setIsCardModalOpen} />
+                    <SwiperModal gender={userDetails.gender} cardDetailsData={cardDetailsData} activityUserCards={activityUserCards} setActivityUserCards={setActivityUserCards} cardCategory={null} setIsCardModalOpen={setIsCardModalOpen} />
                 </Box>
             </Modal>
             <div className="activity-card-stack-container">

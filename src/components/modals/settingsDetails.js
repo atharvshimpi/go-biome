@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Dialog } from "@headlessui/react"
 
 // eslint-disable-next-line
-const SettingsDetails = ({ settingId, children, onClose }) => {
+const SettingsDetails = ({ gameStats, settingId, children, onClose }) => {
     return (
         <Dialog className="fixed inset-0 z-10" onClose={onClose} open={true}>
             <div className="flex flex-col justify-center h-full pt-4 text-center sm:block sm:p-0">
@@ -44,7 +44,7 @@ const SettingsDetails = ({ settingId, children, onClose }) => {
                             ease: "easeIn",
                         },
                     }}
-                    className={`z-0 flex flex-col w-full h-full bg-white rounded-t-lg shadow-xl ${settingId === 4 ? "bgGameState" : null}`}
+                    className={`z-0 flex flex-col w-full h-full bg-white rounded-t-lg shadow-xl ${settingId === 4 ? `biome-garden-bg${gameStats.gameState}` : null}`}
                     style={{ backgroundColor: "#ffbc58" }}
                 >
                     {children}

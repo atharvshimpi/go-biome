@@ -9,7 +9,7 @@ import Social from "../../assets/images/category/social.svg"
 import Zen from "../../assets/images/category/zen.svg"
 
 import { GoLocation } from "react-icons/go"
-import { AiOutlineCalendar } from "react-icons/ai"
+import { AiOutlineCalendar, AiFillDelete } from "react-icons/ai"
 import { FcSpeaker } from "react-icons/fc"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { Box, CircularProgress } from "@mui/material"
@@ -41,7 +41,7 @@ const categoryTags = [
     },
 ]
 
-const SwiperModal = ({ gender, activityUserCards, setActivityUserCards, cardCategory, setIsCardModalOpen }) => {
+const SwiperModal = ({ gender, cardDetailsData, activityUserCards, setActivityUserCards, cardCategory, setIsCardModalOpen }) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false)
     const audio = new Audio(select)
 
@@ -61,9 +61,10 @@ const SwiperModal = ({ gender, activityUserCards, setActivityUserCards, cardCate
         }
     }
 
-    const handleDelete = (activityId, categoryId) => {
+    const handleDelete = (activityId) => {
+        // console.log("Before Delete: ", activityUserCards)
         const filteredUserCards = activityUserCards.filter(card => card.activityId !== activityId)
-        console.log(filteredUserCards)
+        // console.log("After Delete: ", filteredUserCards)
         setActivityUserCards(filteredUserCards)
         localStorage.setItem("activity-user-cards", JSON.stringify(filteredUserCards))
         setIsCardModalOpen(false)
@@ -76,7 +77,7 @@ const SwiperModal = ({ gender, activityUserCards, setActivityUserCards, cardCate
             modules={[EffectCards]}
             className="mySwiper"
         >
-            {activityUserCards.map((obj, key) => {
+            {cardDetailsData.map((obj, key) => {
                 const [cardLoading, setCardLoading] = useState(true)
                 const [iconImage, setIconImage] = useState(null)
                 const multiGenderAvaialble =
@@ -129,7 +130,7 @@ const SwiperModal = ({ gender, activityUserCards, setActivityUserCards, cardCate
                                     <img src={require(`../../assets/images/category/${obj.category}.svg`)} style={{ opacity: 0 }} alt={obj.task} />
                                     <img src={require(`../../assets/images/category/${obj.category}.svg`)} style={{ backgroundColor: categoryTags[obj.categoryId].color }} alt={obj.task} />
                                     <div className="activity-cardstack-ellipsis">
-                                        <BsThreeDotsVertical 
+                                        <AiFillDelete
                                             onClick={() => handleDelete(obj.activityId)}
                                             style={{ marginLeft: "0rem" }} 
                                         />
@@ -169,10 +170,6 @@ const SwiperModal = ({ gender, activityUserCards, setActivityUserCards, cardCate
                                 </div>
                                 <div className="activity-cardstack-date-container">
                                     <AiOutlineCalendar />
-                                    {/* 0   1   2  3
-                                        Sat Jan 28 2023
-                                        
-                                    */}
                                     <div><p className="cardstack-card-date">{`${dateArr[0]}, ${dateArr[2]} ${dateArr[1]} ${dateArr[3]}`}</p></div>
                                 </div>
                                 {/* <div className="activity-cardstack-date-container">

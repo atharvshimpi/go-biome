@@ -31,10 +31,10 @@ const ActivityModal5 = ({ biomeGarden, gameStats, setIsActivityModal5Open, setIs
             <div className="activity-img-group">
                 <div className="activity-img-container">
                     <img className="activity-img" src={require(`../../../assets/images/biome/${biomeGarden.active}.png`)} alt="friendly" />
-                    <div className="activity-points-earned">+{gameStats.currentActivity.points}</div>
-                </div>
-                <div className="activity-img-container">
                     <img className="activity-img" src={minionPoints} alt="unfriendly" />
+                </div>
+                <div className="activity-points-container">
+                    <div className="activity-points-earned">+{gameStats.currentActivity.points}</div>
                     <div className="activity-points-earned">-{gameStats.currentActivity.points}</div>
                 </div>
             </div>

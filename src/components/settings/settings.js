@@ -113,7 +113,7 @@ const Settings = () => {
 
                 <AnimatePresence>
                     {open && (
-                        <SettingsDetails settingId={settingId} onClose={() => setOpen(false)}>
+                        <SettingsDetails gameStats={gameStats} settingId={settingId} onClose={() => setOpen(false)}>
                             <div className="flex flex-col h-full pt-3">
                                 <div className="flex justify-between items-start px-3 shadow-sm text-center">
                                     <div className="slider-title">

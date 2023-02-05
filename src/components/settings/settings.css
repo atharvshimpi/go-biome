@@ -157,6 +157,20 @@
     background: url(../../assets/images/bg/gameState2.png);
 }
 
+.biome-garden-bg0, 
+.biome-garden-bg1, 
+.biome-garden-bg2 {
+    background: url(../../assets/images/bg/biomeGarden012.png);
+}
+
+.biome-garden-bg3 {
+    background: url(../../assets/images/bg/biomeGarden3.png);
+}
+
+.biome-garden-bg4 {
+    background: url(../../assets/images/bg/biomeGarden4.png);
+}
+
 .biome-char {
     position: relative;
     top: -140px;

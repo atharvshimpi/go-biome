@@ -29,7 +29,7 @@ const ActivityModal8 = ({ gameStats, setGameStats, pref, setIsActivityModal8Open
             <div className="activity-progress-heading">
                 {`Go-go Biome! You have successfully balanced your biome today. ${pref.friendlyBiome} sends you a hug!`}
             </div>
-            <div className="activity-img-group" style={{ justifyContent: "center" }}>
+            <div className="activity-img-group" style={{ flexDirection: "row", justifyContent: "center" }}>
                 <img className="activity-biome-congra-img" src={biomePoints} alt="friendly" />
                 <img className="activity-biome-congra-img" src={em37} alt="em37" />
             </div>

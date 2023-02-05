@@ -32,7 +32,7 @@ export const setDefault = () => {
     localStorage.setItem(
         "biome-garden",
         JSON.stringify({
-            active: "FB11.4",
+            active: "DB1.1",
             chars: [
                 // biomeName: isUnlocked
                 {FB1: false},
@@ -52,4 +52,8 @@ export const setDefault = () => {
             defaults: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         })
     )
+    localStorage.setItem("game-analytics", JSON.stringify({
+        activityCategoryFirstTouched: -1,
+        shuffleButtonPressFreq: 0, 
+    }))
 }

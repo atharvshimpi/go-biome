@@ -16,7 +16,7 @@ const Terms = () => {
                     <IoIosArrowBack
                         onClick={() => {
                             audio.play(),
-                            navigate("/")
+                            navigate("/settings")
                         }}
                         className="icon"
                     />

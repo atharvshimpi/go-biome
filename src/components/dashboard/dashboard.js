@@ -34,7 +34,6 @@ import unFriendlyBiome3 from "../../assets/images/minion/UFB4.2.png"
 
 // biome shield strength
 import Nostrength from "../../assets/images/shield/nostrength.svg"
-import { BsShieldExclamation } from "react-icons/bs"
 import Charging from "../../assets/images/shield/charging.svg"
 import Partialstrength from "../../assets/images/shield/partialstrength.svg"
 import Fullstrength from "../../assets/images/shield/fullstrength.svg"
@@ -42,7 +41,6 @@ import Diversitycheck from "../../assets/images/shield/diversitycheck.svg"
 import Superdiversity from "../../assets/images/shield/superdiversity.svg"
 
 import { AiFillSetting } from "react-icons/ai"
-import { GiEncirclement } from "react-icons/gi"
 import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
 
@@ -66,7 +64,6 @@ import FlashGoodEmojiNoModal from "../activities/modals/flash-good-emoji-no"
 import select from "../../assets/sounds/UI/Shuffle_button.mp3"
 import select1 from "../../assets/sounds/UI/Proceed.mp3"
 import select2 from "../../assets/sounds/UI/CardTap.mp3"
-import { UserAuth } from "../../context/authContext"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -90,7 +87,6 @@ const Dashboard = () => {
         unFriendlyBiome3,
     ])
     const [activeCardIdx, setActiveCardIdx] = useState(0)
-    const [numOfDistActPerformed, setNumOfDistActPerformed] = useState(null)
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [isLikedCardsModalOpen, setIsLikedCardsModalOpen] = useState(false)
     const [isActivityProgressModalOpen, setIsActivityProgressModalOpen] =
@@ -112,81 +108,25 @@ const Dashboard = () => {
     const [isFlashGoodEmojiNoModalOpen, setIsFlashGoodEmojiNoModalOpen] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
-    const [prevGame, setPrevGame] = useState(gameStats.prevDate)
-    const [morningGameNotif, setMorningNotif] = useState(pref.wakeupTime)
-    const { user } = UserAuth()
+    const [lastPlayed, setLastPlayed] = useState(gameStats.prevDate)
+    const [morningGameNotif, setMorningGameNotif] = useState(pref.wakeupTime)
     const card = new Audio(select2)
     const navigate = useNavigate()
 
-    // Day Reset
-    useEffect(() => {
-        if (prevGame) {
-            const prevDate = new Date(prevGame)
-            const currDate = new Date()
+    // // Biome Flash Cards
+    // useEffect(() => {
+    //     const morningGameNotifTime = new Date(morningGameNotif)
+    //     const currDate = new Date()
+    //     var hours = morningGameNotifTime.getHours()
 
-            if (prevDate.getDate() + 1 <= currDate.getDate()) {
-                console.log("New Day!")
-                prevDate.setDate(prevDate.getDate() + 1)
-                setPrevGame(prevDate)
-
-                const actPerfSum = gameStats.activityPerformed.reduce(
-                    (x, y) => {
-                        return x + y
-                    },
-                    0
-                )
-
-                // if inactive, then gameState - 1
-                if (!actPerfSum) {
-                    if (gameStats.gameState > 0)
-                        localStorage.setItem(
-                            "gamestats",
-                            JSON.stringify({
-                                ...gameStats,
-                                // gameState: gameStats.gameState - 1,
-                                activityPerformed: [0, 0, 0, 0],
-                                currentActivity: null,
-                                friendlyBiomePoints: 15,
-                                unFriendlyBiomePoints: 85,
-                                activityBiomeCongMsg: false,
-                                prevDate: prevDate,
-                            })
-                        )
-                    // else gameState + 1
-                } else {
-                    if (gameStats.gameState < 3)
-                        localStorage.setItem(
-                            "gamestats",
-                            JSON.stringify({
-                                ...gameStats,
-                                // gameState: gameStats.gameState + 1,
-                                activityPerformed: [0, 0, 0, 0],
-                                currentActivity: null,
-                                friendlyBiomePoints: 15,
-                                unFriendlyBiomePoints: 85,
-                                activityBiomeCongMsg: false,
-                                prevDate: prevDate,
-                            })
-                        )
-                }
-            }
-        }
-    }, [prevGame])
-
-    // Biome Flash Cards
-    useEffect(() => {
-        const morningGameNotifTime = new Date(morningGameNotif)
-        const currDate = new Date()
-        var hours = morningGameNotifTime.getHours()
-
-        if (
-            (currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&
-            morningGameNotifTime.getDate() + 1 <= currDate.getDate())
-        ) {
-            hours = currDate.getHours()
-            handleCardModalOpen(6)
-        }
-    }, [morningGameNotif])
+    //     if (
+    //         (currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&
+    //         morningGameNotifTime.getDate() + 1 <= currDate.getDate())
+    //     ) {
+    //         hours = currDate.getHours()
+    //         handleCardModalOpen(6)
+    //     }
+    // }, [morningGameNotif])
 
     useEffect(() => {
         if (!userDetails) return <Navigate to="/userDetails" />
@@ -202,26 +142,26 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        setNumOfDistActPerformed(distAct(gameStats.activityPerformed))
+        let numDistActPerf = distAct(gameStats.activityPerformed)
         setGameStats({
             ...gameStats,
-            gameState: distAct(gameStats.activityPerformed)
+            gameState: numDistActPerf
         })
         localStorage.setItem("gamestats", JSON.stringify({
             ...gameStats,
-            gameState: distAct(gameStats.activityPerformed)
+            gameState: numDistActPerf
         }))
 
         if (gameStats.activityOngoing) {
             setSheildImage(Charging)
         } else {
-            if (numOfDistActPerformed === 0) setSheildImage(Nostrength)
-            else if (numOfDistActPerformed === 1) setSheildImage(Partialstrength)
-            else if (numOfDistActPerformed === 2) setSheildImage(Fullstrength)
-            else if (numOfDistActPerformed === 3) setSheildImage(Diversitycheck)
-            else if (numOfDistActPerformed === 4) setSheildImage(Superdiversity)
+            if (numDistActPerf === 0) setSheildImage(Nostrength)
+            else if (numDistActPerf === 1) setSheildImage(Partialstrength)
+            else if (numDistActPerf === 2) setSheildImage(Fullstrength)
+            else if (numDistActPerf === 3) setSheildImage(Diversitycheck)
+            else if (numDistActPerf === 4) setSheildImage(Superdiversity)
         }
-    }, [isActivityProgressModalOpen])
+    }, [gameStats.activityPerformed, isActivityProgressModalOpen])
 
     // research about this part
     const handleVibrate = () => {
@@ -299,14 +239,57 @@ const Dashboard = () => {
         }
     }
 
+    // Day Reset
+    useEffect(() => {
+        const prevDate = new Date(lastPlayed)
+        const currDate = new Date()
+
+        if (prevDate.getDate() + 1 <= currDate.getDate()) {
+            console.log("New Day!")
+            prevDate.setDate(prevDate.getDate() + 1)
+            setLastPlayed(prevDate)
+            console.log("lastPlayed: ", lastPlayed)
+            console.log("prevDate: ", prevDate.toISOString())
+
+            setGameStats({
+                ...gameStats,
+                activityPerformed: [0, 0, 0, 0],
+                gameState: 0,
+                currentActivity: null,
+                friendlyBiomePoints: 15,
+                unFriendlyBiomePoints: 85,
+                activityBiomeCongMsg: false,
+                prevDate: prevDate.toISOString(),
+            })
+
+            localStorage.setItem(
+                "gamestats",
+                JSON.stringify({
+                    ...gameStats,
+                    activityPerformed: [0, 0, 0, 0],
+                    currentActivity: null,
+                    friendlyBiomePoints: 15,
+                    unFriendlyBiomePoints: 85,
+                    activityBiomeCongMsg: false,
+                    prevDate: prevDate.toISOString(),
+                })
+            )
+        }
+    }, [lastPlayed])
+
     return (
         <motion.div
             initial={{ width: 0 }}
             animate={{ width: "100%" }}   
             exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
             className="dashboard-container"
+            style={ gameStats.gameState <= 2 ? {
+                background: "#B99691"
+            } : {
+                background: "#EC8C7A"
+            }}
         >
-            <div className="top-view">
+            <div className="top-view" style={{ margin: "0rem" }}>
                 <div className="icon-group">
                     <div
                         className="icon-container"
@@ -332,105 +315,159 @@ const Dashboard = () => {
                         padding: "0rem 1rem 0rem 0rem"
                     } : null}
                 >
-                    <div className="minion-group">
+                    {/* Biomes */}
+                    <div 
+                        className="minion-group"
+                        style={{ 
+                            // width: "50%"
+                        }}
+                    >
                         <img
                             style={{
-                                width:
-                                    gameStats.friendlyBiomePoints >= 50
-                                        ? "4rem"
-                                        : "5rem",
+                                width: gameStats.gameState === 0 ? "5rem" : "3.5rem",
+                                marginLeft: "0.3rem"
                             }}
                             onClick={(handleVibrate => {
                                 handleVibrate
                                 handleCardModalOpen(5)
                             })}
-                            src={require(`../../assets/images/biome/${biomeGarden.active}.png`)}
+                            src={require(`../../assets/images/biome/DB1.1.png`)}
                             className="biomechar"
                         />
-                        {gameStats.friendlyBiomePoints >= 50 ? (
+                        {gameStats.gameState >= 1 ? (
                             <img
                                 style={{
-                                    width:
-                                        gameStats.friendlyBiomePoints >= 50
-                                            ? "4rem"
-                                            : "5rem",
+                                    width: "3.5rem",
+                                    marginLeft: "0.3rem"
                                 }}
                                 onClick={() => {
                                     handleVibrate
                                     handleCardModalOpen(5)
                                 }}
-                                src={friendlyBiomeArray[1]}
+                                src={require(`../../assets/images/biome/FB2.5.png`)}
                                 className="biomechar"
                             />
                         ) : null}
-                        {gameStats.friendlyBiomePoints >= 85 ? (
+                        {gameStats.gameState >= 2 ? (
                             <img
                                 style={{
-                                    width:
-                                        gameStats.friendlyBiomePoints >= 50
-                                            ? "4rem"
-                                            : "5rem",
+                                    width: "3.5rem",
+                                    marginLeft: "0.3rem"
                                 }}
                                 onClick={() => {
                                     handleVibrate
                                     handleCardModalOpen(5)
                                 }}
-                                src={friendlyBiomeArray[2]}
+                                src={require(`../../assets/images/biome/FB7.7.png`)}
                                 className="biomechar"
                             />
+                        ) : null}
+                        {gameStats.gameState >= 3 ? (
+                            <>
+                                <img
+                                    style={{
+                                        width: "3.5rem",
+                                        marginLeft: "0.3rem"
+                                    }}
+                                    onClick={() => {
+                                        handleVibrate
+                                        handleCardModalOpen(5)
+                                    }}
+                                    src={require(`../../assets/images/biome/FB1.5.png`)}
+                                    className="biomechar"
+                                />
+                                <img
+                                    style={{
+                                        width: "3.5rem",
+                                        marginLeft: "0.3rem"
+                                    }}
+                                    onClick={() => {
+                                        handleVibrate
+                                        handleCardModalOpen(5)
+                                    }}
+                                    src={require(`../../assets/images/biome/FB13.7.png`)}
+                                    className="biomechar"
+                                />
+                            </>
                         ) : null}
                     </div>
-                    <div className="minion-group">
+
+                    {/* Minions */}
+                    <div 
+                        className="minion-group"
+                        style={{
+                            width: "50%"
+                        }}
+                    >
                         <img
                             style={{
-                                width:
-                                    gameStats.unFriendlyBiomePoints <= 85
-                                        ? "4rem"
-                                        : "5rem",
-                                marginRight:
-                                    gameStats.unFriendlyBiomePoints <= 15
-                                        ? "0px"
-                                        : "",
+                                width: "3.5rem",
+                                marginLeft: "0.3rem",
+                                marginRight: gameStats.gameState >= 3 ? "0rem" : "-1.2rem"
                             }}
                             onClick={() => {
                                 handleVibrate
                                 handleCardModalOpen(5)
                             }}
-                            src={unFriendlyBiomeArray[0]}
+                            src={require(`../../assets/images/minion/UFB1.1.png`)}
                             className="minionchar"
                         />
-                        {gameStats.friendlyBiomePoints >= 50 ? null : (
-                            <img
-                                style={{
-                                    width:
-                                        gameStats.unFriendlyBiomePoints < 85
-                                            ? "4rem"
-                                            : "5rem",
-                                }}
-                                onClick={() => {
-                                    handleVibrate
-                                    handleCardModalOpen(5)
-                                }}
-                                src={unFriendlyBiomeArray[1]}
-                                className="minionchar shift-right"
-                            />
-                        )}
-                        {gameStats.friendlyBiomePoints >= 85 ? null : (
-                            <img
-                                style={{
-                                    width:
-                                        gameStats.unFriendlyBiomePoints <= 85
-                                            ? "4rem"
-                                            : "5rem",
-                                }}
-                                onClick={() => {
-                                    handleVibrate
-                                    handleCardModalOpen(5)
-                                }}
-                                src={unFriendlyBiomeArray[2]}
-                                className="minionchar"
-                            />
-                        )}
+                        {gameStats.gameState <= 1 ? (
+                            <>
+                                <img
+                                    style={{
+                                        width: "3.5rem",
+                                        marginLeft: "0.3rem"
+                                    }}
+                                    onClick={() => {
+                                        handleVibrate
+                                        handleCardModalOpen(5)
+                                    }}
+                                    src={require(`../../assets/images/minion/UFB1.4.png`)}
+                                    className="minionchar shift-right"
+                                />
+                                <img
+                                    style={{
+                                        width: "3.5rem",
+                                        marginLeft: "0.3rem"
+                                    }}
+                                    onClick={() => {
+                                        handleVibrate
+                                        handleCardModalOpen(5)
+                                    }}
+                                    src={require(`../../assets/images/minion/UFB3.2.png`)}
+                                    className="minionchar shift-right"
+                                />
+                            </>
+                        ) : null}
+                        {gameStats.gameState === 0 ? (
+                            <>
+                                <img
+                                    style={{
+                                        width: "3.5rem",
+                                        marginLeft: "0.3rem"
+                                    }}
+                                    onClick={() => {
+                                        handleVibrate
+                                        handleCardModalOpen(5)
+                                    }}
+                                    src={require(`../../assets/images/minion/UFB4.2.png`)}
+                                    className="minionchar"
+                                />
+                                <img
+                                    style={{
+                                        width: "3.5rem",
+                                        marginLeft: "0.3rem"
+                                    }}
+                                    onClick={() => {
+                                        handleVibrate
+                                        handleCardModalOpen(5)
+                                    }}
+                                    src={require(`../../assets/images/minion/UFB3.6.png`)}
+                                    className="minionchar"
+                                />
+                            </>
+                        ) : null}
                     </div>
                 </div>
                 <div className="biomepoints-container">
@@ -533,7 +570,7 @@ const Dashboard = () => {
                         />
                     </Box>
                 </Modal>
-                {/* Flash Cards */}
+                {/* Flash Cards
                 <Modal
                     open={isFlashModalOpen}
                     onClose={() => setIsFlashModalOpen(false)}
@@ -637,7 +674,7 @@ const Dashboard = () => {
                             setIsFlashGoodEmojiModalOpen={setIsFlashGoodEmojiModalOpen}  
                         />
                     </Box>
-                </Modal>
+                </Modal> */}
                 {/* activity modal 1 */}
                 <Modal
                     open={isActivityModal1Open}

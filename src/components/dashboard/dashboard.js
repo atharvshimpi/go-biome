@@ -423,7 +423,7 @@ const Dashboard = () => {
                                         handleVibrate
                                         handleCardModalOpen(5)
                                     }}
-                                    src={require(`../../assets/images/minion/UFB1.4.png`)}
+                                    src={require(`../../assets/images/minion/UFB3.2.png`)}
                                     className="minionchar shift-right"
                                 />
                                 <img
@@ -435,7 +435,7 @@ const Dashboard = () => {
                                         handleVibrate
                                         handleCardModalOpen(5)
                                     }}
-                                    src={require(`../../assets/images/minion/UFB3.2.png`)}
+                                    src={require(`../../assets/images/minion/UFB1.4.png`)}
                                     className="minionchar shift-right"
                                 />
                             </>
@@ -457,13 +457,14 @@ const Dashboard = () => {
                                 <img
                                     style={{
                                         width: "3.5rem",
-                                        marginLeft: "0.3rem"
+                                        marginLeft: "0.3rem",
+                                        transform: "scaleX(-1)"
                                     }}
                                     onClick={() => {
                                         handleVibrate
                                         handleCardModalOpen(5)
                                     }}
-                                    src={require(`../../assets/images/minion/UFB3.6.png`)}
+                                    src={require(`../../assets/images/minion/UFB3.5.png`)}
                                     className="minionchar"
                                 />
                             </>

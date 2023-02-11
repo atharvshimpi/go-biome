@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { EffectCards } from "swiper"
 
+import deleteSound from "../../assets/sounds/Delete_cards.mp3"
 import select from "../../assets/sounds/UI/Proceed.mp3"
 import Environment from "../../assets/images/category/environment.svg"
 import PhysicalActivity from "../../assets/images/category/physicalactivity.svg"
@@ -44,6 +45,7 @@ const categoryTags = [
 const SwiperModal = ({ gender, cardDetailsData, activityUserCards, setActivityUserCards, cardCategory, setIsCardModalOpen }) => {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false)
     const audio = new Audio(select)
+    const deleteCard = new Audio(deleteSound)
 
     // On song end, set isAudioPlaying to false
     const toggleAudio = () => {
@@ -62,6 +64,8 @@ const SwiperModal = ({ gender, cardDetailsData, activityUserCards, setActivityUs
     }
 
     const handleDelete = (activityId) => {
+        // Play Sound
+        deleteCard.play()
         // console.log("Before Delete: ", activityUserCards)
         const filteredUserCards = activityUserCards.filter(card => card.activityId !== activityId)
         // console.log("After Delete: ", filteredUserCards)

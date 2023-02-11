@@ -64,6 +64,7 @@ import FlashGoodEmojiNoModal from "../activities/modals/flash-good-emoji-no"
 import select from "../../assets/sounds/UI/Shuffle_button.mp3"
 import select1 from "../../assets/sounds/UI/Proceed.mp3"
 import select2 from "../../assets/sounds/UI/CardTap.mp3"
+import { demoNotification } from "../notifications/demo"
 
 const Dashboard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
@@ -76,16 +77,6 @@ const Dashboard = () => {
         JSON.parse(localStorage.getItem("gamestats"))
     )
     const [shieldImage, setSheildImage] = useState(Nostrength)
-    const [friendlyBiomeArray, setFriendlyBiomeArray] = useState([
-        friendlyBiome1,
-        friendlyBiome2,
-        friendlyBiome3,
-    ])
-    const [unFriendlyBiomeArray, setUnFriendlyBiomeArray] = useState([
-        unFriendlyBiome2,
-        unFriendlyBiome1,
-        unFriendlyBiome3,
-    ])
     const [activeCardIdx, setActiveCardIdx] = useState(0)
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [isLikedCardsModalOpen, setIsLikedCardsModalOpen] = useState(false)
@@ -108,8 +99,13 @@ const Dashboard = () => {
     const [isFlashGoodEmojiNoModalOpen, setIsFlashGoodEmojiNoModalOpen] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
+    const notifMsgs = [
+        `${pref.friendlyBiome} misses you. Engage in an activity to let it know you care`,
+        `${pref.friendlyBiome} needs help finding new friends. Engage in an activity to help it`,
+        `Your friendly biome energy is low on energy. Engage in an activity to help it.`
+    ]
     const [lastPlayed, setLastPlayed] = useState(gameStats.prevDate)
-    const [morningGameNotif, setMorningGameNotif] = useState(pref.wakeupTime)
+    const [wakeupTime, setwakeupTime] = useState(pref.wakeupTime)
     const card = new Audio(select2)
     const navigate = useNavigate()
 
@@ -242,14 +238,13 @@ const Dashboard = () => {
     // Day Reset
     useEffect(() => {
         const prevDate = new Date(lastPlayed)
+        const wakeupDate = new Date(wakeupTime)
         const currDate = new Date()
 
         if (prevDate.getDate() + 1 <= currDate.getDate()) {
             console.log("New Day!")
             prevDate.setDate(prevDate.getDate() + 1)
             setLastPlayed(prevDate)
-            console.log("lastPlayed: ", lastPlayed)
-            console.log("prevDate: ", prevDate.toISOString())
 
             setGameStats({
                 ...gameStats,
@@ -274,8 +269,14 @@ const Dashboard = () => {
                     prevDate: prevDate.toISOString(),
                 })
             )
+
+            // Set a Timeout function for 3 hours after wakeup
+            const timer = ((wakeupDate.getHours() + 3)*3600 + wakeupDate.getMinutes()*60)*1000
+            setTimeout(() => {
+                demoNotification(notifMsgs[Math.random() % 3])
+            }, timer)
         }
-    }, [lastPlayed])
+    })
 
     return (
         <motion.div
@@ -423,7 +424,7 @@ const Dashboard = () => {
                                         handleVibrate
                                         handleCardModalOpen(5)
                                     }}
-                                    src={require(`../../assets/images/minion/UFB3.2.png`)}
+                                    src={require(`../../assets/images/minion/UFB3.3.png`)}
                                     className="minionchar shift-right"
                                 />
                                 <img

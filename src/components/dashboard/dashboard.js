@@ -215,7 +215,7 @@ const Dashboard = () => {
             let activityCategoryId = 0
             
             do {
-                const activityCategoryId = Math.floor(Math.random() * 4)
+                activityCategoryId = Math.floor(Math.random() * 4)
             } while (activityHistory[activityHistory.length - 1].category === activityCategories[activityCategoryId])
 
             do {
@@ -226,12 +226,19 @@ const Dashboard = () => {
         }
         else {
             // there is some category from which no activity has been done. Generate a random card from that category
-            let activityCategoryId = 0
-            do {
-                activityCategoryId = Math.floor(Math.random() * 4)
-            } while (activityHistory.some(activity => activity.category === activityCategories[activityCategoryId]))
 
-            handleCardModalOpen(activityCategoryId, Math.floor(Math.random() * 10))
+            for (let activityCategoryId in activityCategories) {
+                if (activityHistory.some(activity => activity.category !== activityCategories[activityCategoryId])) {
+                    handleCardModalOpen(activityCategoryId, Math.floor(Math.random() * 10))
+                }
+            }
+
+            // let activityCategoryId = 0
+            // do {
+            //     activityCategoryId = Math.floor(Math.random() * 4)
+            // } while (activityHistory.some(activity => activity.category === activityCategories[activityCategoryId]))
+
+            // handleCardModalOpen(activityCategoryId, Math.floor(Math.random() * 10))
         }
     }
 

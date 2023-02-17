@@ -23,6 +23,7 @@ import liked_cards_icon from "../../../assets/images/gameInformation/liked_cards
 import shuffle_icon from "../../../assets/images/gameInformation/shuffle.png"
 import game_board_icon from "../../../assets/images/gameInformation/game_board.svg"
 import biome_garden_icon from "../../../assets/images/gameInformation/biome_garden.png"
+import biome_connect_icon from '../../../assets/images/gameInformation/biome_connect.png'
 
 export default function gameInformation() {
     const navigate = useNavigate()
@@ -161,25 +162,25 @@ export default function gameInformation() {
             </div>
             <div className="gameInformation-section-row">
                 <div className="gameInformation-section-col col-center">
-                    <img src={environment_activity_icon} width="120px" />
+                    <img src={environment_activity_icon} width="150px" />
                     <p style={{ marginRight: "0px", marginTop: "-20px" }}>
                         <strong>Go Green</strong>
                     </p>
                 </div>
                 <div className="gameInformation-section-col col-center">
-                    <img src={physical_activity_icon} width="120px" />
+                    <img src={physical_activity_icon} width="150px" />
                     <p style={{ marginRight: "0px", marginTop: "-20px" }}>
                         <strong>Get Active</strong>
                     </p>
                 </div>
                 <div className="gameInformation-section-col col-center">
-                    <img src={social_activity_icon} width="120px" />
+                    <img src={social_activity_icon} width="150px" />
                     <p style={{ marginRight: "0px", marginTop: "-20px" }}>
                         <strong>Get Social</strong>
                     </p>
                 </div>
                 <div className="gameInformation-section-col col-center">
-                    <img src={zen_activity_icon} width="120px" />
+                    <img src={zen_activity_icon} width="150px" />
                     <p style={{ marginRight: "0px", marginTop: "-20px" }}>
                         <strong>Go Zen</strong>
                     </p>
@@ -288,6 +289,26 @@ export default function gameInformation() {
                         }}
                     >
                         Access your new friendly biome in the biome garden
+                    </p>
+                </div>
+                <div
+                    className="gameInformation-section-col col-center"
+                    style={{ width: "30%", marginTop: "20px" }}
+                >
+                    <div className="secondary-features-image-container">
+                        <img src={biome_connect_icon} />
+                    </div>
+                    <p style={{ marginRight: "0px" }}>
+                        <strong>Biome Connect</strong>
+                    </p>
+                    <p
+                        style={{
+                            marginRight: "0px",
+                            width: "60%",
+                            textAlign: "center",
+                        }}
+                    >
+                        A series of yes or no questions to connect with your friendly biome
                     </p>
                 </div>
             </div>

@@ -9,12 +9,18 @@ const ActivityModal7 = ({ biomeGarden, gameStats, pref, setIsActivityModal7Open 
             "gamestats",
             JSON.stringify({
                 ...gameStats,
-                activityBiomeMovementModal: false
+                activityBiomeMovementModal: false,
+                currentActivity: null,
             })
         )
         audio.play()
         setIsActivityModal7Open(false)
     }
+
+    if (!JSON.parse(localStorage.getItem("gamestats")).currentActivity) {
+        return null
+    }
+
     return (
         <div className="activity-progress-container-map" style={{ width: "100%" }}>
             <div className="activity-progress-heading">

@@ -2,7 +2,7 @@
     margin-bottom: 3rem;
 }
 
-.header{
+.header {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -19,28 +19,34 @@
     font-size: 1.25rem;
 }
 
-.main-text{
+.main-text {
     margin-left: 2rem;
     margin-right: 2rem;
     font-size: 0.8rem;
 }
 
-.text-para1{
+.text-para1 {
     margin-bottom: 2rem;
 }
 
-.text-para2{
+.text-para1-creative {
+    font-size: 1rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+.text-para2 {
     margin-top: 1rem;
 }
 
-.main-text-data{
-    margin-top:-1rem ;
+.main-text-data {
+    margin-top: -1rem;
     margin-left: 2rem;
     margin-right: 2rem;
     font-size: 0.8rem;
 }
 
-a:link{
+a:link {
     color: rgb(0, 26, 255);
     background-color: transparent;
     text-decoration: none;
@@ -76,6 +82,6 @@ a:hover {
     margin-bottom: 1rem;
 }
 
-.data-image > h2 {
+.data-image>h2 {
     font-weight: bold;
 }

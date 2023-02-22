@@ -12,7 +12,8 @@ import game_narrative_2 from "../../assets/images/onboarding/game_narrative_2.pn
 import bugsy from "../../assets/images/friendly.png"
 import icons from "../../assets/images/icons.png"
 
-import select1 from "../../assets/sounds/UI/Proceed.mp3"
+import select1 from "../../assets/sounds/UI/CardTap.mp3"
+import proceed from "../../assets/sounds/UI/Proceed.mp3"
 import "./questions.css"
 
 const QuestionsHome = () => {
@@ -20,12 +21,19 @@ const QuestionsHome = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const audio = new Audio(select1)
+    const audio1 = new Audio(proceed)
     const [cardShown, setCardShown] = useState(0)
 
     const handleTap = () => {
-        audio.play()
+        
         if (cardShown < 6) {
+            audio.play()
             setCardShown(cardShown + 1)
+        }
+
+        if(cardShown==6)
+        {
+            audio1.play()
         }
     }
 
@@ -225,7 +233,7 @@ const QuestionsHome = () => {
                     <div className="questions-btn-container">
                         <button
                             className="questions-btn"
-                            onClick={() => navigate("/questions?q=1")}
+                            onClick={() => {navigate("/questions?q=1"),audio1.play()}}
                         >
                             LET&apos;S GO!
                         </button>

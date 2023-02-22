@@ -34,6 +34,7 @@ import unFriendlyBiome3 from "../../assets/images/minion/UFB4.2.png"
 
 // biome shield strength
 import Nostrength from "../../assets/images/shield/nostrength.svg"
+import { BsShieldExclamation } from "react-icons/bs"
 import Charging from "../../assets/images/shield/charging.svg"
 import Partialstrength from "../../assets/images/shield/partialstrength.svg"
 import Fullstrength from "../../assets/images/shield/fullstrength.svg"
@@ -41,6 +42,7 @@ import Diversitycheck from "../../assets/images/shield/diversitycheck.svg"
 import Superdiversity from "../../assets/images/shield/superdiversity.svg"
 
 import { AiFillSetting } from "react-icons/ai"
+import { GiEncirclement } from "react-icons/gi"
 import { MdLocationPin } from "react-icons/md"
 import { BiShuffle } from "react-icons/bi"
 
@@ -77,6 +79,16 @@ const Dashboard = () => {
         JSON.parse(localStorage.getItem("gamestats"))
     )
     const [shieldImage, setSheildImage] = useState(Nostrength)
+    const [friendlyBiomeArray, setFriendlyBiomeArray] = useState([
+        friendlyBiome1,
+        friendlyBiome2,
+        friendlyBiome3,
+    ])
+    const [unFriendlyBiomeArray, setUnFriendlyBiomeArray] = useState([
+        unFriendlyBiome2,
+        unFriendlyBiome1,
+        unFriendlyBiome3,
+    ])
     const [activeCardIdx, setActiveCardIdx] = useState(0)
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [isLikedCardsModalOpen, setIsLikedCardsModalOpen] = useState(false)
@@ -99,6 +111,9 @@ const Dashboard = () => {
     const [isFlashGoodEmojiNoModalOpen, setIsFlashGoodEmojiNoModalOpen] = useState(false)
     const [cardCategory, setCardCategory] = useState(null)
     const [cardDetailsData, setCardDetailsData] = useState([])
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
+    const [prevGame, setPrevGame] = useState(gameStats.prevDate)	
+    const [morningGameNotif, setMorningNotif] = useState(pref.wakeupTime)
     const notifMsgs = [
         `${pref.friendlyBiome} misses you. Engage in an activity to let it know you care`,
         `${pref.friendlyBiome} needs help finding new friends. Engage in an activity to help it`,
@@ -109,6 +124,92 @@ const Dashboard = () => {
     const card = new Audio(select2)
     const navigate = useNavigate()
 
+    useEffect(() => {	
+        if (prevGame) {	
+            const prevDate = new Date(prevGame)	
+            const currDate = new Date()	
+            if (prevDate.getDate() + 1 <= currDate.getDate()) {	
+                console.log("New Day!")	
+                prevDate.setDate(prevDate.getDate() + 1)	
+                setPrevGame(prevDate)	
+                const actPerfSum = gameStats.activityPerformed.reduce(	
+                    (x, y) => {	
+                        return x + y	
+                    },	
+                    0	
+                )	
+                // et	
+                // if inactive, then gameState - 1	
+                if (!actPerfSum) {	
+                    if (gameStats.gameState > 0)	
+                        localStorage.setItem(	
+                            "gamestats",	
+                            JSON.stringify({	
+                                ...gameStats,	
+                                gameState: gameStats.gameState - 1,	
+                                activityPerformed: [0, 0, 0, 0],	
+                                currentActivity: null,	
+                                friendlyBiomePoints: 15,	
+                                unFriendlyBiomePoints: 85,	
+                                activityBiomeCongMsg: false,	
+                                prevDate: prevDate,	
+                            })	
+                        )	
+                    // else gameState + 1	
+                } else {	
+                    if (gameStats.gameState < 3)	
+                        localStorage.setItem(	
+                            "gamestats",	
+                            JSON.stringify({	
+                                ...gameStats,	
+                                gameState: gameStats.gameState + 1,	
+                                activityPerformed: [0, 0, 0, 0],	
+                                currentActivity: null,	
+                                friendlyBiomePoints: 15,	
+                                unFriendlyBiomePoints: 85,	
+                                activityBiomeCongMsg: false,	
+                                prevDate: prevDate,	
+                            })	
+                        )	
+                }	
+            }	
+        }	
+    }, [prevGame])	
+    // Biome Flash Cards	
+    useEffect(() => {	
+        const morningGameNotifTime = new Date(morningGameNotif)	
+        const currDate = new Date()	
+        var hours = morningGameNotifTime.getHours()	
+        if (	
+            (currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&	
+            morningGameNotifTime.getDate() + 1 <= currDate.getDate())	
+        ) {	
+            hours = currDate.getHours()	
+            handleCardModalOpen(6)	
+        }	
+    }, [morningGameNotif])	
+    // Notifications	
+    // 1. Morning	
+    const morningMsg = `Your Biome Digest is waiting for you!`	
+    useEffect(() => {	
+        const morningGameNotifTime = new Date(morningGameNotif)	
+        const currDate = new Date()	
+        if (	
+            currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&	
+            morningGameNotifTime.getDate() + 1 <= currDate.getDate()	
+        ) {	
+            demoNotification(morningMsg)	
+            morningGameNotifTime.setDate(morningGameNotifTime.getDate() + 1)	
+            setMorningNotif(morningGameNotifTime)	
+            localStorage.setItem(	
+                "preferences",	
+                JSON.stringify({	
+                    ...pref,	
+                    wakeupTime: morningGameNotifTime,	
+                })	
+            )	
+        }	
+    }, [morningGameNotif])
     // // Biome Flash Cards
     // useEffect(() => {
     //     const morningGameNotifTime = new Date(morningGameNotif)
@@ -304,8 +405,8 @@ const Dashboard = () => {
                     >
                         <AiFillSetting
                             onClick={() => {
-                                const audio = new Audio(select1)
-                                audio.play()
+                                const audio = new Audio(select2)	
+                                if(soundEnabled){audio.play()}
                                 navigate("/settings")
                             }}
                             className="icon"
@@ -337,7 +438,7 @@ const Dashboard = () => {
                             }}
                             onClick={(handleVibrate => {
                                 handleVibrate
-                                handleCardModalOpen(5)
+                                //handleCardModalOpen(5)
                             })}
                             src={require(`../../assets/images/biome/DB1.1.png`)}
                             className="biomechar"
@@ -350,7 +451,7 @@ const Dashboard = () => {
                                 }}
                                 onClick={() => {
                                     handleVibrate
-                                    handleCardModalOpen(5)
+                                    //handleCardModalOpen(5)
                                 }}
                                 src={require(`../../assets/images/biome/FB2.5.png`)}
                                 className="biomechar"
@@ -364,7 +465,7 @@ const Dashboard = () => {
                                 }}
                                 onClick={() => {
                                     handleVibrate
-                                    handleCardModalOpen(5)
+                                    //handleCardModalOpen(5)
                                 }}
                                 src={require(`../../assets/images/biome/FB7.7.png`)}
                                 className="biomechar"
@@ -379,7 +480,7 @@ const Dashboard = () => {
                                     }}
                                     onClick={() => {
                                         handleVibrate
-                                        handleCardModalOpen(5)
+                                        //handleCardModalOpen(5)
                                     }}
                                     src={require(`../../assets/images/biome/FB1.5.png`)}
                                     className="biomechar"
@@ -391,7 +492,7 @@ const Dashboard = () => {
                                     }}
                                     onClick={() => {
                                         handleVibrate
-                                        handleCardModalOpen(5)
+                                        //handleCardModalOpen(5)
                                     }}
                                     src={require(`../../assets/images/biome/FB13.7.png`)}
                                     className="biomechar"
@@ -415,7 +516,7 @@ const Dashboard = () => {
                             }}
                             onClick={() => {
                                 handleVibrate
-                                handleCardModalOpen(5)
+                                //handleCardModalOpen(5)
                             }}
                             src={require(`../../assets/images/minion/UFB1.1.png`)}
                             className="minionchar"
@@ -429,7 +530,7 @@ const Dashboard = () => {
                                     }}
                                     onClick={() => {
                                         handleVibrate
-                                        handleCardModalOpen(5)
+                                        //handleCardModalOpen(5)
                                     }}
                                     src={require(`../../assets/images/minion/UFB3.3.png`)}
                                     className="minionchar shift-right"
@@ -441,7 +542,7 @@ const Dashboard = () => {
                                     }}
                                     onClick={() => {
                                         handleVibrate
-                                        handleCardModalOpen(5)
+                                        //handleCardModalOpen(5)
                                     }}
                                     src={require(`../../assets/images/minion/UFB1.4.png`)}
                                     className="minionchar shift-right"
@@ -457,7 +558,7 @@ const Dashboard = () => {
                                     }}
                                     onClick={() => {
                                         handleVibrate
-                                        handleCardModalOpen(5)
+                                        //handleCardModalOpen(5)
                                     }}
                                     src={require(`../../assets/images/minion/UFB4.2.png`)}
                                     className="minionchar"
@@ -470,7 +571,7 @@ const Dashboard = () => {
                                     }}
                                     onClick={() => {
                                         handleVibrate
-                                        handleCardModalOpen(5)
+                                        //handleCardModalOpen(5)
                                     }}
                                     src={require(`../../assets/images/minion/UFB3.5.png`)}
                                     className="minionchar"
@@ -486,6 +587,9 @@ const Dashboard = () => {
                                 src={shieldImage}
                                 alt="shield"
                                 className="shield-icon"
+                                onClick={() => {	
+                                    handleCardModalOpen(5)	
+                                }}
                             />
                         </div>
                         <div className="biome-points">
@@ -579,7 +683,7 @@ const Dashboard = () => {
                         />
                     </Box>
                 </Modal>
-                {/* Flash Cards
+                {/* Flash Cards*/}
                 <Modal
                     open={isFlashModalOpen}
                     onClose={() => setIsFlashModalOpen(false)}
@@ -683,7 +787,7 @@ const Dashboard = () => {
                             setIsFlashGoodEmojiModalOpen={setIsFlashGoodEmojiModalOpen}  
                         />
                     </Box>
-                </Modal> */}
+                </Modal> 
                 {/* activity modal 1 */}
                 <Modal
                     open={isActivityModal1Open}
@@ -829,7 +933,7 @@ const Dashboard = () => {
                 <div className="activity-cards">
                     <div
                         onClick={() => {
-                            card.play(),
+                            if(soundEnabled){card.play()}
                             handleCardModalOpen(0)
                         }}
                         style={{ backgroundColor: "#94B394" }}
@@ -839,7 +943,7 @@ const Dashboard = () => {
                     </div>
                     <div
                         onClick={() => {
-                            card.play(),
+                            if(soundEnabled){card.play()}
                             handleCardModalOpen(1)
                         }}
                         style={{ backgroundColor: "#FED966" }}
@@ -849,7 +953,7 @@ const Dashboard = () => {
                     </div>
                     <div
                         onClick={() => {
-                            card.play(),
+                            if(soundEnabled){card.play()}
                             handleCardModalOpen(2)
                         }}
                         style={{ backgroundColor: "#B886C1" }}
@@ -859,7 +963,7 @@ const Dashboard = () => {
                     </div>
                     <div
                         onClick={() => {
-                            card.play(),
+                            if(soundEnabled){card.play()}
                             handleCardModalOpen(3)
                         }}
                         style={{ backgroundColor: "#F2A1A0" }}
@@ -876,7 +980,7 @@ const Dashboard = () => {
                         style={{ color: "black" }}
                         className="icon"
                         onClick={() => {
-                            card.play(),
+                            if(soundEnabled){card.play()}
                             handleCardModalOpen(4)
                         }}
                     />
@@ -888,7 +992,7 @@ const Dashboard = () => {
                             handleShuffle()
                             // handleCardModalOpen(Math.floor(Math.random() * (3 - 0 + 1)))
                             const audio = new Audio(select)
-                            audio.play()
+                            if(soundEnabled){audio.play()}
                         }}
                     />
                 </div>
@@ -897,7 +1001,7 @@ const Dashboard = () => {
                         className="icon"
                         onClick={() => {
                             const audio = new Audio(select1)
-                            audio.play()
+                            if(soundEnabled){audio.play()}
                             navigate("/map")
                         }}
                     />

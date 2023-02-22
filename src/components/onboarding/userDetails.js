@@ -43,13 +43,15 @@ const UserDetails = () => {
     const { user } = UserAuth()
     const audio = new Audio(select)
     const navigate = useNavigate()
+    //const pref = JSON.parse(localStorage.getItem("preferences"))
+    //const [soundEnabled, setSoundEnabled] = useState(pref.sound)
 
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.id]: e.target.value })
     }
 
     const handleSubmit = (e) => {
-        audio.play()
+       //if(soundEnabled){audio.play()}
         setLoading(true)
         localStorage.setItem("user", JSON.stringify({ 
             ...userData, 

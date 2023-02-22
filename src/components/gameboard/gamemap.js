@@ -50,6 +50,7 @@ const Gamemap = () => {
     const [biomePosition, setBiomePosition] = useState(localStorage.getItem("solo-map-position") ? JSON.parse(localStorage.getItem("solo-map-position")) : [8, 0])
     const [biomeSteps, setBiomeSteps] = useState(0)
     const navigate = useNavigate()
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const notify = () => toast("Click on your biome to move it")
 
     useEffect(() => {
@@ -143,14 +144,14 @@ const Gamemap = () => {
             return
         }
 
-        audio1.play()
+        if(soundEnabled){audio1.play()}
         navigate("/")
     }
 
     const getTile = (val, row, col) => {
         if (row === biomePosition[0] && col === biomePosition[1]) {
             return <button onClick={() => {
-                                        audio.play()
+                                        if(soundEnabled){audio.play()}
                                         setOnBiomeClicked(true)
                                     }}
                             style={{height: '64px', width: '64px'}}

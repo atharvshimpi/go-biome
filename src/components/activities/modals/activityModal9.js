@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import select from "../../../assets/sounds/UI/Proceed.mp3"
@@ -6,9 +6,10 @@ import gut10 from "../../../assets/images/gut10.png"
 
 const ActivityModal9 = ({ pref, setIsActivityModal9Open }) => {
     const navigate = useNavigate() 
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleClick = () => {
         const audio = new Audio(select)
-        audio.play()
+        if(soundEnabled){audio.play()}
         setIsActivityModal9Open(false)
         navigate("/map")
     }

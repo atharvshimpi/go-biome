@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
@@ -16,7 +16,8 @@ import "./userCard.css"
 const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
     const audio = new Audio(select)
     const navigate = useNavigate()
-
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     return (
         <motion.div
             initial={{ width: 0 }}
@@ -28,7 +29,7 @@ const UserCard = ({ setIsPreviewOn, userCardData, userImageData }) => {
                 <div className="icon-container">
                     <IoIosArrowBack
                         onClick={() => {
-                            audio.play(), 
+                            if(soundEnabled){audio.play()} 
                             setIsPreviewOn(false)
                         }}
                         className="icon"

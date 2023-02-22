@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import select from "../../../assets/sounds/UI/Proceed.mp3"
 
 const ActivityModal7 = ({ biomeGarden, gameStats, pref, setIsActivityModal7Open }) => {
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleClick = () => {
         const audio = new Audio(select)
         localStorage.setItem(
@@ -13,7 +14,7 @@ const ActivityModal7 = ({ biomeGarden, gameStats, pref, setIsActivityModal7Open 
                 currentActivity: null,
             })
         )
-        audio.play()
+        if(soundEnabled){audio.play()}
         setIsActivityModal7Open(false)
     }
 

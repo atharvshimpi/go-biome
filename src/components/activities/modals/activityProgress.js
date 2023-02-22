@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Lottie from "react-lottie"
 
 import animationData from "../../../assets/videos/timer.json"
@@ -6,11 +6,13 @@ import positive from "../../../assets/sounds/UI/Yes.mp3"
 import "./activityProgress.css"
 
 const ActivityProgress = ({ gameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open }) => {
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleClick = () => {
         setIsActivityProgressModalOpen(false)
         setIsActivityModal2_1Open(true)
         const audio = new Audio(positive)
-        audio.play()
+        if(soundEnabled){audio.play()}
     }
 
     const defaultOptions = {

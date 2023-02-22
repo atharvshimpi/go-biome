@@ -1,18 +1,21 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-
+import select from "../../assets/sounds/UI/Proceed.mp3"
 import { IoIosArrowBack } from "react-icons/io"
 import "./terms.css"
 
 const AboutResearch = () => {
     const navigate = useNavigate()
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
+    const audio = new Audio(select)
     return(
         <div className="contain">
             <div className="header">
                 <div className="icon-container">
                     <IoIosArrowBack
                         onClick={() => {
-                            // audio.play(),
+                            if(soundEnabled){audio.play()}
                             navigate("/settings")
                         }}
                         className="icon"
@@ -20,15 +23,15 @@ const AboutResearch = () => {
                 </div>
                 <h1><b>About this research</b></h1>
                 {/* Hide this part to maintain center align */}
-                <div style={{ opacity: 0 }} className="icon-container">
+                {/* <div style={{ opacity: 0 }} className="icon-container">
                     <IoIosArrowBack
                         onClick={() => {
-                            // audio.play(),
-                            navigate("/")
+                            audio.play(),
+                            navigate("/settings")
                         }}
                         className="icon"
                     />
-                </div>
+                </div> */}
             </div>
 
             <div className="header-intro">

@@ -58,7 +58,10 @@ const GeneralSettings = ({ setOpen, setSettingId }) => {
                                         />
                                     </Switch>
                                     :
-                                    <IoIosArrowForward className="icon" onClick={() =>{ audio.play(), handleClick(obj.id)}}/>
+                                    <IoIosArrowForward className="icon" onClick={() =>{ 
+                                        if(soundEnabled){audio.play()}
+                                        handleClick(obj.id)
+                                    }}/>
                                 }
                             </div>  
                         )

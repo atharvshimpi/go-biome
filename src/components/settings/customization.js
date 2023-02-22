@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import { settingDetails } from "./settingsData"
 
@@ -7,7 +7,8 @@ import { IoIosArrowForward } from "react-icons/io"
 // eslint-disable-next-line
 const CustomizationSettings = ({ setOpen, setSettingId }) => {
     const audio = new Audio(select)
-
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleClick = (id) => {
         setSettingId(id)
         setOpen(true)
@@ -16,7 +17,7 @@ const CustomizationSettings = ({ setOpen, setSettingId }) => {
     return (
         <div className="general-settings">
             <div className="general-settings-container">
-                <h2>Customisation</h2>
+                <h2>Customization</h2>
                 <div className="general-settings-content">
                     {settingDetails.filter(obj => obj.id >= 7 && obj.id < 10).map((obj) => {
                         return (
@@ -25,7 +26,10 @@ const CustomizationSettings = ({ setOpen, setSettingId }) => {
                                     {obj.icon}
                                     <p>{obj.title}</p>
                                 </div>
-                                <IoIosArrowForward className="icon" onClick={() => { audio.play(); handleClick(obj.id)}}/>
+                                <IoIosArrowForward className="icon" onClick={() => { 
+                                    if(soundEnabled){audio.play()} 
+                                    handleClick(obj.id)
+                                }}/>
                             </div>  
                         )
                     })}

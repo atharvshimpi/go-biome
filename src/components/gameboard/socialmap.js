@@ -21,6 +21,8 @@ import { collection, getDocs } from "firebase/firestore"
 import "./socialmap.css"
 
 const SocialMap = () => {
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const audio = new Audio(select)
     const navigate = useNavigate()
 
@@ -155,7 +157,10 @@ const SocialMap = () => {
     return(
         <div className="gamemap_container">
             <div className="socialmap_button">
-                <button onClick={() =>{ audio.play(),navigate("/map")}}>Personal Map</button>
+                <button onClick={() =>{ 
+                    if(soundEnabled){audio.play()}
+                    navigate("/map")
+                }}>Personal Map</button>
             </div>
             {board.map((row, rowIdx) => {
                 return <div key={k++} className={"row" + (rowIdx === 0 ? " right" : "")}>

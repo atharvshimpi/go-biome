@@ -9,8 +9,6 @@ import shazam from "../../../assets/images/shazam.svg"
 import friendlyBiome1 from "../../../assets/images/biome/shield.png"
 import friendlyBiome2 from "../../../assets/images/biome/ant.png"
 import friendlyBiome3 from "../../../assets/images/biome/bugsy.png"
-const pref = JSON.parse(localStorage.getItem("preferences"))
-const gameStats = JSON.parse(localStorage.getItem("gamestats"))
 const messages = [
     "Would you like to feed your biome fibre rich foods? ",
     "Would you like to feed your biome with fermented food? ",
@@ -53,10 +51,11 @@ const FlashModal = ({
     const [yesImage, setYesImage] = useState(EM19)
     const [noImage, setImage] = useState(EM7)
     const [EmValue, setEmValue] = useState(EM7)
+    //const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleYes = () => {
-        const audio = new Audio(select)
+
         setEmValue(25)
-        audio.play()
+
         setYesImage(yesImage)
         setIsFlashModalOpen(false)
         if (ind < 15) {
@@ -67,8 +66,7 @@ const FlashModal = ({
     }
 
     const handleNo = () => {
-        const audio = new Audio(select)
-        audio.play()
+
         setIsFlashModalOpen(false)
         if (ind < 15) {
             setIsFlashEmojiNoModalOpen(true)

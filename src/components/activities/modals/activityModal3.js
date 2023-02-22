@@ -14,12 +14,12 @@ const ActivityModal3 = ({ gameStats, pref, setIsActivityModal3Open, setIsActivit
     const audio = new Audio(select)
     const newUUID = uuid()
     const navigate = useNavigate()
-    
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleLogActivity = () => {
         let tempActivityPerformed = gameStats.activityPerformed
         tempActivityPerformed[gameStats.currentActivity.categoryId]++
 
-        audio.play()        
+        if(soundEnabled){audio.play()}        
         activityHistory.push({
             ...gameStats.currentActivity,
             activityId: newUUID,

@@ -48,6 +48,7 @@ const Settings = () => {
     const { logOut } = UserAuth()
     const audio = new Audio(select1)
     const navigate = useNavigate()
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
 
     const handleSignOut = async () => {
         try {
@@ -88,7 +89,7 @@ const Settings = () => {
                     <div className="icon-container">
                         <IoIosArrowBack
                             onClick={() => {
-                                audio.play(), 
+                                if(soundEnabled){audio.play()} 
                                 navigate("/")
                             }}
                             className="icon"
@@ -126,7 +127,7 @@ const Settings = () => {
                                         <button>
                                             <GrFormClose 
                                                 onClick={() => {
-                                                    audio.play(),
+                                                    if(soundEnabled){audio.play()}
                                                     setOpen(false)
                                                 }} 
                                             />

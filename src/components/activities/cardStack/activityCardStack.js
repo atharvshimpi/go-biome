@@ -20,6 +20,8 @@ const ActivityCardStack = ({ activityUserCards, setActivityUserCards, setOpen })
     const [gameStats, setGameStats] = useState(JSON.parse(localStorage.getItem("gamestats")))
     const [isCardModalOpen, setIsCardModalOpen] = useState(false)
     const [cardDetailsData, setCardDetailsData] = useState([])
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const audio = new Audio(select) 
     
     const handleCardModalOpen = (categoryId) => {
@@ -51,28 +53,40 @@ const ActivityCardStack = ({ activityUserCards, setActivityUserCards, setOpen })
                 <p className="activity-card-stack-heading">Total Count : { categorySpecificCardsCount(0) + categorySpecificCardsCount(1) + categorySpecificCardsCount(2) + categorySpecificCardsCount(3) } </p>
                 <div className="activity-cards">
                     <div
-                        onClick={() => {audio.play(); handleCardModalOpen(0)}}
+                        onClick={() => {
+                            if(soundEnabled){audio.play()} 
+                            handleCardModalOpen(0)
+                        }}
                         style={{ backgroundColor: "#94B394" }}
                         className="cards"
                     >
                         <img src={Environment} alt="environment" />
                     </div>
                     <div
-                        onClick={() => {audio.play(),handleCardModalOpen(1)}}
+                        onClick={() => {	
+                            if(soundEnabled){audio.play()}	
+                            handleCardModalOpen(1)	
+                        }}
                         style={{ backgroundColor: "#FED966" }}
                         className="cards"
                     >
                         <img src={Physicalactivity} alt="physicalActivity" />
                     </div>
                     <div
-                        onClick={() => {audio.play(),handleCardModalOpen(2)}}
+                        onClick={() => {	
+                            if(soundEnabled){audio.play()}	
+                            handleCardModalOpen(2)	
+                        }}
                         style={{ backgroundColor: "#B886C1" }}
                         className="cards"
                     >
                         <img src={Social} alt="social" />
                     </div>
                     <div
-                        onClick={() => {audio.play(),handleCardModalOpen(3)}}
+                        onClick={() => {	
+                            if(soundEnabled){audio.play()}	
+                            handleCardModalOpen(3)	
+                        }}
                         style={{ backgroundColor: "#F2A1A0" }}
                         className="cards"
                     >

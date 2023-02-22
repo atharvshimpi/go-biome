@@ -46,6 +46,8 @@ const SwiperModal = ({ gender, cardDetailsData, activityUserCards, setActivityUs
     const [isAudioPlaying, setIsAudioPlaying] = useState(false)
     const audio = new Audio(select)
     const deleteCard = new Audio(deleteSound)
+    const pref = JSON.parse(localStorage.getItem("preferences"))	
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
 
     // On song end, set isAudioPlaying to false
     const toggleAudio = () => {
@@ -65,7 +67,7 @@ const SwiperModal = ({ gender, cardDetailsData, activityUserCards, setActivityUs
 
     const handleDelete = (activityId) => {
         // Play Sound
-        deleteCard.play()
+        if(soundEnabled){deleteCard.play()}	
         // console.log("Before Delete: ", activityUserCards)
         const filteredUserCards = activityUserCards.filter(card => card.activityId !== activityId)
         // console.log("After Delete: ", filteredUserCards)
@@ -152,9 +154,9 @@ const SwiperModal = ({ gender, cardDetailsData, activityUserCards, setActivityUs
                                         height: "50%"
                                     }}
                                     onLoad={imageLoaded}
-                                    onClick={() =>
-                                        audio.play()
-                                    }
+                                    onClick={() =>{	
+                                        if(soundEnabled){audio.play()}	
+                                    }}
                                     src={obj.icon.length > 4 ? obj.icon : require(`../../assets/images/cards/${
                                         obj.category
                                     }/${

@@ -39,6 +39,8 @@ const ActivityHistory = ({ activityHistory }) => {
     const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false)
     const [selectedDay, setSelectedDay] = useState(new Date()) // default set to today's date
     const [displayData, setDisplayData] = useState({})
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const audio = new Audio(select)
     // activityHistory.reverse().map((activity, key) => {
     //     return (
@@ -62,7 +64,7 @@ const ActivityHistory = ({ activityHistory }) => {
 
     const handleClick = (day) => {
         handleSetActivityData(day)
-        audio.play()
+        if(soundEnabled){audio.play()}
     }
 
     function diffInWeeks(date2, date1) {

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import { settingDetails } from "./settingsData"
 
@@ -8,11 +8,12 @@ import { IoIosArrowForward } from "react-icons/io"
 // eslint-disable-next-line
 const AboutSettings = ({ setOpen, setSettingId, handleSignOut, navigate }) => {
     const audio = new Audio(select1)
-
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleClick = (id) => {
         // setSettingId(id)
         // setOpen(true)
-        audio.play()
+        if(soundEnabled){audio.play()}
         if(id == 10) navigate("/terms")
         else if(id == 11) navigate("/about-research")
         else if(id == 12) navigate("/questionnaire")

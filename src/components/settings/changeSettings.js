@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { TimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateFnsUtils from "@date-io/date-fns"
@@ -21,6 +21,8 @@ export const changeProfilePicture = ({
     setLoading,
     setOpen,
 }) => {
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleImage = (e) => {
         const fileReader = new FileReader()
         const audio = new Audio(select1)
@@ -33,7 +35,7 @@ export const changeProfilePicture = ({
     }
 
     const handleSubmit = () => {
-        audio.play()
+        if(soundEnabled){audio.play()}
         localStorage.setItem("user", JSON.stringify(user))
         setLoading(true)
         setTimeout(() => {
@@ -82,7 +84,7 @@ export const changeUsername = ({
     setOpen,
 }) => {
     const handleSubmit = () => {
-        audio.play()
+        if(soundEnabled){audio.play()}
         localStorage.setItem("user", JSON.stringify(user))
         setLoading(true)
         setTimeout(() => {

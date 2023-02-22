@@ -36,6 +36,8 @@ const HistoryModal = ({ gender, cardCategory, activityId  }) => {
     filteredCard?.icon.split("_").length > 1 ? true : false
     const imageLoaded = () => setCardLoading(false)
     const dateArr = filteredCard?.createdAt.split(" ").slice(0, 4)
+    const pref = JSON.parse(localStorage.getItem("preferences"))	
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
 
     return (
         <div
@@ -88,7 +90,9 @@ const HistoryModal = ({ gender, cardCategory, activityId  }) => {
                                 width: "80%"
                             }}
                             onLoad={imageLoaded}
-                            onClick={() => audio.play()}
+                            onClick={() => {	
+                                    if(soundEnabled){audio.play()}	
+                            }}
                             src={
                                 filteredCard.icon.length > 4
                                     ? filteredCard.icon

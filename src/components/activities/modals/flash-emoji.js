@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { flashDetails } from "../../../../src/data/flash.js"
 import select from "../../../assets/sounds/UI/Proceed.mp3"
 import biome from "../../../assets/images/shield/biome.png"
@@ -46,8 +46,7 @@ import EM34 from "../../../assets/images/Biome_Emojis/34.png"
 import EM35 from "../../../assets/images/Biome_Emojis/35.png"
 import EM36 from "../../../assets/images/Biome_Emojis/36.png"
 import EM37 from "../../../assets/images/Biome_Emojis/37.png"
-const pref = JSON.parse(localStorage.getItem("preferences"))
-const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+
 const messages = [
     "Would you like to feed your biome fibre rich foods? ",
     "Would you like to feed your biome with fermented food? ",
@@ -94,17 +93,15 @@ var image
 
 const FlashEmojiModal = ({ userDetails, setIsFlashEmojiModalOpen, ind, EmValue }) => {
     var ind_emoji = Math.floor(Math.random() * (7 - 0) + 0)
-    
+
     const handleYes = () => {
-        const audio = new Audio(select)
-        audio.play()
+
         setIsFlashEmojiModalOpen(false)
     }
 
     const handleNo = () => {
-        const audio = new Audio(select)
-        audio.play()
-        setIsFlashModalOpen(false)
+
+        setIsFlashEmojiModalOpen(false)
     }
     return (
         <div className="activity-progress-container-status">
@@ -121,7 +118,7 @@ const FlashEmojiModal = ({ userDetails, setIsFlashEmojiModalOpen, ind, EmValue }
             </div>
 
             <div className="name-emoji-modal">
-                <b>{userDetails.username}</b> says
+                <b>Biome</b> says
             </div>
 
             <div>

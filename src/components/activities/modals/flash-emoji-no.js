@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { flashDetails } from "../../../../src/data/flash.js"
 import select from "../../../assets/sounds/UI/Proceed.mp3"
 import biome from "../../../assets/images/shield/biome.png"
@@ -46,8 +46,7 @@ import EM34 from "../../../assets/images/Biome_Emojis/34.png"
 import EM35 from "../../../assets/images/Biome_Emojis/35.png"
 import EM36 from "../../../assets/images/Biome_Emojis/36.png"
 import EM37 from "../../../assets/images/Biome_Emojis/37.png"
-const pref = JSON.parse(localStorage.getItem("preferences"))
-const gameStats = JSON.parse(localStorage.getItem("gamestats"))
+
 const messages = [
     "Would you like to feed your biome fibre rich foods? ",
     "Would you like to feed your biome with fermented food? ",
@@ -74,21 +73,20 @@ const messages = [
     "Want to play with clean soil in your backyard? ",
     "Want to watch a netflix episode past your sleep time? ",
 ]
-const userDetails = JSON.parse(localStorage.getItem("user"))
+
 var image
 const no_emoji = [EM7, EM25, EM20, EM8, EM35, EM33, EM15]
 
 const FlashEmojiNoModal = ({ pref, setIsFlashEmojiNoModalOpen, ind }) => {
     var indno_emoji = Math.floor(Math.random() * (7 - 0) + 0)
+    
     const handleYes = () => {
-        const audio = new Audio(select)
-        audio.play()
+
         setIsFlashEmojiNoModalOpen(false)
     }
 
     const handleNo = () => {
-        const audio = new Audio(select)
-        audio.play()
+
         setIsFlashModalOpen(false)
     }
     return (
@@ -106,7 +104,7 @@ const FlashEmojiNoModal = ({ pref, setIsFlashEmojiNoModalOpen, ind }) => {
             </div>
 
             <div className="name-emoji-modal">
-                <b>{userDetails.username}</b> says
+                <b>Biome</b> says
             </div>
 
             <div>

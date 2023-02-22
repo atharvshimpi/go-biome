@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import positive from "../../../assets/sounds/Positive.mp3"
 import biomePoints from "../../../assets/images/biome/points.png"
@@ -6,6 +6,7 @@ import celebration from "../../../assets/images/celebration.png"
 import em37 from "../../../assets/images/em37.png"
 
 const ActivityModal8 = ({ gameStats, setGameStats, pref, setIsActivityModal8Open, setIsActivityModal6Open }) => {
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleClick = () => {
         localStorage.setItem(
             "gamestats",
@@ -16,7 +17,7 @@ const ActivityModal8 = ({ gameStats, setGameStats, pref, setIsActivityModal8Open
         )
         setGameStats({...gameStats, activityBiomeCongMsg: true})
         const audio = new Audio(positive)
-        audio.play()
+        if(soundEnabled){audio.play()}
         setIsActivityModal8Open(false)
         setIsActivityModal6Open(true)
     }

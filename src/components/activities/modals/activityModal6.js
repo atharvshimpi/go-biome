@@ -13,7 +13,7 @@ const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open, setIsActivit
     const biomeStatusNames = ["Partial Strength", "Full Strength", "Biome Diversity", "Super Diversity"]
     const audio1 = new Audio(select)
     const navigate = useNavigate()
-
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const distAct = (arr) => {
         let count = 0
         for(let i = 0; i < arr.length; i++) {
@@ -47,7 +47,7 @@ const ActivityModal6 = ({ gameStats, pref, setIsActivityModal6Open, setIsActivit
 
         setIsActivityModal6Open(false)
 
-        audio1.play()
+        if(soundEnabled){audio1.play()}
         if(numOfDistActPerformed >= 3 && gameStats.friendlyBiomePoints != 85)
             setIsActivityModal9Open(true)
         else

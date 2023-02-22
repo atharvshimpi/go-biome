@@ -1,9 +1,9 @@
-import React from "react"
-
+import React, { useState, useEffect } from "react"
 import select from "../../../assets/sounds/UI/Proceed.mp3"
 import incorrect from "../../../assets/sounds/Incorrect.mp3"
 
 const ActivityModal2_1 = ({ pref, gameStats, setGameStats, setIsActivityProgressModalOpen, setIsActivityModal2_1Open, setIsActivityModal3Open }) => {
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleYes = () => {
         setIsActivityModal2_1Open(false)
         setIsActivityModal3Open(true)
@@ -33,14 +33,14 @@ const ActivityModal2_1 = ({ pref, gameStats, setGameStats, setIsActivityProgress
         }))
 
         const audio = new Audio(select)
-        audio.play()
+        if(soundEnabled){audio.play()}
     }
 
     const handleNo = () => {
         setIsActivityModal2_1Open(false)
         setIsActivityProgressModalOpen(true)
         const audio = new Audio(incorrect)
-        audio.play()
+        if(soundEnabled){audio.play()}
     }
 
     return (

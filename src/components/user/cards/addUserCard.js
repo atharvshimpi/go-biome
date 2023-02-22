@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { firestore } from "../../../firebase"
 import { doc, updateDoc } from "firebase/firestore"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
-
+//NEW
 import UserCard from "./userCard"
 import { storage } from "../../../firebase"
 
@@ -54,7 +54,8 @@ const AddUserCard = () => {
     const userDetails = JSON.parse(localStorage.getItem("user"))
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
     const [activityUserCard, setActivityUserCard] = useState(JSON.parse(localStorage.getItem("activity-user-cards")))
-
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const initialState = {
         location: "",
         tag: categoryTags[gameStats.currentActivity.categoryId],
@@ -94,7 +95,7 @@ const AddUserCard = () => {
     }
 
     const navigateUtil = () => {
-        audio.play()
+        if(soundEnabled){audio.play()}
         // demoNotification(msgTemplate)
         if(gameStats.friendlyBiomePoints === 85)
             navigate("/map")
@@ -153,7 +154,7 @@ const AddUserCard = () => {
         // })
 
         const audio = new Audio(create)
-        audio.play()
+        if(soundEnabled){audio.play()}
         setTimeout(() => {
             setLoading(false)
             navigateUtil()
@@ -191,7 +192,7 @@ const AddUserCard = () => {
                         <div style={{ opacity: 0 }} className="icon-container">
                             <IoIosArrowBack
                                 onClick={() => {
-                                    audio.play(),
+                                    if(soundEnabled){audio.play()}
                                     navigate("/")
                                 }}
                                 className="icon"
@@ -320,7 +321,7 @@ const AddUserCard = () => {
                                     startIcon={isDisabled ? <AiFillLock /> : null}
                                     disabled={isDisabled}
                                     onClick={() => {
-                                        audio.play(),
+                                        if(soundEnabled){audio.play()}
                                         setIsPreviewOn(true)
                                     }}
                                     className="add-usercard-btn"

@@ -1,11 +1,12 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 import select from "../../../assets/sounds/UI/Proceed.mp3"
 import minionPoints from "../../../assets/images/minion/UFB1.1.png"
 
 const ActivityModal5 = ({ biomeGarden, gameStats, setIsActivityModal5Open, setIsActivityModal6Open, setIsActivityModal8Open }) => {   
     const audio = new Audio(select)
-    
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const handleLogActivity = () => {
         localStorage.setItem(
             "gamestats",
@@ -16,8 +17,8 @@ const ActivityModal5 = ({ biomeGarden, gameStats, setIsActivityModal5Open, setIs
         )
         
         setIsActivityModal5Open(false)
-        audio.play()
-        if(gameStats.friendlyBiomePoints === 85 && !gameStats.activityBiomeCongMsg)
+        if(soundEnabled){audio.play()}
+        if(gameStats.friendlyBiomePoints == 85 && !gameStats.activityBiomeCongMsg)
             setIsActivityModal8Open(true)
         else
             setIsActivityModal6Open(true)

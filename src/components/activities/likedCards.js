@@ -50,6 +50,8 @@ const LikedCards = ({
     const [loading, setLoading] = useState(false)
     // const msgTemplate = `Activity currently in progress!\nRemember to log your activity once you finish!`
     const audio = new Audio(select1)
+    const pref = JSON.parse(localStorage.getItem("preferences"))
+    const [soundEnabled, setSoundEnabled] = useState(pref.sound)
 
     const handleClick = (e, obj) => {
         e.stopPropagation()
@@ -86,7 +88,7 @@ const LikedCards = ({
         )
 
         const audio = new Audio(select)
-        audio.play()
+        if(soundEnabled){audio.play()}
         setTimeout(() => {
             setLoading(false)
             setIsLikedCardsModalOpen(false)
@@ -96,7 +98,7 @@ const LikedCards = ({
 
     const handleLike = (e, obj) => {
         e.stopPropagation()
-        audio.play()
+        if(soundEnabled){audio.play()}
     
         const filterArr = likedCardsDetails.filter(likedObj => likedObj.icon !== obj.icon)
 
@@ -187,7 +189,7 @@ const LikedCards = ({
                             <div
                                 className="card-container"
                                 onClick={() => {
-                                    audio.play(), 
+                                    if(soundEnabled){audio.play()}
                                     setIsCardFlipped(!isCardFlipped)
                                 }}
                                 style={{
@@ -201,7 +203,7 @@ const LikedCards = ({
                                         <button
                                             className="btn"
                                             onClick={(e) => {
-                                                audio.play(), 
+                                                if(soundEnabled){audio.play()}
                                                 handleClick(e, obj)
                                             }}
                                         >

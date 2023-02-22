@@ -1,17 +1,17 @@
-.swiper-modal-rectangle{
-    background-color:#cf83ffb1;
+.swiper-modal-rectangle {
+    background-color: #cf83ffb1;
     width: 100%;
     border-radius: 2rem;
-    height:25rem;
+    height: 25rem;
 }
 
-.swiper-modal-inner{
-    background-color:white;
+.swiper-modal-inner {
+    background-color: white;
     width: 100%;
     border-radius: 2rem 2rem 0rem 0rem;
 }
 
-.swiper-modal-activity{
+.swiper-modal-activity {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,12 +19,12 @@
     width: 100%;
 }
 
-.swiper-modal-image{
+.swiper-modal-image {
     height: 75%;
     width: 3rem;
 }
 
-.swiper-modal-image-main{
+.swiper-modal-image-main {
     position: relative;
     top: 4.5rem;
     left: 4rem;
@@ -39,7 +39,7 @@
     margin-bottom: 0.5rem;
 }
 
-.swiper-modal-activity-title1{
+.swiper-modal-activity-title1 {
     font-size: 0.8rem;
     text-align: left;
     position: relative;
@@ -50,62 +50,62 @@
     right: 3.5rem;
 }
 
-.swiper-modal-description{
+.swiper-modal-description {
     position: relative;
     width: 13rem;
-    height:4rem;
+    height: 4rem;
     border-radius: 0.75rem;
     border-style: solid;
     border-width: 0.01rem;
-    top:1rem;
+    top: 1rem;
     left: 1rem;
 }
 
-.swiper-modal-main-text{
+.swiper-modal-main-text {
     font-family: 'Roboto Condensed', sans-serif;
     position: relative;
-    left:0rem;
-    top:0rem;
+    left: 0rem;
+    top: 0rem;
     bottom: 1rem;
 }
 
-.swiper-modal-date{
-    display:flex;
+.swiper-modal-date {
+    display: flex;
 }
 
-.swiper-modal-main-text1{
-    
+.swiper-modal-main-text1 {
+
     position: relative;
-    left:0.5rem;
-    top:-0.5rem;
+    left: 0.5rem;
+    top: -0.5rem;
     bottom: 1rem;
 }
 
-.swiper-modal-main-text-date{
-    
+.swiper-modal-main-text-date {
+
     position: relative;
-    left:3rem;
-    top:1rem;
+    left: 3rem;
+    top: 1rem;
     bottom: 1rem;
 }
 
-.swiper-modal-date-svg{
+.swiper-modal-date-svg {
     position: relative;
     width: 1.5rem;
     height: 1.5rem;
-    top:1.75rem;
-    left:2rem;
+    top: 1.75rem;
+    left: 2rem;
 }
 
-.swiper-modal-repeat{
+.swiper-modal-repeat {
     position: relative;
     width: 10rem;
-    height:2rem;
+    height: 2rem;
     border-radius: 0.5rem;
     border-style: solid;
     border-width: 0.01rem;
-    top:2.5rem;
-    background-color:#fff ;
+    top: 2.5rem;
+    background-color: #fff;
     left: 2.5rem;
 }
 
@@ -131,7 +131,7 @@
     font-weight: bolder;
 }
 
-.activity-cardstack-card-container > img {
+.activity-cardstack-card-container>img {
     width: 50%;
 }
 
@@ -161,6 +161,8 @@
 .activity-cardstack-card-description {
     font-size: 1rem;
     font-weight: normal;
+    border: 1px black solid;
+    border-radius: 0.6rem;
     padding: 1rem;
     width: 80%;
     overflow: scroll;
@@ -174,7 +176,7 @@
     font-size: 1rem;
 }
 
-.activity-cardstack-date-container > div {
+.activity-cardstack-date-container>div {
     margin-left: 1rem;
 }
 
@@ -186,7 +188,7 @@
     margin-bottom: 1rem;
 }
 
-.activity-cardstack-location > p {
+.activity-cardstack-location>p {
     margin-left: 0.5rem;
 }
 
@@ -216,7 +218,7 @@
 }
 
 .cardstack-card-date {
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .activity-cardstack-top {

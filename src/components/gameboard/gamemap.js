@@ -20,6 +20,8 @@ import unfriendlyBiome1 from '../../assets/images/gamemap/unfriendly/unfriendlyB
 import unfriendlyBiome2 from '../../assets/images/gamemap/unfriendly/unfriendlyBiome2.png'
 import unfriendlyBiome3 from '../../assets/images/gamemap/unfriendly/unfriendlyBiome3.png'
 import unfriendlyBiome4 from '../../assets/images/gamemap/unfriendly/unfriendlyBiome4.png'
+import unfriendlyBiome5 from '../../assets/images/gamemap/unfriendly/unfriendlyBiome5.png'
+import unfriendlyBiome6 from '../../assets/images/gamemap/unfriendly/unfriendlyBiome6.png'
 import Environment from "../../assets/images/category/environment.svg"
 import Social from "../../assets/images/category/social.svg"
 import Physicalactivity from "../../assets/images/category/physicalactivity.svg"
@@ -32,14 +34,14 @@ import "./gamemap.css"
 
 const Gamemap = () => {
     const [board, setBoard] = useState([
-        [8, 8, 8, 8, 8, 10],
-        [1, 0, 0, 13, 0, 2],
-        [4, 13  , 0, 11, 0, 3],
+        [8, 8, 8, 8, 8, 15],
+        [1, 0, 0, 15, 0, 2],
+        [4, 15, 0, 11, 0, 3],
         [1, 0, 10, 0, 10, 2],
         [4, 13, 0, 11, 0, 3],
         [1, 0, 0, 0, 12, 2],
-        [4, 0, 11, 0, 0, 3],
-        [1, 0, 0, 10, 0, 2],
+        [4, 0, 14, 0, 0, 3],
+        [1, 0, 0, 14, 0, 2],
         [8, 8, 8, 8, 8, 8]
     ])
     const gameStats = JSON.parse(localStorage.getItem("gamestats"))
@@ -154,64 +156,82 @@ const Gamemap = () => {
                                         if(soundEnabled){audio.play()}
                                         setOnBiomeClicked(true)
                                     }}
-                            style={{height: '64px', width: '64px'}}
+                            style={{height: '64px', minWidth: '64px', maxWidth: '64px'}}
                     >
                         <div style={{position: "relative", top: '10px', right: "-35px"}}>
                             {getLastActivityIcon()}
                         </div>
-                        <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} width="40px" height="40px" />
+                        <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} style={{width: "40px", height: "40px", objectFit: "contain"}} />
                 </button>
         }
+        const imgStyle = {width: "64px", height: '64px', objectFit: "contain", minWidth: "64px"}
         if (val === 0) {
-            return <img key={row*8 + col} src={dashed} width="64px" height="64px" />
+            return <img key={row*8 + col} src={dashed} style={imgStyle} />
         }
         if (val === 1) {
-            return <img key={row*8 + col} src={dashedLeftDown} width="64px" height="64px" />
+            return <img key={row*8 + col} src={dashedLeftDown} style={imgStyle} />
         }
         if (val === 2) {
-            return <img key={row*8 + col} src={dashedRightUp} width="64px" height="64px" />
+            return <img key={row*8 + col} src={dashedRightUp} width="64px" height="64px" style={imgStyle} />
         }
         if (val === 3) {
-            return <img key={row*8 + col} src={dashedRightDown} width="64px" height="64px" />
+            return <img key={row*8 + col} src={dashedRightDown} width="64px" height="64px" style={imgStyle} />
         }
         if (val === 4) {
-            return <img key={row*8 + col} src={dashedLeftUp} width="64px" height="64px" />
+            return <img key={row*8 + col} src={dashedLeftUp} width="64px" height="64px" style={imgStyle} />
         }
         if (val === 5) {
-            return <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} width="64px" height="64px" />
+            return <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} width="64px" height="64px" style={imgStyle} />
         }
         if (val === 6) {
-            return <img key={row*8 + col} src={unfriendlyBiome2} width="64px" height="64px" className="right_aligned" />
+            return <img key={row*8 + col} src={unfriendlyBiome2} width="64px" height="64px" className="right_aligned" style={imgStyle} />
         }
         if (val === 10) {
             if (!isMinionCrossed([row, col])) {
-                return <img key={row*8 + col} src={unfriendlyBiome2} width="64px" height="64px" />
+                return <img key={row*8 + col} src={unfriendlyBiome2} width="64px" height="64px" style={imgStyle} />
             }
             else {
-                return <img src={dashed} width="64px" height="64px" />
+                return <img src={dashed} width="64px" height="64px" style={imgStyle} />
             }
         }
         if (val === 11) {
             if (!isMinionCrossed([row, col])) {
-                return <img src={unfriendlyBiome1} width="64px" height="64px" />
+                return <img src={unfriendlyBiome1} width="64px" height="64px" style={imgStyle} />
             }
             else {
-                return <img src={dashed} width="64px" height="64px" />
+                return <img src={dashed} width="64px" height="64px" style={imgStyle} />
             }
         }
         if (val === 12) {
             if (!isMinionCrossed([row, col])) {
-                return <img src={unfriendlyBiome4} width="64px" height="64px" />
+                return <img src={unfriendlyBiome4} width="64px" height="64px" style={imgStyle} />
             }
             else {
-                return <img src={dashed} width="64px" height="64px" />
+                return <img src={dashed} width="64px" height="64px" style={imgStyle} />
             }
-        }if (val === 13) {
+        }
+        if (val === 13) {
             if (!isMinionCrossed([row, col])) {
-                return <img key={row*8 + col} src={unfriendlyBiome3} width="64px" height="64px" />
+                return <img key={row*8 + col} src={unfriendlyBiome3} width="64px" height="64px" style={imgStyle} />
             }
             else {
-                return <img src={dashed} width="64px" height="64px" />
+                return <img src={dashed} width="64px" height="64px" style={imgStyle} />
+            }
+        }
+        if (val === 14) {
+            if (!isMinionCrossed([row, col])) {
+                return <img key={row*8 + col} src={unfriendlyBiome5} width="64px" height="64px" style={imgStyle} />
+            }
+            else {
+                return <img src={dashed} width="64px" height="64px" style={imgStyle} />
+            }
+        }
+        if (val === 15) {
+            if (!isMinionCrossed([row, col])) {
+                return <img key={row*8 + col} src={unfriendlyBiome6} width="64px" height="64px" style={imgStyle} />
+            }
+            else {
+                return <img src={dashed} width="64px" height="64px" style={imgStyle} />
             }
         }
 
@@ -238,7 +258,7 @@ const Gamemap = () => {
             case 'environment':
                 return (
                     <div
-                        style={{ backgroundColor: "#94B394", width:"20px", height:"20px", borderRadius: '50%', padding: '2px' }}
+                        style={{ backgroundColor: "#94B394", width:"20px", height:"20px", borderRadius: '20%', padding: '2px', border: '1px solid black' }}
                     >
                         <img src={Environment} alt="environment" />
                     </div>
@@ -246,7 +266,7 @@ const Gamemap = () => {
             case 'physicalactivity':
                 return (
                     <div
-                        style={{ backgroundColor: "#FED966", width:"20px", height:"20px", borderRadius: '50%', padding: '2px' }}
+                        style={{ backgroundColor: "#FED966", width:"20px", height:"20px", borderRadius: '20%', padding: '2px', border: '1px solid black' }}
                     >
                         <img src={Physicalactivity} alt="physical activity" />
                     </div>
@@ -254,7 +274,7 @@ const Gamemap = () => {
             case 'zen':
                 return (
                     <div
-                        style={{ backgroundColor: "#F2A1A0", width:"20px", height:"20px", borderRadius: '50%', padding: '2px' }}
+                        style={{ backgroundColor: "#F2A1A0", width:"20px", height:"20px", borderRadius: '20%', padding: '2px', border: '1px solid black' }}
                     >
                         <img src={Zen} alt="zen" />
                     </div>
@@ -262,7 +282,7 @@ const Gamemap = () => {
             case 'social':
                 return (
                     <div
-                        style={{ backgroundColor: "#B886C1", width:"20px", height:"20px", borderRadius: '50%', padding: '2px' }}
+                        style={{ backgroundColor: "#B886C1", width:"20px", height:"20px", borderRadius: '20%', padding: '2px', border: '1px solid black' }}
                     >
                         <img src={Social} alt="social" />
                     </div>

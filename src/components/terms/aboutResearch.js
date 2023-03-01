@@ -35,19 +35,19 @@ const AboutResearch = () => {
             </div>
 
             <div className="header-intro">
-                <h1> <b>Introduction:</b></h1>
+                <h1> <b>1 Introduction</b></h1>
             </div>
 
             <div className="main-text">
                 <p className="text-para1">
-                    <b>Card 1:</b> The human gut consists of diverse friendly and unfriendly microbes, together known as the gut microbiome. Maintaining a balance between these two is crucial to maintain good gut health, and overall wellbeing.<br/> <br/>
-                    <b>Card 2:</b> However, not many of us know how we can influence our gut microbial diversity. So we designed Go-Go Biome, an open-ended digital game to engage people in real-world gut-friendly activities through play. <br/> <br/>
-                    <b>Card 3:</b> Go-Go Biome is part of a PhD research project that aims to understand the design of interactive experiences for gut health engagement. <br/>
+                    The human gut consists of diverse friendly and unfriendly microbes, together known as the gut microbiome. Maintaining a balance between these two is crucial to maintain good gut health, and overall wellbeing.<br/> <br/>
+                    However, not many of us know how we can influence our gut microbial diversity. So we designed Go-Go Biome, an open-ended digital game to engage people in real-world gut-friendly activities through play.<br/> <br/>
+                    Go-Go Biome is part of a PhD research project that aims to understand the design of interactive experiences for gut health engagement.<br/>
                 </p>
             </div>
 
             <div className="header">
-                <h1> <b>Purpose of this research:</b></h1>
+                <h1> <b>2 What is the purpose of this research?</b></h1>
             </div>
 
             <div className="main-text-data">
@@ -57,17 +57,17 @@ const AboutResearch = () => {
             </div>
 
             <div className="header">
-                <h1> <b>Questions being answered through this research:</b></h1>
+                <h1> <b>3 What are the questions being addressed through this research?</b></h1>
             </div>
 
             <div className="main-text-data">
                 <p className="text-para1">
-                Some of the questions we seek to answer through this research are- What experiences does interaction with the game features enable? What does interaction with the game tell participants about human-microbial interactions that they did not know before? What are the key design considerations in building games for real world engagement with such topics? 
+                Some of the questions we seek to answer through this research are- How does unstructured play support players in gut health engagement?; What experiences does interaction with the game features enable?; What does interaction with the game tell participants about human-microbial interactions that they did not know before?; What are the key design considerations in building games for real world engagement with such topics? 
                 </p>
             </div>
 
             <div className="header">
-                <h1> <b>Research Team:</b></h1>
+                <h1> <b>4 Research Team</b></h1>
             </div>
 
             <div className="main-text-data">
@@ -77,7 +77,7 @@ const AboutResearch = () => {
             </div>
 
             <div className="header">
-                <h1> <b>Your participation and feedback:</b></h1>
+                <h1> <b>5 Your participation and feedback</b></h1>
             </div>
 
             <div className="main-text-data">
@@ -92,9 +92,9 @@ const AboutResearch = () => {
 
             <div className="main-text-data">
                 <p className="text-para1">
-                    <b>Game Design:</b> Nandini Pasumarthy <br/> <br/>
-                    <b>Game Development:</b> Atharv Shimpi, Pranjal Parashar and Shreyas Nisal <br/> <br/>
-                    <b>Expert Guidance:</b>  Dr. Rohit Ashok Khot, Dr. Jessica Danaher and Prof. Elise van den Hoven <br/> <br/>
+                    <b>Game and UX Design:</b> Nandini Pasumarthy <br/> <br/>
+                    <b>Game Development:</b> Back-end developer- Atharv Shimpi, Front-end developer- Pranjal Parashar and Shreyas Nisal<br/> <br/>
+                    <b>Expert Guidance:</b>  Dr. Rohit Ashok Khot, Dr. Jessica Danaher and Prof. Elise van den Hoven<br/> <br/>
                     <b>University Affiliation:</b> RMIT University, Victoria, Australia  X BITS Pilani KK Birla, Goa, India <br/> <br/>
                 </p>
             </div>

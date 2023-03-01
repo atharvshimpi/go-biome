@@ -47,13 +47,13 @@ export default function gameInformation() {
             <div className="gameInformation-section-row">
                 <div className="gameInformation-section-col col-center">
                     <img src={bugsy_population} width="185px" />
-                    <p style={{ marginRight: "0px" }}>
+                    <p style={{ marginRight: "0px", textAlign: "center" }}>
                         The friendly biome population
                     </p>
                 </div>
                 <div className="gameInformation-section-col col-center">
                     <img src={minion_population} width="160px" />
-                    <p style={{ marginRight: "0px" }}>
+                    <p style={{ marginRight: "0px", textAlign: "center" }}>
                         The unfriendly biome population
                     </p>
                 </div>

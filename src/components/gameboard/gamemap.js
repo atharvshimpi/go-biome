@@ -253,6 +253,9 @@ const Gamemap = () => {
 
     const getLastActivityIcon = () => {
         const activityHistory = JSON.parse(localStorage.getItem("activity-history"))
+        if (!activityHistory || activityHistory.length === 0) {
+            return null
+        }
         const lastActivityCategory = activityHistory[activityHistory.length - 1].category
         switch(lastActivityCategory) {
             case 'environment':

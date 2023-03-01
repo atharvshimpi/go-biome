@@ -8,7 +8,7 @@ import { UserAuth } from "../../context/authContext"
 import { updateDoc, doc } from "firebase/firestore"
 import { firestore } from "../../firebase"
 import { settingDetails } from "./settingsData"
-import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName } from "./changeSettings"
+import { changeProfilePicture, changeUsername, activityCardStack, activityHistory, biomeGarden, changeWakingHours, changeSleepingHours, changeMorningCheckInHours, changeMealHours, changeFriendlyBiomeName, changeUnFriendlyBiomeName, backupData } from "./changeSettings"
 
 import SettingsDetails from "../modals/settingsDetails"
 import UserSettings from "./user"
@@ -45,6 +45,7 @@ const Settings = () => {
     const [morningCheckInTime, handleMorningCheckInTimeChange] = useState(pref.morningCheckInTime)
     const [mealTime, handleMealTimeChange] = useState(pref.mealTime)
     const notify = () => toast.success("Updated Successfully!")
+    const backupNotify = () => toast.success("Backed Up Successfully!")
     const { logOut } = UserAuth()
     const audio = new Audio(select1)
     const navigate = useNavigate()
@@ -71,6 +72,24 @@ const Settings = () => {
         } catch (error) {
             console.log("Error while SignOut: ", error)
         }
+    }
+
+    const handleBackUp = async () => {
+        setLoading(true)
+        // Backup all the data to firebase and,  
+        await updateDoc(doc(firestore, "users", user.email.split("@")[0]), {
+            userDetails: user,
+            preferences: pref,
+            activityHistory: activityHistoryData,
+            activityCardStack: activityUserCards,
+            likedCards: likedCards,
+            gameStats: gameStats,
+            mapStats: mapStats,
+            biomeGarden: biomeChars
+        }).then(() => {
+            setLoading(false)
+            backupNotify()
+        })
     }
 
     useEffect(() => {
@@ -139,11 +158,12 @@ const Settings = () => {
                                 { settingId === 2 ? activityCardStack(activityUserCards, setActivityUserCards, setOpen) : null }
                                 { settingId === 3 ? activityHistory(activityHistoryData) : null }
                                 { settingId === 4 ? biomeGarden(biomeChars, setBiomeChars, loading, setLoading) : null }
-                                { settingId === 7 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 8 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 7 ? backupData({handleBackUp, loading}) : null }
+                                { settingId === 8 ? changeWakingHours({notify, pref, setPref, wakeTime, handleWakeTimeChange, loading, setLoading, setOpen}) : null }
+                                { settingId === 9 ? changeSleepingHours({notify, pref, setPref, sleepTime, handleSleepTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 15 ? changeMorningCheckInHours({notify, pref, setPref, morningCheckInTime, handleMorningCheckInTimeChange, loading, setLoading, setOpen}) : null }
                                 { settingId === 16 ? changeMealHours({notify, pref, setPref, mealTime, handleMealTimeChange, loading, setLoading, setOpen}) : null }
-                                { settingId === 9 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
+                                { settingId === 10 ? changeFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
                                 { settingId === 17 ? changeUnFriendlyBiomeName({notify, user, pref, setPref, loading, setLoading, setOpen}) : null }
                             </div>
                         </SettingsDetails>

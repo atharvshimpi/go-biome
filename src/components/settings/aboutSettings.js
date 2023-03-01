@@ -27,7 +27,7 @@ const AboutSettings = ({ setOpen, setSettingId, handleSignOut, navigate }) => {
             <div className="general-settings-container">
                 <h2>About</h2>
                 <div className="general-settings-content">
-                    {settingDetails.filter(obj => obj.id >= 10 && obj.id < 17).map((obj) => {
+                    {settingDetails.filter(obj => obj.id >= 11 && obj.id < 18).map((obj) => {
                         return (
                             <div key={obj.id} className="options">
                                 <div className="title-icon">

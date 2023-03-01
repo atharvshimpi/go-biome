@@ -6,6 +6,7 @@ import DateFnsUtils from "@date-io/date-fns"
 import imageTemplate from "../../assets/images/imageTemplate.svg"
 
 import emptyTemplate from "../../assets/images/emptyTemplate.svg"
+import { Box, CircularProgress } from "@material-ui/core"
 import { Avatar, IconButton } from "@mui/material"
 import { ActivityHistoryDrpDwn } from "../modals/activityHistoryDrpDwn"
 import ActivityCardStack from "../activities/cardStack/activityCardStack"
@@ -176,9 +177,15 @@ export const changeWakingHours = ({
     setOpen,
 }) => {
     const handleSubmit = () => {
+        // Set current date, but get time from wakeTime
+        const currTime = new Date(wakeTime)
+        currTime.setDate(new Date().getDate())
+        currTime.setMonth(new Date().getMonth())
+        currTime.setFullYear(new Date().getFullYear())
+
         localStorage.setItem(
             "preferences",
-            JSON.stringify({ ...pref, wakeupTime: wakeTime })
+            JSON.stringify({ ...pref, wakeupTime: currTime })
         )
         setLoading(true)
         setTimeout(() => {
@@ -186,7 +193,7 @@ export const changeWakingHours = ({
             setOpen(false)
             notify()
         }, 1000)
-        setPref({ ...pref, wakeupTime: wakeTime })
+        setPref({ ...pref, wakeupTime: currTime })
     }
 
     return (
@@ -217,9 +224,15 @@ export const changeSleepingHours = ({
     setOpen,
 }) => {
     const handleSubmit = () => {
+        // Set current date, but get time from wakeTime
+        const currTime = new Date(sleepTime)
+        currTime.setDate(new Date().getDate())
+        currTime.setMonth(new Date().getMonth())
+        currTime.setFullYear(new Date().getFullYear())
+
         localStorage.setItem(
             "preferences",
-            JSON.stringify({ ...pref, sleepTime: sleepTime })
+            JSON.stringify({ ...pref, sleepTime: currTime })
         )
         setLoading(true)
         setTimeout(() => {
@@ -227,7 +240,7 @@ export const changeSleepingHours = ({
             setOpen(false)
             notify()
         }, 1000)
-        setPref({ ...pref, sleepTime: sleepTime })
+        setPref({ ...pref, sleepTime: currTime })
     }
 
     return (
@@ -401,20 +414,28 @@ export const changeUnFriendlyBiomeName = ({
     )
 }
 
-export const saveProgress = () => {
+export const backupData = ({
+    handleBackUp,
+    loading
+}) => {
     return (
         <div className="save-progress-info">
             <p className="save-progress-heading">
-                Create a save file to recover your current progress if you
-                change your phone or reinstall the app in the future.
+                Back up your data to recover your current progress anytime.
             </p>
 
             <p className="save-progress-ps">
-                We only store your data locally for maximum privacy. We cannot
-                recover your data if it&apos;s lost and there is no save file!
+                We back up your data on our firebase servers for maximum privacy. 
             </p>
 
-            <button className="save-progress-btn">Save Now</button>
+            <button onClick={handleBackUp} className="save-progress-btn">
+                {loading ? 
+                    <Box sx={{ display: "flex", justifyContent: "center", fontSize: "0.8rem" }}>
+                        <CircularProgress style={{ width: "25px", height: "25px" }} /> 
+                    </Box>
+                    : "Back Up Now"
+                }
+            </button>
         </div>
     )
 }

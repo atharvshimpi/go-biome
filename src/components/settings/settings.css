@@ -209,9 +209,10 @@
 .save-progress-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: 40vh;
     padding: 1rem;
 }
 
@@ -230,11 +231,14 @@
 
 .save-progress-btn {
     position: relative;
-    width: 60%;
-    height: 2rem;
+    width: 80%;
+    height: 3rem;
     background: #ffdfb8;
-    border-radius: 0.5rem;
-    box-shadow:0 5px 5px 0 #333;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+    transition: opacity 0.1s ease-in-out;
+    font-size: 1.3rem;
+    box-shadow: 0 5px 5px 0 #a66d27;
 }
 
 .save-progress-btn:active {

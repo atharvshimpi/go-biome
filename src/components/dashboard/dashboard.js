@@ -175,6 +175,7 @@ const Dashboard = () => {
             }	
         }	
     }, [prevGame])	
+
     // Biome Flash Cards	
     useEffect(() => {	
         const morningGameNotifTime = new Date(morningGameNotif)	
@@ -188,14 +189,15 @@ const Dashboard = () => {
             handleCardModalOpen(6)	
         }	
     }, [morningGameNotif])	
+
     // Notifications	
     // 1. Morning	
-    const morningMsg = `Your Biome Digest is waiting for you!`	
-    useEffect(() => {	
+    const morningMsg = `Your Biome Digest is waiting for you!`
+    useEffect(() => {
         const morningGameNotifTime = new Date(morningGameNotif)	
         const currDate = new Date()	
         if (	
-            currDate.getHours() >= morningGameNotifTime.getHours() + 2 &&	
+            currDate.getHours() >= morningGameNotifTime.getHours() &&	
             morningGameNotifTime.getDate() + 1 <= currDate.getDate()	
         ) {	
             demoNotification(morningMsg)	
@@ -205,11 +207,12 @@ const Dashboard = () => {
                 "preferences",	
                 JSON.stringify({	
                     ...pref,	
-                    wakeupTime: morningGameNotifTime,	
-                })	
+                    wakeupTime: morningGameNotifTime,
+                })
             )	
         }	
     }, [morningGameNotif])
+
     // // Biome Flash Cards
     // useEffect(() => {
     //     const morningGameNotifTime = new Date(morningGameNotif)
@@ -330,7 +333,7 @@ const Dashboard = () => {
             for (let activityCategoryId = 0; activityCategoryId < activityCategories.length; activityCategoryId++) {
                 if (activityHistory.every(activity => activity.category !== activityCategories[activityCategoryId])) {
                     handleCardModalOpen(activityCategoryId, Math.floor(Math.random() * 10))
-                    break;
+                    break
                 }
             }
 

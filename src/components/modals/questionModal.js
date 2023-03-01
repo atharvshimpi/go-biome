@@ -38,7 +38,7 @@ const initialState = {
 
 const QuestionModal = ({ qNum }) => {
     const user = JSON.parse(localStorage.getItem("user"))
-   // const pref = JSON.parse(localStorage.getItem("preferences"))	
+    // const pref = JSON.parse(localStorage.getItem("preferences"))	
     //const [soundEnabled, setSoundEnabled] = useState(pref.sound)
     const [answers, setAnswers] = useState(initialState)
     const [loading, setLoading] = useState(false)
@@ -115,7 +115,7 @@ const QuestionModal = ({ qNum }) => {
                         }}
                         className="questions-btn"
                         onClick={() => {
-                           // if(soundEnabled){audio.play()}
+                            // if(soundEnabled){audio.play()}
                             if (qNum < 4) navigate(`/questions?q=${qNum + 1}`)
                             else handleSubmit()
                         }}

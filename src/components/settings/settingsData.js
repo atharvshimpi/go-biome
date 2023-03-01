@@ -6,7 +6,8 @@ import {
     BsFillVolumeUpFill,
     BsPhoneVibrateFill,
     BsFillMoonFill,
-    BsFillImageFill
+    BsFillImageFill,
+    BsFillCloudArrowUpFill
 } from "react-icons/bs"
 import {
     FaUserAlt,
@@ -71,6 +72,11 @@ export const settingDetails = [
         title: "Sound",
         icon: <BsFillVolumeUpFill />,
     },
+    {
+        id: 7,
+        title: "Backup Data",
+        icon: <BsFillCloudArrowUpFill />,
+    },
     // {
     //     id: 7,
     //     title: "Haptic Vibration",
@@ -87,12 +93,12 @@ export const settingDetails = [
     //     icon: <FaInfo />,
     // },
     {
-        id: 7,
+        id: 8,
         title: "Waking Hours",
         icon: <FaSun />,
     },
     {
-        id: 8,
+        id: 9,
         title: "Sleeping Hours",
         icon: <BsFillMoonFill />,
     },
@@ -107,7 +113,7 @@ export const settingDetails = [
     //     icon: <GiForkKnifeSpoon />,
     // },
     {
-        id: 9,
+        id: 10,
         title: "Set friendly Biome Name",
         icon: <FaBacterium />,
     },
@@ -117,17 +123,17 @@ export const settingDetails = [
     //     icon: <FaVirus />,
     // },
     {
-        id: 10,
+        id: 11,
         title: "Terms and Conditions",
         icon: <FaBook />,
     },
     {
-        id: 11,
+        id: 12,
         title: "About this research",
         icon: <FaResearchgate />,
     },
     {
-        id: 12,
+        id: 13,
         title: "Questionnaire",
         icon: <AiOutlineQuestionCircle/>,
     },
@@ -137,12 +143,12 @@ export const settingDetails = [
     //     icon: <AiOutlineTeam/>,
     // },
     {
-        id: 13,
+        id: 14,
         title: "Creative Commons Attribution",
         icon: <AiOutlineCopyrightCircle/>,
     },
     {
-        id: 14,
+        id: 15,
         title: "Game Information",
         icon: <FaGamepad />,
     },

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 
@@ -14,6 +14,7 @@ import icons from "../../assets/images/icons.png"
 
 import select1 from "../../assets/sounds/UI/CardTap.mp3"
 import proceed from "../../assets/sounds/UI/Proceed.mp3"
+import intro from "../../assets/sounds/intro.mp3"
 import "./questions.css"
 
 const QuestionsHome = () => {
@@ -23,6 +24,16 @@ const QuestionsHome = () => {
     const audio = new Audio(select1)
     const audio1 = new Audio(proceed)
     const [cardShown, setCardShown] = useState(0)
+    const introMusic = new Audio(intro)
+
+    useEffect(() => {
+        introMusic.loop = true
+        introMusic.play()
+
+        return function cleanup() {
+            introMusic.pause()
+        }
+    }, [])
 
     const handleTap = () => {
         
@@ -233,7 +244,10 @@ const QuestionsHome = () => {
                     <div className="questions-btn-container">
                         <button
                             className="questions-btn"
-                            onClick={() => {navigate("/questions?q=1"),audio1.play()}}
+                            onClick={() => {
+                                            navigate("/questions?q=1")
+                                            audio1.play()
+                                    }}
                         >
                             LET&apos;S GO!
                         </button>

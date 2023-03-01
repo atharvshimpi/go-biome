@@ -14,7 +14,7 @@ const ActivityModal1 = ({ pref, setIsActivityProgressModalOpen, setIsActivityMod
 
     return (
         <div className="activity-progress-container">
-            <div className="activity-progress-heading" style={{ fontSize: "1.2rem" }}>
+            <div className="activity-progress-heading" style={{ fontSize: "1rem" }}>
                 Engage in the activity for at least 10-30 minutes to help <b>{` ${pref.friendlyBiome} `}</b> make friends
             </div>
             <button onClick={handleClick} className="activity-progress-btn">

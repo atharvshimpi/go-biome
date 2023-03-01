@@ -327,10 +327,10 @@ const Dashboard = () => {
         }
         else {
             // there is some category from which no activity has been done. Generate a random card from that category
-
-            for (let activityCategoryId in activityCategories) {
-                if (activityHistory.some(activity => activity.category !== activityCategories[activityCategoryId])) {
+            for (let activityCategoryId = 0; activityCategoryId < activityCategories.length; activityCategoryId++) {
+                if (activityHistory.every(activity => activity.category !== activityCategories[activityCategoryId])) {
                     handleCardModalOpen(activityCategoryId, Math.floor(Math.random() * 10))
+                    break;
                 }
             }
 

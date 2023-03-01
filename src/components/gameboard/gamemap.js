@@ -48,7 +48,7 @@ const Gamemap = () => {
     const pref = JSON.parse(localStorage.getItem("preferences"))
     const biomeGarden = JSON.parse(localStorage.getItem("biome-garden"))
     const [onBiomeClicked, setOnBiomeClicked] = useState(false)
-    const [isActivityModal7Open, setIsActivityModal7Open] = useState(gameStats.activityBiomeMovementModal)
+    const [isActivityModal7Open, setIsActivityModal7Open] = useState(gameStats.activityBiomeMovementModal || gameStats.currentActivity)
     const [biomePosition, setBiomePosition] = useState(localStorage.getItem("solo-map-position") ? JSON.parse(localStorage.getItem("solo-map-position")) : [8, 0])
     const [biomeSteps, setBiomeSteps] = useState(0)
     const navigate = useNavigate()
@@ -161,7 +161,7 @@ const Gamemap = () => {
                         <div style={{position: "relative", top: '10px', right: "-35px"}}>
                             {getLastActivityIcon()}
                         </div>
-                        <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} style={{width: "40px", height: "40px", objectFit: "contain"}} />
+                        <img key={row*8 + col} src={require(`../../assets/images/biome/${biomeGarden.active}.png`)} style={{width: "64px", height: "64px", objectFit: "contain"}} />
                 </button>
         }
         const imgStyle = {width: "64px", height: '64px', objectFit: "contain", minWidth: "64px"}
